@@ -44,7 +44,7 @@ export const Header = () => {
         </NavLi>
       </LinksContainer>
       <LoginContainer>
-        <LoginLink href="/auth" className="p__opensans">
+        <LoginLink to="/auth" className="p__opensans">
           Log In / Registration
         </LoginLink>
         <Divider />
