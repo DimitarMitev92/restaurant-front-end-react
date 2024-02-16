@@ -20,7 +20,6 @@ import { NavLink } from "react-router-dom";
 
 export const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-
   return (
     <Navbar>
       <LogoContainer>
@@ -44,8 +43,11 @@ export const Header = () => {
         </NavLi>
       </LinksContainer>
       <LoginContainer>
-        <LoginLink to="/auth">Log In / Registration</LoginLink>
+        <LoginLink to="/auth/login">Sign In</LoginLink>
         <Divider />
+        <LoginLink to="/auth/register">Sign Up</LoginLink>
+        <Divider />
+        <LoginLink to="/auth/logout">Log Out</LoginLink>
       </LoginContainer>
       <SmallScreenContainer>
         <GiHamburgerMenu
@@ -71,6 +73,15 @@ export const Header = () => {
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
                 <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
+              </SmallScreenNavLink>
+              <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                <NavLink to="/auth/login">Sign In</NavLink>
+              </SmallScreenNavLink>
+              <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                <NavLink to="/auth/register">Sign Up</NavLink>
+              </SmallScreenNavLink>
+              <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                <NavLink to="/auth/logout">Log Out</NavLink>
               </SmallScreenNavLink>
             </SmallScreenLinks>
           </SmallScreenOverlay>

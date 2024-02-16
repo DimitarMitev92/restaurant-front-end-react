@@ -70,7 +70,7 @@ export const LoginContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
 
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;
