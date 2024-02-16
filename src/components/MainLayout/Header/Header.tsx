@@ -27,26 +27,24 @@ export const Header = () => {
         <LogoImage src={image} alt="app__logo" />
       </LogoContainer>
       <LinksContainer>
-        <NavLi className="p__opensans">
+        <NavLi>
           <NavLink to="/">Home</NavLink>
         </NavLi>
-        <NavLi className="p__opensans">
+        <NavLi>
           <NavLink to="/#about">About Us</NavLink>
         </NavLi>
-        <NavLi className="p__opensans">
+        <NavLi>
           <NavLink to="/#most-ordered">Most Ordered</NavLink>
         </NavLi>
-        <NavLi className="p__opensans">
+        <NavLi>
           <NavLink to="/restaurants">Restaurants</NavLink>
         </NavLi>
-        <NavLi className="p__opensans">
+        <NavLi>
           <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
         </NavLi>
       </LinksContainer>
       <LoginContainer>
-        <LoginLink href="/auth" className="p__opensans">
-          Log In / Registration
-        </LoginLink>
+        <LoginLink to="/auth">Log In / Registration</LoginLink>
         <Divider />
       </LoginContainer>
       <SmallScreenContainer>
@@ -56,12 +54,8 @@ export const Header = () => {
           onClick={() => setToggleMenu(true)}
         />
         {toggleMenu && (
-          <SmallScreenOverlay className="flex__center slide-bottom">
-            <CloseIcon
-              fontSize={27}
-              className="overlay__close"
-              onClick={() => setToggleMenu(false)}
-            />
+          <SmallScreenOverlay>
+            <CloseIcon fontSize={27} onClick={() => setToggleMenu(false)} />
             <SmallScreenLinks>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
                 <NavLink to="/">Home</NavLink>

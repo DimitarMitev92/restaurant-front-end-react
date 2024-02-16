@@ -1,4 +1,5 @@
 import { MdOutlineRestaurantMenu } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
@@ -68,9 +69,13 @@ export const LoginContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
 `;
 
-export const LoginLink = styled.a`
+export const LoginLink = styled(NavLink)`
   margin: 0 1rem;
   text-decoration: none;
   transition: 0.5s ease;
