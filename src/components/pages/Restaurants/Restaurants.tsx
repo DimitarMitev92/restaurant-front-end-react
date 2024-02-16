@@ -1,3 +1,3 @@
-export const Restaurant = () => {
-  return <div>Restaurant</div>;
+export const Restaurants = () => {
+  return <div>Restaurants</div>;
 };

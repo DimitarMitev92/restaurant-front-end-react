@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   CloseIcon,
   Divider,
@@ -17,8 +17,12 @@ import {
 import image from "../../../assets/gericht.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
+import { UserContext } from "../../../context/UserContext";
+import { routes } from "../../../routes/routes.static";
 
 export const Header = () => {
+  const { user } = useContext(UserContext);
+
   const [toggleMenu, setToggleMenu] = useState(false);
   return (
     <Navbar>
@@ -27,27 +31,33 @@ export const Header = () => {
       </LogoContainer>
       <LinksContainer>
         <NavLi>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to={routes.MAIN}>Home</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="/#about-us">About Us</NavLink>
+          <NavLink to={routes.ABOUT_US}>About Us</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="/#most-ordered">Most Ordered</NavLink>
+          <NavLink to={routes.MOST_ORDERED}>Most Ordered</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="/restaurants">Restaurants</NavLink>
+          <NavLink to={routes.RESTAURANTS}>Restaurants</NavLink>
         </NavLi>
-        <NavLi>
-          <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
-        </NavLi>
+        {user && user.user.rights === "ADMIN" && (
+          <NavLi>
+            <NavLink to={routes.ADMIN_DASHBOARD}>Admin Dashboard</NavLink>
+          </NavLi>
+        )}
       </LinksContainer>
       <LoginContainer>
-        <LoginLink to="/auth/sign-in">Sign In</LoginLink>
-        <Divider />
-        <LoginLink to="/auth/sign-up">Sign Up</LoginLink>
-        <Divider />
-        <LoginLink to="/auth/logout">Log Out</LoginLink>
+        {!user ? (
+          <>
+            <LoginLink to={routes.SIGN_IN}>Sign In</LoginLink>
+            <Divider />
+            <LoginLink to={routes.SIGN_UP}>Sign Up</LoginLink>
+          </>
+        ) : (
+          <LoginLink to={routes.LOGOUT}>Log Out</LoginLink>
+        )}
       </LoginContainer>
       <SmallScreenContainer>
         <GiHamburgerMenu
@@ -60,29 +70,36 @@ export const Header = () => {
             <CloseIcon fontSize={27} onClick={() => setToggleMenu(false)} />
             <SmallScreenLinks>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to={routes.MAIN}>Home</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/#about-us">About Us</NavLink>
+                <NavLink to={routes.ABOUT_US}>About Us</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/#most-ordered">Most Ordered</NavLink>
+                <NavLink to={routes.MOST_ORDERED}>Most Ordered</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/restaurants">Restaurants</NavLink>
+                <NavLink to={routes.RESTAURANTS}>Restaurants</NavLink>
               </SmallScreenNavLink>
-              <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
-              </SmallScreenNavLink>
-              <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/auth/sign-in">Sign In</NavLink>
-              </SmallScreenNavLink>
-              <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/auth/sign-up">Sign Up</NavLink>
-              </SmallScreenNavLink>
-              <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/auth/logout">Log Out</NavLink>
-              </SmallScreenNavLink>
+              {user && user.user.rights === "ADMIN" && (
+                <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                  <NavLink to={routes.ADMIN_DASHBOARD}>Admin Dashboard</NavLink>
+                </SmallScreenNavLink>
+              )}
+              {!user ? (
+                <>
+                  <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                    <NavLink to={routes.SIGN_IN}>Sign In</NavLink>
+                  </SmallScreenNavLink>
+                  <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                    <NavLink to={routes.SIGN_UP}>Sign Up</NavLink>
+                  </SmallScreenNavLink>
+                </>
+              ) : (
+                <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                  <NavLink to={routes.LOGOUT}>Log Out</NavLink>
+                </SmallScreenNavLink>
+              )}
             </SmallScreenLinks>
           </SmallScreenOverlay>
         )}

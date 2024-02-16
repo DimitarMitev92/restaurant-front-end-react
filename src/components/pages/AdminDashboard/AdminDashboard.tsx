@@ -1,3 +1,3 @@
-export const Admin = () => {
+export const AdminDashboard = () => {
   return <div>AdminDashboard</div>;
 };

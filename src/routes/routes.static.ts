@@ -5,6 +5,8 @@ export const routes = {
   SIGN_UP: mainRoute.SIGN_UP,
   SIGN_IN: mainRoute.SIGN_IN,
   LOGOUT: mainRoute.LOGOUT,
+  ABOUT_US: mainRoute.ABOUT_US,
+  MOST_ORDERED: mainRoute.MOST_ORDERED,
   ADMIN_DASHBOARD: mainRoute.ADMIN_DASHBOARD,
   RESTAURANTS: mainRoute.RESTAURANTS,
   RESTAURANTS_UPDATE: mainRoute.RESTAURANTS_UPDATE,
