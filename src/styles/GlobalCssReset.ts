@@ -8,6 +8,8 @@ export const GlobalReset = createGlobalStyle`
   box-sizing: border-box;
 }
 
+
+
 /* Remove default margin and padding */
 body,
 h1,
