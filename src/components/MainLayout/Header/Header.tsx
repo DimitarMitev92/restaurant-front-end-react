@@ -30,7 +30,7 @@ export const Header = () => {
           <NavLink to="/">Home</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="/#about">About Us</NavLink>
+          <NavLink to="/#about-us">About Us</NavLink>
         </NavLi>
         <NavLi>
           <NavLink to="/#most-ordered">Most Ordered</NavLink>
@@ -43,9 +43,9 @@ export const Header = () => {
         </NavLi>
       </LinksContainer>
       <LoginContainer>
-        <LoginLink to="/auth/login">Sign In</LoginLink>
+        <LoginLink to="/auth/sign-in">Sign In</LoginLink>
         <Divider />
-        <LoginLink to="/auth/register">Sign Up</LoginLink>
+        <LoginLink to="/auth/sign-up">Sign Up</LoginLink>
         <Divider />
         <LoginLink to="/auth/logout">Log Out</LoginLink>
       </LoginContainer>
@@ -75,10 +75,10 @@ export const Header = () => {
                 <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/auth/login">Sign In</NavLink>
+                <NavLink to="/auth/sign-in">Sign In</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to="/auth/register">Sign Up</NavLink>
+                <NavLink to="/auth/sign-up">Sign Up</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
                 <NavLink to="/auth/logout">Log Out</NavLink>
