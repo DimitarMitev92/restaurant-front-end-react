@@ -9,16 +9,19 @@ export class FetchDataError extends Error {
 
 export const fetchDataFromApi = async (
   url: string,
-  user: UserDataFromApi,
+  user: UserDataFromApi | null,
   methodType: string,
   body: unknown | null,
   errorMsg: string
 ) => {
   try {
-    const headers = {
-      Authorization: `Bearer ${user.access_token}`,
+    const headers: Record<string, string> = {
       "Content-Type": "application/json",
     };
+
+    if (user) {
+      headers.Authorization = `Bearer ${user.access_token}`;
+    }
 
     const options = {
       method: methodType,

@@ -48,3 +48,7 @@ export const rightsUser = {
   ADMIN: "ADMIN",
   CLIENT: "CLIENT",
 };
+
+export const headers = {
+  CONTENT_TYPE_APP_JSON: { "Content-Type": "application/json" },
+};
