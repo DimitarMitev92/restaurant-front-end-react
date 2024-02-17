@@ -1,3 +1,5 @@
+import { CreateRestaurant } from "../../Forms/CreateRestaurant/CreateRestaurant";
+
 export const AdminDashboard = () => {
-  return <div>AdminDashboard</div>;
+  return <CreateRestaurant />;
 };

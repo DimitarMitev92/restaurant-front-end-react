@@ -18,3 +18,10 @@ export const signInValidationSchema = Yup.object({
     .max(20, "Password cannot be more than 20 characters long.")
     .required("Password is required."),
 });
+
+export const createRestaurantValidationSchema = Yup.object({
+  name: Yup.string().required("Name is required."),
+  locationId: Yup.string().uuid().required("Location is required."),
+  openHour: Yup.string().required("Open hour is required."),
+  closeHour: Yup.string().required("Close hour is required."),
+});

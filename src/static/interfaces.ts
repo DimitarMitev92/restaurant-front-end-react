@@ -58,3 +58,22 @@ export interface LocationData {
   updatedAt: string;
   deletedAt: string | null;
 }
+
+export interface CreateRestaurantFormProps {
+  onSubmit: (CreateRestaurantFormDataFormData: SignInFormData) => void;
+}
+
+export interface CreateRestaurantFormData {
+  name: string;
+  locationId: string;
+  openHour: string;
+  closeHour: string;
+}
+
+export interface CreateRestaurantFormValues {
+  name: string;
+  locationId: string;
+  openHour: string;
+  closeHour: string;
+  error?: string;
+}
