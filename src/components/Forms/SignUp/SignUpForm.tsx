@@ -60,15 +60,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
     },
   });
 
-  // useEffect(() => {
-  //   const fetchLocations = async () => {
-  //     const locationsData = await locationService.fetchLocations();
-  //     console.log(locationsData);
-  //     setLocations(locationsData);
-  //   };
-  //   fetchLocations();
-  // }, []);
-
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -110,19 +101,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
         {formik.touched.email && formik.errors.email && (
           <div>{formik.errors.email}</div>
         )}
-
-        {/* LOCATION
-        <label htmlFor="locationId">Location:</label>
-        <input
-          type="text"
-          name="locationId"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.locationId}
-        />
-        {formik.touched.locationId && formik.errors.locationId && (
-          <div>{formik.errors.locationId}</div>
-        )} */}
 
         {/* LOCATION */}
         <label htmlFor="locationId">Location:</label>
