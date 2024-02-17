@@ -36,6 +36,21 @@ export interface SignUpFormValues {
   error?: string;
 }
 
+export interface SignInFormData {
+  email: string;
+  password: string;
+}
+
+export interface SignInFormProps {
+  onSubmit: (signInFormData: SignInFormData) => void;
+}
+
+export interface SignInFormValues {
+  email: string;
+  password: string;
+  error?: string;
+}
+
 export interface LocationData {
   id: string;
   name: string;
