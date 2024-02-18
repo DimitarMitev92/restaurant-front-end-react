@@ -77,3 +77,69 @@ export interface CreateRestaurantFormValues {
   closeHour: string;
   error?: string;
 }
+
+export interface CreateMenuFormData {
+  type?: string;
+  restaurantId: string;
+}
+
+export interface UpdateMenuFormData {
+  type?: string;
+  restaurantId: string;
+}
+
+export interface CreatePackageFormData {
+  type: string;
+  price: number;
+}
+export interface UpdatePackageFormData {
+  type?: string;
+  price?: number;
+}
+
+export interface CreateCategoryFormData {
+  type: string;
+}
+export interface UpdateCategoryFormData {
+  type: string;
+}
+
+export interface CreateMealFormData {
+  name: string;
+  picture: string;
+  description: string;
+  additionalNote: string;
+  startDate: string;
+  endDate: string;
+  startHour: string;
+  endHour: string;
+  price: number;
+  weight: number;
+  menuId: string;
+  categoryId: string;
+  packageId: string;
+}
+
+export interface UpdateMealFormData {
+  id: string;
+}
+export interface Meal {
+  mealId: string;
+  count: number;
+}
+export interface CreateOrderFormData {
+  clientId: string;
+  restaurantId: string;
+  pickMethod: string;
+  additionalInfo?: string;
+  meals: Meal[];
+}
+
+
+export interface UpdateOrderFormData {
+  clientId?: string;
+  restaurantId?: string;
+  pickMethod?: string;
+  additionalInfo?: string;
+  meals?: Meal[];
+}
