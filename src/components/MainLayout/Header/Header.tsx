@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   CloseIcon,
   Divider,
@@ -17,11 +17,11 @@ import {
 import image from "../../../assets/gericht.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
-import { UserContext } from "../../../context/UserContext";
 import { routes } from "../../../routes/routes.static";
+import { useAuth } from "../../../context/AuthProvider";
 
 export const Header = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
 
   const [toggleMenu, setToggleMenu] = useState(false);
   return (

@@ -1,10 +1,10 @@
-import { RequestOptions, UserDataFromApi } from "../static/interfaces";
+import { RequestOptions, UserDataFromApiRefactor } from "../static/interfaces";
 import { FetchDataError } from "./fetchDataFromApi";
 
 export const signService = async (
   url: string,
   options: RequestOptions
-): Promise<UserDataFromApi> => {
+): Promise<UserDataFromApiRefactor> => {
   try {
     const response = await fetch(url, options);
 
@@ -13,7 +13,20 @@ export const signService = async (
       throw new FetchDataError(`${errorData.message}`);
     }
 
-    return await response.json();
+    const responseData = await response.json();
+
+    const refactorData = {
+      user: {
+        firstName: responseData.user.firstName,
+        lastName: responseData.user.lastName,
+        email: responseData.user.email,
+        locationId: responseData.user.locationId,
+        rights: responseData.user.rights,
+        accessToken: responseData.access_token,
+      },
+    };
+
+    return refactorData;
   } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(`An unexpected error occurred: ${error.message}`);

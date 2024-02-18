@@ -23,6 +23,7 @@ export const restaurantService = {
 
   createRestaurant: async (restaurantData: CreateRestaurantFormData) => {
     try {
+      console.log(accessToken);
       const restaurant = await fetchDataFromApi(
         `${endpointAPI.RESTAURANT}/create`,
         accessToken ? accessToken : null,

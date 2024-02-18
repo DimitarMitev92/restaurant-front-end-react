@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import { useSessionStorage } from "../../../hooks/useSesionStorage";
-import { UserContext } from "../../../context/UserContext";
 import { SignInFormProps, SignInFormValues } from "../../../static/interfaces";
 import { signInValidationSchema } from "../../../static/form-validations";
 import {
@@ -12,11 +11,12 @@ import {
 } from "../../../static/endpoints";
 import { signService } from "../../../services/signService";
 import { useFormik } from "formik";
+import { useAuth } from "../../../context/AuthProvider";
 
 export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   const navigate = useNavigate();
   const { setItem } = useSessionStorage();
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useAuth();
 
   const formik = useFormik<SignInFormValues>({
     initialValues: {
@@ -36,7 +36,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         const userDataFromApi = await signService(url, options);
         onSubmit && onSubmit(values);
         resetForm();
-        setItem("access_token", JSON.stringify(userDataFromApi.access_token));
+        setItem("access_token", userDataFromApi.user.accessToken);
         setUser(userDataFromApi);
         navigate(mainRoute.MAIN);
       } catch (error) {

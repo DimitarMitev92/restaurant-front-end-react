@@ -28,7 +28,6 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
     validationSchema: createRestaurantValidationSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
       try {
-        console.log(values);
         const restaurant = await restaurantService.createRestaurant(values);
         onSubmit && onSubmit(restaurant);
         resetForm();
