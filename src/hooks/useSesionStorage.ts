@@ -23,9 +23,7 @@ export const useSessionStorage = () => {
 };
 
 //HOW TO USE IT:
-
 // const {getItem, setItem, removeItem} = useSessionStorage();
-
 // getItem("access_token");
 // setItem("access_token", token);
 // removeItem("access_token")

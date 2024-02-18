@@ -1,5 +1,3 @@
-import { UserDataFromApi } from "../static/interfaces";
-
 export class FetchDataError extends Error {
   constructor(message: string) {
     super(message);
@@ -9,7 +7,7 @@ export class FetchDataError extends Error {
 
 export const fetchDataFromApi = async (
   url: string,
-  user: UserDataFromApi | null,
+  accessToken: string | null,
   methodType: string,
   body: unknown | null,
   errorMsg: string
@@ -19,8 +17,8 @@ export const fetchDataFromApi = async (
       "Content-Type": "application/json",
     };
 
-    if (user) {
-      headers.Authorization = `Bearer ${user.access_token}`;
+    if (accessToken) {
+      headers.Authorization = `Bearer ${accessToken}`;
     }
 
     const options = {
