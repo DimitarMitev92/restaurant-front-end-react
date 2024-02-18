@@ -36,11 +36,11 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         const userDataFromApi = await signService(url, options);
         onSubmit && onSubmit(values);
         resetForm();
-        setItem("user", JSON.stringify(userDataFromApi));
+        setItem("access_token", JSON.stringify(userDataFromApi.access_token));
         setUser(userDataFromApi);
         navigate(mainRoute.MAIN);
       } catch (error) {
-        console.error("Sign-up error:", error);
+        console.error("Sign-in error:", error);
         const errorMessage =
           error instanceof Error
             ? error.message
@@ -85,7 +85,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         )}
 
         <button type="submit" disabled={formik.isSubmitting}>
-          Sign Up
+          Sign In
         </button>
       </form>
     </div>

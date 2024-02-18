@@ -45,7 +45,8 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
         const userDataFromApi = await signService(url, options);
         onSubmit && onSubmit(values);
         resetForm();
-        setItem("user", JSON.stringify(userDataFromApi));
+        console.log(userDataFromApi);
+        setItem("access_token", JSON.stringify(userDataFromApi.access_token));
         setUser(userDataFromApi);
         navigate(mainRoute.MAIN);
       } catch (error) {
