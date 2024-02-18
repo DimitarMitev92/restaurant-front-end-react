@@ -14,15 +14,14 @@ import {
 } from "../../../static/endpoints";
 import { useNavigate } from "react-router-dom";
 import { useSessionStorage } from "../../../hooks/useSesionStorage";
-import { useContext } from "react";
-import { UserContext } from "../../../context/UserContext";
 import { useLocations } from "../../../hooks/useLocations";
+import { useAuth } from "../../../context/AuthProvider";
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const { locations = [] } = useLocations();
   const navigate = useNavigate();
   const { setItem } = useSessionStorage();
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useAuth();
 
   const formik = useFormik<SignUpFormValues>({
     initialValues: {
@@ -46,7 +45,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
         onSubmit && onSubmit(values);
         resetForm();
         console.log(userDataFromApi);
-        setItem("access_token", JSON.stringify(userDataFromApi.access_token));
+        setItem("access_token", userDataFromApi.user.accessToken);
         setUser(userDataFromApi);
         navigate(mainRoute.MAIN);
       } catch (error) {

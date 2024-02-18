@@ -1,3 +1,25 @@
+import { ReactNode } from "react";
+
+export interface AuthContextType {
+  isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
+  user: UserDataFromApiRefactor | null;
+  setUser: React.Dispatch<React.SetStateAction<UserDataFromApiRefactor | null>>;
+}
+
+export interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export interface DecodedToken {
+  exp: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  locationId: string;
+  rights: string;
+}
+
 export interface UserDataFromApi {
   user: {
     firstName: string;
@@ -7,6 +29,17 @@ export interface UserDataFromApi {
     rights: "ADMIN" | "CLIENT";
   };
   access_token: string;
+}
+
+export interface UserDataFromApiRefactor {
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    locationId: string;
+    rights: "ADMIN" | "CLIENT";
+    accessToken: string;
+  };
 }
 
 export interface RequestOptions {

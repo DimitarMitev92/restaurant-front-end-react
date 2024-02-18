@@ -1,7 +1,7 @@
-import React, { useContext, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
 import { mainRoute } from "../static/endpoints";
+import { useAuth } from "../context/AuthProvider";
 
 interface PrivateRoutesProps {
   element: ReactElement;
@@ -11,7 +11,7 @@ export const AdminRoute: React.FC<PrivateRoutesProps> = ({
   element,
   ...props
 }) => {
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
 
   if (!user) {
     return <Navigate to={mainRoute.SIGN_IN} replace />;
