@@ -3,10 +3,10 @@ import { restaurantService } from "../services/restaurantService";
 
 export const useRestaurants = () => {
   const {
-    data: restaurans,
+    data: restaurants,
     isLoading,
     isError,
   } = useQuery("restaurants", restaurantService.fetchRestaurants, { retry: 1 });
 
-  return { restaurans, loading: isLoading, error: isError };
+  return { restaurants, loading: isLoading, error: isError };
 };
