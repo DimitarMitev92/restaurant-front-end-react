@@ -22,6 +22,7 @@ export const FormDiv = styled.form`
   margin: 0 auto;
   @media screen and (max-width: 1000px) {
     width: 40em;
+    padding: 1em 2em;
   }
 `;
 
@@ -32,6 +33,9 @@ export const FormHeading = styled.h2`
   letter-spacing: 0.04em;
   text-transform: capitalize;
   text-align: center;
+  @media screen and (max-width: 1000px) {
+    font-size: 2em;
+  }
 `;
 
 export const ImageSignIn = styled.img`

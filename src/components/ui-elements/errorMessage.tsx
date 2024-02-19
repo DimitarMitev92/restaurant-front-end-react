@@ -6,8 +6,11 @@ interface ErrorDisplayProps {
 }
 
 const ErrorDiv = styled.div`
-  color: red;
+  color: var(--color-red);
   margin-top: 5px;
+  @media screen and (max-width: 1000px) {
+    font-size: 0.8em;
+  }
 `;
 
 const ErrorMessage: React.FC<ErrorDisplayProps> = ({ error }) => {

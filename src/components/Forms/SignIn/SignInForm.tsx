@@ -68,6 +68,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         <UnifiedInput
           type="email"
           name="email"
+          placeholder="Enter your email..."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
@@ -81,6 +82,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         <UnifiedInput
           type="password"
           name="password"
+          placeholder="Enter your password..."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
