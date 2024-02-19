@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 `;
 
 export const FormDiv = styled.form`
-  width: 50em;
+  width: 40em;
   display: flex;
   flex-direction: column;
   align-items: center;
