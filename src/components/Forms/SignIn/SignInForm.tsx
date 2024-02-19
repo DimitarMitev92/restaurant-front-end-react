@@ -12,6 +12,13 @@ import {
 import { signService } from "../../../services/signService";
 import { useFormik } from "formik";
 import { useAuth } from "../../../context/AuthProvider";
+import UnifiedInput from "../../ui-elements/input";
+import InputLabel from "../../ui-elements/inputLabel";
+import ErrorMessage from "../../ui-elements/errorMessage";
+import { FormDiv, FormHeading, ImageSignIn, Wrapper } from "./SignInForm.style";
+
+import imageSignIn from "../../../assets/sign-in.avif";
+import SubmitFormButton from "../../ui-elements/submitFormButton";
 
 export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   const navigate = useNavigate();
@@ -52,42 +59,46 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   });
 
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
+    <Wrapper>
+      <ImageSignIn src={imageSignIn} alt="image-sign-in" />
+      <FormDiv onSubmit={formik.handleSubmit}>
+        <FormHeading>Sign in</FormHeading>
         {/* EMAIL */}
-        <label htmlFor="email">Email:</label>
-        <input
+        <InputLabel htmlFor="email">Email:</InputLabel>
+        <UnifiedInput
           type="email"
           name="email"
+          placeholder="Enter your email..."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email && (
-          <div>{formik.errors.email}</div>
+          <ErrorMessage error={formik.errors.email} />
         )}
 
         {/* PASSWORD */}
-        <label htmlFor="password">Password:</label>
-        <input
+        <InputLabel htmlFor="password">Password:</InputLabel>
+        <UnifiedInput
           type="password"
           name="password"
+          placeholder="Enter your password..."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
         {formik.touched.password && formik.errors.password && (
-          <div>{formik.errors.password}</div>
+          <ErrorMessage error={formik.errors.password} />
         )}
 
-        {formik.errors.error && (
-          <div style={{ color: "red" }}>{formik.errors.error}</div>
-        )}
+        {formik.errors.error && <ErrorMessage error={formik.errors.error} />}
 
-        <button type="submit" disabled={formik.isSubmitting}>
-          Sign In
-        </button>
-      </form>
-    </div>
+        <SubmitFormButton
+          type="submit"
+          disabled={formik.isSubmitting}
+          label="Sign In"
+        ></SubmitFormButton>
+      </FormDiv>
+    </Wrapper>
   );
 };

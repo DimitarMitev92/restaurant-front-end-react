@@ -7,8 +7,8 @@ export interface SubmitFormButtonProps {
 }
 
 const StyledButton = styled.button`
-  background-color: #dcca87;
-  color: var(--color-yellow);
+  background-color: var(--color-green);
+  color: var(--color-white);
   border: none;
   padding: 10px;
   cursor: pointer;
