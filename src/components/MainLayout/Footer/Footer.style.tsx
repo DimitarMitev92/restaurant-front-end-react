@@ -5,9 +5,10 @@ export const FooterDiv = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 2em;
+  padding: 1em;
   display: flex;
   justify-content: center;
+  font-size: 20px;
 `;
 
 export const FooterText = styled.p`

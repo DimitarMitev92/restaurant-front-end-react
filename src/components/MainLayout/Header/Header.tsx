@@ -19,7 +19,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes/routes.static";
 import { useAuth } from "../../../context/AuthProvider";
-import imageSrc from '../../../images/Black_And_White_Aesthetic_Minimalist_Modern_Simple_Typography_Coconut_Cosmetics_Logo__1_-removebg-preview.png'
+import imageSrc from '../../../images/Black_And_White_Aesthetic_Minimalist_Modern_Simple_Typography_Coconut_Cosmetics_Logo__2___1_-removebg-preview.png'
 export const Header = () => {
   const { user } = useAuth();
 
