@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterDiv = styled.div`
-  background-color: var(--color-black);
+  background-color: var(--color-yellow);
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -11,6 +11,6 @@ export const FooterDiv = styled.div`
 `;
 
 export const FooterText = styled.p`
-  color: var(--color-white);
+  color: var(--color-green);
   text-transform: capitalize;
 `;

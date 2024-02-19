@@ -7,7 +7,7 @@ export const Navbar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--color-black);
+  background: var(--color-yellow);
   padding: 1rem 2rem;
 
   @media screen and (max-width: 1150px) {
@@ -58,7 +58,7 @@ export const LinksContainer = styled.ul`
 export const NavLi = styled.li`
   margin: 0 1rem;
   cursor: pointer;
-  color: var(--color-white);
+  color: var(--color-green);
 
   &:hover {
     color: var(--color-grey);
@@ -79,10 +79,10 @@ export const LoginLink = styled(NavLink)`
   margin: 0 1rem;
   text-decoration: none;
   transition: 0.5s ease;
-  color: var(--color-white);
+  color: var(--color-green);
 
   &:hover {
-    border-bottom: 1px solid var(--color-golden);
+    border-bottom: 1px solid var(--color-green);
   }
 `;
 
@@ -106,7 +106,7 @@ export const SmallScreenOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: var(--color-black);
+  background: var(--color-yellow);
   transition: 0.5s ease;
   flex-direction: column;
   z-index: 5;
@@ -114,7 +114,7 @@ export const SmallScreenOverlay = styled.div`
 
 export const CloseIcon = styled(MdOutlineRestaurantMenu)`
   font-size: 27px;
-  color: var(--color-golden);
+  color: var(--color-green);
   cursor: pointer;
   position: absolute;
   top: 20px;
@@ -128,12 +128,12 @@ export const SmallScreenLinks = styled.ul`
 export const SmallScreenNavLink = styled.li`
   margin: 2rem;
   cursor: pointer;
-  color: var(--color-golden);
+  color: var(--color-green);
   font-size: 2rem;
   text-align: center;
-  font-family: var(--font-base);
+  /* font-family: var(--font-base); */
 
   &:hover {
-    color: var(--color-white);
+    color: var(--color-green);
   }
 `;
