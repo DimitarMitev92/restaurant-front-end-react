@@ -16,6 +16,13 @@ import { useNavigate } from "react-router-dom";
 import { useSessionStorage } from "../../../hooks/useSesionStorage";
 import { useLocations } from "../../../hooks/useLocations";
 import { useAuth } from "../../../context/AuthProvider";
+import { FormDiv, FormHeading, ImageSignUp, Wrapper } from "./SignUpForm.style";
+
+import imageSignUp from "../../../assets/sign-up.avif";
+import InputLabel from "../../ui-elements/inputLabel";
+import UnifiedInput from "../../ui-elements/input";
+import ErrorMessage from "../../ui-elements/errorMessage";
+import SubmitFormButton from "../../ui-elements/submitFormButton";
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const { locations = [] } = useLocations();
@@ -61,11 +68,13 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   });
 
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
+    <Wrapper>
+      <ImageSignUp src={imageSignUp} alt="image-sign-up" />
+      <FormDiv onSubmit={formik.handleSubmit}>
+        <FormHeading>Sign up</FormHeading>
         {/* FIRST NAME */}
-        <label htmlFor="firstName">First Name:</label>
-        <input
+        <InputLabel htmlFor="firstName">First Name:</InputLabel>
+        <UnifiedInput
           type="text"
           name="firstName"
           onChange={formik.handleChange}
@@ -73,12 +82,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.firstName}
         />
         {formik.touched.firstName && formik.errors.firstName && (
-          <div>{formik.errors.firstName}</div>
+          <ErrorMessage error={formik.errors.firstName} />
         )}
 
         {/* LAST NAME */}
-        <label htmlFor="lastName">Last Name:</label>
-        <input
+        <InputLabel htmlFor="lastName">Last Name:</InputLabel>
+        <UnifiedInput
           type="text"
           name="lastName"
           onChange={formik.handleChange}
@@ -86,12 +95,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.lastName}
         />
         {formik.touched.lastName && formik.errors.lastName && (
-          <div>{formik.errors.lastName}</div>
+          <ErrorMessage error={formik.errors.lastName} />
         )}
 
         {/* EMAIL */}
-        <label htmlFor="email">Email:</label>
-        <input
+        <InputLabel htmlFor="email">Email:</InputLabel>
+        <UnifiedInput
           type="email"
           name="email"
           onChange={formik.handleChange}
@@ -99,35 +108,30 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email && (
-          <div>{formik.errors.email}</div>
+          <ErrorMessage error={formik.errors.email} />
         )}
 
         {/* LOCATION */}
-        <label htmlFor="locationId">Location:</label>
-        <select
+        <InputLabel htmlFor="locationId">Location:</InputLabel>
+        <UnifiedInput
+          type="select"
           name="locationId"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.locationId}
-        >
-          <option value="" disabled>
-            Select location
-          </option>
-          {Array.isArray(locations) &&
-            locations.length !== 0 &&
-            locations.map((location: LocationData) => (
-              <option key={location.id} value={location.id}>
-                {location.name}
-              </option>
-            ))}
-        </select>
+          options={locations.map((location: LocationData) => ({
+            value: location.id,
+            label: location.name,
+          }))}
+          placeholder="Select location"
+        />
         {formik.touched.locationId && formik.errors.locationId && (
-          <div>{formik.errors.locationId}</div>
+          <ErrorMessage error={formik.errors.locationId} />
         )}
 
         {/* PASSWORD */}
-        <label htmlFor="password">Password:</label>
-        <input
+        <InputLabel htmlFor="password">Password:</InputLabel>
+        <UnifiedInput
           type="password"
           name="password"
           onChange={formik.handleChange}
@@ -135,17 +139,17 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.password}
         />
         {formik.touched.password && formik.errors.password && (
-          <div>{formik.errors.password}</div>
+          <ErrorMessage error={formik.errors.password} />
         )}
 
-        {formik.errors.error && (
-          <div style={{ color: "red" }}>{formik.errors.error}</div>
-        )}
+        {formik.errors.error && <ErrorMessage error={formik.errors.error} />}
 
-        <button type="submit" disabled={formik.isSubmitting}>
-          Sign Up
-        </button>
-      </form>
-    </div>
+        <SubmitFormButton
+          type="submit"
+          disabled={formik.isSubmitting}
+          label="Sign Up"
+        />
+      </FormDiv>
+    </Wrapper>
   );
 };
