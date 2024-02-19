@@ -24,9 +24,9 @@ const baseStyle = css`
   padding: 0.75rem 1rem;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  border: 1px solid var(--color-golden);
-  color: var(--color-white);
-  background: var(--color-black);
+  border: 1px solid var(--color-green);
+  color: var(--color-green);
+  background: var(--color-yellow);
   font-size: 1rem;
   border-radius: 5px;
   width: 100%;
