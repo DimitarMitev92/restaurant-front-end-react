@@ -22,6 +22,7 @@ export const signInValidationSchema = Yup.object({
 export const createRestaurantValidationSchema = Yup.object({
   name: Yup.string().required("Name is required."),
   locationId: Yup.string().uuid().required("Location is required."),
+  imageUrl: Yup.string().required("Image url is required."),
   openHour: Yup.string().required("Open hour is required."),
   closeHour: Yup.string().required("Close hour is required."),
 });

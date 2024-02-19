@@ -21,6 +21,7 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
     initialValues: {
       name: "",
       locationId: "",
+      imageUrl: "",
       openHour: "",
       closeHour: "",
       error: "",
@@ -82,6 +83,19 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
         </select>
         {formik.touched.locationId && formik.errors.locationId && (
           <div>{formik.errors.locationId}</div>
+        )}
+
+        {/* IMAGE URL */}
+        <label htmlFor="firstName">Image url:</label>
+        <input
+          type="text"
+          name="imageUrl"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.imageUrl}
+        />
+        {formik.touched.imageUrl && formik.errors.imageUrl && (
+          <div>{formik.errors.imageUrl}</div>
         )}
 
         {/* OPEN HOUR */}
