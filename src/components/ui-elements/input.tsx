@@ -25,8 +25,8 @@ const baseStyle = css`
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   border: 1px solid var(--color-green);
-  color: var(--color-green);
-  background: var(--color-yellow);
+  color: var(--color-black);
+  background: var(--color-white);
   font-size: 1rem;
   border-radius: 5px;
   width: 100%;
