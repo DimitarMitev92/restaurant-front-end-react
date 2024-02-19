@@ -2,11 +2,10 @@ import { endpointAPI, method } from "../static/endpoints";
 import { CreateRestaurantFormData } from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
-const accessToken = sessionStorage.getItem("access_token");
-
 export const restaurantService = {
   fetchRestaurants: async () => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
       const restaurants = await fetchDataFromApi(
         endpointAPI.RESTAURANT,
         accessToken ? accessToken : null,
@@ -23,7 +22,7 @@ export const restaurantService = {
 
   createRestaurant: async (restaurantData: CreateRestaurantFormData) => {
     try {
-      console.log(accessToken);
+      const accessToken = sessionStorage.getItem("access_token");
       const restaurant = await fetchDataFromApi(
         `${endpointAPI.RESTAURANT}/create`,
         accessToken ? accessToken : null,
