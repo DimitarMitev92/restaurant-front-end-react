@@ -8,8 +8,8 @@ import PrivateRoutes from "./guards/PrivateRoutes";
 import { AdminRoute } from "./guards/AdminRoutes";
 import { AdminDashboard } from "./components/pages/AdminDashboard/AdminDashboard";
 import { Logout } from "./components/Logout/Logout";
-import { Restaurants } from "./components/pages/Restaurants/Restaurants";
 import { AuthProvider } from "./context/AuthProvider";
+import Restaurants from "./components/pages/Restaurants/Restaurants";
 
 function App() {
   return (
