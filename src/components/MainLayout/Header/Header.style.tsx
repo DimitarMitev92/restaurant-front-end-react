@@ -9,6 +9,7 @@ export const Navbar = styled.nav`
   align-items: center;
   background: var(--color-yellow);
   padding: 1rem 2rem;
+  font-size: 20px;
 
   @media screen and (max-width: 1150px) {
     .app__navbar-links {
