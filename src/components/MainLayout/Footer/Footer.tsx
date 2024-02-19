@@ -1,5 +1,9 @@
-import React from "react";
+import { FooterDiv, FooterText } from "./Footer.style";
 
 export const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <FooterDiv>
+      <FooterText>© 2024 All rights reserved</FooterText>
+    </FooterDiv>
+  );
 };
