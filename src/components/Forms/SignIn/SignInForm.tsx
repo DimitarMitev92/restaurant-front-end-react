@@ -12,6 +12,14 @@ import {
 import { signService } from "../../../services/signService";
 import { useFormik } from "formik";
 import { useAuth } from "../../../context/AuthProvider";
+import {
+  ErrorDiv,
+  FormDiv,
+  FormHeading,
+  Input,
+  Label,
+  Wrapper,
+} from "./SignInForm.style";
 
 export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   const navigate = useNavigate();
@@ -52,42 +60,45 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   });
 
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
+    <Wrapper>
+      <FormDiv onSubmit={formik.handleSubmit}>
+        <FormHeading>Sign in</FormHeading>
         {/* EMAIL */}
-        <label htmlFor="email">Email:</label>
-        <input
+        <Label htmlFor="email">Email:</Label>
+        <Input
           type="email"
           name="email"
+          placeholder="Please enter your email..."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email && (
-          <div>{formik.errors.email}</div>
+          <ErrorDiv>{formik.errors.email}</ErrorDiv>
         )}
 
         {/* PASSWORD */}
-        <label htmlFor="password">Password:</label>
-        <input
+        <Label htmlFor="password">Password:</Label>
+        <Input
           type="password"
           name="password"
+          placeholder="Please enter your password..."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
         {formik.touched.password && formik.errors.password && (
-          <div>{formik.errors.password}</div>
+          <ErrorDiv>{formik.errors.password}</ErrorDiv>
         )}
 
         {formik.errors.error && (
-          <div style={{ color: "red" }}>{formik.errors.error}</div>
+          <ErrorDiv style={{ color: "red" }}>{formik.errors.error}</ErrorDiv>
         )}
 
         <button type="submit" disabled={formik.isSubmitting}>
           Sign In
         </button>
-      </form>
-    </div>
+      </FormDiv>
+    </Wrapper>
   );
 };

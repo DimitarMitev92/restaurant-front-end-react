@@ -16,6 +16,16 @@ import { useNavigate } from "react-router-dom";
 import { useSessionStorage } from "../../../hooks/useSesionStorage";
 import { useLocations } from "../../../hooks/useLocations";
 import { useAuth } from "../../../context/AuthProvider";
+import {
+  FormDiv,
+  FormHeading,
+  Input,
+  Label,
+  Select,
+  Option,
+  ErrorDiv,
+  Wrapper,
+} from "../SignIn/SignInForm.style";
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const { locations = [] } = useLocations();
@@ -61,11 +71,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   });
 
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
+    <Wrapper>
+      <FormDiv onSubmit={formik.handleSubmit}>
+        <FormHeading>Sign up</FormHeading>
         {/* FIRST NAME */}
-        <label htmlFor="firstName">First Name:</label>
-        <input
+        <Label htmlFor="firstName">First Name:</Label>
+        <Input
           type="text"
           name="firstName"
           onChange={formik.handleChange}
@@ -73,12 +84,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.firstName}
         />
         {formik.touched.firstName && formik.errors.firstName && (
-          <div>{formik.errors.firstName}</div>
+          <ErrorDiv>{formik.errors.firstName}</ErrorDiv>
         )}
 
         {/* LAST NAME */}
-        <label htmlFor="lastName">Last Name:</label>
-        <input
+        <Label htmlFor="lastName">Last Name:</Label>
+        <Input
           type="text"
           name="lastName"
           onChange={formik.handleChange}
@@ -86,12 +97,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.lastName}
         />
         {formik.touched.lastName && formik.errors.lastName && (
-          <div>{formik.errors.lastName}</div>
+          <ErrorDiv>{formik.errors.lastName}</ErrorDiv>
         )}
 
         {/* EMAIL */}
-        <label htmlFor="email">Email:</label>
-        <input
+        <Label htmlFor="email">Email:</Label>
+        <Input
           type="email"
           name="email"
           onChange={formik.handleChange}
@@ -99,35 +110,35 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email && (
-          <div>{formik.errors.email}</div>
+          <ErrorDiv>{formik.errors.email}</ErrorDiv>
         )}
 
         {/* LOCATION */}
-        <label htmlFor="locationId">Location:</label>
-        <select
+        <Label htmlFor="locationId">Location:</Label>
+        <Select
           name="locationId"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.locationId}
         >
-          <option value="" disabled>
+          <Option value="" disabled>
             Select location
-          </option>
+          </Option>
           {Array.isArray(locations) &&
             locations.length !== 0 &&
             locations.map((location: LocationData) => (
-              <option key={location.id} value={location.id}>
+              <Option key={location.id} value={location.id}>
                 {location.name}
-              </option>
+              </Option>
             ))}
-        </select>
+        </Select>
         {formik.touched.locationId && formik.errors.locationId && (
-          <div>{formik.errors.locationId}</div>
+          <ErrorDiv>{formik.errors.locationId}</ErrorDiv>
         )}
 
         {/* PASSWORD */}
-        <label htmlFor="password">Password:</label>
-        <input
+        <Label htmlFor="password">Password:</Label>
+        <Input
           type="password"
           name="password"
           onChange={formik.handleChange}
@@ -135,17 +146,17 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           value={formik.values.password}
         />
         {formik.touched.password && formik.errors.password && (
-          <div>{formik.errors.password}</div>
+          <ErrorDiv>{formik.errors.password}</ErrorDiv>
         )}
 
         {formik.errors.error && (
-          <div style={{ color: "red" }}>{formik.errors.error}</div>
+          <ErrorDiv style={{ color: "red" }}>{formik.errors.error}</ErrorDiv>
         )}
 
         <button type="submit" disabled={formik.isSubmitting}>
           Sign Up
         </button>
-      </form>
-    </div>
+      </FormDiv>
+    </Wrapper>
   );
 };
