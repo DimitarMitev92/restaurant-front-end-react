@@ -99,6 +99,7 @@ export interface CreateRestaurantFormProps {
 export interface CreateRestaurantFormData {
   name: string;
   locationId: string;
+  imageUrl: string;
   openHour: string;
   closeHour: string;
 }
@@ -106,6 +107,7 @@ export interface CreateRestaurantFormData {
 export interface CreateRestaurantFormValues {
   name: string;
   locationId: string;
+  imageUrl: string;
   openHour: string;
   closeHour: string;
   error?: string;
@@ -167,7 +169,6 @@ export interface CreateOrderFormData {
   additionalInfo?: string;
   meals: Meal[];
 }
-
 
 export interface UpdateOrderFormData {
   clientId?: string;
