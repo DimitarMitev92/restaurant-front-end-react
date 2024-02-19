@@ -5,10 +5,10 @@
   --color-gray: #545454;
   --color-crimson: #f5efdb;
   --color-grey: #aaaaaa;
-  --color-green: #4CAF50;
+  --color-green: #4caf50;
   --color-red: #ea5853;
   --color-black: black;
-
+  --color-white: white;
 }
 
 body {
