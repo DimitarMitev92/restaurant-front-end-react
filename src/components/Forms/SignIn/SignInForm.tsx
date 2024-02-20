@@ -13,7 +13,7 @@ import { signService } from "../../../services/signService";
 import { SignInFormProps } from "../../../static/interfaces";
 
 import imageSignIn from "../../../assets/sign-in.jpeg";
-import { ReusableSignForm } from "../ReusableSignForm/ReusableSignForm";
+import { ReusableForm } from "../ReusableForm/ReusableForm";
 
 export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   return (
     <Wrapper>
       <ImageSignIn src={imageSignIn} alt="image-sign-in" />
-      <ReusableSignForm
+      <ReusableForm
         formHeading="Sign In"
         inputsData={inputsSignInData}
         initialValues={{ email: "", password: "", error: "" }}

@@ -4,9 +4,9 @@ import SubmitFormButton from "../../ui-elements/submitFormButton";
 import InputLabel from "../../ui-elements/inputLabel";
 import UnifiedInput from "../../ui-elements/input";
 import ErrorMessage from "../../ui-elements/errorMessage";
-import { FormDiv, FormHeading } from "./ReusableSignForm.style";
+import { FormDiv, FormHeading } from "./ReusableForm.style";
 
-interface ReusableSignFormProps {
+interface ReusableProps {
   formHeading: string;
   inputsData: {
     options?:
@@ -22,11 +22,15 @@ interface ReusableSignFormProps {
     placeholder: string;
   }[];
   initialValues: {
+    name?: string;
+    imageUrl?: string;
+    openHour?: string;
+    closeHour?: string;
     firstName?: string;
     lastName?: string;
     locationId?: string;
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
     error: string;
   };
   validationSchema: unknown;
@@ -42,7 +46,7 @@ interface FormValues {
   [key: string]: string;
 }
 
-export const ReusableSignForm: React.FC<ReusableSignFormProps> = ({
+export const ReusableForm: React.FC<ReusableProps> = ({
   formHeading,
   inputsData,
   initialValues,
