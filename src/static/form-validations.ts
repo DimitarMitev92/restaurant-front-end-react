@@ -30,3 +30,7 @@ export const createRestaurantValidationSchema = Yup.object({
 export const createLocationValidationSchema = Yup.object({
   name: Yup.string().required("Name is required."),
 });
+
+export const createCategoryValidationSchema = Yup.object({
+  type: Yup.string().required("Type is required."),
+});
