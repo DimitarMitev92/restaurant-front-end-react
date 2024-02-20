@@ -12,7 +12,7 @@ import {
 import { signService } from "../../../services/signService";
 import { SignInFormProps } from "../../../static/interfaces";
 
-import imageSignIn from "../../../assets/sign-in.avif";
+import imageSignIn from "../../../assets/sign-in.jpeg";
 import { ReusableSignForm } from "../ReusableSignForm/ReusableSignForm";
 
 export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {

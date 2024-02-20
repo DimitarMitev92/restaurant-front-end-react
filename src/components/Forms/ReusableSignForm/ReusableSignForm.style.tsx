@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1500px) {
+  @media screen and (max-width: 1000px) {
     height: 85.8vh;
   }
   @media screen and (max-width: 650px) {
@@ -38,10 +38,10 @@ export const FormHeading = styled.h2`
   }
 `;
 
-export const ImageSignIn = styled.img`
+export const ImageSignUp = styled.img`
   height: 85.8vh;
 
-  @media screen and (max-width: 1500px) {
+  @media screen and (max-width: 1000px) {
     display: none;
   }
 `;
