@@ -23,6 +23,7 @@ interface ReusableProps {
   }[];
   initialValues: {
     name?: string;
+    type?: string;
     imageUrl?: string;
     openHour?: string;
     closeHour?: string;

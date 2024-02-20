@@ -10,7 +10,7 @@ export const endpointAPI = {
   MEAL: `http://localhost:${PORT}/meal`,
   ORDER: `http://localhost:${PORT}/order`,
   ORDER_DETAIL: `http://localhost:${PORT}/?????`, // ASK WHY DON'T HAVE ORDER DETAIL CONTROLLER!!!
-  CATEGORY: `http://localhost:${PORT}/categoty`,
+  CATEGORY: `http://localhost:${PORT}/category`,
   LOCATION: `http://localhost:${PORT}/location`,
   PACKAGE: `http://localhost:${PORT}/package`,
 };

@@ -126,6 +126,19 @@ export interface CreateLocationFormValues {
   error?: string;
 }
 
+export interface CreateCategoryFormProps {
+  onSubmit: (CreateCategoryFormData: CreateCategoryFormData) => void;
+}
+
+export interface CreateCategoryFormData {
+  type: string;
+}
+
+export interface CreateCategoryFormValues {
+  type: string;
+  error?: string;
+}
+
 export interface CreateMenuFormData {
   type?: string;
   restaurantId: string;
