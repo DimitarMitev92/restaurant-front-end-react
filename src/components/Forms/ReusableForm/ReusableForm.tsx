@@ -24,6 +24,7 @@ interface ReusableProps {
   initialValues: {
     name?: string;
     type?: string;
+    price?: string;
     imageUrl?: string;
     openHour?: string;
     closeHour?: string;
