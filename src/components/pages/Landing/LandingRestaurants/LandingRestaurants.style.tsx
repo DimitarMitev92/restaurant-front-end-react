@@ -26,9 +26,9 @@ export const TitleWithLinkContainer = styled.div`
 `;
 export const CardsContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
-  justify-content: space-between;
   @media (max-width: 768px) {
     flex-direction: column;
   }

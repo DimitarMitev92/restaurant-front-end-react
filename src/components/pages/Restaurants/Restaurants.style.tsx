@@ -20,11 +20,9 @@ export const StyledContainer = styled.div`
 
 export const CardsContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
-  align-items: baseline;
-  justify-content: space-between;
   @media (max-width: 768px) {
     flex-direction: column;
   }
