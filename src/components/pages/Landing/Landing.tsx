@@ -8,9 +8,9 @@ export const Landing: React.FC<LandingProps> = () => {
   return (
     <>
       <LandingHero />
-      <LandingAboutUs />
       <LandingRestaurants />
       <LandingMostOrdered />
+      <LandingAboutUs />
     </>
   );
 };
