@@ -1,4 +1,8 @@
-import { LocationData, SignUpFormProps } from "../../../static/interfaces";
+import {
+  LocationData,
+  SignUpFormData,
+  SignUpFormProps,
+} from "../../../static/interfaces";
 import { signUpValidationSchema } from "../../../static/form-validations";
 import { signService } from "../../../services/signService";
 import {
@@ -14,8 +18,8 @@ import { useAuth } from "../../../context/AuthProvider";
 import { ImageSignUp, Wrapper } from "./SignUpForm.style";
 
 import imageSignUp from "../../../assets/sign-up.jpeg";
-import { ReusableSignForm } from "../ReusableSignForm/ReusableSignForm";
 import { useLocations } from "../../../hooks/useLocations";
+import { ReusableForm } from "../ReusableForm/ReusableForm";
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const { locations = [] } = useLocations();
@@ -68,7 +72,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   return (
     <Wrapper>
       <ImageSignUp src={imageSignUp} alt="image-sign-up" />
-      <ReusableSignForm
+      <ReusableForm
         formHeading="Sign Up"
         inputsData={inputsSignUpData}
         initialValues={{
@@ -80,7 +84,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           error: "",
         }}
         validationSchema={signUpValidationSchema}
-        onSubmit={async (values) => {
+        onSubmit={async (values: SignUpFormData) => {
           const url = endpointAPI.SIGN_UP;
           const options = {
             method: method.POST,
