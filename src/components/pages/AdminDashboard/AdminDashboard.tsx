@@ -1,11 +1,9 @@
-import { CreateCategory } from "../../Forms/CreateCategory/CreateCategory";
-import { CreateLocation } from "../../Forms/CreateLocation/CreateLocation";
+import { CreatePackage } from "../../Forms/CreatePackage/CreatePackage";
 
 export const AdminDashboard = () => {
   return (
     <>
-      <CreateLocation />
-      <CreateCategory />
+      <CreatePackage />
     </>
   );
 };

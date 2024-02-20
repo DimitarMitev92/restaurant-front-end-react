@@ -139,6 +139,21 @@ export interface CreateCategoryFormValues {
   error?: string;
 }
 
+export interface CreatePackageFormProps {
+  onSubmit: (CreatePackageFormData: CreatePackageFormData) => void;
+}
+
+export interface CreatePackageFormData {
+  type: string;
+  price: number;
+}
+
+export interface CreatePackageFormValues {
+  type: string;
+  price: number;
+  error?: string;
+}
+
 export interface CreateMenuFormData {
   type?: string;
   restaurantId: string;

@@ -34,3 +34,8 @@ export const createLocationValidationSchema = Yup.object({
 export const createCategoryValidationSchema = Yup.object({
   type: Yup.string().required("Type is required."),
 });
+
+export const createPackageValidationSchema = Yup.object({
+  type: Yup.string().required("Type is required."),
+  price: Yup.number().required("Price is required."),
+});
