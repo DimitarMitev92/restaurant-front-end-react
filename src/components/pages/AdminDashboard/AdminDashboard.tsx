@@ -1,5 +1,5 @@
-import { CreateRestaurant } from "../../Forms/CreateRestaurant/CreateRestaurant";
+import { CreateLocation } from "../../Forms/CreateLocation/CreateLocation";
 
 export const AdminDashboard = () => {
-  return <CreateRestaurant />;
+  return <CreateLocation />;
 };

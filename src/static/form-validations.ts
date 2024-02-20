@@ -26,3 +26,7 @@ export const createRestaurantValidationSchema = Yup.object({
   openHour: Yup.string().required("Open hour is required."),
   closeHour: Yup.string().required("Close hour is required."),
 });
+
+export const createLocationValidationSchema = Yup.object({
+  name: Yup.string().required("Name is required."),
+});

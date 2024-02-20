@@ -93,7 +93,7 @@ export interface LocationData {
 }
 
 export interface CreateRestaurantFormProps {
-  onSubmit: (CreateRestaurantFormDataFormData: SignInFormData) => void;
+  onSubmit: (CreateRestaurantFormData: CreateRestaurantFormData) => void;
 }
 
 export interface CreateRestaurantFormData {
@@ -110,6 +110,19 @@ export interface CreateRestaurantFormValues {
   imageUrl: string;
   openHour: string;
   closeHour: string;
+  error?: string;
+}
+
+export interface CreateLocationFormProps {
+  onSubmit: (CreateLocationFormData: CreateLocationFormData) => void;
+}
+
+export interface CreateLocationFormData {
+  name: string;
+}
+
+export interface CreateLocationFormValues {
+  name: string;
   error?: string;
 }
 
