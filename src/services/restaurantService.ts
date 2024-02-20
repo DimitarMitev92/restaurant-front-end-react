@@ -23,6 +23,7 @@ export const restaurantService = {
   createRestaurant: async (restaurantData: CreateRestaurantFormData) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
+      console.log(accessToken);
       const restaurant = await fetchDataFromApi(
         `${endpointAPI.RESTAURANT}/create`,
         accessToken ? accessToken : null,
