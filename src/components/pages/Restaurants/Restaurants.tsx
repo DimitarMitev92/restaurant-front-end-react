@@ -2,6 +2,8 @@ import RestaurantCard from "./RestaurantsCard/RestaurantCard";
 import { Restaurant } from "./Restaurants.static";
 import { CardsContainer, StyledContainer } from "./Restaurants.style";
 import { useRestaurants } from "../../../hooks/useRestaurants";
+import { PulseLoader } from "react-spinners";
+import EmptyList from "../../EmptyList/EmptyList";
 
 const Restaurants = () => {
   const { restaurants, loading, error } = useRestaurants();
@@ -17,7 +19,7 @@ const Restaurants = () => {
         </header>
         <CardsContainer>
           {loading ? (
-            <p>Loading...</p>
+            <PulseLoader color="#4caf50" size={12} />
           ) : error ? (
             <p>Error loading restaurants.</p>
           ) : restaurants.length > 0 ? (
@@ -25,7 +27,7 @@ const Restaurants = () => {
               <RestaurantCard key={restaurant.id} restaurant={restaurant} />
             ))
           ) : (
-            <p>No restaurants available.</p>
+            <EmptyList message="No restaurants available" />
           )}
         </CardsContainer>
       </StyledContainer>
