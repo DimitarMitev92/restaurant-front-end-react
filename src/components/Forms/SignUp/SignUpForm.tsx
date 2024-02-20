@@ -13,7 +13,7 @@ import { useSessionStorage } from "../../../hooks/useSesionStorage";
 import { useAuth } from "../../../context/AuthProvider";
 import { ImageSignUp, Wrapper } from "./SignUpForm.style";
 
-import imageSignUp from "../../../assets/sign-up.avif";
+import imageSignUp from "../../../assets/sign-up.jpeg";
 import { ReusableSignForm } from "../ReusableSignForm/ReusableSignForm";
 import { useLocations } from "../../../hooks/useLocations";
 

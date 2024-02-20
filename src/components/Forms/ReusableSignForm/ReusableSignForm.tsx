@@ -1,10 +1,10 @@
 import React from "react";
 import { useFormik } from "formik";
 import SubmitFormButton from "../../ui-elements/submitFormButton";
-import { FormDiv, FormHeading } from "../SignIn/SignInForm.style";
 import InputLabel from "../../ui-elements/inputLabel";
 import UnifiedInput from "../../ui-elements/input";
 import ErrorMessage from "../../ui-elements/errorMessage";
+import { FormDiv, FormHeading } from "./ReusableSignForm.style";
 
 interface ReusableSignFormProps {
   formHeading: string;
