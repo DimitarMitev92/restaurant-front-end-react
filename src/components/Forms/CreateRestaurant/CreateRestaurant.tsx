@@ -8,7 +8,6 @@ import {
 import { createRestaurantValidationSchema } from "../../../static/form-validations";
 import { restaurantService } from "../../../services/restaurantService";
 import { mainRoute } from "../../../static/endpoints";
-import { Wrapper } from "../SignIn/SignInForm.style";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 
 export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
@@ -60,26 +59,24 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   ];
 
   return (
-    <Wrapper>
-      <ReusableForm
-        formHeading="Create restaurant"
-        inputsData={inputsCreateRestaurantData}
-        initialValues={{
-          name: "",
-          locationId: "",
-          imageUrl: "",
-          openHour: "",
-          closeHour: "",
-          error: "",
-        }}
-        validationSchema={createRestaurantValidationSchema}
-        onSubmit={async (values) => {
-          const restaurant = await restaurantService.createRestaurant(values);
-          onSubmit && onSubmit(restaurant);
-          navigate(mainRoute.MAIN);
-        }}
-        buttonText="Create"
-      />
-    </Wrapper>
+    <ReusableForm
+      formHeading="Create restaurant"
+      inputsData={inputsCreateRestaurantData}
+      initialValues={{
+        name: "",
+        locationId: "",
+        imageUrl: "",
+        openHour: "",
+        closeHour: "",
+        error: "",
+      }}
+      validationSchema={createRestaurantValidationSchema}
+      onSubmit={async (values) => {
+        const restaurant = await restaurantService.createRestaurant(values);
+        onSubmit && onSubmit(restaurant);
+        navigate(mainRoute.MAIN);
+      }}
+      buttonText="Create"
+    />
   );
 };

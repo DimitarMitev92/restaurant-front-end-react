@@ -27,6 +27,25 @@ export const createRestaurantValidationSchema = Yup.object({
   closeHour: Yup.string().required("Close hour is required."),
 });
 
+export const createMealValidationSchema = Yup.object({
+  name: Yup.string().min(3).required("Name is required."),
+  picture: Yup.string().url().required("Image URL is required."),
+  description: Yup.string().min(10).required("Description is required."),
+  startDate: Yup.string().required("Start date is required."),
+  endDate: Yup.string().required("End date is required."),
+  startHour: Yup.string().required("Start hour is required."),
+  endHour: Yup.string().required("End hour is required."),
+  price: Yup.number()
+    .positive("Price must be a positive number.")
+    .required("Price is required."),
+  weight: Yup.number()
+    .positive("Weight must be a positive number.")
+    .required("Weight is required."),
+  menuId: Yup.string().uuid().required("Menu is required."),
+  categoryId: Yup.string().uuid().required("Category is required."),
+  packageId: Yup.string().uuid().required("Package is required."),
+});
+
 export const createLocationValidationSchema = Yup.object({
   name: Yup.string().required("Name is required."),
 });
@@ -37,7 +56,9 @@ export const createCategoryValidationSchema = Yup.object({
 
 export const createPackageValidationSchema = Yup.object({
   type: Yup.string().required("Type is required."),
-  price: Yup.number().required("Price is required."),
+  price: Yup.number()
+    .positive("Price must be a positive number.")
+    .required("Price is required."),
 });
 
 export const createMenuValidationSchema = Yup.object({

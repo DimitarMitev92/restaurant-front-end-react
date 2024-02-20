@@ -12,7 +12,6 @@ export const useLandingHeroLogic = () => {
   ) => {
     const value = (e.target as HTMLSelectElement).value;
     setSelectedLocation(value);
-    console.log(e.target.value);
   };
 
   const options = locations?.map((location: Location) => ({

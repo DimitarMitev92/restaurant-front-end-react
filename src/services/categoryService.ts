@@ -27,9 +27,6 @@ export const categoryService = {
   createCategory: async (categoryData: CreateCategoryFormData) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
-      console.log(accessToken);
-      console.log(`${endpointAPI.CATEGORY}/create`);
-      console.log(categoryData);
       const category = await fetchDataFromApi(
         `${endpointAPI.CATEGORY}/create`,
         accessToken ? accessToken : null,

@@ -26,10 +26,7 @@ export const fetchDataFromApi = async (
       headers,
       body: body ? JSON.stringify(body) : null,
     };
-    console.log(url);
-    console.log(options);
     const response = await fetch(url, options);
-    console.log(response);
     if (!response.ok) {
       const errorData = await response.json();
       throw new FetchDataError(`${errorMsg}: ${errorData.message}`);

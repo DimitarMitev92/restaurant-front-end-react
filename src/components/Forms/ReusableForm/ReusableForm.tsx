@@ -25,13 +25,23 @@ interface ReusableProps {
     name?: string;
     type?: string;
     price?: string;
+    weight?: string;
     imageUrl?: string;
+    picture?: string;
+    description?: string;
     openHour?: string;
     closeHour?: string;
+    startHour?: string;
+    endHour?: string;
+    startDate?: string;
+    endDate?: string;
     firstName?: string;
     lastName?: string;
     locationId?: string;
     restaurantId?: string;
+    menuId?: string;
+    categoryId?: string;
+    packageId?: string;
     email?: string;
     password?: string;
     error: string;
@@ -62,7 +72,6 @@ export const ReusableForm: React.FC<ReusableProps> = ({
     validationSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
       try {
-        console.log("values", values);
         await onSubmit(values);
         resetForm();
       } catch (error) {
