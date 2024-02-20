@@ -39,3 +39,8 @@ export const createPackageValidationSchema = Yup.object({
   type: Yup.string().required("Type is required."),
   price: Yup.number().required("Price is required."),
 });
+
+export const createMenuValidationSchema = Yup.object({
+  type: Yup.string().required("Type is required."),
+  restaurantId: Yup.string().uuid().required("Restaurant is required."),
+});

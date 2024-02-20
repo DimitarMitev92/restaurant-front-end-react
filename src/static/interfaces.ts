@@ -92,6 +92,15 @@ export interface LocationData {
   deletedAt: string | null;
 }
 
+export interface RestaurantData {
+  id: string;
+  name: string;
+  locationId: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
 export interface CreateRestaurantFormProps {
   onSubmit: (CreateRestaurantFormData: CreateRestaurantFormData) => void;
 }
@@ -154,9 +163,19 @@ export interface CreatePackageFormValues {
   error?: string;
 }
 
+export interface CreateMenuFormProps {
+  onSubmit: (CreateMenuFormData: CreateMenuFormData) => void;
+}
+
 export interface CreateMenuFormData {
-  type?: string;
+  type: string;
   restaurantId: string;
+}
+
+export interface CreateMenuFormData {
+  type: string;
+  restaurantId: string;
+  error?: string;
 }
 
 export interface UpdateMenuFormData {
