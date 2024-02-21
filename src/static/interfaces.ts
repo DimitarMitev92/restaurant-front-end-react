@@ -101,6 +101,32 @@ export interface RestaurantData {
   deletedAt: string | null;
 }
 
+export interface MenuData {
+  id: string;
+  type: string;
+  restaurantId: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface CategoryData {
+  id: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface PackageData {
+  id: string;
+  type: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
 export interface CreateRestaurantFormProps {
   onSubmit: (CreateRestaurantFormData: CreateRestaurantFormData) => void;
 }
@@ -119,6 +145,41 @@ export interface CreateRestaurantFormValues {
   imageUrl: string;
   openHour: string;
   closeHour: string;
+  error?: string;
+}
+
+export interface CreateMealFormProps {
+  onSubmit: (CreateMealFormData: CreateMealFormData) => void;
+}
+
+export interface CreateMealFormData {
+  name: string;
+  picture: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  startHour: string;
+  endHour: string;
+  price: number;
+  weight: number;
+  menuId: string;
+  categoryId: string;
+  packageId: string;
+}
+
+export interface CreateMealFormValues {
+  name: string;
+  picture: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  startHour: string;
+  endHour: string;
+  price: number;
+  weight: number;
+  menuId: string;
+  categoryId: string;
+  packageId: string;
   error?: string;
 }
 

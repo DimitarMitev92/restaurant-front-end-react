@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { CreateLocationFormProps } from "../../../static/interfaces";
-import { Wrapper } from "../ReusableForm/ReusableForm.style";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createLocationValidationSchema } from "../../../static/form-validations";
 import { locationService } from "../../../services/locationService";
@@ -23,22 +22,20 @@ export const CreateLocation: React.FC<CreateLocationFormProps> = ({
   ];
 
   return (
-    <Wrapper>
-      <ReusableForm
-        formHeading="Create location"
-        inputsData={inputsCreateLocationData}
-        initialValues={{
-          name: "",
-          error: "",
-        }}
-        validationSchema={createLocationValidationSchema}
-        onSubmit={async (values) => {
-          const location = await locationService.createLocation(values);
-          onSubmit && onSubmit(location);
-          navigate(mainRoute.MAIN);
-        }}
-        buttonText="Create"
-      />
-    </Wrapper>
+    <ReusableForm
+      formHeading="Create location"
+      inputsData={inputsCreateLocationData}
+      initialValues={{
+        name: "",
+        error: "",
+      }}
+      validationSchema={createLocationValidationSchema}
+      onSubmit={async (values) => {
+        const location = await locationService.createLocation(values);
+        onSubmit && onSubmit(location);
+        navigate(mainRoute.MAIN);
+      }}
+      buttonText="Create"
+    />
   );
 };

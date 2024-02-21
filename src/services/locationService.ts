@@ -22,9 +22,6 @@ export const locationService = {
   createLocation: async (locationData: CreateLocationFormData) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
-      console.log(accessToken);
-      console.log(`${endpointAPI.LOCATION}/create`);
-      console.log(locationData);
       const location = await fetchDataFromApi(
         `${endpointAPI.LOCATION}/create`,
         accessToken ? accessToken : null,

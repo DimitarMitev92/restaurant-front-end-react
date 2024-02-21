@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router";
 import { CreateCategoryFormProps } from "../../../static/interfaces";
-import { Wrapper } from "../SignIn/SignInForm.style";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createCategoryValidationSchema } from "../../../static/form-validations";
 import { mainRoute } from "../../../static/endpoints";
@@ -22,23 +21,20 @@ export const CreateCategory: React.FC<CreateCategoryFormProps> = ({
   ];
 
   return (
-    <Wrapper>
-      <ReusableForm
-        formHeading="Create category"
-        inputsData={inputsCreateCategoryData}
-        initialValues={{
-          type: "",
-          error: "",
-        }}
-        validationSchema={createCategoryValidationSchema}
-        onSubmit={async (values) => {
-          console.log(values);
-          const category = await categoryService.createCategory(values);
-          onSubmit && onSubmit(category);
-          navigate(mainRoute.MAIN);
-        }}
-        buttonText="Create"
-      />
-    </Wrapper>
+    <ReusableForm
+      formHeading="Create category"
+      inputsData={inputsCreateCategoryData}
+      initialValues={{
+        type: "",
+        error: "",
+      }}
+      validationSchema={createCategoryValidationSchema}
+      onSubmit={async (values) => {
+        const category = await categoryService.createCategory(values);
+        onSubmit && onSubmit(category);
+        navigate(mainRoute.MAIN);
+      }}
+      buttonText="Create"
+    />
   );
 };

@@ -4,7 +4,6 @@ import {
   RestaurantData,
 } from "../../../static/interfaces";
 import { useRestaurants } from "../../../hooks/useRestaurants";
-import { Wrapper } from "../SignIn/SignInForm.style";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createMenuValidationSchema } from "../../../static/form-validations";
 import { menuService } from "../../../services/menuService";
@@ -36,23 +35,21 @@ export const CreateMenu: React.FC<CreateMenuFormProps> = ({ onSubmit }) => {
   ];
 
   return (
-    <Wrapper>
-      <ReusableForm
-        formHeading="Create menu"
-        inputsData={inputsCreateMenuData}
-        initialValues={{
-          type: "",
-          restaurantId: "",
-          error: "",
-        }}
-        validationSchema={createMenuValidationSchema}
-        onSubmit={async (values) => {
-          const restaurant = await menuService.createMenu(values);
-          onSubmit && onSubmit(restaurant);
-          navigate(mainRoute.MAIN);
-        }}
-        buttonText="Create"
-      />
-    </Wrapper>
+    <ReusableForm
+      formHeading="Create menu"
+      inputsData={inputsCreateMenuData}
+      initialValues={{
+        type: "",
+        restaurantId: "",
+        error: "",
+      }}
+      validationSchema={createMenuValidationSchema}
+      onSubmit={async (values) => {
+        const restaurant = await menuService.createMenu(values);
+        onSubmit && onSubmit(restaurant);
+        navigate(mainRoute.MAIN);
+      }}
+      buttonText="Create"
+    />
   );
 };
