@@ -11,6 +11,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<{
     user: {
+      id: string;
       firstName: string;
       lastName: string;
       email: string;
@@ -56,6 +57,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           setIsAuthenticated(true);
           setUser(() => ({
             user: {
+              id: decoded.sub,
               firstName: decoded.firstName,
               lastName: decoded.lastName,
               email: decoded.email,

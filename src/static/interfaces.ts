@@ -12,6 +12,7 @@ export interface AuthProviderProps {
 }
 
 export interface DecodedToken {
+  sub: string;
   exp: number;
   firstName: string;
   lastName: string;
@@ -22,6 +23,7 @@ export interface DecodedToken {
 
 export interface UserDataFromApi {
   user: {
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -33,6 +35,7 @@ export interface UserDataFromApi {
 
 export interface UserDataFromApiRefactor {
   user: {
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
