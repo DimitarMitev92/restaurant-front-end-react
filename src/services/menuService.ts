@@ -2,11 +2,11 @@ import { endpointAPI, method } from "../static/endpoints";
 import { CreateMenuFormData, UpdateMenuFormData } from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
-const accessToken = sessionStorage.getItem("access_token");
-
 export const menuService = {
   fetchMenus: async () => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const menus = await fetchDataFromApi(
         endpointAPI.MENU,
         accessToken ? accessToken : null,
@@ -23,6 +23,8 @@ export const menuService = {
 
   createMenu: async (menuData: CreateMenuFormData) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const menu = await fetchDataFromApi(
         `${endpointAPI.MENU}/create`,
         accessToken ? accessToken : null,
@@ -38,6 +40,8 @@ export const menuService = {
   },
   updateMenu: async (menuId: string, menuData: UpdateMenuFormData) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const menu = await fetchDataFromApi(
         `${endpointAPI.MENU}/${menuId}`,
         accessToken ? accessToken : null,
@@ -53,6 +57,8 @@ export const menuService = {
   },
   fetchMenuById: async (menuId: string) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const menu = await fetchDataFromApi(
         `${endpointAPI.MENU}/${menuId}`,
         accessToken ? accessToken : null,

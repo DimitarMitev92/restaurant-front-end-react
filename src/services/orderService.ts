@@ -2,11 +2,11 @@ import { endpointAPI, method } from "../static/endpoints";
 import { CreateOrderFormData, UpdateOrderFormData } from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
-const accessToken = sessionStorage.getItem("access_token");
-
 export const orderService = {
   fetchOrders: async () => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const orders = await fetchDataFromApi(
         endpointAPI.ORDER,
         accessToken ? accessToken : null,
@@ -23,6 +23,8 @@ export const orderService = {
 
   createOrder: async (orderData: CreateOrderFormData) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const order = await fetchDataFromApi(
         `${endpointAPI.ORDER}/create`,
         accessToken ? accessToken : null,
@@ -38,6 +40,8 @@ export const orderService = {
   },
   updateOrder: async (orderId: string, orderData: UpdateOrderFormData) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const order = await fetchDataFromApi(
         `${endpointAPI.ORDER}/${orderId}`,
         accessToken ? accessToken : null,
@@ -53,6 +57,8 @@ export const orderService = {
   },
   fetchOrderById: async (orderId: string) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const meal = await fetchDataFromApi(
         `${endpointAPI.ORDER}/${orderId}`,
         accessToken ? accessToken : null,

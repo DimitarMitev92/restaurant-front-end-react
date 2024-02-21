@@ -5,11 +5,11 @@ import {
 } from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
-const accessToken = sessionStorage.getItem("access_token");
-
 export const packageService = {
   fetchPackages: async () => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const packages = await fetchDataFromApi(
         endpointAPI.PACKAGE,
         accessToken ? accessToken : null,
@@ -26,6 +26,8 @@ export const packageService = {
 
   createPackage: async (packageData: CreatePackageFormData) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const pack = await fetchDataFromApi(
         `${endpointAPI.PACKAGE}/create`,
         accessToken ? accessToken : null,
@@ -44,6 +46,8 @@ export const packageService = {
     packageData: UpdatePackageFormData
   ) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const pack = await fetchDataFromApi(
         `${endpointAPI.PACKAGE}/${packageId}`,
         accessToken ? accessToken : null,
@@ -59,6 +63,8 @@ export const packageService = {
   },
   fetchPackageById: async (packageId: string) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const pack = await fetchDataFromApi(
         `${endpointAPI.PACKAGE}/${packageId}`,
         accessToken ? accessToken : null,

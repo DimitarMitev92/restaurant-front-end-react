@@ -5,11 +5,11 @@ import {
 } from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
-const accessToken = sessionStorage.getItem("access_token");
-
 export const categoryService = {
   fetchCategories: async () => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const categories = await fetchDataFromApi(
         endpointAPI.CATEGORY,
         accessToken ? accessToken : null,
@@ -40,11 +40,13 @@ export const categoryService = {
       throw error;
     }
   },
+
   updateCategory: async (
     categoryId: string,
     categoryData: UpdateCategoryFormData
   ) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
       const category = await fetchDataFromApi(
         `${endpointAPI.CATEGORY}/${categoryId}`,
         accessToken ? accessToken : null,
@@ -60,6 +62,7 @@ export const categoryService = {
   },
   fetchCategoryById: async (categoryId: string) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
       const category = await fetchDataFromApi(
         `${endpointAPI.CATEGORY}/${categoryId}`,
         accessToken ? accessToken : null,

@@ -1,11 +1,11 @@
 import { endpointAPI, method } from "../static/endpoints";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
-const accessToken = sessionStorage.getItem("access_token");
-
 export const orderDetailService = {
   fetchOrderDetails: async () => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const orderDetails = await fetchDataFromApi(
         endpointAPI.ORDER_DETAIL,
         accessToken ? accessToken : null,
@@ -22,6 +22,8 @@ export const orderDetailService = {
 
   fetchOrderDetailById: async (orderDetailId: string) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const meal = await fetchDataFromApi(
         `${endpointAPI.ORDER_DETAIL}/${orderDetailId}`,
         accessToken ? accessToken : null,
