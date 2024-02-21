@@ -8,9 +8,9 @@ import {
 } from "../../../static/endpoints";
 import { changePasswordValidationSchema } from "../../../static/form-validations";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
-import { useSessionStorage } from "../../../hooks/useSessionStorage";
 import { useAuth } from "../../../context/AuthProvider";
 import { ChangePasswordFormData } from "../../../static/interfaces";
+import { useSessionStorage } from "../../../hooks/useSessionStorage";
 
 export const ChangePassword = () => {
   const navigate = useNavigate();
