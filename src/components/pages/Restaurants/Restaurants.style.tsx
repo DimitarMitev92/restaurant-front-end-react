@@ -2,11 +2,8 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   display: flex;
-  margin-top: 20px;
   flex-direction: column;
-  /* justify-content: center;  
-  align-items: center;       */
-  min-height: 100vh;
+  height: 85.8vh;
   padding: 16px;
 
   @media (max-width: 768px) {
@@ -20,6 +17,7 @@ export const StyledContainer = styled.div`
 
 export const CardsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -29,4 +27,16 @@ export const CardsContainer = styled.div`
   @media (max-width: 950px) {
     justify-content: center;
   }
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+`;
+
+export const HeaderWithInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-green);
+  margin-bottom: 40px;
 `;
