@@ -6,7 +6,7 @@ import { CreateMeal } from "../../Forms/CreateMeal/CreateMeal";
 import { CreateMenu } from "../../Forms/CreateMenu/CreateMenu";
 import { CreatePackage } from "../../Forms/CreatePackage/CreatePackage";
 import { CreateRestaurant } from "../../Forms/CreateRestaurant/CreateRestaurant";
-
+import { CreateMenuType } from "../../Forms/CreateMenuType/CreateMenuType";
 
 export const useAdminDashboardLogic = () => {
   const [activeForm, setActiveForm] = useState<string>("");
@@ -22,6 +22,11 @@ export const useAdminDashboardLogic = () => {
       label: "Create Restaurant",
       formName: "createRestaurant",
       path: "/admin-dashboard/create-restaurant",
+    },
+    {
+      label: "Create Menu Type",
+      formName: "createMenuType",
+      path: "/admin-dashboard/create-menu-type",
     },
     {
       label: "Create Menu",
@@ -51,6 +56,8 @@ export const useAdminDashboardLogic = () => {
         return <CreateRestaurant onSubmit={(data) => console.log(data)} />;
       case "createPackage":
         return <CreatePackage onSubmit={(data) => console.log(data)} />;
+      case "createMenuType":
+        return <CreateMenuType onSubmit={(data) => console.log(data)} />;
       case "createMenu":
         return <CreateMenu onSubmit={(data) => console.log(data)} />;
       case "createLocation":

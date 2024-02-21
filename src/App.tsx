@@ -44,6 +44,10 @@ function App() {
                   element={<AdminRoute element={<AdminDashboard />} />}
                 />
                 <Route
+                  path={routes.ADMIN_DASHBOARD_CREATE_MENU_TYPE}
+                  element={<AdminRoute element={<AdminDashboard />} />}
+                />
+                <Route
                   path={routes.ADMIN_DASHBOARD_CREATE_MENU}
                   element={<AdminRoute element={<AdminDashboard />} />}
                 />
