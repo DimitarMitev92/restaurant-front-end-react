@@ -1,28 +1,48 @@
 import RestaurantCard from "./RestaurantsCard/RestaurantCard";
 import { Restaurant } from "./Restaurants.static";
-import { CardsContainer, StyledContainer } from "./Restaurants.style";
-import { useRestaurants } from "../../../hooks/useRestaurants";
+import {
+  CardsContainer,
+  HeaderWithInputContainer,
+  InputContainer,
+  StyledContainer,
+} from "./Restaurants.style";
 import { PulseLoader } from "react-spinners";
 import EmptyList from "../../EmptyList/EmptyList";
+import UnifiedInput from "../../ui-elements/input";
+import { useRestaurantsPageLogic } from "./Restaurants.logic";
 
 const Restaurants = () => {
-  const { restaurants, loading, error } = useRestaurants();
+  const {
+    options,
+    restaurants,
+    isLoading,
+    error,
+    handleChange,
+    selectedLocation,
+  } = useRestaurantsPageLogic();
 
   return (
     <>
       <StyledContainer>
-        <header>
-          <h2>Your Restaurants</h2>
-          {/* <div>
-            <Button onClick={handleCreateRestaurant}>Create New Restaurant</Button>
-        </div> */}
-        </header>
+        <HeaderWithInputContainer>
+          <h2>Restaurants</h2>
+          <InputContainer>
+            <UnifiedInput
+              type="select"
+              onChange={handleChange}
+              value={selectedLocation}
+              placeholder="Select location"
+              name="location"
+              options={options || []}
+            />
+          </InputContainer>
+        </HeaderWithInputContainer>
         <CardsContainer>
-          {loading ? (
+          {isLoading ? (
             <PulseLoader color="#4caf50" size={12} />
           ) : error ? (
-            <p>Error loading restaurants.</p>
-          ) : restaurants.length > 0 ? (
+            <p>{error}</p>
+          ) : restaurants && restaurants.length > 0 ? (
             restaurants.map((restaurant: Restaurant) => (
               <RestaurantCard key={restaurant.id} restaurant={restaurant} />
             ))
