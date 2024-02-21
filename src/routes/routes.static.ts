@@ -26,6 +26,7 @@ export const routes = {
   CATEGORY: mainRoute.CATEGORY,
   LOCATION: mainRoute.LOCATION,
   PACKAGE: mainRoute.PACKAGE,
+  PROFILE: mainRoute.PROFILE,
   NOT_FOUND: mainRoute.NOT_FOUND,
 };
 
