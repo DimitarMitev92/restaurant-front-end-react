@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { SwitchButtonProps } from './Cart.static';
+import styled from "styled-components";
+import { SwitchButtonProps } from "./Cart.static";
 
 export const CartWrapper = styled.div`
   max-height: 856px;
@@ -7,7 +7,7 @@ export const CartWrapper = styled.div`
 `;
 
 export const SidebarWrapper = styled.div`
-  top: 85px; 
+  top: 85px;
   width: 320px;
   height: 90%;
   background: white;
@@ -45,10 +45,9 @@ export const FlexContainer = styled.div`
   justify-content: center;
 `;
 
-
 export const SwitchButton = styled.button<SwitchButtonProps>`
-  background-color: ${(props) => (props.active ? '#4caf50' : '#ffc244')};
-  color: ${(props) => (props.active ? '#fff' : '#333')};
+  background-color: ${(props) => (props.active ? "#4caf50" : "#ffc244")};
+  color: ${(props) => (props.active ? "#fff" : "#333")};
   padding: 10px 15px;
   border: none;
   border-radius: 2px;
@@ -56,6 +55,6 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => (props.active ? '#4caf50' : '#ffc244')};
+    background-color: ${(props) => (props.active ? "#4caf50" : "#ffc244")};
   }
 `;

@@ -30,7 +30,7 @@ export const mainRoute = {
   ADMIN_DASHBOARD_CREATE_CATEGORY: "/admin-dashboard/create-category",
   ADMIN_DASHBOARD_CREATE_MEAL: "/admin-dashboard/create-meal",
   RESTAURANTS: "/restaurants",
-  RESTAURANTS_UPDATE: "/restaurants/:id",
+  RESTAURANTS_UPDATE: "/restaurant/:id",
   MENU: "/menu",
   MENU_UPDATE: "/menu/:id",
   MEAL: "/meal",

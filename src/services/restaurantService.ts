@@ -20,6 +20,23 @@ export const restaurantService = {
     }
   },
 
+  fetchMealsByRestaurantId: async (id: string | undefined) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const restaurants = await fetchDataFromApi(
+        `${endpointAPI.RESTAURANT}/${id}`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching meals by restaurant id"
+      );
+      return restaurants;
+    } catch (error) {
+      console.error("Error fetching meals by restaurant id.");
+      throw error;
+    }
+  },
+
   createRestaurant: async (restaurantData: CreateRestaurantFormData) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");

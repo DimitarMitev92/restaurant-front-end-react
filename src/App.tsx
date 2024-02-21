@@ -10,10 +10,8 @@ import { AdminDashboard } from "./components/pages/AdminDashboard/AdminDashboard
 import { Logout } from "./components/Logout/Logout";
 import { AuthProvider } from "./context/AuthProvider";
 import Restaurants from "./components/pages/Restaurants/Restaurants";
+import { RestaurantsDetails } from "./components/pages/Restaurant/RestaurantsDetails/RestaurantsDetails";
 import { Profile } from "./components/Profile/Profile";
-import { Restaurant } from "./components/pages/Restaurant/Restaurant";
-
-
 
 function App() {
   return (
@@ -28,7 +26,10 @@ function App() {
             <Route path={routes.SIGN_IN} element={<SignIn />} />
             <Route path={routes.SIGN_UP} element={<SignUp />} />
             <Route path={routes.RESTAURANTS} element={<Restaurants />} />
-            <Route path={routes.RESTAURANTS_UPDATE} element={<Restaurant />} />
+            <Route
+              path={routes.RESTAURANTS_UPDATE}
+              element={<RestaurantsDetails />}
+            />
             <Route element={<PrivateRoutes />}>
               <Route
                 path={routes.ADMIN_DASHBOARD}
