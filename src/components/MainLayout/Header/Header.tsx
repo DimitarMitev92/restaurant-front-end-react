@@ -15,6 +15,7 @@ import {
   SmallScreenOverlay,
 } from "./Header.style";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FaUser } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes/routes.static";
 import { useAuth } from "../../../context/AuthProvider";
@@ -55,7 +56,12 @@ export const Header = () => {
             <LoginLink to={routes.SIGN_UP}>Sign Up</LoginLink>
           </>
         ) : (
-          <LoginLink to={routes.LOGOUT}>Log Out</LoginLink>
+          <>
+            <LoginLink to={routes.PROFILE}>
+              <FaUser />
+            </LoginLink>
+            <LoginLink to={routes.LOGOUT}>Log Out</LoginLink>
+          </>
         )}
       </LoginContainer>
       <SmallScreenContainer>
@@ -95,9 +101,14 @@ export const Header = () => {
                   </SmallScreenNavLink>
                 </>
               ) : (
-                <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                  <NavLink to={routes.LOGOUT}>Log Out</NavLink>
-                </SmallScreenNavLink>
+                <>
+                  <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                    <LoginLink to={routes.PROFILE}>Profile</LoginLink>
+                  </SmallScreenNavLink>
+                  <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
+                    <NavLink to={routes.LOGOUT}>Log Out</NavLink>
+                  </SmallScreenNavLink>
+                </>
               )}
             </SmallScreenLinks>
           </SmallScreenOverlay>
