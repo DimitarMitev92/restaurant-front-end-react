@@ -23,6 +23,12 @@ export const mainRoute = {
   SIGN_UP: "/auth/sign-up",
   LOGOUT: "/auth/logout",
   ADMIN_DASHBOARD: "/admin-dashboard",
+  ADMIN_DASHBOARD_CREATE_PACKAGE: "/admin-dashboard/create-package",
+  ADMIN_DASHBOARD_CREATE_RESTAURANT: "/admin-dashboard/create-restaurant",
+  ADMIN_DASHBOARD_CREATE_MENU: "/admin-dashboard/create-menu",
+  ADMIN_DASHBOARD_CREATE_LOCATION: "/admin-dashboard/create-location",
+  ADMIN_DASHBOARD_CREATE_CATEGORY: "/admin-dashboard/create-category",
+  ADMIN_DASHBOARD_CREATE_MEAL: "/admin-dashboard/create-meal",
   RESTAURANTS: "/restaurants",
   RESTAURANTS_UPDATE: "/restaurants/:id",
   MENU: "/menu",
@@ -37,6 +43,7 @@ export const mainRoute = {
   PROFILE: "/profile",
   NOT_FOUND: "*",
 };
+
 
 export const method = {
   GET: "GET",

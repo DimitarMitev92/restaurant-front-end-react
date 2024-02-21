@@ -8,7 +8,7 @@ interface ButtonProps {
 export const StyledButton = styled.button`
   cursor: pointer;
   background-color: var(--color-green);
-  color: var(--color-yellow);
+  color: var(--color-white);
   border: none;
   padding: 10px 20px;
   font-size: 1rem;
