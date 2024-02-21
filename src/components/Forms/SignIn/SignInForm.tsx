@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useSessionStorage } from "../../../hooks/useSesionStorage";
+import { useSessionStorage } from "../../../hooks/useSessionStorage";
 import { useAuth } from "../../../context/AuthProvider";
 import { ImageSignIn, Wrapper } from "./SignInForm.style";
 import { signInValidationSchema } from "../../../static/form-validations";
