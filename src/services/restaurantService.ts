@@ -24,7 +24,7 @@ export const restaurantService = {
     try {
       const accessToken = sessionStorage.getItem("access_token");
       const restaurants = await fetchDataFromApi(
-        `${endpointAPI.RESTAURANT}/${id}`,
+        `${endpointAPI.RESTAURANT}/${id}/meals`,
         accessToken ? accessToken : null,
         method.GET,
         null,
