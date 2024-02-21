@@ -30,6 +30,7 @@ export const changePasswordValidationSchema = Yup.object({
     .max(20, "New password cannot be more than 20 characters long.")
     .required("New password is required"),
   comparePassword: Yup.string()
+    .oneOf([Yup.ref("newPassword")], "Passwords must match")
     .min(6, "New password must be at least 6 characters long.")
     .max(20, "New password cannot be more than 20 characters long.")
     .required("New password is required"),
