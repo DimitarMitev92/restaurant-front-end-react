@@ -36,4 +36,21 @@ export const restaurantService = {
       throw error;
     }
   },
+
+  fetchRestaurantsByLocationId: async (locationId:string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const restaurants = await fetchDataFromApi(
+        `${endpointAPI.RESTAURANT}/byLocationId/${locationId}`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching restaurants by location ID"
+      );
+      return restaurants;
+    } catch (error) {
+      console.error("Error fetching restaurants by location ID.", error);
+      throw error;
+    }
+  },
 };
