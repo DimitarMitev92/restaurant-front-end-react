@@ -82,3 +82,7 @@ export const createMenuValidationSchema = Yup.object({
   type: Yup.string().required("Type is required."),
   restaurantId: Yup.string().uuid().required("Restaurant is required."),
 });
+
+export const createAddressValidationSchema = Yup.object({
+  address: Yup.string().required("Address is required."),
+});

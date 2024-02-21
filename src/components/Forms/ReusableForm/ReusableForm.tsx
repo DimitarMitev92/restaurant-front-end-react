@@ -42,6 +42,7 @@ interface ReusableProps {
     menuId?: string;
     categoryId?: string;
     packageId?: string;
+    address?: string;
     email?: string;
     password?: string;
     newPassword?: string;

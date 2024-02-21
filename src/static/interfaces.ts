@@ -219,6 +219,23 @@ export interface CreateCategoryFormValues {
   error?: string;
 }
 
+export interface CreateAddressFormProps {
+  onSubmit: (CreateAddressFormData: CreateAddressFormData) => void;
+}
+
+export interface CreateAddressFormData {
+  address: string;
+}
+
+export interface UpdateAddressFormData {
+  address: string;
+}
+
+export interface CreateAddressFormValues {
+  address: string;
+  error?: string;
+}
+
 export interface CreatePackageFormProps {
   onSubmit: (CreatePackageFormData: CreatePackageFormData) => void;
 }

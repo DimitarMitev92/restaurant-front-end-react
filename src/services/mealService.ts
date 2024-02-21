@@ -1,15 +1,12 @@
 import { endpointAPI, method } from "../static/endpoints";
-import {
-  CreateMealFormData,
-  UpdateMealFormData,
-} from "../static/interfaces";
+import { CreateMealFormData, UpdateMealFormData } from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
-
-const accessToken = sessionStorage.getItem("access_token");
 
 export const mealService = {
   fetchMeals: async () => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const meals = await fetchDataFromApi(
         endpointAPI.MEAL,
         accessToken ? accessToken : null,
@@ -26,6 +23,8 @@ export const mealService = {
 
   createMeal: async (mealData: CreateMealFormData) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const meal = await fetchDataFromApi(
         `${endpointAPI.MEAL}/create`,
         accessToken ? accessToken : null,
@@ -41,6 +40,8 @@ export const mealService = {
   },
   updateMeal: async (mealId: string, mealData: UpdateMealFormData) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const meal = await fetchDataFromApi(
         `${endpointAPI.MEAL}/${mealId}`,
         accessToken ? accessToken : null,
@@ -56,6 +57,8 @@ export const mealService = {
   },
   fetchMealById: async (mealId: string) => {
     try {
+      const accessToken = sessionStorage.getItem("access_token");
+
       const meal = await fetchDataFromApi(
         `${endpointAPI.MEAL}/${mealId}`,
         accessToken ? accessToken : null,

@@ -13,6 +13,7 @@ export const endpointAPI = {
   CATEGORY: `http://localhost:${PORT}/category`,
   LOCATION: `http://localhost:${PORT}/location`,
   PACKAGE: `http://localhost:${PORT}/package`,
+  ADDRESS: `http://localhost:${PORT}/address`,
 };
 
 export const mainRoute = {
@@ -43,7 +44,6 @@ export const mainRoute = {
   PROFILE: "/profile",
   NOT_FOUND: "*",
 };
-
 
 export const method = {
   GET: "GET",
