@@ -57,7 +57,6 @@ function App() {
                   element={<AdminRoute element={<AdminDashboard />} />}
                 />
               </Route>
-              />
               <Route path={routes.PROFILE} element={<Profile />} />
               <Route path={routes.LOGOUT} element={<Logout />} />
             </Route>
