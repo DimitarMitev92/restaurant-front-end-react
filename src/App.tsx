@@ -11,6 +11,7 @@ import { Logout } from "./components/Logout/Logout";
 import { AuthProvider } from "./context/AuthProvider";
 import Restaurants from "./components/pages/Restaurants/Restaurants";
 import { Profile } from "./components/Profile/Profile";
+import { Restaurant } from "./components/pages/Restaurant/Restaurant";
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path={routes.SIGN_IN} element={<SignIn />} />
             <Route path={routes.SIGN_UP} element={<SignUp />} />
             <Route path={routes.RESTAURANTS} element={<Restaurants />} />
+            <Route path={routes.RESTAURANTS_UPDATE} element={<Restaurant />} />
             <Route element={<PrivateRoutes />}>
               <Route
                 path={routes.ADMIN_DASHBOARD}

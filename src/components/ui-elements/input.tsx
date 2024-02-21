@@ -18,6 +18,7 @@ interface UnifiedInputProps {
   type?: string;
   name?: string;
   options?: Option[];
+  checked?: boolean;
 }
 
 const baseStyle = css`
