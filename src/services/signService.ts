@@ -17,6 +17,7 @@ export const signService = async (
 
     const refactorData = {
       user: {
+        id: responseData.user.id,
         firstName: responseData.user.firstName,
         lastName: responseData.user.lastName,
         email: responseData.user.email,
