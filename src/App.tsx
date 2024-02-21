@@ -10,6 +10,7 @@ import { AdminDashboard } from "./components/pages/AdminDashboard/AdminDashboard
 import { Logout } from "./components/Logout/Logout";
 import { AuthProvider } from "./context/AuthProvider";
 import Restaurants from "./components/pages/Restaurants/Restaurants";
+import { Profile } from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 path={routes.ADMIN_DASHBOARD}
                 element={<AdminRoute element={<AdminDashboard />} />}
               />
+              <Route path={routes.PROFILE} element={<Profile />} />
               <Route path={routes.LOGOUT} element={<Logout />} />
             </Route>
             {/* MUST ADD ADDITIONAL ROUTES  */}

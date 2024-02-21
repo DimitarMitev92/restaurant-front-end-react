@@ -34,6 +34,7 @@ export const mainRoute = {
   CATEGORY: "/category",
   LOCATION: "/location",
   PACKAGE: "/package",
+  PROFILE: "/profile",
   NOT_FOUND: "*",
 };
 
