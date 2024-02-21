@@ -59,6 +59,13 @@ export interface SignUpFormData {
   password: string;
 }
 
+export interface ChangePasswordFormData {
+  email: string;
+  password: string;
+  newPassword: string;
+  comparePassword: string;
+}
+
 export interface SignUpFormProps {
   onSubmit: (signUpFormData: SignUpFormData) => void;
 }

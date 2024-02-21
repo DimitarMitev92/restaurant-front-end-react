@@ -12,7 +12,7 @@ import {
   method,
 } from "../../../static/endpoints";
 import { useNavigate } from "react-router-dom";
-import { useSessionStorage } from "../../../hooks/useSesionStorage";
+import { useSessionStorage } from "../../../hooks/useSessionStorage";
 // import { useLocations } from "../../../hooks/useLocations";
 import { useAuth } from "../../../context/AuthProvider";
 import { ImageSignUp, Wrapper } from "./SignUpForm.style";

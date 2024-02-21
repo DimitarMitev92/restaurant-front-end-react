@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useSessionStorage } from "../../hooks/useSesionStorage";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
 import { useEffect } from "react";
 import { mainRoute } from "../../static/endpoints";
 import { useAuth } from "../../context/AuthProvider";

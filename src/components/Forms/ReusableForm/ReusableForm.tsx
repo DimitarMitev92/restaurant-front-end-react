@@ -44,6 +44,8 @@ interface ReusableProps {
     packageId?: string;
     email?: string;
     password?: string;
+    newPassword?: string;
+    comparePassword?: string;
     error: string;
   };
   validationSchema: unknown;

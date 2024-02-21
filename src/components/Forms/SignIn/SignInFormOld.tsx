@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { useSessionStorage } from "../../../hooks/useSesionStorage";
+import { useSessionStorage } from "../../../hooks/useSessionStorage";
 import { SignInFormProps, SignInFormValues } from "../../../static/interfaces";
 import { signInValidationSchema } from "../../../static/form-validations";
 import {
