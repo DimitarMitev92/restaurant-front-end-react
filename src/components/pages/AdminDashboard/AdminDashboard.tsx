@@ -1,17 +1,31 @@
-import { CreateCategory } from "../../Forms/CreateCategory/CreateCategory";
-import { CreateMeal } from "../../Forms/CreateMeal/CreateMeal";
-import { CreateMenu } from "../../Forms/CreateMenu/CreateMenu";
-import { CreatePackage } from "../../Forms/CreatePackage/CreatePackage";
-import { CreateRestaurant } from "../../Forms/CreateRestaurant/CreateRestaurant";
+import {
+  DashboardContainer,
+  Header,
+  ButtonContainer,
+  WrapperDashBoard,
+} from "./AdminDashboard.style";
+import Button from "../../ui-elements/button";
+import { useAdminDashboardLogic } from "./AdminDashboard.logic";
 
 export const AdminDashboard = () => {
+  const { handleButtonClick, forms, renderForm } = useAdminDashboardLogic();
+
   return (
-    <>
-      <CreateCategory />
-      <CreatePackage />
-      <CreateRestaurant />
-      <CreateMenu />
-      <CreateMeal />
-    </>
+    <WrapperDashBoard>
+      <DashboardContainer>
+        <Header>Admin Dashboard</Header>
+        <ButtonContainer>
+          {forms.map(({ label, formName, path }) => (
+            <Button
+              key={formName}
+              label={label}
+              color="--color-green"
+              onClick={() => handleButtonClick(formName, path)}
+            />
+          ))}
+        </ButtonContainer>
+        {renderForm()}
+      </DashboardContainer>
+    </WrapperDashBoard>
   );
 };

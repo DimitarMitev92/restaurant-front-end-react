@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 85.8vh;
+  overflow: overlay;
   @media screen and (max-width: 650px) {
     height: 87vh;
   }
