@@ -11,6 +11,8 @@ import { Logout } from "./components/Logout/Logout";
 import { AuthProvider } from "./context/AuthProvider";
 import Restaurants from "./components/pages/Restaurants/Restaurants";
 
+
+
 function App() {
   return (
     <AuthProvider>
@@ -28,7 +30,32 @@ function App() {
               <Route
                 path={routes.ADMIN_DASHBOARD}
                 element={<AdminRoute element={<AdminDashboard />} />}
-              />
+              >
+                <Route
+                  path={routes.ADMIN_DASHBOARD_CREATE_PACKAGE}
+                  element={<AdminRoute element={<AdminDashboard />} />}
+                />
+                <Route
+                  path={routes.ADMIN_DASHBOARD_CREATE_RESTAURANT}
+                  element={<AdminRoute element={<AdminDashboard />} />}
+                />
+                <Route
+                  path={routes.ADMIN_DASHBOARD_CREATE_MENU}
+                  element={<AdminRoute element={<AdminDashboard />} />}
+                />
+                <Route
+                  path={routes.ADMIN_DASHBOARD_CREATE_LOCATION}
+                  element={<AdminRoute element={<AdminDashboard />} />}
+                />
+                <Route
+                  path={routes.ADMIN_DASHBOARD_CREATE_CATEGORY}
+                  element={<AdminRoute element={<AdminDashboard />} />}
+                />
+                <Route
+                  path={routes.ADMIN_DASHBOARD_CREATE_MEAL}
+                  element={<AdminRoute element={<AdminDashboard />} />}
+                />
+              </Route>
               <Route path={routes.LOGOUT} element={<Logout />} />
             </Route>
             {/* MUST ADD ADDITIONAL ROUTES  */}
