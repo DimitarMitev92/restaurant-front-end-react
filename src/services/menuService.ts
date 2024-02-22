@@ -14,6 +14,7 @@ export const menuService = {
         null,
         "Error fetching menus"
       );
+
       return menus;
     } catch (error) {
       console.error("Error fetching menus");

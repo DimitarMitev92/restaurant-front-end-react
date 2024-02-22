@@ -132,7 +132,8 @@ export interface MenuTypeData {
 
 export interface MenuData {
   id: string;
-  type: string;
+  menuTypeId: string;
+  menuTypeValue: string;
   restaurantId: string;
   createdAt: string;
   updatedAt: string;
