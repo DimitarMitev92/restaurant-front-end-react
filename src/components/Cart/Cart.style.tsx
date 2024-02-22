@@ -1,9 +1,15 @@
 import styled from "styled-components";
-import { SwitchButtonProps } from "./Cart.static";
+import { CartInputProps, SwitchButtonProps } from "./Cart.static";
+import { StyledButton } from "../ui-elements/button";
+import InputLabel from "../ui-elements/inputLabel";
 
 export const CartWrapper = styled.div`
   max-height: 856px;
-  width: 344px;
+  width: 360px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const SidebarWrapper = styled.div`
@@ -17,6 +23,18 @@ export const SidebarWrapper = styled.div`
   border-radius: 7px;
   transform: translateX(0);
   padding: 5px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    box-shadow: none;
+  }
 `;
 
 export const SidebarHeader = styled.div`
@@ -29,7 +47,6 @@ export const SidebarHeader = styled.div`
 `;
 
 export const SidebarTitle = styled.h2`
-  color: var(--xds-color-content-default);
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
@@ -57,4 +74,49 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
   &:hover {
     background-color: ${(props) => (props.active ? "#4caf50" : "#ffc244")};
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 1rem;
+  }
 `;
+
+export const CartButton = styled(StyledButton)`
+  padding: 10px 15px;
+  margin-left: 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+`;
+
+export const CartLabel = styled(InputLabel)`
+  font-size: 0.8rem;
+  margin-top: 10px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const StyledCartInput = styled.div<CartInputProps>`
+  label {
+    font-size: 0.8rem;
+    margin-top: 10px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+`;
+
+export const StyledPriceDiv = styled.div`
+  font-size: 1rem;
+`
+

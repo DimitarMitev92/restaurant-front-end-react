@@ -1,51 +1,86 @@
-import React, { useState } from "react";
-import { useSwipeable, SwipeableHandlers } from "react-swipeable";
+import React, { useEffect, useState, ChangeEvent } from "react";
+import { CartItem } from "./Cart.logic";
+import { useAuth } from "../../context/AuthProvider";
+import { useAddressesByUserId } from "../../hooks/useAddresses"; 
+import Select from "../ui-elements/select";
+import TextArea from "../ui-elements/textArea";
+import Switch from "./Switch";
 import {
+  CartWrapper,
   SidebarWrapper,
   SidebarHeader,
   SidebarTitle,
   SidebarContent,
-  CartWrapper,
+  CartLabel,
+  CartButton,
+  StyledPriceDiv
 } from "./Cart.style";
+import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/input";
-import Switch from "./Switch";
-import InputLabel from "../ui-elements/inputLabel";
-import TextArea from "../ui-elements/textArea";
-import { Button } from "../pages/Restaurants/RestaurantsCard/RestaurantCard.style";
+
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
+  const [selectedAddress, setSelectedAddress] = useState<string | undefined>(undefined);
   const [showNoteTextArea, setShowNoteTextArea] = useState<boolean>(false);
   const [additionalNote, setAdditionalNote] = useState<string>("");
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [addresses, setAddresses] = useState<Address[]>([]);
+
+  const { user } = useAuth(); 
+  const addressQuery = useAddressesByUserId(user?.user.id || "");
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        if (user && addressQuery && addressQuery.addresses && addressQuery.addresses.length > 0) {
+          setAddresses(addressQuery.addresses);
+          setSelectedAddress(addressQuery.addresses[0]?.id);
+        }
+      } catch (error) {
+        console.error('Error fetching user addresses:', error);
+      }
+    };
+  
+    fetchAddresses();
+  }, [user, addressQuery]);
 
   const handleSwitchClick = (mode: boolean) => {
     setDeliveryMode(mode);
+    setSelectedAddress(undefined);
   };
 
-  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleNoteChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setAdditionalNote(e.target.value);
   };
 
-  const handleCheckButton = () => {
+  const handleNoteCheckboxChange = () => {
     setShowNoteTextArea(!showNoteTextArea);
   };
 
-  const handlers: SwipeableHandlers = useSwipeable({
-    onSwiped: (eventData) => {
-      if (eventData.dir === "Right") {
-        setDeliveryMode(true);
-      } else if (eventData.dir === "Left") {
-        setDeliveryMode(false);
-      }
-    },
-  });
-
   const handleConfirmOrder = () => {
-    // TODO: Create order
+    // TODO: Submit order implementation
+  };
+
+  const calculateTotalPrice = () => {
+    let total = 0;
+    cartItems.forEach((item) => {
+      total += item.product.price * item.quantity;
+    });
+    setTotalPrice(total);
+  };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [cartItems]);
+
+  const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedAddress(e.target.value);
   };
 
   return (
-    <CartWrapper {...handlers}>
+    <CartWrapper>
       <SidebarWrapper>
         <SidebarHeader>
           <SidebarTitle>Cart</SidebarTitle>
@@ -55,29 +90,46 @@ export const ShoppingCart: React.FC = () => {
           />
         </SidebarHeader>
         <SidebarContent>
-          {/* Your cart items will go here */}
-          {/* Example: 
-          <CartItem />
-          <CartItem />
-          */}
-            <UnifiedInput
-              type="checkbox"
-              checked={showNoteTextArea}
-              onChange={handleCheckButton} value={""}/>
-            <InputLabel htmlFor={"additional note"} >Additional Note</InputLabel>
-          {showNoteTextArea && (
-            <TextArea
-              placeholder="Additional Note"
-              value={additionalNote}
-              onChange={handleNoteChange}
-            />
-          )}
+          <>
+            <div>
+              <UnifiedInput
+                type="checkbox"
+                checked={showNoteTextArea}
+                onChange={handleNoteCheckboxChange} value={""}/>
+              <CartLabel htmlFor="additional-note">Additional Note:</CartLabel>
+            </div>
+            {showNoteTextArea && (
+              <div>
+                <TextArea
+                  placeholder="Additional Note"
+                  value={additionalNote}
+                  onChange={handleNoteChange}
+                />
+              </div>
+            )}
+            {deliveryMode && addresses && (
+              <>
+                <CartLabel htmlFor="address-select">
+                  Select Delivery Address:
+                </CartLabel>
+                <Select
+                  onChange={handleAddressChange}
+                  value={selectedAddress || ""}
+                  options={addresses.map((address: Address) => ({
+                    value: address.id,
+                    label: `${address.address}`,
+                  }))}
+                />
+              </>
+            )}
+             <StyledPriceDiv>
+              Total Price: ${totalPrice.toFixed(2)}
+            </StyledPriceDiv>
+          </>
+          <CartButton onClick={handleConfirmOrder}>Confirm Order</CartButton>
         </SidebarContent>
-           <Button onClick={handleConfirmOrder}>
-            Confirm Order
-          </Button>
+        
       </SidebarWrapper>
     </CartWrapper>
   );
 };
-
