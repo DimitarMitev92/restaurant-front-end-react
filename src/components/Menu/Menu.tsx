@@ -1,15 +1,15 @@
+import { MenuProps } from "../../static/interfaces";
 import { Meal } from "../Meal/Meal";
 import { MealsWrapper } from "../Meal/Meal.style";
-import { MenuName, MenuWrapper } from "./Menu.styles";
+import { MenuWrapper } from "./Menu.styles";
 
-export const Menu = (props) => {
-  const meals = props.menu.meals.map((meal) => {
+export const Menu: React.FC<MenuProps> = ({ menu }) => {
+  const meals = menu.meals.map((meal) => {
     return <Meal key={meal.id} meal={meal}></Meal>;
   });
 
   return (
     <MenuWrapper>
-      <MenuName>{props.menu.name}</MenuName>
       <MealsWrapper>{meals}</MealsWrapper>
     </MenuWrapper>
   );

@@ -3,6 +3,7 @@ import {
   AddButton,
   BtnWrapper,
   EditButton,
+  IconImage,
   Img,
   Info,
   InfoAndPicture,
@@ -13,19 +14,23 @@ import {
   RemoveButton,
 } from "./Meal.style";
 
-export const Meal = (props) => {
-  console.log(props);
+import trashIcon from "../../assets/trash-xmark.png";
+import editIcon from "../../assets/edit.png";
+import { IMealProps } from "../../static/interfaces";
 
+export const Meal: React.FC<IMealProps> = ({ meal }) => {
   const { user } = useAuth();
-
-  console.log(user?.user.rights);
 
   let adminBtns;
   if (user?.user.rights === "ADMIN") {
     adminBtns = (
       <>
-        <RemoveButton>R</RemoveButton>
-        <EditButton>E</EditButton>
+        <RemoveButton>
+          <IconImage src={trashIcon} />
+        </RemoveButton>
+        <EditButton>
+          <IconImage src={editIcon} />
+        </EditButton>
       </>
     );
   }
@@ -34,9 +39,9 @@ export const Meal = (props) => {
     <MealCard>
       <NameAndAddBtn>
         <div>
-          {props.meal.name}
+          {meal.name}
           <span>-</span>
-          <span>{props.meal.weight}g</span>
+          <span>{meal.weight}g</span>
         </div>
         <BtnWrapper>
           {user?.user.rights && adminBtns}
@@ -44,12 +49,12 @@ export const Meal = (props) => {
         </BtnWrapper>
       </NameAndAddBtn>
       <InfoAndPicture>
-        <Info>{props.meal.description}</Info>
+        <Info>{meal.description}</Info>
         <MealPicture>
           <Img src="https://restaurant-two.s3.eu-north-1.amazonaws.com/1708357534060-kaouther-djouada-hcEDfkiVmMI-unsplash.jpg"></Img>
         </MealPicture>
       </InfoAndPicture>
-      <Price>{props.meal.price} USD</Price>
+      <Price>{meal.price} USD</Price>
     </MealCard>
   );
 };

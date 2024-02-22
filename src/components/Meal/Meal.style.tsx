@@ -11,14 +11,15 @@ export const MealCard = styled.section`
   justify-content: space-between;
   font-size: larger;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-  /* max-width: 800px;
-  max-height: 280px; */
+  max-width: 840px;
+  max-height: 280px;
 `;
 
 export const MealsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   gap: 2.5rem;
 `;
 
@@ -56,11 +57,11 @@ export const AddButton = styled.button`
   all: unset;
   border-radius: 50%;
   background-color: #9f9f9f;
-  height: 2.6rem;
-  width: 2.6rem;
+  height: 2.55rem;
+  width: 2.55rem;
   text-align: center;
   font-size: 2rem;
-  color: white;
+  color: #050505;
   cursor: pointer;
 
   &:hover {
@@ -76,11 +77,12 @@ export const EditButton = styled.button`
   all: unset;
   border-radius: 50%;
   background-color: #9f9f9f;
-  height: 2.6rem;
-  width: 2.6rem;
+  height: 2.4rem;
+  width: 2.4rem;
   text-align: center;
   font-size: 2rem;
-  color: white;
+  color: #050505;
+
   cursor: pointer;
 
   &:hover {
@@ -96,11 +98,11 @@ export const RemoveButton = styled.button`
   all: unset;
   border-radius: 50%;
   background-color: #9f9f9f;
-  height: 2.6rem;
-  width: 2.6rem;
+  height: 2.4rem;
+  width: 2.4rem;
   text-align: center;
   font-size: 2rem;
-  color: white;
+  color: #050505;
   cursor: pointer;
 
   &:hover {
@@ -114,7 +116,9 @@ export const RemoveButton = styled.button`
 
 export const BtnWrapper = styled.div`
   display: flex;
-  gap: 0.2rem;
+  gap: 0.3rem;
 `;
 
 export const Price = styled.div``;
+
+export const IconImage = styled.img``;

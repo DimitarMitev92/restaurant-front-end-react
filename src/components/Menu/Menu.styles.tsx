@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MenuWrapper = styled.section`
-  padding: 3rem;
+  padding: 0.5rem;
   width: 100%;
   justify-content: center;
 `;
