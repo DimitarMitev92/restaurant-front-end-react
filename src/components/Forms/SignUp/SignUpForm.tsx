@@ -67,6 +67,13 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
       name: "password",
       placeholder: "Enter your password...",
     },
+    {
+      htmlFor: "comparePassword",
+      labelTitle: "Confirm Password:",
+      type: "password",
+      name: "comparePassword",
+      placeholder: "Enter again your password...",
+    },
   ];
 
   return (
@@ -81,6 +88,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           email: "",
           locationId: "",
           password: "",
+          comparePassword: "",
           error: "",
         }}
         validationSchema={signUpValidationSchema}
@@ -89,7 +97,13 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
           const options = {
             method: method.POST,
             headers: headers.CONTENT_TYPE_APP_JSON,
-            body: JSON.stringify(values),
+            body: JSON.stringify({
+              firstName: values.firstName,
+              lastName: values.lastName,
+              email: values.email,
+              locationId: values.locationId,
+              password: values.password,
+            }),
           };
           const userDataFromApi = await signService(url, options);
           onSubmit && onSubmit(values);
