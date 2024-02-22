@@ -92,7 +92,7 @@ export const CreateMeal: React.FC<CreateMealFormProps> = ({ onSubmit }) => {
       placeholder: "Select menu",
       options: menus.map((menu: MenuData) => ({
         value: menu.id,
-        label: menu.type,
+        label: menu.menuTypeValue,
       })),
     },
     {
