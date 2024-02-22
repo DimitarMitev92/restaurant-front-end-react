@@ -1,36 +1,9 @@
 import { useRestaurantDetails } from "../../../../hooks/useRestaurantDetails";
+import { IRestaurantsDetails } from "../../../../static/interfaces";
 import { ShoppingCart } from "../../../Cart/Cart";
-import { Menu } from "../../../Menu/Menu";
-import { MenuWrapper, RestaurantWrapper } from "./RestaurantsDetails.style";
-
-export interface Meal {}
-
-export interface IRestaurantsDetails {
-  restaurant: string;
-  menus: [
-    {
-      name: string;
-      id: string;
-      meals: [
-        {
-          id: string;
-          name: string;
-          description: string;
-          additionalNote: string;
-          picture: string;
-          price: number;
-          weight: number;
-          startHour: string;
-          endHour: string;
-          startDate: string;
-          endDate: string;
-          categoryId: string;
-          packegeId: string;
-        }
-      ];
-    }
-  ];
-}
+import { FilterWrapper } from "../../../Menu/MenuFIlter/MenuFIlter.style";
+import { MenuFilter } from "../../../Menu/MenuFIlter/MenuFilter";
+import { RestaurantWrapper } from "./RestaurantsDetails.style";
 
 export const RestaurantsDetails = () => {
   const { restaurantDetails }: { restaurantDetails: IRestaurantsDetails } =
@@ -40,15 +13,13 @@ export const RestaurantsDetails = () => {
     return <div>Loading...</div>;
   }
 
-  const menus = restaurantDetails.menus.map((menu) => {
-    console.log(menu);
-
-    return <Menu key={menu.id} menu={menu}></Menu>;
-  });
-
   return (
     <RestaurantWrapper>
-      <MenuWrapper>{menus}</MenuWrapper>
+      <FilterWrapper>
+        {restaurantDetails.menus?.map((menu) => {
+          return <MenuFilter key={menu.id} menu={menu} />;
+        })}
+      </FilterWrapper>
       <ShoppingCart />
     </RestaurantWrapper>
   );
