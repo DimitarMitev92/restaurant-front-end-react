@@ -362,3 +362,46 @@ export interface UpdateOrderFormData {
   additionalInfo?: string;
   meals?: Meal[];
 }
+
+export interface IMeal {
+  id: string;
+  name: string;
+  description: string;
+  additionalNote: string;
+  picture: string;
+  price: number;
+  weight: number;
+  startHour: string;
+  endHour: string;
+  startDate: string;
+  endDate: string;
+  categoryId: string;
+  packegeId: string;
+  mealId: string;
+  count: number;
+}
+
+export interface IMealProps {
+  meal: IMeal;
+}
+
+export interface IRestaurantsDetails {
+  restaurant: string;
+  menus: [
+    {
+      name: string;
+      id: string;
+      meals: IMeal[];
+    }
+  ];
+}
+
+export interface Menu {
+  type: string;
+  id: string;
+  meals: IMeal[];
+}
+
+export interface MenuProps {
+  menu: Menu;
+}
