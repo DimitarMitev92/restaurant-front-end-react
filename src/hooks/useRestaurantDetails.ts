@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { restaurantService } from "../services/restaurantService";
 import { useParams } from "react-router-dom";
+import { mealService } from "../services/mealService";
 
 export const useRestaurantDetails = () => {
   const params = useParams();
@@ -12,7 +12,7 @@ export const useRestaurantDetails = () => {
   } = useQuery(
     "restaurant",
     async () => {
-      return await restaurantService.fetchMealsByRestaurantId(params.id);
+      return await mealService.fetchMealsByRestaurantId(params.id);
     },
     { retry: 2 }
   );
