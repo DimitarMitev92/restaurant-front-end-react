@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { RequestOptions, UserDataFromApiRefactor } from "../static/interfaces";
 import { FetchDataError } from "./fetchDataFromApi";
 
@@ -15,14 +16,16 @@ export const signService = async (
 
     const responseData = await response.json();
 
+    const decodedToken = jwtDecode(responseData.access_token);
+
     const refactorData = {
       user: {
-        id: responseData.user.id,
-        firstName: responseData.user.firstName,
-        lastName: responseData.user.lastName,
-        email: responseData.user.email,
-        locationId: responseData.user.locationId,
-        rights: responseData.user.rights,
+        id: decodedToken.sub || "",
+        firstName: responseData.user?.firstName || "",
+        lastName: responseData.user?.lastName || "",
+        email: responseData.user?.email || "",
+        locationId: responseData.user?.locationId || "",
+        rights: responseData.user?.rights || "CLIENT",
         accessToken: responseData.access_token,
       },
     };
