@@ -26,6 +26,7 @@ export const mainRoute = {
   ADMIN_DASHBOARD: "/admin-dashboard",
   ADMIN_DASHBOARD_CREATE_PACKAGE: "/admin-dashboard/create-package",
   ADMIN_DASHBOARD_CREATE_RESTAURANT: "/admin-dashboard/create-restaurant",
+  ADMIN_DASHBOARD_CREATE_MENU_TYPE: "/admin-dashboard/create-menu-type",
   ADMIN_DASHBOARD_CREATE_MENU: "/admin-dashboard/create-menu",
   ADMIN_DASHBOARD_CREATE_LOCATION: "/admin-dashboard/create-location",
   ADMIN_DASHBOARD_CREATE_CATEGORY: "/admin-dashboard/create-category",
