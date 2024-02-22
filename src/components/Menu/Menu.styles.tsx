@@ -7,5 +7,6 @@ export const MenuWrapper = styled.section`
 `;
 
 export const MenuName = styled.h1`
-  padding: 1rem;
+  margin-right: auto;
+  margin-top: 2rem;
 `;

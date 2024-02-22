@@ -18,3 +18,10 @@ export const FilterHolder = styled.button`
     background-color: #ffc244;
   }
 `;
+
+export const FilterBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+`;

@@ -387,9 +387,10 @@ export interface IMealProps {
 
 export interface IRestaurantsDetails {
   restaurant: string;
+  type: string;
   menus: [
     {
-      name: string;
+      type: string;
       id: string;
       meals: IMeal[];
     }
@@ -403,5 +404,15 @@ export interface Menu {
 }
 
 export interface MenuProps {
+  filter: (type: string) => void;
+  menu: Menu;
+}
+
+export interface ClearFilterProps {
+  type: string;
+  filter: (type: string) => void;
+}
+
+export interface MealHolderProps {
   menu: Menu;
 }
