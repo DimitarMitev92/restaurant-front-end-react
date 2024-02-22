@@ -31,9 +31,6 @@ const baseStyle = css`
   font-size: 1rem;
   border-radius: 5px;
   width: 100%;
-  @media (max-width: 400px) {
-    width: auto;
-  }
 `;
 
 const StyledInput = styled.input`

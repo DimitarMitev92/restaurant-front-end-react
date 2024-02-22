@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import SubmitFormButton from "../../ui-elements/submitFormButton";
 import InputLabel from "../../ui-elements/inputLabel";
 import UnifiedInput from "../../ui-elements/input";
 import ErrorMessage from "../../ui-elements/errorMessage";
-import { FormDiv, FormHeading } from "./ReusableForm.style";
+import {
+  EyeIcon,
+  FormDiv,
+  FormHeading,
+  PasswordWrapper,
+} from "./ReusableForm.style";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface ReusableProps {
   formHeading: string;
@@ -71,6 +77,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
   onSubmit,
   buttonText,
 }) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const formik = useFormik<FormValues>({
     initialValues,
     validationSchema,
@@ -90,6 +97,10 @@ export const ReusableForm: React.FC<ReusableProps> = ({
     },
   });
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <FormDiv onSubmit={formik.handleSubmit}>
       <FormHeading>{formHeading}</FormHeading>
@@ -97,15 +108,38 @@ export const ReusableForm: React.FC<ReusableProps> = ({
       {inputsData.map((input) => (
         <React.Fragment key={input.name}>
           <InputLabel htmlFor={input.htmlFor} children={input.labelTitle} />
-          <UnifiedInput
-            type={input.type}
-            name={input.name}
-            placeholder={input.placeholder}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values[input.name]}
-            options={input.options}
-          />
+          {input.type === "password" ? (
+            <PasswordWrapper>
+              <UnifiedInput
+                type={passwordVisible ? "text" : "password"}
+                name={input.name}
+                placeholder={input.placeholder}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values[input.name]}
+                options={input.options}
+              />
+              {passwordVisible ? (
+                <EyeIcon>
+                  <FaEyeSlash onClick={togglePasswordVisibility} />
+                </EyeIcon>
+              ) : (
+                <EyeIcon>
+                  <FaEye onClick={togglePasswordVisibility} />
+                </EyeIcon>
+              )}
+            </PasswordWrapper>
+          ) : (
+            <UnifiedInput
+              type={input.type}
+              name={input.name}
+              placeholder={input.placeholder}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values[input.name]}
+              options={input.options}
+            />
+          )}
           {formik.touched[input.name] &&
             formik.errors[input.name] !== undefined && (
               <ErrorMessage error={formik.errors[input.name] as string} />

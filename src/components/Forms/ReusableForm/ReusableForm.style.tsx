@@ -44,3 +44,16 @@ export const ImageSignUp = styled.img`
     display: none;
   }
 `;
+
+export const PasswordWrapper = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
+export const EyeIcon = styled.span`
+  position: absolute;
+  top: 60%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+`;
