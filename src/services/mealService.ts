@@ -72,4 +72,20 @@ export const mealService = {
       throw error;
     }
   },
+  fetchMealsByRestaurantId: async (id: string | undefined) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const restaurants = await fetchDataFromApi(
+        `${endpointAPI.MEAL}/${id}`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching meals by restaurant id"
+      );
+      return restaurants;
+    } catch (error) {
+      console.error("Error fetching meals by restaurant id.");
+      throw error;
+    }
+  },
 };
