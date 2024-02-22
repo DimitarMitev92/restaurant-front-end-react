@@ -39,6 +39,7 @@ interface ReusableProps {
     lastName?: string;
     locationId?: string;
     restaurantId?: string;
+    menuTypeId?: string;
     menuId?: string;
     categoryId?: string;
     packageId?: string;

@@ -111,6 +111,14 @@ export interface RestaurantData {
   deletedAt: string | null;
 }
 
+export interface MenuTypeData {
+  id: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
 export interface MenuData {
   id: string;
   type: string;
