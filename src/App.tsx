@@ -11,7 +11,7 @@ import { Logout } from "./components/Logout/Logout";
 import { AuthProvider } from "./context/AuthProvider";
 import Restaurants from "./components/pages/Restaurants/Restaurants";
 import { RestaurantsDetails } from "./components/pages/Restaurant/RestaurantsDetails/RestaurantsDetails";
-import { Profile } from "./components/Profile/Profile";
+import { Profile } from "./components/pages/Profile/Profile";
 
 function App() {
   return (
@@ -64,10 +64,22 @@ function App() {
                   element={<AdminRoute element={<AdminDashboard />} />}
                 />
               </Route>
-              <Route path={routes.PROFILE} element={<Profile />} />
+              <Route path={routes.PROFILE} element={<Profile />}>
+                <Route
+                  path={routes.PROFILE_CHANGE_PASSWORD}
+                  element={<Profile />}
+                />
+                <Route
+                  path={routes.PROFILE_CREATE_ADDRESS}
+                  element={<Profile />}
+                />
+                <Route
+                  path={routes.PROFILE_ORDERS_HISTORY}
+                  element={<Profile />}
+                />
+              </Route>
               <Route path={routes.LOGOUT} element={<Logout />} />
             </Route>
-            {/* MUST ADD ADDITIONAL ROUTES  */}
           </Routes>
         </Main>
       </BrowserRouter>

@@ -9,10 +9,15 @@ import {
 import { changePasswordValidationSchema } from "../../../static/form-validations";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { useAuth } from "../../../context/AuthProvider";
-import { ChangePasswordFormData } from "../../../static/interfaces";
+import {
+  ChangePasswordFormData,
+  ChangePasswordFormProps,
+} from "../../../static/interfaces";
 import { useSessionStorage } from "../../../hooks/useSessionStorage";
 
-export const ChangePassword = () => {
+export const ChangePassword: React.FC<ChangePasswordFormProps> = ({
+  onSubmit,
+}) => {
   const navigate = useNavigate();
   const { setItem } = useSessionStorage();
   const { setUser } = useAuth();
@@ -72,6 +77,7 @@ export const ChangePassword = () => {
           }),
         };
         const userDataFromApi = await signService(url, options);
+        onSubmit && onSubmit(values);
         setItem("access_token", userDataFromApi.user.accessToken);
         setUser(userDataFromApi);
         navigate(mainRoute.MAIN);
