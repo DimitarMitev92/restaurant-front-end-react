@@ -61,6 +61,10 @@ export const rightsUser = {
   CLIENT: "CLIENT",
 };
 
+export const clearFilter = {
+  all: "ALL"
+}
+
 export const headers = {
   CONTENT_TYPE_APP_JSON: { "Content-Type": "application/json" },
 };
