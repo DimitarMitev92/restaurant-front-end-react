@@ -43,6 +43,9 @@ export const mainRoute = {
   LOCATION: "/location",
   PACKAGE: "/package",
   PROFILE: "/profile",
+  PROFILE_CHANGE_PASSWORD: "/profile/change-password",
+  PROFILE_CREATE_ADDRESS: "/profile/create-address",
+  PROFILE_ORDERS_HISTORY: "/profile/orders-history",
   NOT_FOUND: "*",
 };
 
