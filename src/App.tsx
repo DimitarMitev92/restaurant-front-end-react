@@ -27,7 +27,7 @@ function App() {
             <Route path={routes.SIGN_UP} element={<SignUp />} />
             <Route path={routes.RESTAURANTS} element={<Restaurants />} />
             <Route
-              path={routes.RESTAURANTS_UPDATE}
+              path={routes.RESTAURANTS_ALL_PATHS}
               element={<RestaurantsDetails />}
             />
             <Route element={<PrivateRoutes />}>

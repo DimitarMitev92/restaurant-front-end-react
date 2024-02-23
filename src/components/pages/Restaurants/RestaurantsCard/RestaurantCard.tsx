@@ -9,13 +9,14 @@ import {
   WorkingHoursOverlay,
 } from "./RestaurantCard.style";
 import { RestaurantCardProps } from "../Restaurants.static";
+import { routes } from "../../../../routes/routes.static";
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/restaurant/${restaurant.id}`);
+    navigate(`${routes.RESTAURANTS}/${restaurant.id}`);
   };
 
   return (

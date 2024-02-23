@@ -17,9 +17,27 @@ import {
 import trashIcon from "../../assets/trash-xmark.png";
 import editIcon from "../../assets/edit.png";
 import { IMealProps } from "../../static/interfaces";
+import { useNavigate, useParams } from "react-router-dom";
+import { routes } from "../../routes/routes.static";
+import { useState } from "react";
+import PopUp from "../PopUp/PopUp";
 
 export const Meal: React.FC<IMealProps> = ({ meal }) => {
   const { user } = useAuth();
+  const { id } = useParams();
+  const [isShowPopUp, setIsShowPopUp] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
+  const handlePopUp = () => {
+    console.log("hit");
+    setIsShowPopUp(true);
+    navigate(`${routes.RESTAURANTS}/${id}/update/${meal.id}`);
+  };
+
+  const handleCancel = () => {
+    setIsShowPopUp(false);
+  };
 
   let adminBtns;
   if (user?.user.rights === "ADMIN") {
@@ -28,7 +46,7 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
         <RemoveButton>
           <IconImage src={trashIcon} />
         </RemoveButton>
-        <EditButton>
+        <EditButton onClick={() => handlePopUp()}>
           <IconImage src={editIcon} />
         </EditButton>
       </>
@@ -36,25 +54,28 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
   }
 
   return (
-    <MealCard>
-      <NameAndAddBtn>
-        <div>
-          {meal.name}
-          <span>-</span>
-          <span>{meal.weight}g</span>
-        </div>
-        <BtnWrapper>
-          {user?.user.rights && adminBtns}
-          <AddButton>+</AddButton>
-        </BtnWrapper>
-      </NameAndAddBtn>
-      <InfoAndPicture>
-        <Info>{meal.description}</Info>
-        <MealPicture>
-          <Img src="https://restaurant-two.s3.eu-north-1.amazonaws.com/1708357534060-kaouther-djouada-hcEDfkiVmMI-unsplash.jpg"></Img>
-        </MealPicture>
-      </InfoAndPicture>
-      <Price>{meal.price} USD</Price>
-    </MealCard>
+    <>
+      <MealCard>
+        <NameAndAddBtn>
+          <div>
+            {meal.name}
+            <span>-</span>
+            <span>{meal.weight}g</span>
+          </div>
+          <BtnWrapper>
+            {user?.user.rights && adminBtns}
+            <AddButton>+</AddButton>
+          </BtnWrapper>
+        </NameAndAddBtn>
+        <InfoAndPicture>
+          <Info>{meal.description}</Info>
+          <MealPicture>
+            <Img src="https://restaurant-two.s3.eu-north-1.amazonaws.com/1708357534060-kaouther-djouada-hcEDfkiVmMI-unsplash.jpg"></Img>
+          </MealPicture>
+        </InfoAndPicture>
+        <Price>{meal.price} USD</Price>
+      </MealCard>
+      {isShowPopUp && <PopUp onCancel={handleCancel} />}
+    </>
   );
 };

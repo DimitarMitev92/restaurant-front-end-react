@@ -179,6 +179,7 @@ export interface CreateRestaurantFormValues {
 }
 
 export interface CreateMealFormProps {
+  updatedId?: string;
   onSubmit: (CreateMealFormData: CreateMealFormData) => void;
 }
 

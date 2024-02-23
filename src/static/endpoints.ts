@@ -10,6 +10,7 @@ export const endpointAPI = {
   MENU_TYPE: `http://localhost:${PORT}/menu-type`,
   MEAL: `http://localhost:${PORT}/meal`,
   ORDER: `http://localhost:${PORT}/order`,
+  ORDER_DETAIL: `http://localhost:${PORT}/order-detail`,
   CATEGORY: `http://localhost:${PORT}/category`,
   LOCATION: `http://localhost:${PORT}/location`,
   PACKAGE: `http://localhost:${PORT}/package`,
@@ -32,7 +33,8 @@ export const mainRoute = {
   ADMIN_DASHBOARD_CREATE_CATEGORY: "/admin-dashboard/create-category",
   ADMIN_DASHBOARD_CREATE_MEAL: "/admin-dashboard/create-meal",
   RESTAURANTS: "/restaurants",
-  RESTAURANTS_UPDATE: "/restaurant/:id",
+  RESTAURANTS_ALL_PATHS: "/restaurants/:id/*",
+  RESTAURANTS_UPDATE: "/restaurants/:id",
   MENU: "/menu",
   MENU_UPDATE: "/menu/:id",
   MEAL: "/meal",
@@ -62,8 +64,8 @@ export const rightsUser = {
 };
 
 export const clearFilter = {
-  all: "ALL"
-}
+  all: "ALL",
+};
 
 export const headers = {
   CONTENT_TYPE_APP_JSON: { "Content-Type": "application/json" },
