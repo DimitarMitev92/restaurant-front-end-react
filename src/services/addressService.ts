@@ -83,4 +83,23 @@ export const addressService = {
       throw error;
     }
   },
+
+  fetchUserId: async () => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      if (accessToken) {
+        const user = await fetchDataFromApi(
+          `${endpointAPI.USER}`,
+          accessToken ? accessToken : null,
+          method.GET,
+          null,
+          "Error fetching user data"
+        );
+        return user.id;
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      throw error;
+    }
+  },
 };

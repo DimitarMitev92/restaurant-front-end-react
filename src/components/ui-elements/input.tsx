@@ -6,7 +6,7 @@ export interface Option {
   label: string;
 }
 
-interface UnifiedInputProps {
+export interface UnifiedInputProps {
   onChange: (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) => void;
