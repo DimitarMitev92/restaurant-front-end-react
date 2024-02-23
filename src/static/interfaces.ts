@@ -11,6 +11,14 @@ export interface AuthProviderProps {
   children: ReactNode;
 }
 
+export interface OrderProviderProps {
+  children: ReactNode
+}
+
+export interface MealOrder {
+  
+}
+
 export interface DecodedToken {
   sub: string;
   exp: number;
