@@ -21,22 +21,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
 import { useState } from "react";
 import PopUp from "../PopUp/PopUp";
+import { usePopupContext } from "../../context/PopupContext";
 
 export const Meal: React.FC<IMealProps> = ({ meal }) => {
   const { user } = useAuth();
   const { id } = useParams();
-  const [isShowPopUp, setIsShowPopUp] = useState<boolean>(false);
+
+  const { isPopUpVisible, showPopUp, hidePopUp } = usePopupContext();
 
   const navigate = useNavigate();
 
   const handlePopUp = () => {
-    console.log("hit");
-    setIsShowPopUp(true);
+    showPopUp();
     navigate(`${routes.RESTAURANTS}/${id}/update/${meal.id}`);
   };
 
   const handleCancel = () => {
-    setIsShowPopUp(false);
+    hidePopUp();
   };
 
   let adminBtns;
@@ -75,7 +76,7 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
         </InfoAndPicture>
         <Price>{meal.price} USD</Price>
       </MealCard>
-      {isShowPopUp && <PopUp onCancel={handleCancel} />}
+      {isPopUpVisible && <PopUp onCancel={handleCancel} />}
     </>
   );
 };

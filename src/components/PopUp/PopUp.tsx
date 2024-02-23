@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { CreateMeal } from "../Forms/CreateMeal/CreateMeal";
 import { CancelButtonPopup, PopUpContainer } from "./PopUp.style";
 import { routes } from "../../routes/routes.static";
+import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 
 const PopUp = ({ onCancel }) => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const PopUp = ({ onCancel }) => {
       >
         X
       </CancelButtonPopup>
-      {updatedId}
+      <UpdateMeal updatedId={updatedId} />
     </PopUpContainer>
   );
 };

@@ -11,6 +11,7 @@ import {
   PasswordWrapper,
 } from "./ReusableForm.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { usePopupContext } from "../../../context/PopupContext";
 
 interface ReusableProps {
   formHeading: string;
@@ -77,6 +78,8 @@ export const ReusableForm: React.FC<ReusableProps> = ({
   onSubmit,
   buttonText,
 }) => {
+  const { hidePopUp } = usePopupContext();
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const formik = useFormik<FormValues>({
     initialValues,
@@ -85,6 +88,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
       try {
         await onSubmit(values);
         resetForm();
+        hidePopUp();
       } catch (error) {
         console.error("Form submission error:", error);
         const errorMessage =
@@ -93,6 +97,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
             : "An expected error occurred.";
         setFieldError("error", errorMessage);
         setSubmitting(false);
+        hidePopUp();
       }
     },
   });
