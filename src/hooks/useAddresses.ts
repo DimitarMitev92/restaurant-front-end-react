@@ -3,11 +3,11 @@ import { addressService } from "../services/addressService";
 
 export const useAddressesByUserId = (userId: string) => {
   const {
-    data: addresses,
+    data: address,
     isLoading,
     isError,
   } = useQuery(
-    ["addresses", userId],
+    ["addresse", userId],
     () => addressService.fetchAddressesByUserId(userId),
     {
       retry: 1,
@@ -15,5 +15,5 @@ export const useAddressesByUserId = (userId: string) => {
     }
   );
 
-  return { addresses, loading: isLoading, error: isError };
+  return { address, loading: isLoading, error: isError };
 };
