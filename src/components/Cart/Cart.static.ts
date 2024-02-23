@@ -27,3 +27,14 @@ export interface ApiResponse {
 export interface CartInputProps extends UnifiedInputProps {
   label?: string;
 }
+
+export interface Meal {
+  id: number;
+  name: string;
+  price: number;
+}
+
+export interface CartItem {
+  product: Meal;
+  quantity: number;
+}

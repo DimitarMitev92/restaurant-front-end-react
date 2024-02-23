@@ -1,7 +1,6 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { CartItem } from "./Cart.logic";
 import { useAuth } from "../../context/AuthProvider";
-import { useAddressesByUserId } from "../../hooks/useAddresses"; 
+import { useAddressesByUserId } from "../../hooks/useAddresses";
 import Select from "../ui-elements/select";
 import TextArea from "../ui-elements/textArea";
 import Switch from "./Switch";
@@ -13,38 +12,40 @@ import {
   SidebarContent,
   CartLabel,
   CartButton,
-  StyledPriceDiv
+  StyledPriceDiv,
 } from "./Cart.style";
-import { Address } from "./Cart.static";
+import { Address, CartItem } from "./Cart.static";
 import UnifiedInput from "../ui-elements/input";
-
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
-  const [selectedAddress, setSelectedAddress] = useState<string | undefined>(undefined);
+  const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
+    undefined
+  );
   const [showNoteTextArea, setShowNoteTextArea] = useState<boolean>(false);
   const [additionalNote, setAdditionalNote] = useState<string>("");
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [addresses, setAddresses] = useState<Address[]>([]);
+  const [selectedAddressId, setSelectedAddressId] = useState("");
 
-  const { user } = useAuth(); 
-  const addressQuery = useAddressesByUserId(user?.user.id || "");
+  const { user } = useAuth();
+  const { address } = useAddressesByUserId(user?.user.id || "");
 
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        if (user && addressQuery && addressQuery.addresses && addressQuery.addresses.length > 0) {
-          setAddresses(addressQuery.addresses);
-          setSelectedAddress(addressQuery.addresses[0]?.id);
+        if (user && address && address.address && address.address.length > 0) {
+          setAddresses(address);
+          setSelectedAddress(address[0]?.address);
         }
       } catch (error) {
-        console.error('Error fetching user addresses:', error);
+        console.error("Error fetching user addresses:", error);
       }
     };
-  
+
     fetchAddresses();
-  }, [user, addressQuery]);
+  }, [user, address]);
 
   const handleSwitchClick = (mode: boolean) => {
     setDeliveryMode(mode);
@@ -76,6 +77,13 @@ export const ShoppingCart: React.FC = () => {
   }, [cartItems]);
 
   const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedAddress = e.target.value;
+
+    const [{ id }] = address.filter(
+      (ad: Address) => ad.address === selectedAddress
+    );
+
+    setSelectedAddressId(id);
     setSelectedAddress(e.target.value);
   };
 
@@ -95,7 +103,9 @@ export const ShoppingCart: React.FC = () => {
               <UnifiedInput
                 type="checkbox"
                 checked={showNoteTextArea}
-                onChange={handleNoteCheckboxChange} value={""}/>
+                onChange={handleNoteCheckboxChange}
+                value={""}
+              />
               <CartLabel htmlFor="additional-note">Additional Note:</CartLabel>
             </div>
             {showNoteTextArea && (
@@ -115,20 +125,22 @@ export const ShoppingCart: React.FC = () => {
                 <Select
                   onChange={handleAddressChange}
                   value={selectedAddress || ""}
-                  options={addresses.map((address: Address) => ({
-                    value: address.id,
-                    label: `${address.address}`,
-                  }))}
+                  options={
+                    address &&
+                    address.map((address: Address) => ({
+                      value: address.address,
+                      label: `${address.address}`,
+                    }))
+                  }
                 />
               </>
             )}
-             <StyledPriceDiv>
+            <StyledPriceDiv>
               Total Price: ${totalPrice.toFixed(2)}
             </StyledPriceDiv>
           </>
           <CartButton onClick={handleConfirmOrder}>Confirm Order</CartButton>
         </SidebarContent>
-        
       </SidebarWrapper>
     </CartWrapper>
   );

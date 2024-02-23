@@ -19,9 +19,9 @@ import editIcon from "../../assets/edit.png";
 import { IMealProps } from "../../static/interfaces";
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
-import { useState } from "react";
 import PopUp from "../PopUp/PopUp";
 import { usePopupContext } from "../../context/PopupContext";
+import { rightsUser } from "../../static/endpoints";
 
 export const Meal: React.FC<IMealProps> = ({ meal }) => {
   const { user } = useAuth();
@@ -41,7 +41,7 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
   };
 
   let adminBtns;
-  if (user?.user.rights === "ADMIN") {
+  if (user?.user.rights === rightsUser.ADMIN) {
     adminBtns = (
       <>
         <RemoveButton>
@@ -54,6 +54,10 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
     );
   }
 
+  const addHandler = () => {
+    console.log("clicked");
+  };
+
   return (
     <>
       <MealCard>
@@ -65,13 +69,13 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
           </div>
           <BtnWrapper>
             {user?.user.rights && adminBtns}
-            <AddButton>+</AddButton>
+            <AddButton onClick={addHandler}>+</AddButton>
           </BtnWrapper>
         </NameAndAddBtn>
         <InfoAndPicture>
           <Info>{meal.description}</Info>
           <MealPicture>
-            <Img src="https://restaurant-two.s3.eu-north-1.amazonaws.com/1708357534060-kaouther-djouada-hcEDfkiVmMI-unsplash.jpg"></Img>
+            <Img src={meal.picture}></Img>
           </MealPicture>
         </InfoAndPicture>
         <Price>{meal.price} USD</Price>
