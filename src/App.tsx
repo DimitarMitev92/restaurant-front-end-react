@@ -76,6 +76,10 @@ function App() {
                     element={<Profile />}
                   />
                   <Route
+                    path={routes.PROFILE_USER_ADDRESSES}
+                    element={<Profile />}
+                  />
+                  <Route
                     path={routes.PROFILE_ORDERS_HISTORY}
                     element={<Profile />}
                   />
