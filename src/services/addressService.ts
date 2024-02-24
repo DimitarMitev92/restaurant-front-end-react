@@ -102,4 +102,23 @@ export const addressService = {
       throw error;
     }
   },
+
+  deleteSoft: async (addressId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      if (accessToken) {
+        const message = await fetchDataFromApi(
+          `${endpointAPI.ADDRESS}/${addressId}/soft`,
+          accessToken ? accessToken : null,
+          method.DELETE,
+          null,
+          "Error during deletion."
+        );
+        return message;
+      }
+    } catch (error) {
+      console.error("Error during deletion:", error);
+      throw error;
+    }
+  },
 };

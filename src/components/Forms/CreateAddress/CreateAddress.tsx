@@ -1,15 +1,11 @@
-import { useNavigate } from "react-router";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createAddressValidationSchema } from "../../../static/form-validations";
-import { mainRoute } from "../../../static/endpoints";
 import { addressService } from "../../../services/addressService";
 import { CreateAddressFormProps } from "../../../static/interfaces";
 
 export const CreateAddress: React.FC<CreateAddressFormProps> = ({
   onSubmit,
 }) => {
-  const navigate = useNavigate();
-
   const inputsCreateAddressData = [
     {
       htmlFor: "address",
@@ -32,7 +28,6 @@ export const CreateAddress: React.FC<CreateAddressFormProps> = ({
       onSubmit={async (values) => {
         await addressService.createAddress(values);
         onSubmit && onSubmit(values);
-        navigate(mainRoute.MAIN);
       }}
       buttonText={"Create"}
     />
