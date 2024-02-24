@@ -15,7 +15,8 @@ import { usePopupContext } from "../../../../context/PopupContext";
 import { mealService } from "../../../../services/mealService";
 
 export const RestaurantsDetails = () => {
-  const { isPopUpVisible } = usePopupContext();
+  const { isUpdateMealPopUpVisible, isUpdateMenuPopUpVisible } =
+    usePopupContext();
   const { id } = useParams();
   const [restaurantDetails, setRestaurantDetails] =
     useState<IRestaurantsDetails | null>(null);
@@ -43,7 +44,7 @@ export const RestaurantsDetails = () => {
     };
 
     fetchRestaurantDetails();
-  }, [id, isPopUpVisible]);
+  }, [id, isUpdateMealPopUpVisible, isUpdateMenuPopUpVisible]);
 
   if (!restaurantDetails) {
     return <div>Loading...</div>;

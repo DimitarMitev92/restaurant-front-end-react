@@ -33,7 +33,7 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
     null
   );
 
-  const [error, setError] = useState<string | null>(null);
+  const [errorFromServer, setErrorFromServer] = useState(null);
 
   const inputsCreateMealData = [
     {
@@ -158,7 +158,7 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
         setCurrentMeal(fetchedMeal);
       } catch (error) {
         console.error("Error fetching meal:", error);
-        setError(error.message);
+        setErrorFromServer(error.message);
       }
     };
     fetchCurrentMeal();
@@ -186,6 +186,6 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       buttonText="Update"
     />
   ) : (
-    <ErrorMessage error={error} />
+    errorFromServer && <ErrorMessage error={errorFromServer} />
   );
 };

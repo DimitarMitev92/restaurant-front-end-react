@@ -29,7 +29,7 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
     null
   );
 
-  const [error, setError] = useState<string | null>(null);
+  const [errorFromServer, setErrorFromServer] = useState(null);
 
   const inputsCreateMenuData = [
     {
@@ -72,7 +72,7 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
         setCurrentMenu(fetchedMenu);
       } catch (error) {
         console.error("Error fetching menu:", error);
-        setError(error.message);
+        setErrorFromServer(error.message);
       }
     };
     fetchCurrentMenu();
@@ -95,6 +95,6 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
       buttonText="Update"
     />
   ) : (
-    <ErrorMessage error={error} />
+    errorFromServer && <ErrorMessage error={errorFromServer} />
   );
 };
