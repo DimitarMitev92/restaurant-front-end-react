@@ -17,28 +17,30 @@ export const WorkingHoursOverlay = styled.div`
   opacity: 0;
   transition: opacity 0.3s ease;
 `;
+
 export const RestaurantCardContainer = styled.div`
   position: relative;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-grey);
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  width: 20vw;
+  width: 300px; 
   display: flex;
   cursor: pointer;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  background-color: #d6dcd7;
+  background-color: var(--color-teal);
 
   &:hover img {
     filter: brightness(70%);
   }
+
   @media (max-width: 768px) {
     width: 100%;
+    margin-bottom: 10px;
   }
 `;
-
 export const RestaurantCardContent = styled.div`
   position: relative;
   display: flex;

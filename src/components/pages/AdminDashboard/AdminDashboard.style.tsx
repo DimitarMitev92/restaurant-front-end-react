@@ -9,7 +9,7 @@ export const DashboardContainer = styled.div`
 
 export const Header = styled.h1`
   display: flex;
-  color: #333;
+  color: var(--color-black);
   text-align: center;
   justify-content: center;
   color: var(--color-green);

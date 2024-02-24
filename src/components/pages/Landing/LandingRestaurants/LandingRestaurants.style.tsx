@@ -40,7 +40,7 @@ export const StyledLink = styled(Link)`
   color: var(--color-green);
   text-decoration: none;
   &:hover {
-    color: green;
+    color: var(--color-dark-green);
     text-decoration: underline;
   }
 `;
