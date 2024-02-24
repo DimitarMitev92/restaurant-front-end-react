@@ -12,12 +12,10 @@ export interface AuthProviderProps {
 }
 
 export interface OrderProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-export interface MealOrder {
-  
-}
+export interface MealOrder {}
 
 export interface DecodedToken {
   sub: string;
@@ -298,6 +296,7 @@ export interface CreatePackageFormValues {
 }
 
 export interface CreateMenuFormProps {
+  updatedId: string;
   onSubmit: (CreateMenuFormData: CreateMenuFormData) => void;
 }
 

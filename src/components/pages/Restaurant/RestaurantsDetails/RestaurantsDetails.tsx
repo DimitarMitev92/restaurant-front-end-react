@@ -15,12 +15,12 @@ import { usePopupContext } from "../../../../context/PopupContext";
 import { mealService } from "../../../../services/mealService";
 
 export const RestaurantsDetails = () => {
-  const params = useParams();
+  const { isPopUpVisible } = usePopupContext();
+  const { id } = useParams();
   const [restaurantDetails, setRestaurantDetails] =
     useState<IRestaurantsDetails | null>(null);
   const [menus, setMenus] = useState<Menu[] | null>(null);
   const [allMenus, setAllMenus] = useState<Menu[] | null>(null);
-  const { isPopUpVisible } = usePopupContext();
 
   const filter = (type: string) => {
     if (type === clearFilter.all) {
@@ -33,7 +33,7 @@ export const RestaurantsDetails = () => {
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
       try {
-        const data = await mealService.fetchMealsByRestaurantId(params.id);
+        const data = await mealService.fetchMealsByRestaurantId(id);
         setRestaurantDetails(data);
         setMenus(data?.menus || []);
         setAllMenus(data?.menus || []);
@@ -43,7 +43,7 @@ export const RestaurantsDetails = () => {
     };
 
     fetchRestaurantDetails();
-  }, [params.id, isPopUpVisible]);
+  }, [id, isPopUpVisible]);
 
   if (!restaurantDetails) {
     return <div>Loading...</div>;

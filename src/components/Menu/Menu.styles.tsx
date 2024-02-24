@@ -7,6 +7,9 @@ export const MenuWrapper = styled.section`
 `;
 
 export const MenuName = styled.h1`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   margin-right: auto;
   margin-top: 2rem;
 `;
