@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface PopupContextProps {
-  isPopUpVisible: boolean;
-  showPopUp: () => void;
-  hidePopUp: () => void;
+  isUpdateMealPopUpVisible: boolean;
+  showUpdateMealPopUp: () => void;
+  hideUpdateMealPopUp: () => void;
+  isUpdateMenuPopUpVisible: boolean;
+  showUpdateMenuPopUp: () => void;
+  hideUpdateMenuPopUp: () => void;
 }
 
 const PopupContext = createContext<PopupContextProps | undefined>(undefined);
@@ -21,20 +24,35 @@ interface PopupProviderProps {
 }
 
 export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
-  const [isPopUpVisible, setIsPopUpVisible] = useState(false);
+  const [isUpdateMealPopUpVisible, setIsUpdateMealPopUpVisible] =
+    useState(false);
 
-  const showPopUp = () => {
-    setIsPopUpVisible(true);
+  const [isUpdateMenuPopUpVisible, setIsUpdateMenuPopUpVisible] =
+    useState(false);
+
+  const showUpdateMealPopUp = () => {
+    setIsUpdateMealPopUpVisible(true);
   };
 
-  const hidePopUp = () => {
-    setIsPopUpVisible(false);
+  const hideUpdateMealPopUp = () => {
+    setIsUpdateMealPopUpVisible(false);
+  };
+
+  const showUpdateMenuPopUp = () => {
+    setIsUpdateMenuPopUpVisible(true);
+  };
+
+  const hideUpdateMenuPopUp = () => {
+    setIsUpdateMenuPopUpVisible(false);
   };
 
   const contextValues: PopupContextProps = {
-    isPopUpVisible,
-    showPopUp,
-    hidePopUp,
+    isUpdateMealPopUpVisible,
+    showUpdateMealPopUp,
+    hideUpdateMealPopUp,
+    isUpdateMenuPopUpVisible,
+    showUpdateMenuPopUp,
+    hideUpdateMenuPopUp,
   };
 
   return (
@@ -44,4 +62,4 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
   );
 };
 
-// const { isPopUpVisible, showPopUp, hidePopUp } = usePopupContext();
+// const {   isUpdateMealPopUpVisible,showUpdateMealPopUp,hideUpdateMealPopUp,isUpdateMenuPopUpVisible,showUpdateMenuPopUp, hideUpdateMenuPopUp, } = usePopupContext();

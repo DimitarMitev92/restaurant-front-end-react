@@ -15,6 +15,7 @@ import { mealService } from "../../../services/mealService";
 import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
 import { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
+import ErrorMessage from "../../ui-elements/errorMessage";
 
 export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   updatedId,
@@ -31,6 +32,8 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   const [currentMeal, setCurrentMeal] = useState<CreateMealFormData | null>(
     null
   );
+
+  const [errorFromServer, setErrorFromServer] = useState(null);
 
   const inputsCreateMealData = [
     {
@@ -154,13 +157,13 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
 
         setCurrentMeal(fetchedMeal);
       } catch (error) {
-        console.error("Error fetching meal", error);
+        console.error("Error fetching meal:", error);
+        setErrorFromServer(error.message);
       }
     };
     fetchCurrentMeal();
   }, [updatedId]);
 
-  // Render the form only if currentMeal is available
   return currentMeal ? (
     <ReusableForm
       formHeading="Update meal"
@@ -171,7 +174,6 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       }}
       validationSchema={createMealValidationSchema}
       onSubmit={async (values) => {
-        // Convert date strings to "yyyy-MM-dd" format before sending to the server
         values.startDate = new Date(values.startDate)
           .toISOString()
           .split("T")[0];
@@ -183,5 +185,7 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       }}
       buttonText="Update"
     />
-  ) : null;
+  ) : (
+    errorFromServer && <ErrorMessage error={errorFromServer} />
+  );
 };

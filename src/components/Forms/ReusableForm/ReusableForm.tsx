@@ -78,7 +78,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
   onSubmit,
   buttonText,
 }) => {
-  const { hidePopUp } = usePopupContext();
+  const { hideUpdateMenuPopUp, hideUpdateMealPopUp } = usePopupContext();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const formik = useFormik<FormValues>({
@@ -88,7 +88,8 @@ export const ReusableForm: React.FC<ReusableProps> = ({
       try {
         await onSubmit(values);
         resetForm();
-        hidePopUp();
+        hideUpdateMenuPopUp();
+        hideUpdateMealPopUp();
       } catch (error) {
         console.error("Form submission error:", error);
         const errorMessage =
@@ -97,7 +98,8 @@ export const ReusableForm: React.FC<ReusableProps> = ({
             : "An expected error occurred.";
         setFieldError("error", errorMessage);
         setSubmitting(false);
-        hidePopUp();
+        hideUpdateMenuPopUp();
+        hideUpdateMealPopUp();
       }
     },
   });

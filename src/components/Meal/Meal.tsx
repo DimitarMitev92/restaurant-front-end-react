@@ -1,6 +1,7 @@
 import { useAuth } from "../../context/AuthProvider";
 import {
   AddButton,
+  AdminButtons,
   BtnWrapper,
   EditButton,
   IconImage,
@@ -22,35 +23,37 @@ import { routes } from "../../routes/routes.static";
 import PopUp from "../PopUp/PopUp";
 import { usePopupContext } from "../../context/PopupContext";
 import { rightsUser } from "../../static/endpoints";
+import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 
 export const Meal: React.FC<IMealProps> = ({ meal }) => {
   const { user } = useAuth();
   const { id } = useParams();
 
-  const { isPopUpVisible, showPopUp, hidePopUp } = usePopupContext();
+  const { isUpdateMealPopUpVisible, showUpdateMealPopUp, hideUpdateMealPopUp } =
+    usePopupContext();
 
   const navigate = useNavigate();
 
   const handlePopUp = () => {
-    showPopUp();
+    showUpdateMealPopUp();
     navigate(`${routes.RESTAURANTS}/${id}/update/${meal.id}`);
   };
 
   const handleCancel = () => {
-    hidePopUp();
+    hideUpdateMealPopUp();
   };
 
   let adminBtns;
   if (user?.user.rights === rightsUser.ADMIN) {
     adminBtns = (
-      <>
-        <RemoveButton>
-          <IconImage src={trashIcon} />
-        </RemoveButton>
+      <AdminButtons>
         <EditButton onClick={() => handlePopUp()}>
           <IconImage src={editIcon} />
         </EditButton>
-      </>
+        <RemoveButton>
+          <IconImage src={trashIcon} />
+        </RemoveButton>
+      </AdminButtons>
     );
   }
 
@@ -68,8 +71,8 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
             <span>{meal.weight}g</span>
           </div>
           <BtnWrapper>
-            {user?.user.rights && adminBtns}
             <AddButton onClick={addHandler}>+</AddButton>
+            {user?.user.rights && adminBtns}
           </BtnWrapper>
         </NameAndAddBtn>
         <InfoAndPicture>
@@ -80,7 +83,9 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
         </InfoAndPicture>
         <Price>{meal.price} USD</Price>
       </MealCard>
-      {isPopUpVisible && <PopUp onCancel={handleCancel} />}
+      {isUpdateMealPopUpVisible && (
+        <PopUp onCancel={handleCancel} UpdateForm={UpdateMeal} />
+      )}
     </>
   );
 };
