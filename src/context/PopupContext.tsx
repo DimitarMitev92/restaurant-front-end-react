@@ -7,6 +7,9 @@ interface PopupContextProps {
   isUpdateMenuPopUpVisible: boolean;
   showUpdateMenuPopUp: () => void;
   hideUpdateMenuPopUp: () => void;
+  isAddMealPopUpVisible: boolean;
+  showAddMealPopUp: () => void;
+  hideAddMealPopUp: () => void;
 }
 
 const PopupContext = createContext<PopupContextProps | undefined>(undefined);
@@ -29,7 +32,7 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
 
   const [isUpdateMenuPopUpVisible, setIsUpdateMenuPopUpVisible] =
     useState(false);
-
+  const [isAddMealPopUpVisible, setIsAddMealPopUpVisible] = useState(false);
   const showUpdateMealPopUp = () => {
     setIsUpdateMealPopUpVisible(true);
   };
@@ -45,6 +48,8 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
   const hideUpdateMenuPopUp = () => {
     setIsUpdateMenuPopUpVisible(false);
   };
+  const showAddMealPopUp = () => setIsAddMealPopUpVisible(true);
+  const hideAddMealPopUp = () => setIsAddMealPopUpVisible(false);
 
   const contextValues: PopupContextProps = {
     isUpdateMealPopUpVisible,
@@ -53,6 +58,9 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
     isUpdateMenuPopUpVisible,
     showUpdateMenuPopUp,
     hideUpdateMenuPopUp,
+    isAddMealPopUpVisible,
+    showAddMealPopUp,
+    hideAddMealPopUp,
   };
 
   return (

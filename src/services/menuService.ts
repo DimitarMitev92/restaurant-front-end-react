@@ -73,4 +73,37 @@ export const menuService = {
       throw error;
     }
   },
+  fetchMenusByRestaurantId: async (restaurantId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+
+      const menu = await fetchDataFromApi(
+        `${endpointAPI.MENU}/restaurant/${restaurantId}`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching this menu "
+      );
+      return menu;
+    } catch (error) {
+      console.error("Error fetching  this menu :", error);
+      throw error;
+    }
+  },
+  fetchRestaurantIdByMenuId : async (menuId:string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const restaurantId = await fetchDataFromApi(
+        `${endpointAPI.MENU}/fetch-restaurant/${menuId}`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching restaurants by menu  ID"
+      );
+      return restaurantId;
+    } catch (error) {
+      console.error("Error fetching restaurants by menu ID.", error);
+      throw error;
+    }
+  }
 };

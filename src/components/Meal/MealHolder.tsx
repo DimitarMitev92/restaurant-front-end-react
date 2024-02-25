@@ -17,16 +17,23 @@ import { usePopupContext } from "../../context/PopupContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
 import PopUp from "../PopUp/PopUp";
-import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 import { UpdateMenu } from "../Forms/UpdateMenu/UpdateMenu";
+import PopUpCreate from "../PopUp/CreatePopUp";
+import { CreateMeal } from "../Forms/CreateMeal/CreateMeal";
 
 export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
   const { user } = useAuth();
 
   const { id } = useParams();
 
-  const { isUpdateMenuPopUpVisible, showUpdateMenuPopUp, hideUpdateMenuPopUp } =
-    usePopupContext();
+  const {
+    isUpdateMenuPopUpVisible,
+    showUpdateMenuPopUp,
+    hideUpdateMenuPopUp,
+    showAddMealPopUp,
+    hideAddMealPopUp,
+    isAddMealPopUpVisible,
+  } = usePopupContext();
 
   const navigate = useNavigate();
 
@@ -38,11 +45,19 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
   const handleCancel = () => {
     hideUpdateMenuPopUp();
   };
+  const handleCancelCreate = () => {
+    hideAddMealPopUp();
+  };
 
+  const handleAddMeal = () => {
+    showAddMealPopUp();
+    navigate(`${routes.RESTAURANTS}/${id}/create/${menu.id}`);
+  };
   let adminBtns;
   if (user?.user.rights === rightsUser.ADMIN) {
     adminBtns = (
       <AdminButtons>
+        <button onClick={() => handleAddMeal()}>add meal</button>
         <EditButton onClick={() => handlePopUp()}>
           <IconImage src={editIcon} />
         </EditButton>
@@ -66,6 +81,9 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
       </MealsWrapper>
       {isUpdateMenuPopUpVisible && (
         <PopUp onCancel={handleCancel} UpdateForm={UpdateMenu} />
+      )}
+      {isAddMealPopUpVisible && (
+        <PopUpCreate onCancel={handleCancelCreate} CreateForm={CreateMeal} />
       )}
     </>
   );
