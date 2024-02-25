@@ -1,25 +1,20 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useCategories } from "../../../hooks/useCategories";
-import { useMenus } from "../../../hooks/useMenus";
 import { usePackages } from "../../../hooks/usePackages";
-import {
-  CategoryData,
-  CreateMealFormProps,
-  MenuData,
-  PackageData,
-} from "../../../static/interfaces";
+import { CategoryData, Meal, PackageData } from "../../../static/interfaces";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { mainRoute } from "../../../static/endpoints";
 import { createMealValidationSchema } from "../../../static/form-validations";
 import { mealService } from "../../../services/mealService";
 
-export const CreateMeal: React.FC<CreateMealFormProps> = ({ onSubmit }) => {
-  const { menus = [] } = useMenus();
+export const CreateMeal: React.FC<{
+  menuId: string;
+  onSubmit: (meal: Meal) => void;
+}> = ({ menuId, onSubmit }) => {
   const { categories = [] } = useCategories();
   const { packages = [] } = usePackages();
-
   const navigate = useNavigate();
-
+  const { id: restaurantId } = useParams();
   const inputsCreateMealData = [
     {
       htmlFor: "name",
@@ -84,17 +79,7 @@ export const CreateMeal: React.FC<CreateMealFormProps> = ({ onSubmit }) => {
       name: "weight",
       placeholder: "Enter weight...",
     },
-    {
-      htmlFor: "menuId",
-      labelTitle: "Menu:",
-      type: "select",
-      name: "menuId",
-      placeholder: "Select menu",
-      options: menus.map((menu: MenuData) => ({
-        value: menu.id,
-        label: menu.menuTypeValue,
-      })),
-    },
+
     {
       htmlFor: "categoryId",
       labelTitle: "Category:",
@@ -121,7 +106,7 @@ export const CreateMeal: React.FC<CreateMealFormProps> = ({ onSubmit }) => {
 
   return (
     <ReusableForm
-      formHeading="Create meal"
+      formHeading="Create Meal"
       inputsData={inputsCreateMealData}
       initialValues={{
         name: "",
@@ -133,16 +118,20 @@ export const CreateMeal: React.FC<CreateMealFormProps> = ({ onSubmit }) => {
         endHour: "",
         price: "",
         weight: "",
-        menuId: "",
+        menuId: menuId || "",
         categoryId: "",
         packageId: "",
         error: "",
       }}
       validationSchema={createMealValidationSchema}
       onSubmit={async (values) => {
-        const meal = await mealService.createMeal(values);
-        onSubmit && onSubmit(meal);
-        navigate(mainRoute.MAIN);
+        try {
+          const meal = await mealService.createMeal(values);
+          onSubmit && onSubmit(meal);
+          navigate(`${mainRoute.RESTAURANTS}/${restaurantId}`);
+        } catch (error) {
+          console.error("Failed to create meal:", error);
+        }
       }}
       buttonText="Create"
     />
