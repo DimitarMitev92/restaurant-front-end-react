@@ -35,7 +35,7 @@ export const HeroTitle = styled.h1`
 
 export const Description = styled.p`
   margin: 2rem 0;
-  color: white;
+  color: var(--color-white);
 `;
 
 export const WrapperImg = styled.div`

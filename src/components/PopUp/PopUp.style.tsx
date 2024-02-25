@@ -7,7 +7,7 @@ export const PopUpContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--color-white);
   border: 1px solid var(--color-green);
   border-radius: 0.5em;
   padding: 1em;
@@ -27,7 +27,7 @@ export const CancelButtonPopup = styled.button`
   font-size: 1em;
   background-color: var(--color-green);
   align-self: flex-end;
-  color: #fff;
+  color: var(--color-white);
   border: none;
   border-radius: 4px;
   cursor: pointer;

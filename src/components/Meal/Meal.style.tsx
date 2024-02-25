@@ -4,7 +4,7 @@ export const MealCard = styled.section`
   height: 18rem;
   width: 100%;
   padding: 1rem;
-  border: 1px solid #d6d6d6;
+  border: 1px solid var(color-white-smoke);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -56,41 +56,41 @@ export const Img = styled.img`
 export const AddButton = styled.button`
   all: unset;
   border-radius: 50%;
-  background-color: #9f9f9f;
+  background-color: var(--color-gray);
   height: 2.5rem;
   width: 2.5rem;
   text-align: center;
   font-size: 2rem;
-  color: #050505;
+  color: var(--color-black);
   cursor: pointer;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: var(--color-white-smoke);
   }
 
   &:active {
-    background-color: #1c841c;
+    background-color: var(--color-dark-green);
   }
 `;
 
 export const EditButton = styled.button`
   all: unset;
   border-radius: 50%;
-  background-color: #9f9f9f;
+  background-color: var(--color-grey);
   height: 2.5rem;
   width: 2.5rem;
   text-align: center;
   font-size: 2rem;
-  color: #050505;
+  color: var(--color-black);
 
   cursor: pointer;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: var(--color-white-smoke);
   }
 
   &:active {
-    background-color: #ffee00;
+    background-color: var(--color-yellow);
   }
 `;
 
@@ -102,20 +102,20 @@ export const AdminButtons = styled.div`
 export const RemoveButton = styled.button`
   all: unset;
   border-radius: 50%;
-  background-color: #9f9f9f;
+  background-color: var(--color-grey);
   height: 2.5rem;
   width: 2.5rem;
   text-align: center;
   font-size: 2rem;
-  color: #050505;
+  color: var(--color-black);
   cursor: pointer;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: var(--color-white-smoke);
   }
 
   &:active {
-    background-color: #ff0000;
+    background-color: var(--color-bright-red);
   }
 `;
 
