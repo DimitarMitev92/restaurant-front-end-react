@@ -1,4 +1,3 @@
-// PopUp.js
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { CancelButtonPopup, PopUpContainer } from "./PopUp.style";
 import { routes } from "../../routes/routes.static";
