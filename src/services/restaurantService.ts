@@ -20,8 +20,6 @@ export const restaurantService = {
     }
   },
 
-  
-
   createRestaurant: async (restaurantData: CreateRestaurantFormData) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
@@ -39,7 +37,7 @@ export const restaurantService = {
     }
   },
 
-  fetchRestaurantsByLocationId: async (locationId:string) => {
+  fetchRestaurantsByLocationId: async (locationId: string) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
       const restaurants = await fetchDataFromApi(
