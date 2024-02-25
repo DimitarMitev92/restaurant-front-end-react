@@ -57,8 +57,8 @@ export const AddButton = styled.button`
   all: unset;
   border-radius: 50%;
   background-color: var(--color-gray);
-  height: 2.55rem;
-  width: 2.55rem;
+  height: 2.5rem;
+  width: 2.5rem;
   text-align: center;
   font-size: 2rem;
   color: var(--color-black);
@@ -77,8 +77,8 @@ export const EditButton = styled.button`
   all: unset;
   border-radius: 50%;
   background-color: var(--color-grey);
-  height: 2.4rem;
-  width: 2.4rem;
+  height: 2.5rem;
+  width: 2.5rem;
   text-align: center;
   font-size: 2rem;
   color: var(--color-black);
@@ -94,12 +94,17 @@ export const EditButton = styled.button`
   }
 `;
 
+export const AdminButtons = styled.div`
+  display: flex;
+  gap: 0.25em;
+`;
+
 export const RemoveButton = styled.button`
   all: unset;
   border-radius: 50%;
   background-color: var(--color-grey);
-  height: 2.4rem;
-  width: 2.4rem;
+  height: 2.5rem;
+  width: 2.5rem;
   text-align: center;
   font-size: 2rem;
   color: var(--color-black);

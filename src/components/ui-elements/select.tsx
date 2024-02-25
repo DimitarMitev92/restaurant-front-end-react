@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 import { ChangeEvent } from "react";
 
 const baseSelectStyle = css`
-  padding: 0.75rem 1rem;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   border: 1px solid var(--color-green);
@@ -11,7 +10,8 @@ const baseSelectStyle = css`
   font-size: 1rem;
   border-radius: 5px;
   width: 100%;
-  height: 20px;
+  height: 2rem;
+  text-align: center;
 `;
 
 const StyledSelect = styled.select`
@@ -28,11 +28,12 @@ interface SelectProps {
 const Select = ({ onChange, value, options, name }: SelectProps) => {
   return (
     <StyledSelect onChange={onChange} value={value} name={name}>
-      {options.map((option, index) => (
-        <option key={index} value={option.value}>
-          {option.label}
-        </option>
-      ))}
+      {options &&
+        options.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.label}
+          </option>
+        ))}
     </StyledSelect>
   );
 };

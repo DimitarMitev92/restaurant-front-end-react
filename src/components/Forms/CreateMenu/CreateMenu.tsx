@@ -52,8 +52,8 @@ export const CreateMenu: React.FC<CreateMenuFormProps> = ({ onSubmit }) => {
       }}
       validationSchema={createMenuValidationSchema}
       onSubmit={async (values) => {
-        const restaurant = await menuService.createMenu(values);
-        onSubmit && onSubmit(restaurant);
+        const menu = await menuService.createMenu(values);
+        onSubmit && onSubmit(menu);
         navigate(mainRoute.MAIN);
       }}
       buttonText="Create"

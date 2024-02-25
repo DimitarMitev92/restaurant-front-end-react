@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { ChangePassword } from "../../Forms/ChangePassword/ChangePassword";
 import { CreateAddress } from "../../Forms/CreateAddress/CreateAddress";
 import { OrdersHistory } from "./OrdersHistory/OrdersHistory";
+import { UserAddresses } from "./UserAddresses/UserAddresses";
 
 export const useProfileLogic = () => {
   const [activeForm, setActiveForm] = useState<string>("");
@@ -20,6 +21,11 @@ export const useProfileLogic = () => {
       path: "/profile/create-address",
     },
     {
+      label: "User Addresses",
+      formName: "userAddresses",
+      path: "/profile/user-addresses",
+    },
+    {
       label: "Orders History",
       formName: "ordersHistory",
       path: "/profile/orders-history",
@@ -33,6 +39,8 @@ export const useProfileLogic = () => {
       case "createAddress":
         return <CreateAddress onSubmit={(data) => console.log(data)} />;
       default:
+      case "userAddresses":
+        return <UserAddresses />;
       case "ordersHistory":
         return <OrdersHistory />;
         return null;

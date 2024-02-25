@@ -1,14 +1,39 @@
-import { CreateMealFormProps } from "../../../static/interfaces";
+import { useNavigate, useParams } from "react-router-dom";
+import { useCategories } from "../../../hooks/useCategories";
+import { useMenus } from "../../../hooks/useMenus";
+import { usePackages } from "../../../hooks/usePackages";
+import {
+  CategoryData,
+  CreateMealFormData,
+  CreateMealFormProps,
+  MenuData,
+  PackageData,
+} from "../../../static/interfaces";
+import { ReusableForm } from "../ReusableForm/ReusableForm";
+import { createMealValidationSchema } from "../../../static/form-validations";
+import { mealService } from "../../../services/mealService";
+import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
+import { useEffect, useState } from "react";
+import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
+import ErrorMessage from "../../ui-elements/errorMessage";
 
 export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   updatedId,
   onSubmit,
 }) => {
+  const { id } = useParams();
+
   const { menus = [] } = useMenus();
   const { categories = [] } = useCategories();
   const { packages = [] } = usePackages();
 
   const navigate = useNavigate();
+
+  const [currentMeal, setCurrentMeal] = useState<CreateMealFormData | null>(
+    null
+  );
+
+  const [errorFromServer, setErrorFromServer] = useState(null);
 
   const inputsCreateMealData = [
     {
@@ -109,32 +134,58 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
     },
   ];
 
-  return (
+  useEffect(() => {
+    const fetchCurrentMeal = async () => {
+      const url = `${endpointAPI.MEAL}/${updatedId}`;
+      const accessToken = sessionStorage.getItem("access_token");
+      try {
+        const fetchedMeal = await fetchDataFromApi(
+          url,
+          accessToken,
+          method.GET,
+          null,
+          "Error fetching meal"
+        );
+
+        const startDate = new Date(fetchedMeal.startDate);
+        startDate.setDate(startDate.getDate() + 1);
+        fetchedMeal.startDate = startDate.toISOString().split("T")[0];
+
+        const endDate = new Date(fetchedMeal.endDate);
+        endDate.setDate(endDate.getDate() + 1);
+        fetchedMeal.endDate = endDate.toISOString().split("T")[0];
+
+        setCurrentMeal(fetchedMeal);
+      } catch (error) {
+        console.error("Error fetching meal:", error);
+        setErrorFromServer(error.message);
+      }
+    };
+    fetchCurrentMeal();
+  }, [updatedId]);
+
+  return currentMeal ? (
     <ReusableForm
-      formHeading="Create meal"
+      formHeading="Update meal"
       inputsData={inputsCreateMealData}
       initialValues={{
-        name: "",
-        picture: "",
-        description: "",
-        startDate: "",
-        endDate: "",
-        startHour: "",
-        endHour: "",
-        price: "",
-        weight: "",
-        menuId: "",
-        categoryId: "",
-        packageId: "",
+        ...currentMeal,
         error: "",
       }}
       validationSchema={createMealValidationSchema}
       onSubmit={async (values) => {
-        const meal = await mealService.createMeal(values);
+        values.startDate = new Date(values.startDate)
+          .toISOString()
+          .split("T")[0];
+        values.endDate = new Date(values.endDate).toISOString().split("T")[0];
+
+        const meal = await mealService.updateMeal(updatedId, values);
         onSubmit && onSubmit(meal);
-        navigate(mainRoute.MAIN);
+        navigate(`${mainRoute.RESTAURANTS}/${id}`);
       }}
-      buttonText="Create"
+      buttonText="Update"
     />
+  ) : (
+    errorFromServer && <ErrorMessage error={errorFromServer} />
   );
 };

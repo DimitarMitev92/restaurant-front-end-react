@@ -1,6 +1,7 @@
 import { useAuth } from "../../context/AuthProvider";
 import {
   AddButton,
+  AdminButtons,
   BtnWrapper,
   EditButton,
   IconImage,
@@ -19,39 +20,46 @@ import editIcon from "../../assets/edit.png";
 import { IMealProps } from "../../static/interfaces";
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
-import { useState } from "react";
 import PopUp from "../PopUp/PopUp";
+import { usePopupContext } from "../../context/PopupContext";
+import { rightsUser } from "../../static/endpoints";
+import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 
 export const Meal: React.FC<IMealProps> = ({ meal }) => {
   const { user } = useAuth();
   const { id } = useParams();
-  const [isShowPopUp, setIsShowPopUp] = useState<boolean>(false);
+
+  const { isUpdateMealPopUpVisible, showUpdateMealPopUp, hideUpdateMealPopUp } =
+    usePopupContext();
 
   const navigate = useNavigate();
 
   const handlePopUp = () => {
-    console.log("hit");
-    setIsShowPopUp(true);
+    showUpdateMealPopUp();
     navigate(`${routes.RESTAURANTS}/${id}/update/${meal.id}`);
   };
 
   const handleCancel = () => {
-    setIsShowPopUp(false);
+    hideUpdateMealPopUp();
   };
 
   let adminBtns;
-  if (user?.user.rights === "ADMIN") {
+  if (user?.user.rights === rightsUser.ADMIN) {
     adminBtns = (
-      <>
-        <RemoveButton>
-          <IconImage src={trashIcon} />
-        </RemoveButton>
+      <AdminButtons>
         <EditButton onClick={() => handlePopUp()}>
           <IconImage src={editIcon} />
         </EditButton>
-      </>
+        <RemoveButton>
+          <IconImage src={trashIcon} />
+        </RemoveButton>
+      </AdminButtons>
     );
   }
+
+  const addHandler = () => {
+    console.log("clicked");
+  };
 
   return (
     <>
@@ -63,19 +71,21 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
             <span>{meal.weight}g</span>
           </div>
           <BtnWrapper>
+            <AddButton onClick={addHandler}>+</AddButton>
             {user?.user.rights && adminBtns}
-            <AddButton>+</AddButton>
           </BtnWrapper>
         </NameAndAddBtn>
         <InfoAndPicture>
           <Info>{meal.description}</Info>
           <MealPicture>
-            <Img src="https://restaurant-two.s3.eu-north-1.amazonaws.com/1708357534060-kaouther-djouada-hcEDfkiVmMI-unsplash.jpg"></Img>
+            <Img src={meal.picture}></Img>
           </MealPicture>
         </InfoAndPicture>
         <Price>{meal.price} USD</Price>
       </MealCard>
-      {isShowPopUp && <PopUp onCancel={handleCancel} />}
+      {isUpdateMealPopUpVisible && (
+        <PopUp onCancel={handleCancel} UpdateForm={UpdateMeal} />
+      )}
     </>
   );
 };

@@ -47,6 +47,7 @@ export const mainRoute = {
   PROFILE: "/profile",
   PROFILE_CHANGE_PASSWORD: "/profile/change-password",
   PROFILE_CREATE_ADDRESS: "/profile/create-address",
+  PROFILE_USER_ADDRESSES: "/profile/user-addresses",
   PROFILE_ORDERS_HISTORY: "/profile/orders-history",
   NOT_FOUND: "*",
 };
