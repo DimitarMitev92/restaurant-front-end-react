@@ -72,11 +72,11 @@ export const mealService = {
       throw error;
     }
   },
-  fetchMealsByRestaurantId: async (id: string | undefined) => {
+  fetchMealsByRestaurantId: async (restaurantId: string | undefined) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
       const restaurants = await fetchDataFromApi(
-        `${endpointAPI.MEAL}/restaurant/${id}`,
+        `${endpointAPI.MEAL}/restaurant/${restaurantId}`,
         accessToken ? accessToken : null,
         method.GET,
         null,
@@ -86,6 +86,22 @@ export const mealService = {
     } catch (error) {
       console.error("Error fetching meals by restaurant id.");
       throw error;
+    }
+  },
+  fetchMealsByMenuId: async (restaurantId: string,menuId: string, ) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const meals = await fetchDataFromApi(
+        `${endpointAPI.MEAL}/restaurant/${restaurantId}/menu/${menuId}`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching meals by menu id"
+      );
+      return meals;
+    } catch (error) {
+      console.error("Error fetching meals by menu id:", error);
+      throw new Error(`No meals found for menu with ID ${menuId}`);
     }
   },
 };
