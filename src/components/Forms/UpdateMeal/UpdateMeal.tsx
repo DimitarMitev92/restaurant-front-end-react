@@ -148,11 +148,11 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
         );
 
         const startDate = new Date(fetchedMeal.startDate);
-        startDate.setDate(startDate.getDate() + 1);
+        startDate.setDate(startDate.getDate());
         fetchedMeal.startDate = startDate.toISOString().split("T")[0];
 
         const endDate = new Date(fetchedMeal.endDate);
-        endDate.setDate(endDate.getDate() + 1);
+        endDate.setDate(endDate.getDate());
         fetchedMeal.endDate = endDate.toISOString().split("T")[0];
 
         setCurrentMeal(fetchedMeal);
