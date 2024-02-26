@@ -6,7 +6,10 @@ import { fetchDataFromApi } from "../services/fetchDataFromApi";
 interface OrderContextProps {
   meals: IMeal[];
   totalPrice: number;
-  addMealToBasket: (meal: IMeal[] | ((prevState: IMeal[]) => IMeal[])) => void;
+  addMealToBasket: (
+    meal: IMeal[] | ((prevState: IMeal[]) => IMeal[]),
+    menuId: string
+  ) => void;
   removeMealFromBasket: (mealId: string) => void;
   addAdditionalNoteForMeal: (mealId: string, additionalNote: string) => void;
 }
@@ -51,8 +54,10 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   };
 
   const addMealToBasket = async (
-    meal: IMeal[] | ((prevState: IMeal[]) => IMeal[])
+    meal: IMeal[] | ((prevState: IMeal[]) => IMeal[]),
+    menuId: string
   ) => {
+    console.log("OrderProvider:", menuId);
     const newMeals = typeof meal === "function" ? meal(meals) : meal;
 
     for (const newMeal of newMeals) {
@@ -74,15 +79,18 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
             ...newMeal,
             packagePrice: packageData.price,
             additionalNote: "",
+            menuId: menuId,
             count: 1,
           };
           setMeals((prevMeals) => [...prevMeals, updatedMeal]);
         } else {
-          setMeals((prevMeals) => [...prevMeals, { ...newMeal, count: 1 }]);
+          setMeals((prevMeals) => [
+            ...prevMeals,
+            { ...newMeal, menuId: menuId, count: 1 },
+          ]);
         }
       }
     }
-
     calculateTotalPrice();
   };
 

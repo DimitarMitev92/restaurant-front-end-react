@@ -2,6 +2,7 @@ import { BillPrintComponent } from "./BillPrint";
 import { CartButton } from "../Cart/Cart.style";
 import { ButtonDiv, StyledModal } from "./BillPrint.style";
 import { PrintPreviewModalProps } from "./BillPrint.static";
+import { useOrderContext } from "../../context/OrderProvider";
 
 export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
   isOpen,
@@ -10,14 +11,16 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
   onDownload,
   onConfirmOrder,
 }) => {
+  const { meals, totalPrice } = useOrderContext();
+
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onClose}>
       <BillPrintComponent
         ref={componentRef}
         isOpen={isOpen}
         onRequestClose={onClose}
-        cartItems={[]}
-        totalPrice={0}
+        meals={meals}
+        totalPrice={totalPrice}
       />
       <ButtonDiv>
         <CartButton onClick={onConfirmOrder}>Confirm Order</CartButton>

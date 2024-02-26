@@ -20,7 +20,7 @@ import {
   OrderCartCount,
   BottomWrapper,
 } from "./Cart.style";
-import { Address, CartItem } from "./Cart.static";
+import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/input";
 import { BillPrintComponent } from "../Bill/BillPrint";
 import { PrintPreviewModal } from "../Bill/Modal";
@@ -103,6 +103,7 @@ export const ShoppingCart: React.FC = () => {
   };
 
   const onAddMealToBasket = (meal: IMeal) => {
+    console.log(meal);
     addMealToBasket([meal]);
   };
 
@@ -123,7 +124,7 @@ export const ShoppingCart: React.FC = () => {
   };
 
   const handleDownload = () => {
-    const bill = createPDF(cartItems, totalPrice);
+    const bill = createPDF(meals, totalPrice);
     bill.save("invoice.pdf");
     handlePreviewInvoice();
   };
@@ -207,7 +208,7 @@ export const ShoppingCart: React.FC = () => {
           isOpen={showPrintPreview}
           onRequestClose={handleClosePrintPreview}
           ref={componentRef}
-          cartItems={cartItems}
+          meals={meals}
           totalPrice={totalPrice}
         />
       )}

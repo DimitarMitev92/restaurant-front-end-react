@@ -392,6 +392,7 @@ export interface IMeal {
 
 export interface IMealProps {
   meal: IMeal;
+  menuId: string;
 }
 
 export interface IRestaurantsDetails {

@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { CartItem } from "./Cart.static";
+import { IMeal } from "../../static/interfaces";
 
 declare module "jspdf" {
   interface jsPDF {
@@ -9,7 +9,7 @@ declare module "jspdf" {
   }
 }
 
-export const createPDF = (cartItems: CartItem[], totalPrice: number): jsPDF => {
+export const createPDF = (meals: IMeal[], totalPrice: number): jsPDF => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const doc = new jsPDF() as jsPDF & { autoTable: any };
 
@@ -30,15 +30,15 @@ export const createPDF = (cartItems: CartItem[], totalPrice: number): jsPDF => {
 
   // Add order info
   doc.text(`Order made on: ${new Date().toLocaleString()}`, 20, 70);
-  const tableData = cartItems.map((item, index) => [
-    index + 1,
-    item.product.name,
-    item.quantity,
-    `$${item.product.price.toFixed(2)}`,
+  const tableData = meals.map((meal) => [
+    meal.id,
+    meal.name,
+    meal.count,
+    `$${meal.price.toFixed(2)}`,
   ]);
 
   const headers = ["#", "Product Name", "Quantity", "Price"];
-  const tableHeight = 10 + cartItems.length * 10;
+  const tableHeight = 10 + meals.length * 10;
 
   doc.autoTable({
     startY: 80,

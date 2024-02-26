@@ -51,6 +51,8 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
     navigate(`${routes.RESTAURANTS}/${id}/create/${menu.id}`);
   };
 
+  console.log(menu);
+
   return (
     <>
       <MealsWrapper>
@@ -70,7 +72,7 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
         </MenuName>
 
         {menu.meals.map((meal) => {
-          return <Meal key={meal.id} meal={meal} />;
+          return <Meal key={meal.id} meal={meal} menuId={menu.id} />;
         })}
       </MealsWrapper>
       {isUpdateMenuPopUpVisible && (
