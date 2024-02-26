@@ -45,9 +45,9 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     return packageData;
   };
 
-  const calculateTotalPrice = () => {
+  const calculateTotalPrice = (updatedMeals: IMeal[]) => {
     let total = 0;
-    meals.forEach((meal) => {
+    updatedMeals.forEach((meal) => {
       total += meal.price * meal.count + meal.packagePrice * meal.count;
     });
     setTotalPrice(total);
@@ -91,7 +91,11 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
         }
       }
     }
-    calculateTotalPrice();
+
+    setMeals((updatedMeals) => {
+      calculateTotalPrice(updatedMeals);
+      return updatedMeals;
+    });
   };
 
   const removeMealFromBasket = (mealId: string) => {
@@ -108,7 +112,10 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
       );
     });
 
-    calculateTotalPrice();
+    setMeals((updatedMeals) => {
+      calculateTotalPrice(updatedMeals);
+      return updatedMeals;
+    });
   };
 
   const addAdditionalNoteForMeal = (mealId: string, additionalNote: string) => {

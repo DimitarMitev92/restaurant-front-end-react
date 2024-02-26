@@ -20,10 +20,14 @@ export const Restaurant = () => {
     isUpdateMenuPopUpVisible,
     isAddMealPopUpVisible,
   } = usePopupContext();
+
   const { id } = useParams();
+
   const [restaurantDetails, setRestaurantDetails] =
     useState<IRestaurantsDetails | null>(null);
+
   const [menus, setMenus] = useState<Menu[] | null>(null);
+
   const [allMenus, setAllMenus] = useState<Menu[] | null>(null);
 
   const filter = (type: string) => {

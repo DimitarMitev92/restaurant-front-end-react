@@ -34,7 +34,6 @@ export const ShoppingCart: React.FC = () => {
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
     undefined
   );
-  const [totalPrice, setTotalPrice] = useState<number>(0);
   const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice, setShowInvoice] = useState<boolean>(false);
@@ -48,7 +47,10 @@ export const ShoppingCart: React.FC = () => {
     addMealToBasket,
     removeMealFromBasket,
     addAdditionalNoteForMeal,
+    totalPrice,
   } = useOrderContext();
+
+  console.log(totalPrice);
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -79,18 +81,6 @@ export const ShoppingCart: React.FC = () => {
     // TODO: Submit order implementation
   };
 
-  const calculateTotalPrice = () => {
-    let total = 0;
-    meals.forEach((meal) => {
-      total += meal.price * meal.count + meal.packagePrice * meal.count;
-    });
-    setTotalPrice(total);
-  };
-
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [meals]);
-
   const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedAddress = e.target.value;
 
@@ -103,7 +93,6 @@ export const ShoppingCart: React.FC = () => {
   };
 
   const onAddMealToBasket = (meal: IMeal) => {
-    console.log(meal);
     addMealToBasket([meal]);
   };
 
