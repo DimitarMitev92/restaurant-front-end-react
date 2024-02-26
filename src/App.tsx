@@ -13,6 +13,7 @@ import Restaurants from "./components/pages/Restaurants/Restaurants";
 import { RestaurantsDetails } from "./components/pages/Restaurant/RestaurantsDetails/RestaurantsDetails";
 import { Profile } from "./components/pages/Profile/Profile";
 import { PopupProvider } from "./context/PopupContext";
+import NotFoundPage from "./components/pages/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -86,6 +87,7 @@ function App() {
                 </Route>
                 <Route path={routes.LOGOUT} element={<Logout />} />
               </Route>
+              <Route path={routes.NOT_FOUND} element={<NotFoundPage />}></Route>
             </Routes>
           </Main>
         </BrowserRouter>
