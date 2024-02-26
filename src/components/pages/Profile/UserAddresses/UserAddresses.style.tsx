@@ -20,5 +20,5 @@ export const AddressCard = styled.div`
 `;
 
 export const AddressText = styled.p`
-  color: #fff;
+  color: var(--color-white);
 `;

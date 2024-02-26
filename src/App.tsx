@@ -13,7 +13,6 @@ import Restaurants from "./components/pages/Restaurants/Restaurants";
 import { Profile } from "./components/pages/Profile/Profile";
 import { PopupProvider } from "./context/PopupContext";
 import NotFoundPage from "./components/pages/NotFoundPage/NotFoundPage";
-import { Restaurant } from "./components/pages/Restaurant/Restaurant";
 import { OrderProvider } from "./context/OrderProvider";
 
 function App() {

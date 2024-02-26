@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent } from "react";
+import React, { useEffect, useState, ChangeEvent, useRef } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useAddressesByUserId } from "../../hooks/useAddresses";
 import Select from "../ui-elements/select";
@@ -24,6 +24,9 @@ import Switch from "../ui-elements/switchButton";
 import { useOrderContext } from "../../context/OrderProvider";
 import { IMeal } from "../../static/interfaces";
 import UnifiedInput from "../ui-elements/input";
+import { BillPrintComponent } from "../Bill/BillPrint";
+import { PrintPreviewModal } from "../Bill/Modal";
+import { createPDF } from "./Cart.logic";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -33,28 +36,35 @@ export const ShoppingCart: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [addressesData, setAddressesData] = useState<Address[]>([]);
-  const [selectedAddressId, setSelectedAddressId] = useState("");
+  const [showInvoice, setShowInvoice] = useState<boolean>(false);
+  const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
 
   const { user } = useAuth();
-  const { addresses } = useAddressesByUserId(user?.user.id || "");
+  const addressesQuery = useAddressesByUserId(user?.user.id || "");
   const {
     meals,
     addMealToBasket,
     removeMealFromBasket,
     addAdditionalNoteForMeal,
   } = useOrderContext();
+  const componentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
         if (
+          
           user &&
-          addresses &&
-          addresses.address &&
-          addresses.address.length > 0
+         
+          addressesQuery &&
+         
+          addressesQuery.addresses &&
+         
+          addressesQuery.addresses.length > 0
+        
         ) {
-          setAddressesData(addresses);
-          setSelectedAddress(addresses[0]?.address);
+          setAddressesData(addressesQuery.addresses);
+          setSelectedAddress(addressesQuery.addresses[0]?.id);
         }
       } catch (error) {
         console.error("Error fetching user addresses:", error);
@@ -62,7 +72,7 @@ export const ShoppingCart: React.FC = () => {
     };
 
     fetchAddresses();
-  }, [user, addresses]);
+  }, [user, address]);
 
   const handleSwitchClick = (mode: boolean) => {
     setDeliveryMode(mode);
@@ -180,8 +190,25 @@ export const ShoppingCart: React.FC = () => {
               </CartButton>
             </BottomWrapper>
           </>
+          <CartButton onClick={handlePreviewInvoice}>Show Order</CartButton>
         </SidebarContent>
       </SidebarWrapper>
+      {showInvoice && (
+        <BillPrintComponent
+          isOpen={showPrintPreview}
+          onRequestClose={handleClosePrintPreview}
+          ref={componentRef}
+          cartItems={cartItems}
+          totalPrice={totalPrice}
+        />
+      )}
+      <PrintPreviewModal
+        isOpen={showPrintPreview}
+        onClose={handleClosePrintPreview}
+        componentRef={componentRef}
+        onDownload={handleDownload} 
+        onConfirmOrder={handleConfirmOrder}  
+      />
     </CartWrapper>
   );
 };
