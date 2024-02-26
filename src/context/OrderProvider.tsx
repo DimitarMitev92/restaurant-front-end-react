@@ -14,6 +14,7 @@ interface OrderContextProps {
   meals: IMeal[];
   addMealToBasket: Dispatch<SetStateAction<IMeal[]>>;
   removeMealFromBasket: (mealId: string) => void;
+  addAdditionalNoteForMeal: (mealId: string, additionalNote: string) => void;
 }
 
 const OrderContext = createContext<OrderContextProps | undefined>(undefined);
@@ -32,7 +33,7 @@ interface OrderProviderProps {
 
 export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [meals, setMeals] = useState<IMeal[]>([]);
-
+  console.log(meals);
   const getPackagePrice = async (packageId: string) => {
     const url = `${endpointAPI.PACKAGE}/${packageId}`;
     const accessToken = sessionStorage.getItem("access_token");
@@ -55,7 +56,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
       const existingMealIndex = meals.findIndex((m) => m.id === newMeal.id);
 
       if (existingMealIndex !== -1) {
-        // If meal with the same ID exists, increment count by 1
         setMeals((prevMeals) => {
           const updatedMeals = [...prevMeals];
           updatedMeals[existingMealIndex] = {
@@ -70,6 +70,7 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
           const updatedMeal = {
             ...newMeal,
             packagePrice: packageData.price,
+            additionalNote: "",
             count: 1,
           };
           setMeals((prevMeals) => [...prevMeals, updatedMeal]);
@@ -95,10 +96,24 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     });
   };
 
+  const addAdditionalNoteForMeal = (mealId: string, additionalNote: string) => {
+    setMeals((prevMeals) => {
+      const updatedMeals = prevMeals.map((meal) => {
+        if (meal.id === mealId) {
+          return { ...meal, additionalNote: additionalNote };
+        }
+        return meal;
+      });
+      console.log(meals);
+      return updatedMeals;
+    });
+  };
+
   const contextValues: OrderContextProps = {
     meals,
     addMealToBasket,
     removeMealFromBasket,
+    addAdditionalNoteForMeal,
   };
 
   return (

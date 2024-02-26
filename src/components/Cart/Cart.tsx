@@ -23,6 +23,7 @@ import { Address, CartItem } from "./Cart.static";
 import Switch from "../ui-elements/switchButton";
 import { useOrderContext } from "../../context/OrderProvider";
 import { IMeal } from "../../static/interfaces";
+import UnifiedInput from "../ui-elements/input";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -36,9 +37,12 @@ export const ShoppingCart: React.FC = () => {
 
   const { user } = useAuth();
   const { addresses } = useAddressesByUserId(user?.user.id || "");
-  const { meals, addMealToBasket, removeMealFromBasket } = useOrderContext();
-
-  console.log(meals);
+  const {
+    meals,
+    addMealToBasket,
+    removeMealFromBasket,
+    addAdditionalNoteForMeal,
+  } = useOrderContext();
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -100,6 +104,10 @@ export const ShoppingCart: React.FC = () => {
     removeMealFromBasket(meal.id);
   };
 
+  const onChangeAdditionalNote = (mealId: string, e: ChangeEvent) => {
+    addAdditionalNoteForMeal(mealId, e.target?.value);
+  };
+
   return (
     <CartWrapper>
       <SidebarWrapper>
@@ -154,6 +162,12 @@ export const ShoppingCart: React.FC = () => {
                         +
                       </OrderCartButton>
                     </OrderMealButtonsWrapper>
+                    <UnifiedInput
+                      type="text"
+                      name="additionalNote"
+                      onChange={(e) => onChangeAdditionalNote(meal.id, e)}
+                      placeholder="Additional note"
+                    />
                   </OrderMealCardWrapper>
                 );
               })}
