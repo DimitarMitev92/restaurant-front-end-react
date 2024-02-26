@@ -14,6 +14,7 @@ import { Profile } from "./components/pages/Profile/Profile";
 import { PopupProvider } from "./context/PopupContext";
 import NotFoundPage from "./components/pages/NotFoundPage/NotFoundPage";
 import { OrderProvider } from "./context/OrderProvider";
+import { Restaurant } from "./components/pages/Restaurant/Restaurant";
 
 function App() {
   return (

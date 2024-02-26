@@ -28,7 +28,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
       <WrapperInfo>
         <HeroTitle>Are you hungry?</HeroTitle>
         <Description>Order something delicious</Description>
-        {loading && <PulseLoader color="#4caf50" size={5} />}
+        {isLoading && <PulseLoader color="#4caf50" size={5} />}
         {error && <p>Error fetching locations.</p>}
         {!isLoading && !error && (
           <UnifiedInput
