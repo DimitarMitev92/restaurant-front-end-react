@@ -23,9 +23,12 @@ import PopUp from "../PopUp/PopUp";
 import { usePopupContext } from "../../context/PopupContext";
 import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
+import { useOrderContext } from "../../context/OrderProvider";
 
 export const Meal: React.FC<IMealProps> = ({ meal }) => {
   const { id } = useParams();
+
+  const { addMealToBasket } = useOrderContext();
 
   const { isUpdateMealPopUpVisible, showUpdateMealPopUp, hideUpdateMealPopUp } =
     usePopupContext();
@@ -42,7 +45,7 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
   };
 
   const addHandler = () => {
-    console.log("clicked");
+    addMealToBasket([meal]);
   };
 
   return (

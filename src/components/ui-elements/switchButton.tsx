@@ -29,13 +29,22 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
   }
 `;
 
-const Switch: React.FC<DeliverySwitchProps> = ({ deliveryMode, handleSwitchClick }) => {
+const Switch: React.FC<DeliverySwitchProps> = ({
+  deliveryMode,
+  handleSwitchClick,
+}) => {
   return (
     <FlexContainer>
-      <SwitchButton onClick={() => handleSwitchClick(true)} $active={deliveryMode}>
+      <SwitchButton
+        onClick={() => handleSwitchClick(true)}
+        $active={deliveryMode}
+      >
         Delivery
       </SwitchButton>
-      <SwitchButton onClick={() => handleSwitchClick(false)} $active={!deliveryMode}>
+      <SwitchButton
+        onClick={() => handleSwitchClick(false)}
+        $active={!deliveryMode}
+      >
         On-site
       </SwitchButton>
     </FlexContainer>

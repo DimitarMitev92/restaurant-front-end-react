@@ -374,18 +374,19 @@ export interface UpdateOrderFormData {
 export interface IMeal {
   id: string;
   name: string;
+  picture: string;
   description: string;
   additionalNote: string;
-  picture: string;
-  price: number;
-  weight: number;
-  startHour: string;
-  endHour: string;
   startDate: string;
   endDate: string;
+  startHour: string;
+  endHour: string;
+  price: number;
+  weight: number;
+  menuId: string;
   categoryId: string;
-  packegeId: string;
-  mealId: string;
+  packageId: string;
+  packagePrice: number;
   count: number;
 }
 

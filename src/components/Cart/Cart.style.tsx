@@ -4,7 +4,8 @@ import { StyledButton } from "../ui-elements/button";
 import InputLabel from "../ui-elements/inputLabel";
 
 export const CartWrapper = styled.div`
-  max-height: 856px;
+  position: relative;
+  min-height: 100%;
   width: 360px;
 
   @media (max-width: 768px) {
@@ -42,14 +43,14 @@ export const SidebarHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-teal);
   border-radius: 6px;
 `;
 
 export const SidebarTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: var(--color-gray);
 `;
 
 export const SidebarContent = styled.div`
@@ -63,8 +64,9 @@ export const FlexContainer = styled.div`
 `;
 
 export const SwitchButton = styled.button<SwitchButtonProps>`
-  background-color: ${(props) => (props.active ? "#4caf50" : "#ffc244")};
-  color: ${(props) => (props.active ? "#fff" : "#333")};
+  background-color: ${(props) =>
+    props.active ? "--color-green" : "--color-yellow"};
+  color: ${(props) => (props.active ? "--color-white" : "--color-gray")};
   padding: 10px 15px;
   border: none;
   border-radius: 2px;
@@ -72,7 +74,8 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => (props.active ? "#4caf50" : "#ffc244")};
+    background-color: ${(props) =>
+      props.active ? "--color-green" : "--color-yellow"};
   }
 
   @media (max-width: 768px) {
@@ -116,7 +119,51 @@ export const StyledCartInput = styled.div<CartInputProps>`
   }
 `;
 
+export const OrderMealCardWrapper = styled.div`
+  width: 100%;
+  background-color: var(--color-green);
+  border-radius: 5px;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+`;
+
+export const OrderMealTitle = styled.h2`
+  font-size: 1em;
+  color: var(--color-white);
+`;
+
+export const OrderMealButtonsWrapper = styled.div`
+  background-color: var(--color-yellow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em;
+`;
+
+export const OrderCartButton = styled(CartButton)`
+  width: 2.8em;
+  height: 2.8em;
+  border-radius: 50%;
+`;
+
+export const OrderCartCountWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const OrderCartCount = styled.p`
+  text-align: center;
+`;
+
 export const StyledPriceDiv = styled.div`
   font-size: 1rem;
-`
+`;
 
+export const BottomWrapper = styled.div`
+  display: flex;
+  position: fixed;
+  bottom: 20px;
+  padding: 1em;
+`;

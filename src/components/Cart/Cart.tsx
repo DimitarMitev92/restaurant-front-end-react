@@ -2,8 +2,6 @@ import React, { useEffect, useState, ChangeEvent } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useAddressesByUserId } from "../../hooks/useAddresses";
 import Select from "../ui-elements/select";
-import TextArea from "../ui-elements/textArea";
-import Switch from "./Switch";
 import {
   CartWrapper,
   SidebarWrapper,
@@ -13,31 +11,46 @@ import {
   CartLabel,
   CartButton,
   StyledPriceDiv,
+  BottomWrapper,
+  OrderMealCardWrapper,
+  OrderMealTitle,
+  OrderMealButtonsWrapper,
+  OrderCartButton,
+  OrderCartCount,
+  OrderCartCountWrapper,
 } from "./Cart.style";
 import { Address, CartItem } from "./Cart.static";
-import UnifiedInput from "../ui-elements/input";
+import Switch from "../ui-elements/switchButton";
+import { useOrderContext } from "../../context/OrderProvider";
+import { IMeal } from "../../static/interfaces";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
     undefined
   );
-  const [showNoteTextArea, setShowNoteTextArea] = useState<boolean>(false);
-  const [additionalNote, setAdditionalNote] = useState<string>("");
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
 
   const { user } = useAuth();
-  const { address } = useAddressesByUserId(user?.user.id || "");
+  const { addresses } = useAddressesByUserId(user?.user.id || "");
+  const { meals, addMealToBasket, removeMealFromBasket } = useOrderContext();
+
+  console.log(meals);
 
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        if (user && address && address.address && address.address.length > 0) {
-          setAddresses(address);
-          setSelectedAddress(address[0]?.address);
+        if (
+          user &&
+          addresses &&
+          addresses.address &&
+          addresses.address.length > 0
+        ) {
+          setAddressesData(addresses);
+          setSelectedAddress(addresses[0]?.address);
         }
       } catch (error) {
         console.error("Error fetching user addresses:", error);
@@ -45,19 +58,11 @@ export const ShoppingCart: React.FC = () => {
     };
 
     fetchAddresses();
-  }, [user, address]);
+  }, [user, addresses]);
 
   const handleSwitchClick = (mode: boolean) => {
     setDeliveryMode(mode);
     setSelectedAddress(undefined);
-  };
-
-  const handleNoteChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setAdditionalNote(e.target.value);
-  };
-
-  const handleNoteCheckboxChange = () => {
-    setShowNoteTextArea(!showNoteTextArea);
   };
 
   const handleConfirmOrder = () => {
@@ -79,12 +84,20 @@ export const ShoppingCart: React.FC = () => {
   const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedAddress = e.target.value;
 
-    const [{ id }] = address.filter(
+    const [{ id }] = addresses.filter(
       (ad: Address) => ad.address === selectedAddress
     );
 
     setSelectedAddressId(id);
     setSelectedAddress(e.target.value);
+  };
+
+  const onAddMealToBasket = (meal: IMeal) => {
+    addMealToBasket([meal]);
+  };
+
+  const onRemoveMealToBasket = (meal: IMeal) => {
+    removeMealFromBasket(meal.id);
   };
 
   return (
@@ -99,24 +112,6 @@ export const ShoppingCart: React.FC = () => {
         </SidebarHeader>
         <SidebarContent>
           <>
-            <div>
-              <UnifiedInput
-                type="checkbox"
-                checked={showNoteTextArea}
-                onChange={handleNoteCheckboxChange}
-                value={""}
-              />
-              <CartLabel htmlFor="additional-note">Additional Note:</CartLabel>
-            </div>
-            {showNoteTextArea && (
-              <div>
-                <TextArea
-                  placeholder="Additional Note"
-                  value={additionalNote}
-                  onChange={handleNoteChange}
-                />
-              </div>
-            )}
             {deliveryMode && addresses && (
               <>
                 <CartLabel htmlFor="address-select">
@@ -126,8 +121,8 @@ export const ShoppingCart: React.FC = () => {
                   onChange={handleAddressChange}
                   value={selectedAddress || ""}
                   options={
-                    address &&
-                    address.map((address: Address) => ({
+                    addresses &&
+                    addresses.map((address: Address) => ({
                       value: address.address,
                       label: `${address.address}`,
                     }))
@@ -135,11 +130,42 @@ export const ShoppingCart: React.FC = () => {
                 />
               </>
             )}
-            <StyledPriceDiv>
-              Total Price: ${totalPrice.toFixed(2)}
-            </StyledPriceDiv>
+            {meals &&
+              meals.map((meal) => {
+                return (
+                  <OrderMealCardWrapper key={meal.id}>
+                    <OrderMealTitle>{meal.name}</OrderMealTitle>
+                    <OrderMealTitle>
+                      {+meal.price * +meal.count} USD
+                    </OrderMealTitle>
+                    <OrderMealTitle>
+                      {+meal.packagePrice * +meal.count} USD
+                    </OrderMealTitle>
+                    <OrderMealButtonsWrapper>
+                      <OrderCartButton
+                        onClick={() => onRemoveMealToBasket(meal)}
+                      >
+                        -
+                      </OrderCartButton>
+                      <OrderCartCountWrapper>
+                        <OrderCartCount>{meal.count}</OrderCartCount>
+                      </OrderCartCountWrapper>
+                      <OrderCartButton onClick={() => onAddMealToBasket(meal)}>
+                        +
+                      </OrderCartButton>
+                    </OrderMealButtonsWrapper>
+                  </OrderMealCardWrapper>
+                );
+              })}
+            <BottomWrapper>
+              <StyledPriceDiv>
+                Total Price: ${totalPrice.toFixed(2)}
+              </StyledPriceDiv>
+              <CartButton onClick={handleConfirmOrder}>
+                Confirm Order
+              </CartButton>
+            </BottomWrapper>
           </>
-          <CartButton onClick={handleConfirmOrder}>Confirm Order</CartButton>
         </SidebarContent>
       </SidebarWrapper>
     </CartWrapper>
