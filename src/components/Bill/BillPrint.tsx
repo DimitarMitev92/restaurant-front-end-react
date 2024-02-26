@@ -16,7 +16,6 @@ export const BillPrintComponent = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const currentDate = new Date().toLocaleDateString();
-    console.log(meals);
     return (
       <BillDiv ref={ref}>
         <BillHeading>Bill</BillHeading>

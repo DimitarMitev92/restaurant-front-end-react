@@ -45,7 +45,6 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
   };
 
   const addHandler = () => {
-    console.log("Meal component:", menuId);
     addMealToBasket([meal], menuId);
   };
 

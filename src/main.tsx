@@ -6,6 +6,10 @@ import { GlobalReset } from "./styles/GlobalCssReset.ts";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { queryFetch } from "./services/queryFetch.ts";
 
+import ReactModal from "react-modal";
+
+ReactModal.setAppElement("#root");
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

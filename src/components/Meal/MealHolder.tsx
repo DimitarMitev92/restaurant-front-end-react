@@ -51,8 +51,6 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
     navigate(`${routes.RESTAURANTS}/${id}/create/${menu.id}`);
   };
 
-  console.log(menu);
-
   return (
     <>
       <MealsWrapper>

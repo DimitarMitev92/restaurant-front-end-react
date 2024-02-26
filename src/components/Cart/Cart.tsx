@@ -50,8 +50,6 @@ export const ShoppingCart: React.FC = () => {
     totalPrice,
   } = useOrderContext();
 
-  console.log(totalPrice);
-
   useEffect(() => {
     const fetchAddresses = async () => {
       try {

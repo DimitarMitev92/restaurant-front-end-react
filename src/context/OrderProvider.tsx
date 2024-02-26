@@ -57,7 +57,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     meal: IMeal[] | ((prevState: IMeal[]) => IMeal[]),
     menuId: string
   ) => {
-    console.log("OrderProvider:", menuId);
     const newMeals = typeof meal === "function" ? meal(meals) : meal;
 
     for (const newMeal of newMeals) {
