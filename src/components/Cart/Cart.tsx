@@ -2,6 +2,7 @@ import React, { useEffect, useState, ChangeEvent, useRef } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useAddressesByUserId } from "../../hooks/useAddresses";
 import Select from "../ui-elements/select";
+
 import {
   CartWrapper,
   SidebarWrapper,
@@ -11,22 +12,22 @@ import {
   CartLabel,
   CartButton,
   StyledPriceDiv,
-  BottomWrapper,
   OrderMealCardWrapper,
   OrderMealTitle,
   OrderMealButtonsWrapper,
   OrderCartButton,
-  OrderCartCount,
   OrderCartCountWrapper,
+  OrderCartCount,
+  BottomWrapper,
 } from "./Cart.style";
 import { Address, CartItem } from "./Cart.static";
-import Switch from "../ui-elements/switchButton";
-import { useOrderContext } from "../../context/OrderProvider";
-import { IMeal } from "../../static/interfaces";
 import UnifiedInput from "../ui-elements/input";
 import { BillPrintComponent } from "../Bill/BillPrint";
 import { PrintPreviewModal } from "../Bill/Modal";
+import { IMeal } from "../../static/interfaces";
 import { createPDF } from "./Cart.logic";
+import { useOrderContext } from "../../context/OrderProvider";
+import Switch from "../ui-elements/switchButton";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -36,35 +37,31 @@ export const ShoppingCart: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [addressesData, setAddressesData] = useState<Address[]>([]);
+  const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice, setShowInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
+  const componentRef = useRef<HTMLDivElement>(null);
 
   const { user } = useAuth();
-  const addressesQuery = useAddressesByUserId(user?.user.id || "");
+  const { addresses } = useAddressesByUserId(user?.user.id || "");
   const {
     meals,
     addMealToBasket,
     removeMealFromBasket,
     addAdditionalNoteForMeal,
   } = useOrderContext();
-  const componentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
         if (
-          
           user &&
-         
-          addressesQuery &&
-         
-          addressesQuery.addresses &&
-         
-          addressesQuery.addresses.length > 0
-        
+          addresses &&
+          addresses.address &&
+          addresses.address.length > 0
         ) {
-          setAddressesData(addressesQuery.addresses);
-          setSelectedAddress(addressesQuery.addresses[0]?.id);
+          setAddressesData(addresses);
+          setSelectedAddress(addresses[0]?.address);
         }
       } catch (error) {
         console.error("Error fetching user addresses:", error);
@@ -72,7 +69,7 @@ export const ShoppingCart: React.FC = () => {
     };
 
     fetchAddresses();
-  }, [user, address]);
+  }, [user, addresses]);
 
   const handleSwitchClick = (mode: boolean) => {
     setDeliveryMode(mode);
@@ -116,6 +113,20 @@ export const ShoppingCart: React.FC = () => {
 
   const onChangeAdditionalNote = (mealId: string, e: ChangeEvent) => {
     addAdditionalNoteForMeal(mealId, e.target?.value);
+  };
+
+  const handlePreviewInvoice = () => {
+    setShowPrintPreview(true);
+  };
+
+  const handleClosePrintPreview = () => {
+    setShowPrintPreview(false);
+  };
+
+  const handleDownload = () => {
+    const bill = createPDF(cartItems, totalPrice);
+    bill.save("invoice.pdf");
+    handlePreviewInvoice();
   };
 
   return (
@@ -185,12 +196,11 @@ export const ShoppingCart: React.FC = () => {
               <StyledPriceDiv>
                 Total Price: ${totalPrice.toFixed(2)}
               </StyledPriceDiv>
-              <CartButton onClick={handleConfirmOrder}>
+              <CartButton onClick={handlePreviewInvoice}>
                 Confirm Order
               </CartButton>
             </BottomWrapper>
           </>
-          <CartButton onClick={handlePreviewInvoice}>Show Order</CartButton>
         </SidebarContent>
       </SidebarWrapper>
       {showInvoice && (
@@ -206,8 +216,8 @@ export const ShoppingCart: React.FC = () => {
         isOpen={showPrintPreview}
         onClose={handleClosePrintPreview}
         componentRef={componentRef}
-        onDownload={handleDownload} 
-        onConfirmOrder={handleConfirmOrder}  
+        onDownload={handleDownload}
+        onConfirmOrder={handleConfirmOrder}
       />
     </CartWrapper>
   );
