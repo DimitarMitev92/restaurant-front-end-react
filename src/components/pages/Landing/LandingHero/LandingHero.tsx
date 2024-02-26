@@ -9,23 +9,32 @@ import imageSrc from "../../../../images/logan-jeffrey-g5DNZ4X6RSc-unsplash.jpg"
 import UnifiedInput from "../../../ui-elements/input";
 import { PulseLoader } from "react-spinners";
 import { useLandingHeroLogic } from "./LandingHero.logic";
+import { LandingHeroProps } from "./LandingHero.static";
 
-export const LandingHero = () => {
-  const { loading, error, selectedLocation, handleChange, options } =
-    useLandingHeroLogic();
+export const LandingHero: React.FC<LandingHeroProps> = ({
+  selectedLocation,
+  setSelectedLocation,
+}) => {
+  const {
+    error,
+    options,
+    isLoading,
+    handleLocationChange,
+    selectedLocationName,
+  } = useLandingHeroLogic(selectedLocation, setSelectedLocation);
 
   return (
     <HeroWrapper>
       <WrapperInfo>
         <HeroTitle>Are you hungry?</HeroTitle>
         <Description>Order something delicious</Description>
-        {loading && <PulseLoader color="#4caf50" size={5} />}
+        {isLoading && <PulseLoader color="var(--color-green)" size={5} />}
         {error && <p>Error fetching locations.</p>}
-        {!loading && !error && (
+        {!isLoading && !error && (
           <UnifiedInput
             type="select"
-            onChange={handleChange}
-            value={selectedLocation}
+            onChange={handleLocationChange}
+            value={selectedLocationName}
             placeholder="Select location"
             name="location"
             options={options || []}
