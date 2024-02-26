@@ -196,8 +196,13 @@ export const ShoppingCart: React.FC = () => {
               <StyledPriceDiv>
                 Total Price: ${totalPrice.toFixed(2)}
               </StyledPriceDiv>
-              <CartButton onClick={handlePreviewInvoice}>
-                Confirm Order
+              <CartButton
+                onClick={handlePreviewInvoice}
+                disabled={totalPrice <= 10}
+              >
+                {totalPrice <= 10
+                  ? "Order must be over 10 USD"
+                  : "Confirm Order"}
               </CartButton>
             </BottomWrapper>
           </>
