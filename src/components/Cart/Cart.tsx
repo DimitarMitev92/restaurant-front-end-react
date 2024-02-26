@@ -35,7 +35,6 @@ export const ShoppingCart: React.FC = () => {
     undefined
   );
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice, setShowInvoice] = useState<boolean>(false);

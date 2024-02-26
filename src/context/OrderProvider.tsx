@@ -1,18 +1,12 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { createContext, useContext, useState } from "react";
 import { IMeal } from "../static/interfaces";
 import { endpointAPI, method } from "../static/endpoints";
 import { fetchDataFromApi } from "../services/fetchDataFromApi";
 
 interface OrderContextProps {
   meals: IMeal[];
-  addMealToBasket: Dispatch<SetStateAction<IMeal[]>>;
+  totalPrice: number;
+  addMealToBasket: (meal: IMeal[] | ((prevState: IMeal[]) => IMeal[])) => void;
   removeMealFromBasket: (mealId: string) => void;
   addAdditionalNoteForMeal: (mealId: string, additionalNote: string) => void;
 }
@@ -28,12 +22,13 @@ export const useOrderContext = () => {
 };
 
 interface OrderProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [meals, setMeals] = useState<IMeal[]>([]);
-  console.log(meals);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
   const getPackagePrice = async (packageId: string) => {
     const url = `${endpointAPI.PACKAGE}/${packageId}`;
     const accessToken = sessionStorage.getItem("access_token");
@@ -47,7 +42,15 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     return packageData;
   };
 
-  const addMealToBasket: Dispatch<SetStateAction<IMeal[]>> = async (
+  const calculateTotalPrice = () => {
+    let total = 0;
+    meals.forEach((meal) => {
+      total += meal.price * meal.count + meal.packagePrice * meal.count;
+    });
+    setTotalPrice(total);
+  };
+
+  const addMealToBasket = async (
     meal: IMeal[] | ((prevState: IMeal[]) => IMeal[])
   ) => {
     const newMeals = typeof meal === "function" ? meal(meals) : meal;
@@ -79,6 +82,8 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
         }
       }
     }
+
+    calculateTotalPrice();
   };
 
   const removeMealFromBasket = (mealId: string) => {
@@ -94,6 +99,8 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
         (meal) => meal.id !== mealId || meal.count >= 1
       );
     });
+
+    calculateTotalPrice();
   };
 
   const addAdditionalNoteForMeal = (mealId: string, additionalNote: string) => {
@@ -104,13 +111,14 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
         }
         return meal;
       });
-      console.log(meals);
+
       return updatedMeals;
     });
   };
 
   const contextValues: OrderContextProps = {
     meals,
+    totalPrice,
     addMealToBasket,
     removeMealFromBasket,
     addAdditionalNoteForMeal,
