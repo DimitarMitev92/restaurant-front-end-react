@@ -71,15 +71,15 @@ export const ShoppingCart: React.FC = () => {
 
   const calculateTotalPrice = () => {
     let total = 0;
-    cartItems.forEach((item) => {
-      total += item.product.price * item.quantity;
+    meals.forEach((meal) => {
+      total += meal.price * meal.count + meal.packagePrice * meal.count;
     });
     setTotalPrice(total);
   };
 
   useEffect(() => {
     calculateTotalPrice();
-  }, [cartItems]);
+  }, [meals]);
 
   const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedAddress = e.target.value;

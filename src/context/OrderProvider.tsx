@@ -65,7 +65,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
           return updatedMeals;
         });
       } else {
-        // If meal with the same ID doesn't exist, add it with count 1
         if (!newMeal.packagePrice) {
           const packageData = await getPackagePrice(newMeal.packageId);
           const updatedMeal = {
