@@ -39,7 +39,7 @@ const Restaurants = () => {
         </HeaderWithInputContainer>
         <CardsContainer>
           {isLoading ? (
-            <PulseLoader color="#4caf50" size={12} />
+            <PulseLoader color="var(--color-green)" size={12} />
           ) : error ? (
             <p>{error}</p>
           ) : restaurants && restaurants.length > 0 ? (

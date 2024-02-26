@@ -1,7 +1,8 @@
-import React, { useEffect, useState, ChangeEvent } from "react";
+import React, { useEffect, useState, ChangeEvent, useRef } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useAddressesByUserId } from "../../hooks/useAddresses";
 import Select from "../ui-elements/select";
+
 import {
   CartWrapper,
   SidebarWrapper,
@@ -11,19 +12,22 @@ import {
   CartLabel,
   CartButton,
   StyledPriceDiv,
-  BottomWrapper,
   OrderMealCardWrapper,
   OrderMealTitle,
   OrderMealButtonsWrapper,
   OrderCartButton,
-  OrderCartCount,
   OrderCartCountWrapper,
+  OrderCartCount,
+  BottomWrapper,
 } from "./Cart.style";
 import { Address, CartItem } from "./Cart.static";
-import Switch from "../ui-elements/switchButton";
-import { useOrderContext } from "../../context/OrderProvider";
-import { IMeal } from "../../static/interfaces";
 import UnifiedInput from "../ui-elements/input";
+import { BillPrintComponent } from "../Bill/BillPrint";
+import { PrintPreviewModal } from "../Bill/Modal";
+import { IMeal } from "../../static/interfaces";
+import { createPDF } from "./Cart.logic";
+import { useOrderContext } from "../../context/OrderProvider";
+import Switch from "../ui-elements/switchButton";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -34,6 +38,9 @@ export const ShoppingCart: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
+  const [showInvoice, setShowInvoice] = useState<boolean>(false);
+  const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
+  const componentRef = useRef<HTMLDivElement>(null);
 
   const { user } = useAuth();
   const { addresses } = useAddressesByUserId(user?.user.id || "");
@@ -108,6 +115,20 @@ export const ShoppingCart: React.FC = () => {
     addAdditionalNoteForMeal(mealId, e.target?.value);
   };
 
+  const handlePreviewInvoice = () => {
+    setShowPrintPreview(true);
+  };
+
+  const handleClosePrintPreview = () => {
+    setShowPrintPreview(false);
+  };
+
+  const handleDownload = () => {
+    const bill = createPDF(cartItems, totalPrice);
+    bill.save("invoice.pdf");
+    handlePreviewInvoice();
+  };
+
   return (
     <CartWrapper>
       <SidebarWrapper>
@@ -175,13 +196,29 @@ export const ShoppingCart: React.FC = () => {
               <StyledPriceDiv>
                 Total Price: ${totalPrice.toFixed(2)}
               </StyledPriceDiv>
-              <CartButton onClick={handleConfirmOrder}>
+              <CartButton onClick={handlePreviewInvoice}>
                 Confirm Order
               </CartButton>
             </BottomWrapper>
           </>
         </SidebarContent>
       </SidebarWrapper>
+      {showInvoice && (
+        <BillPrintComponent
+          isOpen={showPrintPreview}
+          onRequestClose={handleClosePrintPreview}
+          ref={componentRef}
+          cartItems={cartItems}
+          totalPrice={totalPrice}
+        />
+      )}
+      <PrintPreviewModal
+        isOpen={showPrintPreview}
+        onClose={handleClosePrintPreview}
+        componentRef={componentRef}
+        onDownload={handleDownload}
+        onConfirmOrder={handleConfirmOrder}
+      />
     </CartWrapper>
   );
 };
