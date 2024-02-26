@@ -1,4 +1,3 @@
-import { useAuth } from "../../context/AuthProvider";
 import {
   AddButton,
   AdminButtons,
@@ -22,11 +21,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
 import PopUp from "../PopUp/PopUp";
 import { usePopupContext } from "../../context/PopupContext";
-import { rightsUser } from "../../static/endpoints";
 import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
+import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
 
 export const Meal: React.FC<IMealProps> = ({ meal }) => {
-  const { user } = useAuth();
   const { id } = useParams();
 
   const { isUpdateMealPopUpVisible, showUpdateMealPopUp, hideUpdateMealPopUp } =
@@ -43,20 +41,6 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
     hideUpdateMealPopUp();
   };
 
-  let adminBtns;
-  if (user?.user.rights === rightsUser.ADMIN) {
-    adminBtns = (
-      <AdminButtons>
-        <EditButton onClick={() => handlePopUp()}>
-          <IconImage src={editIcon} />
-        </EditButton>
-        <RemoveButton>
-          <IconImage src={trashIcon} />
-        </RemoveButton>
-      </AdminButtons>
-    );
-  }
-
   const addHandler = () => {
     console.log("clicked");
   };
@@ -72,7 +56,16 @@ export const Meal: React.FC<IMealProps> = ({ meal }) => {
           </div>
           <BtnWrapper>
             <AddButton onClick={addHandler}>+</AddButton>
-            {user?.user.rights && adminBtns}
+            <UserRoleHOC>
+              <AdminButtons>
+                <EditButton onClick={() => handlePopUp()}>
+                  <IconImage src={editIcon} />
+                </EditButton>
+                <RemoveButton>
+                  <IconImage src={trashIcon} />
+                </RemoveButton>
+              </AdminButtons>
+            </UserRoleHOC>
           </BtnWrapper>
         </NameAndAddBtn>
         <InfoAndPicture>
