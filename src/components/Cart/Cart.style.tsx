@@ -4,6 +4,8 @@ import { StyledButton } from "../ui-elements/button";
 import InputLabel from "../ui-elements/inputLabel";
 
 export const CartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   position: relative;
   min-height: 100%;
   width: 360px;
@@ -54,7 +56,7 @@ export const SidebarTitle = styled.h2`
 `;
 
 export const SidebarContent = styled.div`
-  padding: 16px;
+  padding: 1rem;
   overflow-y: auto;
 `;
 
@@ -95,7 +97,7 @@ export const CartButton = styled(StyledButton)`
   transition: background-color 0.3s ease;
 
   &:disabled {
-    background-color: red;
+    background-color: var(--color-bright-red);
     cursor: not-allowed;
   }
 
@@ -127,19 +129,26 @@ export const StyledCartInput = styled.div<CartInputProps>`
 
 export const OrderMealCardWrapper = styled.div`
   width: 100%;
-  background-color: var(--color-green);
+  background-color: var(--color-white);
   border-radius: 5px;
-  padding: 0.5em;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  padding: 0.8rem;
   margin-bottom: 0.5em;
 `;
 
 export const OrderMealTitle = styled.h2`
   font-size: 1em;
-  color: var(--color-white);
+  color: var(--color-black);
+`;
+
+export const OrderMealPrices = styled.h3`
+  font-size: 0.8em;
+  color: var(--color-green);
 `;
 
 export const OrderMealButtonsWrapper = styled.div`
   background-color: var(--color-yellow);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,8 +157,8 @@ export const OrderMealButtonsWrapper = styled.div`
 `;
 
 export const OrderCartButton = styled(CartButton)`
-  width: 2.8em;
-  height: 2.8em;
+  width: 2.6em;
+  height: 2.6em;
   border-radius: 50%;
 `;
 
@@ -170,6 +179,10 @@ export const StyledPriceDiv = styled.div`
 export const BottomWrapper = styled.div`
   display: flex;
   position: fixed;
+  margin-top: 20px;
+  background-color: var(--color-white);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
   bottom: 20px;
-  padding: 1em;
+  padding: 1rem;
 `;
