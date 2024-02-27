@@ -1,6 +1,7 @@
 import { RiAddCircleFill } from "react-icons/ri";
 import { RiEditBoxFill } from "react-icons/ri";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import { RiPlayListAddFill } from "react-icons/ri";
 import styled from "styled-components";
 
 export const MealCard = styled.section`
@@ -64,6 +65,15 @@ export const StyledAddCircle = styled(RiAddCircleFill)`
     color: darkgreen;
   }
 `;
+
+export const StyledAddMealButton = styled(RiPlayListAddFill)`
+    font-size: 32px;
+  color: var(--color-green);
+  cursor: pointer;
+  &:hover {
+    color: darkgreen;
+  }
+`
 
 export const StyledEditButton = styled(RiEditBoxFill)`
   font-size: 32px;
