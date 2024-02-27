@@ -53,4 +53,20 @@ export const restaurantService = {
       throw error;
     }
   },
+  deleteRestaurantById: async (restaurantId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const restaurant = await fetchDataFromApi(
+        `${endpointAPI.RESTAURANT}/${restaurantId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting restaurant by  ID"
+      );
+      return restaurant;
+    } catch (error) {
+      console.error("Error deleting restaurant by restaurant  ID.", error);
+      throw error;
+    }
+  },
 };

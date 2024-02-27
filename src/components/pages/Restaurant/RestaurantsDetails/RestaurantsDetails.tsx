@@ -18,7 +18,10 @@ export const RestaurantsDetails = () => {
   const {
     isUpdateMealPopUpVisible,
     isUpdateMenuPopUpVisible,
-    isAddMealPopUpVisible,isDeleteMealPopUpVisible,isDeleteMenuPopUpVisible
+    isAddMealPopUpVisible,
+    isDeleteMealPopUpVisible,
+    isDeleteMenuPopUpVisible,
+    isDeleteRestaurantPopUpVisible,
   } = usePopupContext();
   const { id } = useParams();
   const [restaurantDetails, setRestaurantDetails] =
@@ -51,7 +54,10 @@ export const RestaurantsDetails = () => {
     id,
     isUpdateMealPopUpVisible,
     isUpdateMenuPopUpVisible,
-    isAddMealPopUpVisible,isDeleteMealPopUpVisible,isDeleteMenuPopUpVisible
+    isAddMealPopUpVisible,
+    isDeleteMealPopUpVisible,
+    isDeleteMenuPopUpVisible,
+    isDeleteRestaurantPopUpVisible,
   ]);
 
   if (!restaurantDetails) {
