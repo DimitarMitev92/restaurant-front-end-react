@@ -31,6 +31,7 @@ import Switch from "../ui-elements/switchButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { orderService } from "../../services/orderService";
 import { mainRoute } from "../../static/endpoints";
+import { menuService } from "../../services/menuService";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -41,6 +42,8 @@ export const ShoppingCart: React.FC = () => {
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice, setShowInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
+  const [areMealsFromRestaurant, setAreMealsFromRestaurant] =
+    useState<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
 
   const { user } = useAuth();
@@ -144,6 +147,19 @@ export const ShoppingCart: React.FC = () => {
     handlePreviewInvoice();
   };
 
+  useEffect(() => {
+    const fetchMenusById = async () => {
+      meals.forEach(async (meal) => {
+        const menuData = await menuService.fetchMenuById(meal.menuId);
+        console.log(menuData);
+        if (menuData.restaurantId === id) {
+          return setAreMealsFromRestaurant(true);
+        }
+      });
+    };
+    fetchMenusById();
+  }, []);
+
   return (
     <CartWrapper>
       <SidebarWrapper>
@@ -174,7 +190,8 @@ export const ShoppingCart: React.FC = () => {
                 />
               </>
             )}
-            {meals &&
+            {areMealsFromRestaurant &&
+              meals &&
               meals.map((meal) => {
                 return (
                   <OrderMealCardWrapper key={meal.id}>
@@ -209,7 +226,8 @@ export const ShoppingCart: React.FC = () => {
               })}
             <BottomWrapper>
               <StyledPriceDiv>
-                Total Price: ${totalPrice.toFixed(2)}
+                Total Price: $
+                {areMealsFromRestaurant ? totalPrice.toFixed(2) : 0.0}
               </StyledPriceDiv>
               <CartButton
                 onClick={handlePreviewInvoice}

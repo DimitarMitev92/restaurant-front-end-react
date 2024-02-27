@@ -73,8 +73,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     menuId: string
   ) => {
     const newMeals = typeof meal === "function" ? meal(meals) : meal;
-    console.log("ORDER PROVIDER - MEALS");
-    console.log(meals);
     for (const newMeal of newMeals) {
       const existingMealIndex = meals.findIndex((m) => m.id === newMeal.id);
 
@@ -108,7 +106,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     }
 
     setMeals((updatedMeals) => {
-      console.log(updatedMeals);
       calculateTotalPrice(updatedMeals);
       return updatedMeals;
     });
@@ -120,8 +117,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     count: number
   ) => {
     const newMeals = typeof meal === "function" ? meal(meals) : meal;
-    console.log("ORDER PROVIDER - MEALS");
-    console.log(newMeals);
 
     for (const newMeal of newMeals) {
       const existingMealIndex = meals.findIndex((m) => m.id === newMeal.id);
@@ -156,7 +151,7 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     }
 
     setMeals((updatedMeals) => {
-      console.log(updatedMeals);
+      calculateTotalPrice(updatedMeals);
       return updatedMeals;
     });
   };

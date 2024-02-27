@@ -73,6 +73,7 @@ export const menuService = {
       throw error;
     }
   },
+
   fetchMenusByRestaurantId: async (restaurantId: string) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
