@@ -40,7 +40,6 @@ export interface UserDataFromApi {
 }
 
 export interface UserDataFromApiRefactor {
-  id: any;
   user: {
     id: string;
     firstName: string;

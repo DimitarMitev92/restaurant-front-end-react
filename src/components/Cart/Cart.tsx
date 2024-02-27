@@ -30,7 +30,7 @@ import { useOrderContext } from "../../context/OrderProvider";
 import Switch from "../ui-elements/switchButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { orderService } from "../../services/orderService";
-import { endpointAPI, mainRoute } from "../../static/endpoints";
+import { mainRoute } from "../../static/endpoints";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -85,20 +85,12 @@ export const ShoppingCart: React.FC = () => {
   };
 
   const handleConfirmOrder = async () => {
-    console.log("client id", user?.user.id);
-    console.log("restaurant id", id);
-    console.log("picked method", deliveryMode ? "delivery" : "on-site");
-    console.log("additional info", additionalNoteForOrder);
-    console.log(meals);
-
-    // Ensure clientId and restaurantId have default values if they are undefined
     const clientId = user?.user.id || "";
     const restaurantId = id || "";
 
     const mealsDataRefactor = meals.map((meal) => {
       return { mealId: meal.id, count: meal.count };
     });
-
     const dataForResponseOrder: CreateOrderFormData = {
       clientId: clientId,
       restaurantId: restaurantId,
@@ -106,11 +98,9 @@ export const ShoppingCart: React.FC = () => {
       additionalInfo: additionalNoteForOrder || "",
       meals: mealsDataRefactor,
     };
-
     const orderFromServer = await orderService.createOrder(
       dataForResponseOrder
     );
-    console.log(orderFromServer);
     navigate(`${mainRoute.PROFILE_ORDERS_HISTORY}`);
   };
 

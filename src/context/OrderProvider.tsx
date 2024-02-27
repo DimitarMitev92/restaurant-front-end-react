@@ -18,6 +18,11 @@ interface OrderContextProps {
   updateDeliveryMode: (mode: boolean) => void;
   updateSelectedAddressId: (addressId: string) => void;
   addAdditionalNoteForOrder: (additionalNote: string) => void;
+  addHistoryOrderToBasket: (
+    meal: IMeal[] | ((prevState: IMeal[]) => IMeal[]),
+    menuId: string,
+    count: number
+  ) => void;
 }
 
 const OrderContext = createContext<OrderContextProps | undefined>(undefined);
@@ -68,7 +73,8 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     menuId: string
   ) => {
     const newMeals = typeof meal === "function" ? meal(meals) : meal;
-
+    console.log("ORDER PROVIDER - MEALS");
+    console.log(meals);
     for (const newMeal of newMeals) {
       const existingMealIndex = meals.findIndex((m) => m.id === newMeal.id);
 
@@ -102,7 +108,55 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     }
 
     setMeals((updatedMeals) => {
+      console.log(updatedMeals);
       calculateTotalPrice(updatedMeals);
+      return updatedMeals;
+    });
+  };
+
+  const addHistoryOrderToBasket = async (
+    meal: IMeal[] | ((prevState: IMeal[]) => IMeal[]),
+    menuId: string,
+    count: number
+  ) => {
+    const newMeals = typeof meal === "function" ? meal(meals) : meal;
+    console.log("ORDER PROVIDER - MEALS");
+    console.log(newMeals);
+
+    for (const newMeal of newMeals) {
+      const existingMealIndex = meals.findIndex((m) => m.id === newMeal.id);
+
+      if (existingMealIndex !== -1) {
+        setMeals((prevMeals) => {
+          const updatedMeals = [...prevMeals];
+          updatedMeals[existingMealIndex] = {
+            ...updatedMeals[existingMealIndex],
+            count: count,
+          };
+          return updatedMeals;
+        });
+      } else {
+        if (!newMeal.packagePrice) {
+          const packageData = await getPackagePrice(newMeal.packageId);
+          const updatedMeal = {
+            ...newMeal,
+            packagePrice: packageData.price,
+            additionalNote: "",
+            menuId: menuId,
+            count: count,
+          };
+          setMeals((prevMeals) => [...prevMeals, updatedMeal]);
+        } else {
+          setMeals((prevMeals) => [
+            ...prevMeals,
+            { ...newMeal, menuId: menuId, count: count },
+          ]);
+        }
+      }
+    }
+
+    setMeals((updatedMeals) => {
+      console.log(updatedMeals);
       return updatedMeals;
     });
   };
@@ -142,7 +196,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
 
   const addAdditionalNoteForOrder = (additionalNote: string) => {
     setAdditionalNoteForOrder(additionalNote);
-    console.log(addAdditionalNoteForOrder);
   };
 
   const updateDeliveryMode = (mode: boolean) => {
@@ -165,6 +218,7 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     updateDeliveryMode,
     updateSelectedAddressId,
     addAdditionalNoteForOrder,
+    addHistoryOrderToBasket,
   };
 
   return (
