@@ -296,7 +296,7 @@ export interface CreatePackageFormValues {
 }
 
 export interface CreateMenuFormProps {
-  updatedId: string;
+  updatedId?: string;
   onSubmit: (CreateMenuFormData: CreateMenuFormData) => void;
 }
 
