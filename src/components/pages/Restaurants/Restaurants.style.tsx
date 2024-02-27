@@ -1,18 +1,37 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 85.8vh;
-  padding: 16px;
+display: flex;
+    flex-direction: column;
+    padding: 100px 16px;
+    height: 100vh;
+    overflow: scroll;
+    &::-webkit-scrollbar {
+    width: 6px;
+  }
 
-  @media (max-width: 768px) {
+  &::-webkit-scrollbar-track {
+    margin: 4px 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(196, 196, 196);
+  }
+    
+
+
+  /* @media (max-width: 768px) {
     padding: 10px;
-  }
+  } */
 
-  @media (min-width: 769px) and (max-width: 1024px) {
+  /* @media (min-width: 769px) and (max-width: 1024px) {
     padding: 15px;
-  }
+  } */
 `;
 
 export const CardsContainer = styled.div`
@@ -21,6 +40,7 @@ export const CardsContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  width: calc(100% -20px);
   @media (max-width: 768px) {
     flex-direction: column;
   }

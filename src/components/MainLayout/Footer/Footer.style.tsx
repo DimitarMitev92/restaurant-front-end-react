@@ -5,8 +5,11 @@ export const FooterDiv = styled.div`
   width: 100%;
   padding: 1em;
   display: flex;
+  position: fixed;
   justify-content: center;
   font-size: 20px;
+  bottom: 0;
+  z-index: 5;
 `;
 
 export const FooterText = styled.p`

@@ -4,7 +4,7 @@ import imageSrc from "../../../assets/Big_Bite__1_-removebg-preview.png";
 const NotFoundPage = () => {
   return (
     <Container>
-      <Heading>404: Page Not Found</Heading>
+      <Heading>Page Not Found</Heading>
       <Image src={imageSrc} alt="foodfly with text" />
       <div>
         <StyledLink to="/">Go Home</StyledLink>

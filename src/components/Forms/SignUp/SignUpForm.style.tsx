@@ -4,12 +4,8 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1500px) {
-    height: 85.8vh;
-  }
-  @media screen and (max-width: 650px) {
-    height: 87vh;
-  }
+  padding-top: 85px;
+  height: 100%;
 `;
 
 export const FormDiv = styled.form`

@@ -19,6 +19,22 @@ export const PopUpContainer = styled.div`
   z-index: 100000;
   box-shadow: 0 4px 8px rgba(0.5, 0.5, 0.5, 0.5);
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 4px 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(196, 196, 196);
+  }
 `;
 
 export const CancelButtonPopup = styled.button`
@@ -31,4 +47,12 @@ export const CancelButtonPopup = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+`;
+export const PopUpOverlay = styled.div`
+  background-color: #5c5a5a4f;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
+  inset: 0px;
 `;

@@ -10,6 +10,8 @@ export const Navbar = styled.nav`
   background: var(--color-yellow);
   padding: 1rem 2rem;
   font-size: 20px;
+  position: fixed;
+  z-index: 6;
 
   @media screen and (max-width: 1150px) {
     .app__navbar-links {
@@ -24,6 +26,7 @@ export const Navbar = styled.nav`
   @media screen and (max-width: 650px) {
     padding: 1rem;
   }
+ 
 `;
 
 export const LogoContainer = styled.div`
