@@ -8,6 +8,7 @@ interface OrderContextProps {
   totalPrice: number;
   deliveryMode: boolean;
   selectedAddressId: string;
+  additionalNoteForOrder: string;
   addMealToBasket: (
     meal: IMeal[] | ((prevState: IMeal[]) => IMeal[]),
     menuId: string
@@ -16,6 +17,7 @@ interface OrderContextProps {
   addAdditionalNoteForMeal: (mealId: string, additionalNote: string) => void;
   updateDeliveryMode: (mode: boolean) => void;
   updateSelectedAddressId: (addressId: string) => void;
+  addAdditionalNoteForOrder: (additionalNote: string) => void;
 }
 
 const OrderContext = createContext<OrderContextProps | undefined>(undefined);
@@ -37,6 +39,8 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
   const [selectedAddressId, setSelectedAddressId] = useState<string>("");
+  const [additionalNoteForOrder, setAdditionalNoteForOrder] =
+    useState<string>("");
 
   const getPackagePrice = async (packageId: string) => {
     const url = `${endpointAPI.PACKAGE}/${packageId}`;
@@ -136,6 +140,11 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     });
   };
 
+  const addAdditionalNoteForOrder = (additionalNote: string) => {
+    setAdditionalNoteForOrder(additionalNote);
+    console.log(addAdditionalNoteForOrder);
+  };
+
   const updateDeliveryMode = (mode: boolean) => {
     setDeliveryMode(mode);
   };
@@ -149,11 +158,13 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     totalPrice,
     deliveryMode,
     selectedAddressId,
+    additionalNoteForOrder,
     addMealToBasket,
     removeMealFromBasket,
     addAdditionalNoteForMeal,
     updateDeliveryMode,
     updateSelectedAddressId,
+    addAdditionalNoteForOrder,
   };
 
   return (
