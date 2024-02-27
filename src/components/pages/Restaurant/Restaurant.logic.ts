@@ -5,6 +5,7 @@ import { routes } from "../../../routes/routes.static";
 import { mealService } from "../../../services/mealService";
 import { clearFilter } from "../../../static/endpoints";
 import { IRestaurantsDetails, Menu } from "../../../static/interfaces";
+import { useRestaurant } from "../../../hooks/useRestaurant";
 
 export const useRestaurantLogic = () => {
   const {
@@ -23,7 +24,7 @@ export const useRestaurantLogic = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const { restaurant } = useRestaurant(id!);
   const [restaurantDetails, setRestaurantDetails] =
     useState<IRestaurantsDetails | null>(null);
 
@@ -88,6 +89,9 @@ export const useRestaurantLogic = () => {
     handleCancelDelete,
     handleCancelRestaurant,
     handleUpdateRestaurant,
-    handleDeleteRestaurant,allMenus,isDeleteRestaurantPopUpVisible,isUpdateRestaurantPopUpVisible
+    handleDeleteRestaurant,
+    allMenus,
+    isDeleteRestaurantPopUpVisible,
+    isUpdateRestaurantPopUpVisible,restaurant
   };
 };

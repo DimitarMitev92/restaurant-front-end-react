@@ -6,10 +6,10 @@ export const MenuWrapper = styled.section`
   justify-content: center;
 `;
 
-export const MenuName = styled.h1`
+export const MenuName = styled.h2`
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-right: auto;
-  margin-top: 2rem;
+  padding: 30px;
 `;

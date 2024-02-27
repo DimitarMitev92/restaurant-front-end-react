@@ -1,6 +1,11 @@
 import { Menu } from "../../../static/interfaces";
 import { clearFilter } from "../../../static/endpoints";
-import { RestaurantWrapper } from "./Restaurant.style";
+import {
+  AdminButtonsContainer,
+  RestaurantNameContainer,
+  RestaurantWrapper,
+  WorkingHoursContainer,
+} from "./Restaurant.style";
 import {
   FilterBtnWrapper,
   FilterWrapper,
@@ -10,11 +15,11 @@ import { MenuFilter } from "../../Menu/MenuFIlter/MenuFilter";
 import { MealHolder } from "../../Meal/MealHolder";
 import { ShoppingCart } from "../../Cart/Cart";
 import UserRoleHOC from "../../UserRoleHOC/UserRoleHOC";
-import Button from "../../ui-elements/button";
 import DeleteRestaurantPopUp from "../../PopUp/DeleteRestaurantPopUp";
 import { UpdateRestaurant } from "../../Forms/UpdateRestaurant/UpdateRestaurant";
 import PopUp from "../../PopUp/PopUp";
 import { useRestaurantLogic } from "./Restaurant.logic";
+import { StyledEditButton, StyledRemoveButton } from "../../Meal/Meal.style";
 
 export const Restaurant = () => {
   const {
@@ -28,6 +33,7 @@ export const Restaurant = () => {
     allMenus,
     isDeleteRestaurantPopUpVisible,
     isUpdateRestaurantPopUpVisible,
+    restaurant,
   } = useRestaurantLogic();
 
   if (!restaurantDetails) {
@@ -37,19 +43,23 @@ export const Restaurant = () => {
     <>
       <RestaurantWrapper>
         <FilterWrapper>
+          <RestaurantNameContainer>
+            {restaurant.name}
+            <AdminButtonsContainer>
+              <UserRoleHOC>
+                <StyledEditButton
+                  onClick={handleUpdateRestaurant}
+                ></StyledEditButton>
+                <StyledRemoveButton
+                  onClick={handleDeleteRestaurant}
+                ></StyledRemoveButton>
+              </UserRoleHOC>
+            </AdminButtonsContainer>
+          </RestaurantNameContainer>
+          <WorkingHoursContainer>
+            Working hours: {restaurant.openHour} - {restaurant.closeHour}
+          </WorkingHoursContainer>
           <FilterBtnWrapper>
-            <UserRoleHOC>
-              <Button
-                label="Delete Restaurant"
-                color="var(--color-red)"
-                onClick={handleDeleteRestaurant}
-              ></Button>
-              <Button
-                label="Update Restaurant"
-                color="var(--color-green)"
-                onClick={handleUpdateRestaurant}
-              ></Button>
-            </UserRoleHOC>
             <ClearAllFilter type={clearFilter.all} filter={filter} />
             {allMenus &&
               allMenus.map((menu: Menu) => {
