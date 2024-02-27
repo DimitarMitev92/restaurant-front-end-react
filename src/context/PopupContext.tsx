@@ -19,6 +19,9 @@ interface PopupContextProps {
   isDeleteRestaurantPopUpVisible: boolean;
   showDeleteRestaurantPopUp: () => void;
   hideDeleteRestaurantPopUp: () => void;
+  isUpdateRestaurantPopUpVisible: boolean;
+  showUpdateRestaurantPopUp: () => void;
+  hideUpdateRestaurantPopUp: () => void;
 }
 
 const PopupContext = createContext<PopupContextProps | undefined>(undefined);
@@ -49,6 +52,9 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
   const [isDeleteRestaurantPopUpVisible, setIsDeleteRestaurantPopUpVisible] =
     useState(false);
 
+  const [isUpdateRestaurantPopUpVisible, setIsUpdateRestaurantPopUpVisible] =
+    useState(false);
+
   const showUpdateMealPopUp = () => {
     setIsUpdateMealPopUpVisible(true);
   };
@@ -70,11 +76,18 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
   const hideDeleteMenuPopUp = () => setIsDeleteMenuPopUpVisible(false);
   const showDeleteMealPopUp = () => setIsDeleteMealPopUpVisible(true);
   const hideDeleteMealPopUp = () => setIsDeleteMealPopUpVisible(false);
-  const showDeleteRestaurantPopUp = () => setIsDeleteRestaurantPopUpVisible(true);
-  const hideDeleteRestaurantPopUp = () => setIsDeleteRestaurantPopUpVisible(false);
+  const showDeleteRestaurantPopUp = () =>
+    setIsDeleteRestaurantPopUpVisible(true);
+  const hideDeleteRestaurantPopUp = () =>
+    setIsDeleteRestaurantPopUpVisible(false);
 
+  const showUpdateRestaurantPopUp = () => {
+    setIsUpdateRestaurantPopUpVisible(true);
+  };
 
-
+  const hideUpdateRestaurantPopUp = () => {
+    setIsUpdateRestaurantPopUpVisible(false);
+  };
   const contextValues: PopupContextProps = {
     isUpdateMealPopUpVisible,
     showUpdateMealPopUp,
@@ -94,6 +107,9 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
     isDeleteRestaurantPopUpVisible,
     showDeleteRestaurantPopUp,
     hideDeleteRestaurantPopUp,
+    isUpdateRestaurantPopUpVisible,
+    showUpdateRestaurantPopUp,
+    hideUpdateRestaurantPopUp,
   };
 
   return (
