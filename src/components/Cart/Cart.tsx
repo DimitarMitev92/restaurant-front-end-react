@@ -24,10 +24,13 @@ import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/input";
 import { BillPrintComponent } from "../Bill/BillPrint";
 import { PrintPreviewModal } from "../Bill/Modal";
-import { IMeal } from "../../static/interfaces";
+import { CreateOrderFormData, IMeal } from "../../static/interfaces";
 import { createPDF } from "./Cart.logic";
 import { useOrderContext } from "../../context/OrderProvider";
 import Switch from "../ui-elements/switchButton";
+import { useNavigate, useParams } from "react-router-dom";
+import { orderService } from "../../services/orderService";
+import { endpointAPI, mainRoute } from "../../static/endpoints";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -41,16 +44,20 @@ export const ShoppingCart: React.FC = () => {
   const componentRef = useRef<HTMLDivElement>(null);
 
   const { user } = useAuth();
+  const { id } = useParams();
   const { addresses } = useAddressesByUserId(user?.user.id || "");
   const {
     meals,
     addMealToBasket,
     removeMealFromBasket,
     addAdditionalNoteForMeal,
+    additionalNoteForOrder,
     totalPrice,
     updateDeliveryMode,
     updateSelectedAddressId,
   } = useOrderContext();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -77,8 +84,34 @@ export const ShoppingCart: React.FC = () => {
     setSelectedAddress(undefined);
   };
 
-  const handleConfirmOrder = () => {
-    // TODO: Submit order implementation
+  const handleConfirmOrder = async () => {
+    console.log("client id", user?.user.id);
+    console.log("restaurant id", id);
+    console.log("picked method", deliveryMode ? "delivery" : "on-site");
+    console.log("additional info", additionalNoteForOrder);
+    console.log(meals);
+
+    // Ensure clientId and restaurantId have default values if they are undefined
+    const clientId = user?.user.id || "";
+    const restaurantId = id || "";
+
+    const mealsDataRefactor = meals.map((meal) => {
+      return { mealId: meal.id, count: meal.count };
+    });
+
+    const dataForResponseOrder: CreateOrderFormData = {
+      clientId: clientId,
+      restaurantId: restaurantId,
+      pickMethod: deliveryMode ? "delivery" : "on-site",
+      additionalInfo: additionalNoteForOrder || "",
+      meals: mealsDataRefactor,
+    };
+
+    const orderFromServer = await orderService.createOrder(
+      dataForResponseOrder
+    );
+    console.log(orderFromServer);
+    navigate(`${mainRoute.PROFILE_ORDERS_HISTORY}`);
   };
 
   const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
