@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   text-align: center;
-  margin-top: 50px;
+  padding: 100px;
 `;
 
 export const Heading = styled.h1`

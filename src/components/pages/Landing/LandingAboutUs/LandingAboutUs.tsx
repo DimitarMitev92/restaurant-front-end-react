@@ -1,3 +1,5 @@
+import { StyledContainer } from "./LandingAboutUs.style";
+
 export const LandingAboutUs = () => {
-  return <div>LandingAboutUs</div>;
+  return <StyledContainer>LandingAboutUs</StyledContainer>;
 };

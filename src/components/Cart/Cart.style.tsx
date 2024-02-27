@@ -7,8 +7,10 @@ export const CartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 100%;
+  height: 100vh;
   width: 360px;
+  padding: 30px;
+  padding-top: 100px;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -16,16 +18,17 @@ export const CartWrapper = styled.div`
 `;
 
 export const SidebarWrapper = styled.div`
-  top: 85px;
+  position: fixed;
+  top: 100px;
+  right: 0;
   width: 320px;
-  height: 90%;
+  height: 75vh;
   background: var(--color-white);
-  z-index: 1000;
+  z-index: 3;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border-radius: 7px;
   transform: translateX(0);
-  padding: 5px;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -56,8 +59,26 @@ export const SidebarTitle = styled.h2`
 `;
 
 export const SidebarContent = styled.div`
-  padding: 1rem;
+  padding: 20px;
+  padding-bottom: 40px;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 4px 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(196, 196, 196);
+  }
+  height: 88%;
 `;
 
 export const FlexContainer = styled.div`
@@ -178,7 +199,6 @@ export const StyledPriceDiv = styled.div`
 
 export const BottomWrapper = styled.div`
   display: flex;
-  position: fixed;
   margin-top: 20px;
   background-color: var(--color-white);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
