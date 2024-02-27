@@ -38,3 +38,17 @@ export interface CartItem {
   product: Meal;
   quantity: number;
 }
+
+export interface AutoTableOptions {
+  startY?: number;
+  head?: Array<Array<string>>;
+  body?: Array<Array<string | number>>;
+  theme?: string;
+  styles?: {
+    fontSize?: number;
+    headStyles?: {
+      fillColor: string;
+    };
+  };
+ 
+}
