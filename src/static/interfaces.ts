@@ -296,15 +296,25 @@ export interface CreatePackageFormValues {
 }
 
 export interface CreateMenuFormProps {
-  updatedId?: string;
+  updatedId: string;
   onSubmit: (CreateMenuFormData: CreateMenuFormData) => void;
 }
-
+export interface CreateRestaurantFormProps {
+  updatedId: string;
+  onSubmit: (CreateRestaurantFormData: CreateRestaurantFormData) => void;
+}
 export interface CreateMenuFormData {
   type: string;
   restaurantId: string;
 }
 
+export interface CreateRestaurantFormData {
+  name: string;
+  locationId: string;
+  imageUrl: string;
+  openHour: string;
+  closeHour: string;
+}
 export interface CreateMenuFormData {
   type: string;
   restaurantId: string;
@@ -330,6 +340,14 @@ export interface CreateCategoryFormData {
 }
 export interface UpdateCategoryFormData {
   type: string;
+}
+
+export interface UpdateRestaurantFormData {
+  name?: string;
+  location?: string;
+  image?: string;
+  openHour?: string;
+  closeHour?: string;
 }
 
 export interface CreateMealFormData {
