@@ -6,7 +6,8 @@ export const useMenus = () => {
     data: menus,
     isLoading,
     isError,
+    refetch: fetchMenus,
   } = useQuery("menus", menuService.fetchMenus, { retry: 1 });
 
-  return { menus, loading: isLoading, error: isError };
+  return { menus, fetchMenus, loading: isLoading, error: isError };
 };
