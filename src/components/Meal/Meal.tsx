@@ -1,9 +1,6 @@
 import {
-  AddButton,
   AdminButtons,
   BtnWrapper,
-  EditButton,
-  IconImage,
   Img,
   Info,
   InfoAndPicture,
@@ -11,11 +8,11 @@ import {
   MealPicture,
   NameAndAddBtn,
   Price,
-  RemoveButton,
+  StyledAddCircle,
+  StyledEditButton,
+  StyledRemoveButton,
 } from "./Meal.style";
 
-import trashIcon from "../../assets/trash-xmark.png";
-import editIcon from "../../assets/edit.png";
 import { IMealProps } from "../../static/interfaces";
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
@@ -24,14 +21,22 @@ import { usePopupContext } from "../../context/PopupContext";
 import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
 import { useOrderContext } from "../../context/OrderProvider";
+import DeleteMealPopUp from "../PopUp/DeleteMealPopUp";
+import DeleteMealMessageForm from "../Forms/DeleteMealMessageForm/DeleteMealMessageForm";
 
 export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
   const { id } = useParams();
 
   const { addMealToBasket } = useOrderContext();
 
-  const { isUpdateMealPopUpVisible, showUpdateMealPopUp, hideUpdateMealPopUp } =
-    usePopupContext();
+  const {
+    isUpdateMealPopUpVisible,
+    showUpdateMealPopUp,
+    hideUpdateMealPopUp,
+    hideDeleteMealPopUp,
+    showDeleteMealPopUp,
+    isDeleteMealPopUpVisible,
+  } = usePopupContext();
 
   const navigate = useNavigate();
 
@@ -48,6 +53,15 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
     addMealToBasket([meal], menuId);
   };
 
+  const handleDeleteMeal = () => {
+    showDeleteMealPopUp();
+    navigate(`${routes.RESTAURANTS}/${id}/delete/${meal.id}`);
+  };
+
+  const handleCancelDelete = () => {
+    hideDeleteMealPopUp();
+  };
+
   return (
     <>
       <MealCard>
@@ -58,15 +72,15 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
             <span>{meal.weight}g</span>
           </div>
           <BtnWrapper>
-            <AddButton onClick={addHandler}>+</AddButton>
+            <StyledAddCircle onClick={addHandler}></StyledAddCircle>
             <UserRoleHOC>
               <AdminButtons>
-                <EditButton onClick={() => handlePopUp()}>
-                  <IconImage src={editIcon} />
-                </EditButton>
-                <RemoveButton>
-                  <IconImage src={trashIcon} />
-                </RemoveButton>
+                <StyledEditButton
+                  onClick={() => handlePopUp()}
+                ></StyledEditButton>
+                <StyledRemoveButton
+                  onClick={() => handleDeleteMeal()}
+                ></StyledRemoveButton>
               </AdminButtons>
             </UserRoleHOC>
           </BtnWrapper>
@@ -81,6 +95,12 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
       </MealCard>
       {isUpdateMealPopUpVisible && (
         <PopUp onCancel={handleCancel} UpdateForm={UpdateMeal} />
+      )}
+      {isDeleteMealPopUpVisible && (
+        <DeleteMealPopUp
+          onCancel={handleCancelDelete}
+          deleteMessage={DeleteMealMessageForm}
+        />
       )}
     </>
   );

@@ -1,3 +1,6 @@
+import { RiAddCircleFill } from "react-icons/ri";
+import { RiEditBoxFill } from "react-icons/ri";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 import styled from "styled-components";
 
 export const MealCard = styled.section`
@@ -53,44 +56,29 @@ export const Img = styled.img`
   border-radius: 8px;
 `;
 
-export const AddButton = styled.button`
-  all: unset;
-  border-radius: 50%;
-  background-color: var(--color-gray);
-  height: 2.5rem;
-  width: 2.5rem;
-  text-align: center;
-  font-size: 2rem;
-  color: var(--color-black);
+export const StyledAddCircle = styled(RiAddCircleFill)`
+  font-size: 32px;
+  color: var(--color-green);
   cursor: pointer;
-
   &:hover {
-    background-color: var(--color-white-smoke);
-  }
-
-  &:active {
-    background-color: var(--color-dark-green);
+    color: darkgreen;
   }
 `;
 
-export const EditButton = styled.button`
-  all: unset;
-  border-radius: 50%;
-  background-color: var(--color-grey);
-  height: 2.5rem;
-  width: 2.5rem;
-  text-align: center;
-  font-size: 2rem;
-  color: var(--color-black);
-
+export const StyledEditButton = styled(RiEditBoxFill)`
+  font-size: 32px;
+  color: var(--color-yellow);
   cursor: pointer;
-
   &:hover {
-    background-color: var(--color-white-smoke);
+    color: var(--color-dark-yellow);
   }
-
-  &:active {
-    background-color: var(--color-yellow);
+`;
+export const StyledRemoveButton = styled(RiDeleteBin6Fill)`
+  font-size: 32px;
+  color: var(--color-red);
+  cursor: pointer;
+  &:hover {
+    color: var(--color-bright-red);
   }
 `;
 
@@ -118,6 +106,7 @@ export const RemoveButton = styled.button`
     background-color: var(--color-bright-red);
   }
 `;
+
 
 export const BtnWrapper = styled.div`
   display: flex;
