@@ -19,7 +19,7 @@ export const CartWrapper = styled.div`
 
 export const SidebarWrapper = styled.div`
   position: fixed;
-  top: 100px;
+  top: 85px;
   right: 0;
   width: 320px;
   height: 75vh;
@@ -32,14 +32,14 @@ export const SidebarWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    height: auto;
-    position: fixed;
+    max-height: 20em;
+    position: relative;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     transform: none;
-    box-shadow: none;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   }
 `;
 

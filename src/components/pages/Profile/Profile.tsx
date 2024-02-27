@@ -25,7 +25,7 @@ export const Profile = () => {
             <Button
               key={formName}
               label={label}
-              color="--color-green"
+              color="var(--color-green)"
               onClick={() => handleButtonClick(formName, path)}
             />
           ))}

@@ -71,8 +71,8 @@ export const Restaurant = () => {
               return <MealHolder key={menu.id} menu={menu} />;
             })}
           {menus && menus.length === 0 && <div>No menus found</div>}
+          <ShoppingCart />
         </FilterWrapper>
-        <ShoppingCart />
       </RestaurantWrapper>
       {isDeleteRestaurantPopUpVisible && (
         <DeleteRestaurantPopUp onCancel={handleCancelDelete} />
