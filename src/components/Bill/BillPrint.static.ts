@@ -20,4 +20,6 @@ export interface BillPrintComponentProps {
   onRequestClose: () => void;
   meals: IMeal[];
   totalPrice: number;
+  deliveryMode: boolean;
+  selectedAddressId: string;
 }

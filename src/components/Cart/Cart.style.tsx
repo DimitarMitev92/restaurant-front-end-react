@@ -3,7 +3,6 @@ import { CartInputProps, SwitchButtonProps } from "./Cart.static";
 import { StyledButton } from "../ui-elements/button";
 import InputLabel from "../ui-elements/inputLabel";
 
-
 export const CartWrapper = styled.div`
   position: relative;
   min-height: 100%;
@@ -65,8 +64,10 @@ export const FlexContainer = styled.div`
 `;
 
 export const SwitchButton = styled.button<SwitchButtonProps>`
-  background-color: ${(props) => (props.active ? "var(--color-green)" : "var(--color-yellow)")};
-  color: ${(props) => (props.active ? "var(--color-white)" : "var(--color-black)")};
+  background-color: ${(props) =>
+    props.active ? "var(--color-green)" : "var(--color-yellow)"};
+  color: ${(props) =>
+    props.active ? "var(--color-white)" : "var(--color-black)"};
   padding: 10px 15px;
   border: none;
   border-radius: 2px;
@@ -74,7 +75,8 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => (props.active ? "var(--color-green)" : "var(--color-yellow)")};
+    background-color: ${(props) =>
+      props.active ? "var(--color-green)" : "var(--color-yellow)"};
   }
 
   @media (max-width: 768px) {
@@ -91,6 +93,11 @@ export const CartButton = styled(StyledButton)`
   border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  &:disabled {
+    background-color: red;
+    cursor: not-allowed;
+  }
 
   @media (max-width: 768px) {
     width: 100%;

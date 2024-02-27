@@ -7,6 +7,25 @@ import {
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
 export const addressService = {
+  fetchAddressByUd: async (addressId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+
+      const address = await fetchDataFromApi(
+        `${endpointAPI.ADDRESS}/${addressId}`,
+        accessToken,
+        method.GET,
+        null,
+        "Error fetching address"
+      );
+
+      return address;
+    } catch (error) {
+      console.error(`Error fetching address`);
+      throw error;
+    }
+  },
+
   fetchAddresses: async () => {
     try {
       const accessToken = sessionStorage.getItem("access_token");

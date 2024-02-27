@@ -6,12 +6,16 @@ import { fetchDataFromApi } from "../services/fetchDataFromApi";
 interface OrderContextProps {
   meals: IMeal[];
   totalPrice: number;
+  deliveryMode: boolean;
+  selectedAddressId: string;
   addMealToBasket: (
     meal: IMeal[] | ((prevState: IMeal[]) => IMeal[]),
     menuId: string
   ) => void;
   removeMealFromBasket: (mealId: string) => void;
   addAdditionalNoteForMeal: (mealId: string, additionalNote: string) => void;
+  updateDeliveryMode: (mode: boolean) => void;
+  updateSelectedAddressId: (addressId: string) => void;
 }
 
 const OrderContext = createContext<OrderContextProps | undefined>(undefined);
@@ -31,6 +35,8 @@ interface OrderProviderProps {
 export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [meals, setMeals] = useState<IMeal[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
+  const [selectedAddressId, setSelectedAddressId] = useState<string>("");
 
   const getPackagePrice = async (packageId: string) => {
     const url = `${endpointAPI.PACKAGE}/${packageId}`;
@@ -130,12 +136,24 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     });
   };
 
+  const updateDeliveryMode = (mode: boolean) => {
+    setDeliveryMode(mode);
+  };
+
+  const updateSelectedAddressId = (addressId: string) => {
+    setSelectedAddressId(addressId);
+  };
+
   const contextValues: OrderContextProps = {
     meals,
     totalPrice,
+    deliveryMode,
+    selectedAddressId,
     addMealToBasket,
     removeMealFromBasket,
     addAdditionalNoteForMeal,
+    updateDeliveryMode,
+    updateSelectedAddressId,
   };
 
   return (

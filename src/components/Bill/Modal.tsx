@@ -11,7 +11,8 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
   onDownload,
   onConfirmOrder,
 }) => {
-  const { meals, totalPrice } = useOrderContext();
+  const { meals, totalPrice, deliveryMode, selectedAddressId } =
+    useOrderContext();
 
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onClose}>
@@ -21,6 +22,8 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
         onRequestClose={onClose}
         meals={meals}
         totalPrice={totalPrice}
+        deliveryMode={deliveryMode}
+        selectedAddressId={selectedAddressId}
       />
       <ButtonDiv>
         <CartButton onClick={onConfirmOrder}>Confirm Order</CartButton>

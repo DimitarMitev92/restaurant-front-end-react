@@ -48,6 +48,8 @@ export const ShoppingCart: React.FC = () => {
     removeMealFromBasket,
     addAdditionalNoteForMeal,
     totalPrice,
+    updateDeliveryMode,
+    updateSelectedAddressId,
   } = useOrderContext();
 
   useEffect(() => {
@@ -104,6 +106,9 @@ export const ShoppingCart: React.FC = () => {
 
   const handlePreviewInvoice = () => {
     setShowPrintPreview(true);
+
+    updateDeliveryMode(deliveryMode);
+    updateSelectedAddressId(selectedAddressId);
   };
 
   const handleClosePrintPreview = () => {
@@ -185,10 +190,14 @@ export const ShoppingCart: React.FC = () => {
               </StyledPriceDiv>
               <CartButton
                 onClick={handlePreviewInvoice}
-                disabled={totalPrice <= 10}
+                disabled={
+                  totalPrice <= 10 || (deliveryMode && !selectedAddressId)
+                }
               >
                 {totalPrice <= 10
                   ? "Order must be over 10 USD"
+                  : deliveryMode && !selectedAddressId
+                  ? "Please select an address"
                   : "Confirm Order"}
               </CartButton>
             </BottomWrapper>
@@ -202,6 +211,8 @@ export const ShoppingCart: React.FC = () => {
           ref={componentRef}
           meals={meals}
           totalPrice={totalPrice}
+          deliveryMode={deliveryMode}
+          selectedAddressId={selectedAddressId}
         />
       )}
       <PrintPreviewModal
