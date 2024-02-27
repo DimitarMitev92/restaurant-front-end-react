@@ -25,7 +25,7 @@ import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
 import { useOrderContext } from "../../context/OrderProvider";
 
-export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
+export const Meal: React.FC<IMealProps> = ({ meal}) => {
   const { id } = useParams();
 
   const { addMealToBasket } = useOrderContext();
@@ -45,7 +45,7 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
   };
 
   const addHandler = () => {
-    addMealToBasket([meal], menuId);
+    addMealToBasket([meal]);
   };
 
   return (

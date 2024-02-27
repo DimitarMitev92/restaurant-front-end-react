@@ -82,9 +82,14 @@ export const ShoppingCart: React.FC = () => {
   const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedAddress = e.target.value;
 
+    console.log("Addresses:", addresses);
+    console.log("Selected Address:", selectedAddress);
+
     const [{ id }] = addresses.filter(
       (ad: Address) => ad.address === selectedAddress
     );
+
+    console.log("Selected Address ID:", id);
 
     setSelectedAddressId(id);
     setSelectedAddress(e.target.value);
@@ -115,7 +120,8 @@ export const ShoppingCart: React.FC = () => {
     bill.save("invoice.pdf");
     handlePreviewInvoice();
   };
-
+  console.log(deliveryMode);
+  console.log();
   return (
     <CartWrapper>
       <SidebarWrapper>
@@ -175,6 +181,7 @@ export const ShoppingCart: React.FC = () => {
                       name="additionalNote"
                       onChange={(e) => onChangeAdditionalNote(meal.id, e)}
                       placeholder="Additional note"
+                      value={selectedAddressId}
                     />
                   </OrderMealCardWrapper>
                 );
