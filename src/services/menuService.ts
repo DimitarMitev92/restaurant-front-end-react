@@ -90,7 +90,7 @@ export const menuService = {
       throw error;
     }
   },
-  fetchRestaurantIdByMenuId : async (menuId:string) => {
+  fetchRestaurantIdByMenuId: async (menuId: string) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
       const restaurantId = await fetchDataFromApi(
@@ -105,5 +105,21 @@ export const menuService = {
       console.error("Error fetching restaurants by menu ID.", error);
       throw error;
     }
-  }
+  },
+  deleteMenuById: async (menuId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const menu = await fetchDataFromApi(
+        `${endpointAPI.MENU}/${menuId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting menu by  ID"
+      );
+      return menu;
+    } catch (error) {
+      console.error("Error deleting menu  by menu ID.", error);
+      throw error;
+    }
+  },
 };

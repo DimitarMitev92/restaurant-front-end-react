@@ -1,36 +1,29 @@
-import { useParams } from "react-router-dom";
-import { usePopupContext } from "../../../context/PopupContext";
 import { useEffect, useState } from "react";
-import { IRestaurantsDetails, Menu } from "../../../static/interfaces";
-import { clearFilter } from "../../../static/endpoints";
-import { mealService } from "../../../services/mealService";
-import { RestaurantWrapper } from "./Restaurant.style";
+import { useParams } from "react-router-dom";
+import { IRestaurantsDetails, Menu } from "../../../../static/interfaces";
+import { ShoppingCart } from "../../../Cart/Cart";
 import {
   FilterBtnWrapper,
   FilterWrapper,
-} from "../../Menu/MenuFIlter/MenuFIlter.style";
-import { ClearAllFilter } from "../../Menu/MenuFIlter/ClearAllFilter";
-import { MenuFilter } from "../../Menu/MenuFIlter/MenuFilter";
-import { MealHolder } from "../../Meal/MealHolder";
-import { ShoppingCart } from "../../Cart/Cart";
-import UserRoleHOC from "../../UserRoleHOC/UserRoleHOC";
+} from "../../../Menu/MenuFIlter/MenuFIlter.style";
+import { MenuFilter } from "../../../Menu/MenuFIlter/MenuFilter";
+import { RestaurantWrapper } from "../Restaurant.style";
+import { MealHolder } from "../../../Meal/MealHolder";
+import { ClearAllFilter } from "../../../Menu/MenuFIlter/ClearAllFilter";
+import { clearFilter } from "../../../../static/endpoints";
+import { usePopupContext } from "../../../../context/PopupContext";
+import { mealService } from "../../../../services/mealService";
 
-export const Restaurant = () => {
+export const RestaurantsDetails = () => {
   const {
     isUpdateMealPopUpVisible,
     isUpdateMenuPopUpVisible,
-    isAddMealPopUpVisible,
-    isDeleteMenuPopUpVisible,
-    isDeleteMealPopUpVisible,
+    isAddMealPopUpVisible,isDeleteMealPopUpVisible,isDeleteMenuPopUpVisible
   } = usePopupContext();
-
   const { id } = useParams();
-
   const [restaurantDetails, setRestaurantDetails] =
     useState<IRestaurantsDetails | null>(null);
-
   const [menus, setMenus] = useState<Menu[] | null>(null);
-
   const [allMenus, setAllMenus] = useState<Menu[] | null>(null);
 
   const filter = (type: string) => {
@@ -58,9 +51,7 @@ export const Restaurant = () => {
     id,
     isUpdateMealPopUpVisible,
     isUpdateMenuPopUpVisible,
-    isAddMealPopUpVisible,
-    isDeleteMenuPopUpVisible,
-    isDeleteMealPopUpVisible,
+    isAddMealPopUpVisible,isDeleteMealPopUpVisible,isDeleteMenuPopUpVisible
   ]);
 
   if (!restaurantDetails) {
@@ -69,12 +60,8 @@ export const Restaurant = () => {
 
   return (
     <RestaurantWrapper>
-    
       <FilterWrapper>
         <FilterBtnWrapper>
-        <UserRoleHOC>
-        <button>Delete Restaurant</button>
-      </UserRoleHOC>
           <ClearAllFilter type={clearFilter.all} filter={filter} />
           {allMenus &&
             allMenus.map((menu: Menu) => {

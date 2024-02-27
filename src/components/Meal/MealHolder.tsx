@@ -3,14 +3,12 @@ import { MenuName } from "../Menu/Menu.styles";
 import { Meal } from "./Meal";
 import {
   AdminButtons,
-  EditButton,
-  IconImage,
   MealsWrapper,
-  RemoveButton,
+  StyledEditButton,
+  StyledRemoveButton,
 } from "./Meal.style";
+import Button from "../ui-elements/button";
 
-import trashIcon from "../../assets/trash-xmark.png";
-import editIcon from "../../assets/edit.png";
 import { usePopupContext } from "../../context/PopupContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
@@ -19,6 +17,8 @@ import { UpdateMenu } from "../Forms/UpdateMenu/UpdateMenu";
 import PopUpCreate from "../PopUp/CreatePopUp";
 import { CreateMeal } from "../Forms/CreateMeal/CreateMeal";
 import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
+import DeletePopUp from "../PopUp/DeleteMenuPopUp";
+import DeleteMessageForm from "../Forms/DeleteMessageForm/DeleteMessageForm";
 
 export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
   const { id } = useParams();
@@ -30,6 +30,9 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
     showAddMealPopUp,
     hideAddMealPopUp,
     isAddMealPopUpVisible,
+    isDeleteMenuPopUpVisible,
+    hideDeleteMenuPopUp,
+    showDeleteMenuPopUp,
   } = usePopupContext();
 
   const navigate = useNavigate();
@@ -51,6 +54,15 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
     navigate(`${routes.RESTAURANTS}/${id}/create/${menu.id}`);
   };
 
+  const handleDeleteMenu = () => {
+    showDeleteMenuPopUp();
+    navigate(`${routes.RESTAURANTS}/${id}/delete/${menu.id}`);
+  };
+
+  const handleCancelDelete = () => {
+    hideDeleteMenuPopUp();
+  };
+
   return (
     <>
       <MealsWrapper>
@@ -58,13 +70,17 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
           {menu.type}
           <UserRoleHOC>
             <AdminButtons>
-              <button onClick={() => handleAddMeal()}>add meal</button>
-              <EditButton onClick={() => handlePopUp()}>
-                <IconImage src={editIcon} />
-              </EditButton>
-              <RemoveButton>
-                <IconImage src={trashIcon} />
-              </RemoveButton>
+              <Button
+                color="var(--color-yellow)"
+                label="Add meal"
+                onClick={() => handleAddMeal()}
+              ></Button>
+              <StyledEditButton
+                onClick={() => handlePopUp()}
+              ></StyledEditButton>
+              <StyledRemoveButton
+                onClick={() => handleDeleteMenu()}
+              ></StyledRemoveButton>
             </AdminButtons>
           </UserRoleHOC>
         </MenuName>
@@ -78,6 +94,12 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
       )}
       {isAddMealPopUpVisible && (
         <PopUpCreate onCancel={handleCancelCreate} CreateForm={CreateMeal} />
+      )}
+      {isDeleteMenuPopUpVisible && (
+        <DeletePopUp
+          onCancel={handleCancelDelete}
+          deleteMessage={DeleteMessageForm}
+        />
       )}
     </>
   );

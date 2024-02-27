@@ -88,7 +88,7 @@ export const mealService = {
       throw error;
     }
   },
-  fetchMealsByMenuId: async (restaurantId: string,menuId: string, ) => {
+  fetchMealsByMenuId: async (restaurantId: string, menuId: string) => {
     try {
       const accessToken = sessionStorage.getItem("access_token");
       const meals = await fetchDataFromApi(
@@ -102,6 +102,38 @@ export const mealService = {
     } catch (error) {
       console.error("Error fetching meals by menu id:", error);
       throw new Error(`No meals found for menu with ID ${menuId}`);
+    }
+  },
+  deleteMealById: async (mealId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const meal = await fetchDataFromApi(
+        `${endpointAPI.MEAL}/${mealId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting meal by  ID"
+      );
+      return meal;
+    } catch (error) {
+      console.error("Error deleting meal by meal  ID.", error);
+      throw error;
+    }
+  },
+  deleteMealsByMenuId: async (menuId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const meal = await fetchDataFromApi(
+        `${endpointAPI.MEAL}/by-menuId/${menuId}`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting meals by menu ID"
+      );
+      return meal;
+    } catch (error) {
+      console.error("Error deleting meals by menu ID.", error);
+      throw error;
     }
   },
 };

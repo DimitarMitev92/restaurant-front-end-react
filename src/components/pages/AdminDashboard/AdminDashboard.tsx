@@ -19,7 +19,7 @@ export const AdminDashboard = () => {
             <Button
               key={formName}
               label={label}
-              color="--color-green"
+              color="var(--color-green)"
               onClick={() => handleButtonClick(formName, path)}
             />
           ))}

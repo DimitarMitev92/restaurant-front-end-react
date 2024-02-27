@@ -7,7 +7,7 @@ interface ButtonProps {
 }
 export const StyledButton = styled.button`
   cursor: pointer;
-  background-color: var(--color-green);
+  background-color: ${props => props.color || 'var(--color-green)'}; 
   color: var(--color-white);
   border: none;
   padding: 10px 20px;
