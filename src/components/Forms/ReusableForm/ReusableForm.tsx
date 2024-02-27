@@ -78,7 +78,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
   onSubmit,
   buttonText,
 }) => {
-  const { hideUpdateMenuPopUp, hideUpdateMealPopUp, hideAddMealPopUp } =
+  const { hideUpdateMenuPopUp, hideUpdateMealPopUp, hideAddMealPopUp ,hideUpdateRestaurantPopUp} =
     usePopupContext();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -92,6 +92,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
         hideUpdateMenuPopUp();
         hideUpdateMealPopUp();
         hideAddMealPopUp();
+        hideUpdateRestaurantPopUp()
       } catch (error) {
         console.error("Form submission error:", error);
         const errorMessage =
@@ -103,6 +104,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
         hideUpdateMenuPopUp();
         hideUpdateMealPopUp();
         hideAddMealPopUp();
+        hideUpdateRestaurantPopUp()
       }
     },
   });

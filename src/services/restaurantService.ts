@@ -1,5 +1,8 @@
 import { endpointAPI, method } from "../static/endpoints";
-import { CreateRestaurantFormData } from "../static/interfaces";
+import {
+  CreateRestaurantFormData,
+  UpdateRestaurantFormData,
+} from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
 export const restaurantService = {
@@ -50,6 +53,42 @@ export const restaurantService = {
       return restaurants;
     } catch (error) {
       console.error("Error fetching restaurants by location ID.", error);
+      throw error;
+    }
+  },
+  deleteRestaurantById: async (restaurantId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const restaurant = await fetchDataFromApi(
+        `${endpointAPI.RESTAURANT}/${restaurantId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting restaurant by  ID"
+      );
+      return restaurant;
+    } catch (error) {
+      console.error("Error deleting restaurant by restaurant  ID.", error);
+      throw error;
+    }
+  },
+  updateRestaurants: async (
+    restaurantId: string,
+    restaurantData: UpdateRestaurantFormData
+  ) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+
+      const restaurant = await fetchDataFromApi(
+        `${endpointAPI.RESTAURANT}/${restaurantId}`,
+        accessToken ? accessToken : null,
+        method.PATCH,
+        restaurantData,
+        "Error during restaurant update"
+      );
+      return restaurant;
+    } catch (error) {
+      console.error("Error during restaurant update:", error);
       throw error;
     }
   },
