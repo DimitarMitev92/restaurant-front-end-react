@@ -10,6 +10,12 @@ interface PopupContextProps {
   isAddMealPopUpVisible: boolean;
   showAddMealPopUp: () => void;
   hideAddMealPopUp: () => void;
+  isDeleteMenuPopUpVisible: boolean;
+  showDeleteMenuPopUp: () => void;
+  hideDeleteMenuPopUp: () => void;
+  isDeleteMealPopUpVisible: boolean;
+  showDeleteMealPopUp: () => void;
+  hideDeleteMealPopUp: () => void;
 }
 
 const PopupContext = createContext<PopupContextProps | undefined>(undefined);
@@ -33,6 +39,11 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
   const [isUpdateMenuPopUpVisible, setIsUpdateMenuPopUpVisible] =
     useState(false);
   const [isAddMealPopUpVisible, setIsAddMealPopUpVisible] = useState(false);
+  const [isDeleteMenuPopUpVisible, setIsDeleteMenuPopUpVisible] =
+    useState(false);
+  const [isDeleteMealPopUpVisible, setIsDeleteMealPopUpVisible] =
+    useState(false);
+
   const showUpdateMealPopUp = () => {
     setIsUpdateMealPopUpVisible(true);
   };
@@ -50,6 +61,10 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
   };
   const showAddMealPopUp = () => setIsAddMealPopUpVisible(true);
   const hideAddMealPopUp = () => setIsAddMealPopUpVisible(false);
+  const showDeleteMenuPopUp = () => setIsDeleteMenuPopUpVisible(true);
+  const hideDeleteMenuPopUp = () => setIsDeleteMenuPopUpVisible(false);
+  const showDeleteMealPopUp = () => setIsDeleteMealPopUpVisible(true);
+  const hideDeleteMealPopUp = () => setIsDeleteMealPopUpVisible(false);
 
   const contextValues: PopupContextProps = {
     isUpdateMealPopUpVisible,
@@ -61,6 +76,12 @@ export const PopupProvider: React.FC<PopupProviderProps> = ({ children }) => {
     isAddMealPopUpVisible,
     showAddMealPopUp,
     hideAddMealPopUp,
+    isDeleteMenuPopUpVisible,
+    showDeleteMenuPopUp,
+    hideDeleteMenuPopUp,
+    isDeleteMealPopUpVisible,
+    showDeleteMealPopUp,
+    hideDeleteMealPopUp,
   };
 
   return (
