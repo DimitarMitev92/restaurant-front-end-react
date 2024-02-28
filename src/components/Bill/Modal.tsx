@@ -4,7 +4,6 @@ import { ButtonDiv, StyledModal } from "./BillPrint.style";
 import { PrintPreviewModalProps } from "./BillPrint.static";
 import { useOrderContext } from "../../context/OrderProvider";
 import UnifiedInput from "../ui-elements/Input/input";
-import { ChangeEvent } from "react";
 
 export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
   isOpen,
@@ -22,8 +21,11 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
     addAdditionalNoteForOrder,
   } = useOrderContext();
 
-  const onChangeAdditionalNoteOrder = (e: ChangeEvent) => {
-    addAdditionalNoteForOrder(e.target?.value);
+  const onChangeAdditionalNoteOrder = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const value = (e.target as HTMLInputElement).value;
+    addAdditionalNoteForOrder(value);
   };
 
   return (
