@@ -7,9 +7,25 @@ export const BillContentDiv = styled.div`
   padding-left: 30px;
 `;
 
+// export const CartItemDiv = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-align: left;
+//   padding: 10px;
+//   border: 1px solid var(--color-grey);
+//   box-shadow: 7px;
+//   margin-bottom: 10px;
+//   font-size: 1.2rem;
+
+//   @media (max-width: 768px) {
+//     font-size: 1rem;
+//   }
+// `;
+
 export const CartItemDiv = styled.div`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;  /* Adjust the number of columns as needed */
   align-items: center;
   text-align: left;
   padding: 10px;
@@ -19,13 +35,14 @@ export const CartItemDiv = styled.div`
   font-size: 1.2rem;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    grid-template-columns: 1fr;  
   }
 `;
 export const StyledModal = styled(ReactModal)`
   display: flex;
   position: fixed;
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   flex-direction: column;
@@ -84,4 +101,32 @@ export const BillHeading = styled.h2`
 
 export const DateHeading = styled.h4`
   margin-bottom: 20px;
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+
+  th, td {
+    border: 0.1px solid var(--color-white-smoke);
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color:  var(--color-green);
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--color-white-smoke);
+  }
+
+  @media only screen and (max-width: 768px) {
+    th, td {
+      font-size: 8px;
+      padding: 6px;
+    }
+  }
 `;
