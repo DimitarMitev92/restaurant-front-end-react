@@ -66,7 +66,7 @@ export interface SignUpFormData {
 }
 
 export interface ChangePasswordFormProps {
-  onSubmit: (ChangePasswordFormData: ChangePasswordFormData) => void;
+  onSubmit?: (ChangePasswordFormData: ChangePasswordFormData) => void;
 }
 
 export interface ChangePasswordFormValues {
@@ -122,6 +122,9 @@ export interface LocationData {
 export interface RestaurantData {
   id: string;
   name: string;
+  openHour: string;
+  closeHour: string;
+  imageUrl: string;
   locationId: string;
   createdAt: string;
   updatedAt: string;
@@ -185,7 +188,7 @@ export interface CreateRestaurantFormValues {
 }
 
 export interface CreateMealFormProps {
-  updatedId?: string;
+  updatedId: string;
   onSubmit: (CreateMealFormData: CreateMealFormData) => void;
 }
 
@@ -264,7 +267,7 @@ export interface CreateMenuTypeFormValues {
 }
 
 export interface CreateAddressFormProps {
-  onSubmit: (CreateAddressFormData: CreateAddressFormData) => void;
+  onSubmit?: (CreateAddressFormData: CreateAddressFormData) => void;
 }
 
 export interface CreateAddressFormData {
@@ -429,6 +432,7 @@ export interface Menu {
   type: string;
   id: string;
   meals: IMeal[];
+  menutypevalue?: string;
 }
 
 export interface MenuProps {

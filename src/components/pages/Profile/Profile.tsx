@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { useAuth } from "../../../context/AuthProvider";
 import Button from "../../ui-elements/button";
 import {
@@ -6,11 +7,10 @@ import {
   Header,
   WrapperDashBoard,
 } from "../AdminDashboard/AdminDashboard.style";
-
 import { useProfileLogic } from "./Profile.logic";
 
 export const Profile = () => {
-  const { handleButtonClick, forms, renderForm } = useProfileLogic();
+  const { handleButtonClick, forms } = useProfileLogic();
   const { user } = useAuth();
 
   return (
@@ -30,7 +30,7 @@ export const Profile = () => {
             />
           ))}
         </ButtonContainer>
-        {renderForm()}
+        <Outlet />
       </DashboardContainer>
     </WrapperDashBoard>
   );
