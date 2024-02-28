@@ -34,18 +34,21 @@ export const Restaurant = () => {
     isDeleteRestaurantPopUpVisible,
     isUpdateRestaurantPopUpVisible,
     restaurant,
+    openHourFormatted,
+    closeHourFormatted,
   } = useRestaurantLogic();
 
   if (!restaurantDetails) {
     return <div>Loading...</div>;
   }
+
   return (
     <>
       <RestaurantWrapper>
         <FilterWrapper>
         <ShoppingCart />
           <RestaurantNameContainer>
-            {restaurant.name}
+            {restaurant?.name}
             <AdminButtonsContainer>
               <UserRoleHOC>
                 <StyledEditButton
@@ -58,7 +61,7 @@ export const Restaurant = () => {
             </AdminButtonsContainer>
           </RestaurantNameContainer>
           <WorkingHoursContainer>
-            Working hours: {restaurant.openHour} - {restaurant.closeHour}
+            Working hours: {openHourFormatted} - {closeHourFormatted}
           </WorkingHoursContainer>
         
           <FilterBtnWrapper>

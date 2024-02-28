@@ -4,8 +4,8 @@ import { usePopupContext } from "../../../context/PopupContext";
 import { routes } from "../../../routes/routes.static";
 import { mealService } from "../../../services/mealService";
 import { clearFilter } from "../../../static/endpoints";
-import { IRestaurantsDetails, Menu } from "../../../static/interfaces";
-import { useRestaurant } from "../../../hooks/useRestaurant";
+import { IRestaurantsDetails, Menu, RestaurantData } from "../../../static/interfaces";
+import { restaurantService } from "../../../services/restaurantService";
 
 export const useRestaurantLogic = () => {
   const {
@@ -24,10 +24,9 @@ export const useRestaurantLogic = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { restaurant } = useRestaurant(id!);
   const [restaurantDetails, setRestaurantDetails] =
     useState<IRestaurantsDetails | null>(null);
-
+  const [restaurant, setRestaurant] = useState<RestaurantData>();
   const [menus, setMenus] = useState<Menu[] | null>(null);
 
   const [allMenus, setAllMenus] = useState<Menu[] | null>(null);
@@ -44,6 +43,8 @@ export const useRestaurantLogic = () => {
     const fetchRestaurantDetails = async () => {
       try {
         const data = await mealService.fetchMealsByRestaurantId(id);
+        const restaurant = await restaurantService.fetchRestaurantById(id!);
+        setRestaurant(restaurant);
         setRestaurantDetails(data);
         setMenus(data?.menus || []);
         setAllMenus(data?.menus || []);
@@ -82,6 +83,10 @@ export const useRestaurantLogic = () => {
     hideUpdateRestaurantPopUp();
   };
 
+
+  const openHourFormatted = restaurant?.openHour.slice(0, 5);
+  const closeHourFormatted = restaurant?.closeHour.slice(0, 5);
+
   return {
     restaurantDetails,
     menus,
@@ -92,6 +97,7 @@ export const useRestaurantLogic = () => {
     handleDeleteRestaurant,
     allMenus,
     isDeleteRestaurantPopUpVisible,
-    isUpdateRestaurantPopUpVisible,restaurant
+    isUpdateRestaurantPopUpVisible,
+    restaurant,openHourFormatted,closeHourFormatted
   };
 };

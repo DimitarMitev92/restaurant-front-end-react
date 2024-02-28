@@ -5,7 +5,7 @@ export const useRestaurant = (restaurantId: string) => {
   const {
     data: restaurant,
     isLoading,
-    isError,
+    isError,refetch
   } = useQuery(
     ["restaurant", restaurantId],
     () => restaurantService.fetchRestaurantById(restaurantId),
@@ -14,5 +14,5 @@ export const useRestaurant = (restaurantId: string) => {
     }
   );
 
-  return { restaurant, loading: isLoading, error: isError };
+  return { restaurant,refetch, loading: isLoading, error: isError };
 };

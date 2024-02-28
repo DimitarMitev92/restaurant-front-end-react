@@ -19,6 +19,9 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
     navigate(`${routes.RESTAURANTS}/${restaurant.id}`);
   };
 
+  const openHourFormatted = restaurant?.openHour.slice(0, 5);
+  const closeHourFormatted = restaurant?.closeHour.slice(0, 5);
+
   return (
     <RestaurantCardContainer
       onClick={handleClick}
@@ -39,7 +42,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
       >
         <p>Working hours:</p>
         <p>
-          Open {restaurant.openHour} - Close {restaurant.closeHour}
+          Open {openHourFormatted} - Close {closeHourFormatted}
         </p>
       </WorkingHoursOverlay>
     </RestaurantCardContainer>
