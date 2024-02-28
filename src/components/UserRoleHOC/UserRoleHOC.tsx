@@ -7,7 +7,7 @@ export interface UserRoleHOCProps {
 
 const UserRoleHOC: React.FC<UserRoleHOCProps> = ({ children }) => {
   const { user } = useAuth();
-  const canUserViewForm = user?.user.rights === "CLIENT" || user?.user.rights === "ADMIN";
+  const canUserViewForm = user?.user.rights === "ADMIN";
   return canUserViewForm ? <>{children}</> : null;
 };
 
