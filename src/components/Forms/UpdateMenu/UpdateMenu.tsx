@@ -3,9 +3,7 @@ import {
   CreateMenuFormData,
   CreateMenuFormProps,
   MenuTypeData,
-  RestaurantData,
 } from "../../../static/interfaces";
-import { useRestaurants } from "../../../hooks/useRestaurants";
 import { useMenuTypes } from "../../../hooks/useMenuTypes";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { useEffect, useState } from "react";
@@ -21,7 +19,6 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
 }) => {
   const { id } = useParams();
 
-  const { restaurants = [] } = useRestaurants();
   const { menuTypes = [] } = useMenuTypes();
   const navigate = useNavigate();
 
@@ -43,17 +40,6 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
         label: menuType.type,
       })),
     },
-    {
-      htmlFor: "restaurantId",
-      labelTitle: "Restaurant",
-      type: "select",
-      name: "restaurantId",
-      placeholder: "Select restaurant",
-      options: restaurants.map((restaurant: RestaurantData) => ({
-        value: restaurant.id,
-        label: restaurant.name,
-      })),
-    },
   ];
 
   useEffect(() => {
@@ -72,7 +58,7 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
         setCurrentMenu(fetchedMenu);
       } catch (error) {
         console.error("Error fetching menu:", error);
-        setErrorFromServer(error.message);
+        setErrorFromServer(error);
       }
     };
     fetchCurrentMenu();
