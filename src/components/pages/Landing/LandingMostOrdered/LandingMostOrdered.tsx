@@ -14,9 +14,8 @@ export const LandingMostOrdered = () => {
   useEffect(() => {
     setMeals(meals);
   }, [meals]);
-
   return (
-    <MostOrderedWrapper>
+    <MostOrderedWrapper id="most-ordered">
       <Title style={{ padding: "40px", textAlign: "start" }}>
         Most Ordered Meals
       </Title>
