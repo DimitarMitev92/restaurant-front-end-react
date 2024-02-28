@@ -19,6 +19,10 @@
   --color-overlay: #5c5a5a4f;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "League Spartan", sans-serif;
   font-weight: 500;

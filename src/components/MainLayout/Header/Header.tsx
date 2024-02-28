@@ -20,6 +20,9 @@ import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes/routes.static";
 import { useAuth } from "../../../context/AuthProvider";
 import imageSrc from "../../../assets/FoodFlyLogo.png";
+
+import { HashLink } from "react-router-hash-link";
+
 export const Header = () => {
   const { user } = useAuth();
 
@@ -37,7 +40,9 @@ export const Header = () => {
           <NavLink to={routes.ABOUT_US}>About Us</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to={routes.MOST_ORDERED}>Most Ordered</NavLink>
+          <HashLink smooth to={routes.MOST_ORDERED}>
+            Most Ordered
+          </HashLink>
         </NavLi>
         <NavLi>
           <NavLink to={routes.RESTAURANTS}>Restaurants</NavLink>
@@ -81,7 +86,7 @@ export const Header = () => {
                 <NavLink to={routes.ABOUT_US}>About Us</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <NavLink to={routes.MOST_ORDERED}>Most Ordered</NavLink>
+                <HashLink to={routes.MOST_ORDERED}>Most Ordered</HashLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
                 <NavLink to={routes.RESTAURANTS}>Restaurants</NavLink>
