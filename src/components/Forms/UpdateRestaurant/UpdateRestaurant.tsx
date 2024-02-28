@@ -12,6 +12,7 @@ import { createRestaurantValidationSchema } from "../../../static/form-validatio
 import ErrorMessage from "../../ui-elements/errorMessage";
 import { useLocations } from "../../../hooks/useLocations";
 import { restaurantService } from "../../../services/restaurantService";
+import { inputsCreateRestaurantData } from "./UpdateRestaurant.static";
 
 export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   updatedId,
@@ -27,14 +28,8 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
 
   const [errorFromServer, setErrorFromServer] = useState(null);
 
-  const inputsCreateRestaurantData = [
-    {
-      htmlFor: "name",
-      labelTitle: "Name:",
-      type: "text",
-      name: "name",
-      placeholder: "Enter your name...",
-    },
+  const inputsCreateRestaurantDataWithLocation = [
+    ...inputsCreateRestaurantData,
     {
       htmlFor: "locationId",
       labelTitle: "Location:",
@@ -45,27 +40,6 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
         value: location.id,
         label: location.name,
       })),
-    },
-    {
-      htmlFor: "imageUrl",
-      labelTitle: "Image:",
-      type: "text",
-      name: "imageUrl",
-      placeholder: "Enter image url...",
-    },
-    {
-      htmlFor: "openHour",
-      labelTitle: "Open hour:",
-      type: "time",
-      name: "openHour",
-      placeholder: "Enter open hour...",
-    },
-    {
-      htmlFor: "closeHour",
-      labelTitle: "Close hour:",
-      type: "time",
-      name: "closeHour",
-      placeholder: "Enter close hour...",
     },
   ];
 
@@ -94,7 +68,7 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   return currentRestaurant ? (
     <ReusableForm
       formHeading="Update restaurant"
-      inputsData={inputsCreateRestaurantData}
+      inputsData={inputsCreateRestaurantDataWithLocation}
       initialValues={{
         ...currentRestaurant,
         error: "",

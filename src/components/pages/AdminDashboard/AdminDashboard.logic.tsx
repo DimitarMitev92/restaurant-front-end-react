@@ -6,43 +6,10 @@ import { CreateMenu } from "../../Forms/CreateMenu/CreateMenu";
 import { CreatePackage } from "../../Forms/CreatePackage/CreatePackage";
 import { CreateRestaurant } from "../../Forms/CreateRestaurant/CreateRestaurant";
 import { CreateMenuType } from "../../Forms/CreateMenuType/CreateMenuType";
-
+import { forms } from "./AdminDashboard.static";
 export const useAdminDashboardLogic = () => {
   const [activeForm, setActiveForm] = useState<string>("");
   const navigate = useNavigate();
-
-  const forms = [
-    {
-      label: "Create Package",
-      formName: "createPackage",
-      path: "/admin-dashboard/create-package",
-    },
-    {
-      label: "Create Restaurant",
-      formName: "createRestaurant",
-      path: "/admin-dashboard/create-restaurant",
-    },
-    {
-      label: "Create Menu Type",
-      formName: "createMenuType",
-      path: "/admin-dashboard/create-menu-type",
-    },
-    {
-      label: "Create Menu",
-      formName: "createMenu",
-      path: "/admin-dashboard/create-menu",
-    },
-    {
-      label: "Create Location",
-      formName: "createLocation",
-      path: "/admin-dashboard/create-location",
-    },
-    {
-      label: "Create Category",
-      formName: "createCategory",
-      path: "/admin-dashboard/create-category",
-    },
-  ];
 
   const renderForm = () => {
     switch (activeForm) {
