@@ -15,11 +15,12 @@ import {
   OrderMealCardWrapper,
   OrderMealTitle,
   OrderMealButtonsWrapper,
-  OrderCartButton,
   OrderCartCountWrapper,
   OrderCartCount,
   BottomWrapper,
   OrderMealPrices,
+  AddCartButton,
+  DecrementCartButton,
 } from "./Cart.style";
 import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/Input/input";
@@ -38,7 +39,6 @@ export const ShoppingCart: React.FC = () => {
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
     undefined
   );
-  const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
@@ -69,7 +69,6 @@ export const ShoppingCart: React.FC = () => {
           addresses.address &&
           addresses.address.length > 0
         ) {
-          setAddressesData(addresses);
           setSelectedAddress(addresses[0]?.address);
         }
       } catch (error) {
@@ -188,17 +187,15 @@ export const ShoppingCart: React.FC = () => {
                       package price: {+meal.packagePrice * +meal.count} USD
                     </OrderMealPrices>
                     <OrderMealButtonsWrapper>
-                      <OrderCartButton
+                      <DecrementCartButton
                         onClick={() => onRemoveMealToBasket(meal)}
-                      >
-                        -
-                      </OrderCartButton>
+                      ></DecrementCartButton>
                       <OrderCartCountWrapper>
                         <OrderCartCount>{meal.count}</OrderCartCount>
                       </OrderCartCountWrapper>
-                      <OrderCartButton onClick={() => onAddMealToBasket(meal)}>
-                        +
-                      </OrderCartButton>
+                      <AddCartButton
+                        onClick={() => onAddMealToBasket(meal)}
+                      ></AddCartButton>
                     </OrderMealButtonsWrapper>
                     <UnifiedInput
                       type="text"

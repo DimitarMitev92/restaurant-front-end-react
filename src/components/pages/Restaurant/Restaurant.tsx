@@ -20,6 +20,7 @@ import { UpdateRestaurant } from "../../Forms/UpdateRestaurant/UpdateRestaurant"
 import PopUp from "../../PopUp/PopUp";
 import { useRestaurantLogic } from "./Restaurant.logic";
 import { StyledEditButton, StyledRemoveButton } from "../../Meal/Meal.style";
+import EmptyList from "../../EmptyList/EmptyList";
 
 export const Restaurant = () => {
   const {
@@ -42,6 +43,8 @@ export const Restaurant = () => {
     return <div>Loading...</div>;
   }
 
+  const hasMenus = menus && menus.length > 0;
+
   return (
     <>
       <RestaurantWrapper>
@@ -62,20 +65,20 @@ export const Restaurant = () => {
           <WorkingHoursContainer>
             Working hours: {openHourFormatted} - {closeHourFormatted}
           </WorkingHoursContainer>
+          {hasMenus && (
+            <FilterBtnWrapper>
+              <ClearAllFilter type={clearFilter.all} filter={filter} />
+              {allMenus?.map((menu: Menu) => (
+                <MenuFilter filter={filter} key={menu.id} menu={menu} />
+              ))}
+            </FilterBtnWrapper>
+          )}
 
-          <FilterBtnWrapper>
-            <ClearAllFilter type={clearFilter.all} filter={filter} />
-
-            {allMenus &&
-              allMenus.map((menu: Menu) => {
-                return <MenuFilter filter={filter} key={menu.id} menu={menu} />;
-              })}
-          </FilterBtnWrapper>
-          {menus &&
-            menus.map((menu: Menu) => {
-              return <MealHolder key={menu.id} menu={menu} />;
-            })}
-          {menus && menus.length === 0 && <div>No menus found</div>}
+          {hasMenus ? (
+            menus.map((menu: Menu) => <MealHolder key={menu.id} menu={menu} />)
+          ) : (
+            <EmptyList message="No menus found"></EmptyList>
+          )}
         </FilterWrapper>
         <ShoppingCart />
       </RestaurantWrapper>

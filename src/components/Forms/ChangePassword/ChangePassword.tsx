@@ -16,6 +16,9 @@ import {
 import { useSessionStorage } from "../../../hooks/useSessionStorage";
 import { inputsChangePasswordData } from "./ChangePassword.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const ChangePassword: React.FC<ChangePasswordFormProps> = ({
   onSubmit,
 }) => {
@@ -36,21 +39,26 @@ export const ChangePassword: React.FC<ChangePasswordFormProps> = ({
       }}
       validationSchema={changePasswordValidationSchema}
       onSubmit={async (values: ChangePasswordFormData) => {
-        const url = endpointAPI.CHANGE_PASSWORD;
-        const options = {
-          method: method.POST,
-          headers: headers.CONTENT_TYPE_APP_JSON,
-          body: JSON.stringify({
-            email: values.email,
-            oldPassword: values.password,
-            newPassword: values.newPassword,
-          }),
-        };
-        const userDataFromApi = await signService(url, options);
-        onSubmit && onSubmit(values);
-        setItem("access_token", userDataFromApi.user.accessToken);
-        setUser(userDataFromApi);
-        navigate(mainRoute.MAIN);
+        try {
+          const url = endpointAPI.CHANGE_PASSWORD;
+          const options = {
+            method: method.POST,
+            headers: headers.CONTENT_TYPE_APP_JSON,
+            body: JSON.stringify({
+              email: values.email,
+              oldPassword: values.password,
+              newPassword: values.newPassword,
+            }),
+          };
+          const userDataFromApi = await signService(url, options);
+          onSubmit && onSubmit(values);
+          setItem("access_token", userDataFromApi.user.accessToken);
+          setUser(userDataFromApi);
+          navigate(mainRoute.MAIN);
+        } catch (error) {
+          console.error("Failed to change password:", error);
+          toast.error(`Failed to change password: ${error.message}`);
+        }
       }}
       buttonText="Change"
     />

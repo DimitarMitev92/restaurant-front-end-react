@@ -8,6 +8,9 @@ import { createMealValidationSchema } from "../../../static/form-validations";
 import { mealService } from "../../../services/mealService";
 import { inputsCreateMealData } from "./CreateMeal.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const CreateMeal: React.FC<{
   menuId: string;
   onSubmit: (meal: Meal) => void;
@@ -70,6 +73,7 @@ export const CreateMeal: React.FC<{
           navigate(`${mainRoute.RESTAURANTS}/${restaurantId}`);
         } catch (error) {
           console.error("Failed to create meal:", error);
+          toast.error(`Failed to create meal: ${error.message}`);
         }
       }}
       buttonText="Create"

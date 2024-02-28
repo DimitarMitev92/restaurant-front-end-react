@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const DashboardContainer = styled.div`
-  padding: 100px;
   height: 100%;
+  padding-top: 100px;
   @media screen and (max-width: 650px) {
     height: 87vh;
   }

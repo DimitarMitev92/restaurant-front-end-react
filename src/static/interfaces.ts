@@ -561,3 +561,10 @@ export interface MenuTypeDataApi {
   updatedAt: string;
   deletedAt: string | null;
 }
+
+export interface ServerError {
+  message: string;
+  error: string;
+  statusCode: number;
+}
+

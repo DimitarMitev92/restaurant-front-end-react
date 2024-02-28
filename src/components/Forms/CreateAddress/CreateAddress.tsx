@@ -5,6 +5,9 @@ import { CreateAddressFormProps } from "../../../static/interfaces";
 import { useNavigate } from "react-router";
 import { inputsCreateAddressData } from "./CreateAddress.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const CreateAddress: React.FC<CreateAddressFormProps> = ({
   onSubmit,
 }) => {
@@ -20,9 +23,14 @@ export const CreateAddress: React.FC<CreateAddressFormProps> = ({
       }}
       validationSchema={createAddressValidationSchema}
       onSubmit={async (values) => {
-        await addressService.createAddress(values);
-        onSubmit && onSubmit(values);
-        navigate("/profile/user-addresses");
+        try {
+          await addressService.createAddress(values);
+          onSubmit && onSubmit(values);
+          navigate("/profile/user-addresses");
+        } catch (error) {
+          console.error("Failed to create address:", error);
+          toast.error(`Failed to create address: ${error.message}`);
+        }
       }}
       buttonText={"Create"}
     />

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { CartInputProps, SwitchButtonProps } from "./Cart.static";
+import { IoIosAddCircle } from "react-icons/io";
+import { IoIosRemoveCircle } from "react-icons/io";
+import { StyledButton } from "../ui-elements/SubmitFormButton/submitFormButton.style";
 import InputLabel from "../ui-elements/InputLabel/inputLabel";
-import { StyledButton } from "../ui-elements/Button/button.style";
 
 export const CartWrapper = styled.div`
   display: flex;
@@ -115,14 +117,14 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
 export const CartButton = styled(StyledButton)`
   padding: 10px 15px;
   /* margin-left: 15px; */
-  font-size: 1rem;
+  font-size: 12px;
   border: none;
   border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:disabled {
-    background-color: var(--color-bright-red);
+    background-color: var(--color-red);
     cursor: not-allowed;
   }
 
@@ -178,16 +180,20 @@ export const OrderMealButtonsWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 15px;
   padding: 0.5em;
 `;
 
-export const OrderCartButton = styled(CartButton)`
-  width: 2.6em;
-  height: 2.6em;
-  border-radius: 50%;
+export const AddCartButton = styled(IoIosAddCircle)`
+  width: 30px;
+  font-size: 40px;
+  color: var(--color-green);
 `;
-
+export const DecrementCartButton = styled(IoIosRemoveCircle)`
+  width: 30px;
+  font-size: 40px;
+  color: var(--color-green);
+`;
 export const OrderCartCountWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -206,6 +212,7 @@ export const StyledPriceDiv = styled.div`
 
 export const BottomWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   margin-top: 20px;
   background-color: var(--color-white);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
