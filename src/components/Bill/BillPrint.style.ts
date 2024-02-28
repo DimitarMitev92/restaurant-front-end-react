@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const BillDiv = styled.div``;
 
 export const BillContentDiv = styled.div`
-  padding-left: 30px;
+  padding: 20px;
+  padding-bottom: 20px;
 `;
 
 export const CartItemDiv = styled.div`
@@ -60,13 +61,13 @@ export const StyledModal = styled(ReactModal)`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.7rem;
+    font-size: 14px;
     padding: 20px;
     margin: 10px;
   }
 
   @media (max-width: 480px) {
-    font-size: 0.6rem;
+    font-size: 12px;
     padding: 10px;
     margin: 5px;
   }
@@ -77,6 +78,15 @@ export const ButtonDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  @media (max-width: 768px) {
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 `;
 
 export const BillHeading = styled.h2`
@@ -91,6 +101,8 @@ export const Table = styled.table`
   width: 100%;
   margin-top: 10px;
   border: none;
+  height: 15vh;
+  margin-top: 10px;
 
   th,
   td {

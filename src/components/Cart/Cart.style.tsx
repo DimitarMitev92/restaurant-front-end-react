@@ -13,12 +13,13 @@ export const CartWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    flex-direction: column;
   }
 `;
 
 export const SidebarWrapper = styled.div`
   position: fixed;
-  top: 85px;
+  top: 100px;
   right: 0;
   width: 320px;
   height: 75vh;
@@ -30,7 +31,7 @@ export const SidebarWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    max-height: 20em;
+    height: 60vh;
     position: relative;
     top: 0;
     right: 0;
@@ -78,6 +79,10 @@ export const SidebarContent = styled.div`
     background: rgb(196, 196, 196);
   }
   height: 88%;
+  @media (max-width: 768px) {
+    overflow-y: auto;
+    height: 78%;
+  }
 `;
 
 export const FlexContainer = styled.div`
@@ -109,7 +114,7 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
 
 export const CartButton = styled(StyledButton)`
   padding: 10px 15px;
-  margin-left: 15px;
+  /* margin-left: 15px; */
   font-size: 1rem;
   border: none;
   border-radius: 2px;
@@ -124,6 +129,7 @@ export const CartButton = styled(StyledButton)`
   @media (max-width: 768px) {
     width: 100%;
     font-size: 0.8rem;
+    margin-bottom: 10px;
   }
 `;
 
@@ -194,6 +200,8 @@ export const OrderCartCount = styled.p`
 
 export const StyledPriceDiv = styled.div`
   font-size: 1rem;
+  padding: 10px;
+  text-align: center;
 `;
 
 export const BottomWrapper = styled.div`
