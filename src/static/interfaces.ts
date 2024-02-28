@@ -448,3 +448,16 @@ export interface ClearFilterProps {
 export interface MealHolderProps {
   menu: Menu;
 }
+
+export interface MostOrderedMeals {
+  meal_id: string;
+  meal_name: string;
+  meal_picture: string;
+  restaurant_id: string;
+  restaurant_name: string;
+  total_meal_count: string;
+}
+
+export interface MostOrderedMealsProps {
+  meal: MostOrderedMeals;
+}

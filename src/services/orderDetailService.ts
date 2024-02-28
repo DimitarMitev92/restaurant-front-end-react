@@ -37,4 +37,21 @@ export const orderDetailService = {
       throw error;
     }
   },
+
+  fetchMostOrderedMeal: async () => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const mostOrderedMeals = await fetchDataFromApi(
+        `${endpointAPI.ORDER_DETAIL}/most-ordered`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching most ordered meal"
+      );
+      return mostOrderedMeals;
+    } catch (error) {
+      console.error("Error fetching this most ordered meals", error);
+      throw error;
+    }
+  },
 };
