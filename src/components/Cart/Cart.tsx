@@ -102,9 +102,7 @@ export const ShoppingCart: React.FC = () => {
       additionalInfo: additionalNoteForOrder || "",
       meals: mealsDataRefactor,
     };
-    const orderFromServer = await orderService.createOrder(
-      dataForResponseOrder
-    );
+    await orderService.createOrder(dataForResponseOrder);
     navigate(`${mainRoute.PROFILE_ORDERS_HISTORY}`);
   };
 
@@ -221,7 +219,7 @@ export const ShoppingCart: React.FC = () => {
                       name="additionalNote"
                       onChange={(e) => onChangeAdditionalNote(meal.id, e)}
                       placeholder="Additional note"
-                      value={""}
+                      value={meal.additionalNote || ""}
                     />
                   </OrderMealCardWrapper>
                 );
@@ -229,7 +227,8 @@ export const ShoppingCart: React.FC = () => {
             {meals.length > 0 && (
               <BottomWrapper>
                 <StyledPriceDiv>
-                  Total Price: ${totalPrice.toFixed(2)}
+                  Total Price: $
+                  {areMealsFromRestaurant ? totalPrice.toFixed(2) : 0}
                 </StyledPriceDiv>
                 <CartButton
                   onClick={handlePreviewInvoice}
