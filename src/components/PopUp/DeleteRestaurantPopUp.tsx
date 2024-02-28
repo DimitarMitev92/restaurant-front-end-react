@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { CancelButtonPopup, PopUpContainer } from "./PopUp.style";
+import { CancelButtonPopup, PopUpContainer, PopUpOverlay } from "./PopUp.style";
 import DeleteRestaurantMessageForm from "../Forms/DeleteRestaurantMessageForm/DeleteRestaurantMessageForm";
 
 interface DeleteRestaurantPopUpProps {
@@ -15,17 +15,20 @@ const DeleteRestaurantPopUp: React.FC<DeleteRestaurantPopUpProps> = ({
   const deletedId = pathSegments[pathSegments.length - 1];
 
   return (
-    <PopUpContainer>
-      <CancelButtonPopup
-        onClick={() => {
-          onCancel();
-          navigate(-1);
-        }}
-      >
-        X
-      </CancelButtonPopup>
-      <DeleteRestaurantMessageForm deletedId={deletedId} />
-    </PopUpContainer>
+    <>
+      <PopUpOverlay />
+      <PopUpContainer>
+        <CancelButtonPopup
+          onClick={() => {
+            onCancel();
+            navigate(-1);
+          }}
+        >
+          X
+        </CancelButtonPopup>
+        <DeleteRestaurantMessageForm deletedId={deletedId} />
+      </PopUpContainer>
+    </>
   );
 };
 

@@ -76,4 +76,20 @@ export const categoryService = {
       throw error;
     }
   },
+  deleteCategoryById: async (categoryId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const category = await fetchDataFromApi(
+        `${endpointAPI.CATEGORY}/${categoryId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting category by  ID"
+      );
+      return category;
+    } catch (error) {
+      console.error("Error deleting category by category ID.", error);
+      throw error;
+    }
+  },
 };

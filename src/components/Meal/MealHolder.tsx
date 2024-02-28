@@ -4,11 +4,10 @@ import { Meal } from "./Meal";
 import {
   AdminButtons,
   MealsWrapper,
+  StyledAddMealButton,
   StyledEditButton,
   StyledRemoveButton,
 } from "./Meal.style";
-import Button from "../ui-elements/button";
-
 import { usePopupContext } from "../../context/PopupContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";
@@ -70,11 +69,9 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
           {menu.type}
           <UserRoleHOC>
             <AdminButtons>
-              <Button
-                color="var(--color-yellow)"
-                label="Add meal"
+              <StyledAddMealButton
                 onClick={() => handleAddMeal()}
-              ></Button>
+              ></StyledAddMealButton>
               <StyledEditButton
                 onClick={() => handlePopUp()}
               ></StyledEditButton>

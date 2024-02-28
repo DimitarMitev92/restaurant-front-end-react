@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const FilterWrapper = styled.div`
   width: 100%;
-  padding: 2rem 3rem;
+  padding: 100px;
+
 `;
 
 export const FilterHolder = styled.button`

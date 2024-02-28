@@ -41,6 +41,22 @@ export const StyledModal = styled(ReactModal)`
   max-width: 90%; 
   max-height: 80%; 
   overflow-y: auto; 
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 4px 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(196, 196, 196);
+  }
 
   @media (max-width: 768px) {
     font-size: 0.7rem;

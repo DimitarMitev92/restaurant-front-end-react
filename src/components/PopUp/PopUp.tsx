@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { CancelButtonPopup, PopUpContainer } from "./PopUp.style";
+import { CancelButtonPopup, PopUpContainer, PopUpOverlay } from "./PopUp.style";
 import { routes } from "../../routes/routes.static";
 
 const PopUp = ({ onCancel, UpdateForm }) => {
@@ -12,17 +12,20 @@ const PopUp = ({ onCancel, UpdateForm }) => {
   const updatedId = pathSegments[pathSegments.length - 1];
 
   return (
-    <PopUpContainer>
-      <CancelButtonPopup
-        onClick={() => {
-          onCancel();
-          navigate(routes.RESTAURANTS_UPDATE.replace(":id", id));
-        }}
-      >
-        X
-      </CancelButtonPopup>
-      <UpdateForm updatedId={updatedId} />
-    </PopUpContainer>
+    <>
+      <PopUpOverlay />
+      <PopUpContainer>
+        <CancelButtonPopup
+          onClick={() => {
+            onCancel();
+            navigate(routes.RESTAURANTS_UPDATE.replace(":id", id));
+          }}
+        >
+          X
+        </CancelButtonPopup>
+        <UpdateForm updatedId={updatedId} />
+      </PopUpContainer>
+    </>
   );
 };
 

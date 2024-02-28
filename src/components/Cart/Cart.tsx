@@ -19,6 +19,7 @@ import {
   OrderCartCountWrapper,
   OrderCartCount,
   BottomWrapper,
+  OrderMealPrices,
 } from "./Cart.style";
 import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/input";
@@ -40,7 +41,7 @@ export const ShoppingCart: React.FC = () => {
   );
   const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
-  const [showInvoice, setShowInvoice] = useState<boolean>(false);
+  const [showInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
   const [areMealsFromRestaurant, setAreMealsFromRestaurant] =
     useState<boolean>(false);
@@ -143,7 +144,7 @@ export const ShoppingCart: React.FC = () => {
 
   const handleDownload = () => {
     const bill = createPDF(meals, totalPrice);
-    bill.save("invoice.pdf");
+    bill.save("bill.pdf");
     handlePreviewInvoice();
   };
 
@@ -196,12 +197,12 @@ export const ShoppingCart: React.FC = () => {
                 return (
                   <OrderMealCardWrapper key={meal.id}>
                     <OrderMealTitle>{meal.name}</OrderMealTitle>
-                    <OrderMealTitle>
-                      {+meal.price * +meal.count} USD
-                    </OrderMealTitle>
-                    <OrderMealTitle>
-                      {+meal.packagePrice * +meal.count} USD
-                    </OrderMealTitle>
+                    <OrderMealPrices>
+                      meal price: {+meal.price * +meal.count} USD
+                    </OrderMealPrices>
+                    <OrderMealPrices>
+                      package price: {+meal.packagePrice * +meal.count} USD
+                    </OrderMealPrices>
                     <OrderMealButtonsWrapper>
                       <OrderCartButton
                         onClick={() => onRemoveMealToBasket(meal)}
@@ -220,28 +221,30 @@ export const ShoppingCart: React.FC = () => {
                       name="additionalNote"
                       onChange={(e) => onChangeAdditionalNote(meal.id, e)}
                       placeholder="Additional note"
+                      value={""}
                     />
                   </OrderMealCardWrapper>
                 );
               })}
-            <BottomWrapper>
-              <StyledPriceDiv>
-                Total Price: $
-                {areMealsFromRestaurant ? totalPrice.toFixed(2) : 0.0}
-              </StyledPriceDiv>
-              <CartButton
-                onClick={handlePreviewInvoice}
-                disabled={
-                  totalPrice <= 10 || (deliveryMode && !selectedAddressId)
-                }
-              >
-                {totalPrice <= 10
-                  ? "Order must be over 10 USD"
-                  : deliveryMode && !selectedAddressId
-                  ? "Please select an address"
-                  : "Confirm Order"}
-              </CartButton>
-            </BottomWrapper>
+            {meals.length > 0 && (
+              <BottomWrapper>
+                <StyledPriceDiv>
+                  Total Price: ${totalPrice.toFixed(2)}
+                </StyledPriceDiv>
+                <CartButton
+                  onClick={handlePreviewInvoice}
+                  disabled={
+                    totalPrice <= 10 || (deliveryMode && !selectedAddressId)
+                  }
+                >
+                  {totalPrice <= 10
+                    ? "Order must be over 10 USD"
+                    : deliveryMode && !selectedAddressId
+                    ? "Please select an address"
+                    : "Confirm Order"}
+                </CartButton>
+              </BottomWrapper>
+            )}
           </>
         </SidebarContent>
       </SidebarWrapper>

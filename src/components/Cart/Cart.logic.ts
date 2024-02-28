@@ -1,20 +1,20 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { IMeal } from "../../static/interfaces";
+import { AutoTableOptions } from "./Cart.static";
 
 declare module "jspdf" {
   interface jsPDF {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    autoTable: (options: any) => jsPDF;
+
+    autoTable: (options: AutoTableOptions) => jsPDF;
   }
 }
 
 export const createPDF = (meals: IMeal[], totalPrice: number): jsPDF => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const doc = new jsPDF() as jsPDF & { autoTable: any };
+  const doc = new jsPDF();
 
   doc.addImage(
-    "/src/images/Black_And_White_Aesthetic_Minimalist_Modern_Simple_Typography_Coconut_Cosmetics_Logo__2___1_-removebg-preview.png",
+    "/src/assets/FoodFlyLogo.png",
     "PNG",
     20,
     20,
@@ -23,21 +23,22 @@ export const createPDF = (meals: IMeal[], totalPrice: number): jsPDF => {
   );
   doc.line(15, 50, 195, 50);
 
-  // Add title
-  doc.setFontSize(14);
+  doc.setFontSize(16);
   doc.text("Bill", 20, 60);
   doc.setFontSize(12);
 
   // Add order info
-  doc.text(`Order made on: ${new Date().toLocaleString()}`, 20, 70);
-  const tableData = meals.map((meal) => [
-    meal.id,
+  const tableData = meals.map((meal, index) => [
+    index + 1,
     meal.name,
     meal.count,
+    meal.price + ' $',
+    meal.packagePrice+ ' $',
+    meal.additionalNote,
     `$${meal.price.toFixed(2)}`,
   ]);
 
-  const headers = ["#", "Product Name", "Quantity", "Price"];
+  const headers = ["#", "Product Name", "Quantity", "Price", "Package price", "Additional Note"];
   const tableHeight = 10 + meals.length * 10;
 
   doc.autoTable({
@@ -45,10 +46,17 @@ export const createPDF = (meals: IMeal[], totalPrice: number): jsPDF => {
     head: [headers],
     body: tableData,
     theme: "grid",
-    styles: { fontSize: 10 },
+    styles: { 
+      fontSize: 10,    
+      headStyles: { fillColor: '#4caf50' }  
+    },  
   });
   const totalPriceYPos = 80 + tableHeight + 10;
   doc.text(`Total Price: $${totalPrice.toFixed(2)}`, 120, totalPriceYPos);
+
+  doc.text("Thank you for using our service!", 20, totalPriceYPos + 20);
+  const date = new Date().toLocaleString();
+  doc.text(`Date: ${date}`, 20, doc.internal.pageSize.height - 10);
 
   return doc;
 };

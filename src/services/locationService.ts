@@ -35,4 +35,36 @@ export const locationService = {
       throw error;
     }
   },
+  fetchLocationById: async (locationId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const location = await fetchDataFromApi(
+        `${endpointAPI.LOCATION}/${locationId}`,
+        accessToken ? accessToken : null,
+        method.GET,
+        null,
+        "Error fetching this location "
+      );
+      return location;
+    } catch (error) {
+      console.error("Error fetching this location :", error);
+      throw error;
+    }
+  },
+  deleteLocationById: async (locationId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const location = await fetchDataFromApi(
+        `${endpointAPI.LOCATION}/${locationId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting relocation by  ID"
+      );
+      return location;
+    } catch (error) {
+      console.error("Error deleting location by location ID.", error);
+      throw error;
+    }
+  },
 };
