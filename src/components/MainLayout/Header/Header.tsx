@@ -84,10 +84,10 @@ export const Header = () => {
                 <NavLink to={routes.MAIN}>Home</NavLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <HashLink to={routes.MOST_ORDERED}>Most Ordered</HashLink>
+                <HashLink to={routes.ABOUT_US}>About Us</HashLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                <HashLink to={routes.ABOUT_US}>About Us</HashLink>
+                <HashLink to={routes.MOST_ORDERED}>Most Ordered</HashLink>
               </SmallScreenNavLink>
               <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
                 <NavLink to={routes.RESTAURANTS}>Restaurants</NavLink>
@@ -109,7 +109,7 @@ export const Header = () => {
               ) : (
                 <>
                   <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
-                    <LoginLink to={routes.PROFILE}>Profile</LoginLink>
+                    <NavLink to={routes.PROFILE}>Profile</NavLink>
                   </SmallScreenNavLink>
                   <SmallScreenNavLink onClick={() => setToggleMenu(false)}>
                     <NavLink to={routes.LOGOUT}>Log Out</NavLink>
