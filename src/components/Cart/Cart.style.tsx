@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { CartInputProps, SwitchButtonProps } from "./Cart.static";
-import { StyledButton } from "../ui-elements/button";
-import InputLabel from "../ui-elements/inputLabel";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
+import { StyledButton } from "../ui-elements/SubmitFormButton/submitFormButton.style";
+import InputLabel from "../ui-elements/InputLabel/inputLabel";
 
 export const CartWrapper = styled.div`
   display: flex;
