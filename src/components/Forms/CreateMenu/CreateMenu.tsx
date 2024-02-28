@@ -3,7 +3,6 @@ import {
   CreateMenuFormProps,
   MenuTypeData,
   RestaurantData,
-  ServerError,
 } from "../../../static/interfaces";
 import { useRestaurants } from "../../../hooks/useRestaurants";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
@@ -60,7 +59,7 @@ export const CreateMenu: React.FC<CreateMenuFormProps> = ({ onSubmit }) => {
           const menu = await menuService.createMenu(values);
           onSubmit && onSubmit(menu);
           navigate(mainRoute.MAIN);
-        } catch (error: ServerError) {
+        } catch (error) {
           console.error("Failed to create menu:", error);
           toast.error(`Failed to create menu: ${error.message}`);
         }

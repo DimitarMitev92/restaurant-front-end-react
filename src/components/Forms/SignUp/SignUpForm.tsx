@@ -13,7 +13,6 @@ import {
 } from "../../../static/endpoints";
 import { useNavigate } from "react-router-dom";
 import { useSessionStorage } from "../../../hooks/useSessionStorage";
-// import { useLocations } from "../../../hooks/useLocations";
 import { useAuth } from "../../../context/AuthProvider";
 import { ImageSignUp, Wrapper } from "./SignUpForm.style";
 
@@ -21,6 +20,9 @@ import imageSignUp from "../../../assets/sign-up.jpeg";
 import { useLocations } from "../../../hooks/useLocations";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { inputsSignUpData } from "./SignUpForm.static";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const { locations = [] } = useLocations();
@@ -60,23 +62,28 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
         }}
         validationSchema={signUpValidationSchema}
         onSubmit={async (values: SignUpFormData) => {
-          const url = endpointAPI.SIGN_UP;
-          const options = {
-            method: method.POST,
-            headers: headers.CONTENT_TYPE_APP_JSON,
-            body: JSON.stringify({
-              firstName: values.firstName,
-              lastName: values.lastName,
-              email: values.email,
-              locationId: values.locationId,
-              password: values.password,
-            }),
-          };
-          const userDataFromApi = await signService(url, options);
-          onSubmit && onSubmit(values);
-          setItem("access_token", userDataFromApi.user.accessToken);
-          setUser(userDataFromApi);
-          navigate(mainRoute.MAIN);
+          try {
+            const url = endpointAPI.SIGN_UP;
+            const options = {
+              method: method.POST,
+              headers: headers.CONTENT_TYPE_APP_JSON,
+              body: JSON.stringify({
+                firstName: values.firstName,
+                lastName: values.lastName,
+                email: values.email,
+                locationId: values.locationId,
+                password: values.password,
+              }),
+            };
+            const userDataFromApi = await signService(url, options);
+            onSubmit && onSubmit(values);
+            setItem("access_token", userDataFromApi.user.accessToken);
+            setUser(userDataFromApi);
+            navigate(mainRoute.MAIN);
+          } catch (error) {
+            console.error("Failed to sign up:", error);
+            toast.error(`Failed to sign up: ${error.message}`);
+          }
         }}
         buttonText="Sign Up"
       />

@@ -13,6 +13,9 @@ import { createMenuValidationSchema } from "../../../static/form-validations";
 import { menuService } from "../../../services/menuService";
 import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
   updatedId,
   onSubmit,
@@ -74,9 +77,14 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
       }}
       validationSchema={createMenuValidationSchema}
       onSubmit={async (values) => {
-        const menu = await menuService.updateMenu(updatedId, values);
-        onSubmit && onSubmit(menu);
-        navigate(`${mainRoute.RESTAURANTS}/${id}`);
+        try {
+          const menu = await menuService.updateMenu(updatedId, values);
+          onSubmit && onSubmit(menu);
+          navigate(`${mainRoute.RESTAURANTS}/${id}`);
+        } catch (error) {
+          console.error("Failed to update menu:", error);
+          toast.error(`Failed to update menu: ${error.message}`);
+        }
       }}
       buttonText="Update"
     />

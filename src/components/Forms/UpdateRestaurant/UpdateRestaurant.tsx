@@ -14,6 +14,9 @@ import { useLocations } from "../../../hooks/useLocations";
 import { restaurantService } from "../../../services/restaurantService";
 import { inputsCreateRestaurantData } from "./UpdateRestaurant.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   updatedId,
   onSubmit,
@@ -75,12 +78,17 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
       }}
       validationSchema={createRestaurantValidationSchema}
       onSubmit={async (values) => {
-        const menu = await restaurantService.updateRestaurants(
-          updatedId,
-          values
-        );
-        onSubmit && onSubmit(menu);
-        navigate(`${mainRoute.RESTAURANTS}/${id}`);
+        try {
+          const menu = await restaurantService.updateRestaurants(
+            updatedId,
+            values
+          );
+          onSubmit && onSubmit(menu);
+          navigate(`${mainRoute.RESTAURANTS}/${id}`);
+        } catch (error) {
+          console.error("Failed to update restaurant:", error);
+          toast.error(`Failed to update restaurant: ${error.message}`);
+        }
       }}
       buttonText="Update"
     />

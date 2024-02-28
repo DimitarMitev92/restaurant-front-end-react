@@ -1,10 +1,7 @@
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createAddressValidationSchema } from "../../../static/form-validations";
 import { addressService } from "../../../services/addressService";
-import {
-  CreateAddressFormProps,
-  ServerError,
-} from "../../../static/interfaces";
+import { CreateAddressFormProps } from "../../../static/interfaces";
 import { useNavigate } from "react-router";
 import { inputsCreateAddressData } from "./CreateAddress.static";
 
@@ -30,7 +27,7 @@ export const CreateAddress: React.FC<CreateAddressFormProps> = ({
           await addressService.createAddress(values);
           onSubmit && onSubmit(values);
           navigate("/profile/user-addresses");
-        } catch (error: ServerError) {
+        } catch (error) {
           console.error("Failed to create address:", error);
           toast.error(`Failed to create address: ${error.message}`);
         }

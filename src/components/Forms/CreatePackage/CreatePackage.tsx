@@ -6,6 +6,9 @@ import { packageService } from "../../../services/packageService";
 import { mainRoute } from "../../../static/endpoints";
 import { inputsCreatePackageData } from "./CreatePackage.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const CreatePackage: React.FC<CreatePackageFormProps> = ({
   onSubmit,
 }) => {
@@ -22,9 +25,14 @@ export const CreatePackage: React.FC<CreatePackageFormProps> = ({
       }}
       validationSchema={createPackageValidationSchema}
       onSubmit={async (values) => {
-        const category = await packageService.createPackage(values);
-        onSubmit && onSubmit(category);
-        navigate(mainRoute.MAIN);
+        try {
+          const category = await packageService.createPackage(values);
+          onSubmit && onSubmit(category);
+          navigate(mainRoute.MAIN);
+        } catch (error) {
+          console.error("Failed to create package:", error);
+          toast.error(`Failed to create package: ${error.message}`);
+        }
       }}
       buttonText="Create"
     />

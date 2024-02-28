@@ -11,6 +11,9 @@ import { mainRoute } from "../../../static/endpoints";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { inputsCreateRestaurantData } from "./CreateRestaurant.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   onSubmit,
 }) => {
@@ -46,9 +49,14 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
       }}
       validationSchema={createRestaurantValidationSchema}
       onSubmit={async (values) => {
-        const restaurant = await restaurantService.createRestaurant(values);
-        onSubmit && onSubmit(restaurant);
-        navigate(mainRoute.MAIN);
+        try {
+          const restaurant = await restaurantService.createRestaurant(values);
+          onSubmit && onSubmit(restaurant);
+          navigate(mainRoute.MAIN);
+        } catch (error) {
+          console.error("Failed to create restaurant:", error);
+          toast.error(`Failed to create restaurant: ${error.message}`);
+        }
       }}
       buttonText="Create"
     />
