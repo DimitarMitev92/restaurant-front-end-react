@@ -15,11 +15,12 @@ import {
   OrderMealCardWrapper,
   OrderMealTitle,
   OrderMealButtonsWrapper,
-  OrderCartButton,
   OrderCartCountWrapper,
   OrderCartCount,
   BottomWrapper,
   OrderMealPrices,
+  AddCartButton,
+  DecrementCartButton,
 } from "./Cart.style";
 import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/Input/input";
@@ -186,17 +187,15 @@ export const ShoppingCart: React.FC = () => {
                       package price: {+meal.packagePrice * +meal.count} USD
                     </OrderMealPrices>
                     <OrderMealButtonsWrapper>
-                      <OrderCartButton
+                      <DecrementCartButton
                         onClick={() => onRemoveMealToBasket(meal)}
-                      >
-                        -
-                      </OrderCartButton>
+                      ></DecrementCartButton>
                       <OrderCartCountWrapper>
                         <OrderCartCount>{meal.count}</OrderCartCount>
                       </OrderCartCountWrapper>
-                      <OrderCartButton onClick={() => onAddMealToBasket(meal)}>
-                        +
-                      </OrderCartButton>
+                      <AddCartButton
+                        onClick={() => onAddMealToBasket(meal)}
+                      ></AddCartButton>
                     </OrderMealButtonsWrapper>
                     <UnifiedInput
                       type="text"
