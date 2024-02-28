@@ -4,7 +4,7 @@ import {
   ButtonContainer,
   WrapperDashBoard,
 } from "./AdminDashboard.style";
-import Button from "../../ui-elements/button";
+import Button from "../../ui-elements/Button/button";
 import { useAdminDashboardLogic } from "./AdminDashboard.logic";
 
 export const AdminDashboard = () => {

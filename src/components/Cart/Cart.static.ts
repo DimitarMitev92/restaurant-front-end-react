@@ -1,11 +1,11 @@
 import { SwipeableProps } from "react-swipeable";
-import { UnifiedInputProps } from "../ui-elements/input";
+import { UnifiedInputProps } from "../ui-elements/Input/input";
 
 export interface SwitchButtonProps {
   active: boolean;
 }
 
-export type SwipeEvent = SwipeableProps['onSwiped'];
+export type SwipeEvent = SwipeableProps["onSwiped"];
 
 export interface DeliverySwitchProps {
   deliveryMode: boolean;
@@ -50,5 +50,4 @@ export interface AutoTableOptions {
       fillColor: string;
     };
   };
- 
 }

@@ -8,7 +8,7 @@ import {
 } from "./Restaurants.style";
 import { PulseLoader } from "react-spinners";
 import EmptyList from "../../EmptyList/EmptyList";
-import UnifiedInput from "../../ui-elements/input";
+import UnifiedInput from "../../ui-elements/Input/input";
 import { useRestaurantsPageLogic } from "./Restaurants.logic";
 import { useAuth } from "../../../context/AuthProvider";
 import { useRestaurantsByLocationId } from "../../../hooks/useRestaurantsByLocation";

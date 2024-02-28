@@ -14,7 +14,7 @@ import { mealService } from "../../../services/mealService";
 import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
 import { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
-import ErrorMessage from "../../ui-elements/errorMessage";
+import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 import { useMenusByRestaurant } from "../../../hooks/useMenusByRestaurant";
 import { inputsCreateMealData } from "./UpdateMeal.static";
 

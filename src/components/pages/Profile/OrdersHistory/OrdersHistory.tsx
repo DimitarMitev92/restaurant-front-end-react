@@ -10,7 +10,7 @@ import {
   OrderHistoryMealHeading,
   OrderHistoryMealsContainer,
 } from "./OrderHistory.style";
-import Button from "../../../ui-elements/button";
+import Button from "../../../ui-elements/Button/button";
 import { routes } from "../../../../routes/routes.static";
 import { useAuth } from "../../../../context/AuthProvider";
 import { useOrderByClientId } from "../../../../hooks/useOrderByClientId";
@@ -18,7 +18,6 @@ import { useOrderByClientId } from "../../../../hooks/useOrderByClientId";
 export const OrdersHistory = () => {
   const { user } = useAuth();
   const { orders } = useOrderByClientId(user?.user.id);
-  console.log(orders);
   const { addHistoryOrderToBasket } = useOrderContext();
   const navigate = useNavigate();
 

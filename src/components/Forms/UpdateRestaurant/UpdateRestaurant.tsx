@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
 import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
 import { createRestaurantValidationSchema } from "../../../static/form-validations";
-import ErrorMessage from "../../ui-elements/errorMessage";
+import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 import { useLocations } from "../../../hooks/useLocations";
 import { restaurantService } from "../../../services/restaurantService";
 import { inputsCreateRestaurantData } from "./UpdateRestaurant.static";

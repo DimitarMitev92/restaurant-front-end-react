@@ -1,5 +1,11 @@
+import { OrderData } from "../components/pages/Profile/OrdersHistory/OrdersHistory.static";
 import { endpointAPI, method } from "../static/endpoints";
-import { CreateOrderFormData, UpdateOrderFormData } from "../static/interfaces";
+import {
+  CreateOrderFormData,
+  Order,
+  OrderDetails,
+  UpdateOrderFormData,
+} from "../static/interfaces";
 import { fetchDataFromApi } from "./fetchDataFromApi";
 
 export const orderService = {
@@ -83,8 +89,9 @@ export const orderService = {
           null,
           "Error fetching orders"
         );
+
         const orderDetails = await Promise.all(
-          orders.map(async (order) => {
+          orders.map(async (order: Order) => {
             const orderDetails = await fetchDataFromApi(
               `${endpointAPI.ORDER_DETAIL}/order/${order.id}`,
               accessToken,
@@ -104,7 +111,7 @@ export const orderService = {
             return {
               ...order,
               restaurant: restaurant,
-              meals: orderDetails.map((orderDetailMeal) => ({
+              meals: orderDetails.map((orderDetailMeal: OrderDetails) => ({
                 ...orderDetailMeal,
                 meal: null, // Placeholder for meal data
               })),
@@ -123,7 +130,7 @@ export const orderService = {
             );
 
             const mealIndex = orderDetail.meals.findIndex(
-              (detail) => detail.id === orderDetailMeal.id
+              (detail: OrderData) => detail.id === orderDetailMeal.id
             );
 
             if (mealIndex !== -1) {
@@ -134,8 +141,6 @@ export const orderService = {
             }
           }
         }
-        console.log("ORDER DETAILS SERVICE");
-        console.log(orderDetails);
         return orderDetails;
       }
     } catch (error) {

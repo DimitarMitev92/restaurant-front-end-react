@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import SubmitFormButton from "../../ui-elements/submitFormButton";
-import InputLabel from "../../ui-elements/inputLabel";
-import UnifiedInput from "../../ui-elements/input";
-import ErrorMessage from "../../ui-elements/errorMessage";
+import SubmitFormButton from "../../ui-elements/SubmitFormButton/submitFormButton";
+import InputLabel from "../../ui-elements/InputLabel/inputLabel";
+import UnifiedInput from "../../ui-elements/Input/input";
+import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 import {
   EyeIcon,
   FormDiv,
@@ -78,8 +78,12 @@ export const ReusableForm: React.FC<ReusableProps> = ({
   onSubmit,
   buttonText,
 }) => {
-  const { hideUpdateMenuPopUp, hideUpdateMealPopUp, hideAddMealPopUp ,hideUpdateRestaurantPopUp} =
-    usePopupContext();
+  const {
+    hideUpdateMenuPopUp,
+    hideUpdateMealPopUp,
+    hideAddMealPopUp,
+    hideUpdateRestaurantPopUp,
+  } = usePopupContext();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const formik = useFormik<FormValues>({
@@ -92,7 +96,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
         hideUpdateMenuPopUp();
         hideUpdateMealPopUp();
         hideAddMealPopUp();
-        hideUpdateRestaurantPopUp()
+        hideUpdateRestaurantPopUp();
       } catch (error) {
         console.error("Form submission error:", error);
         const errorMessage =
@@ -104,7 +108,7 @@ export const ReusableForm: React.FC<ReusableProps> = ({
         hideUpdateMenuPopUp();
         hideUpdateMealPopUp();
         hideAddMealPopUp();
-        hideUpdateRestaurantPopUp()
+        hideUpdateRestaurantPopUp();
       }
     },
   });

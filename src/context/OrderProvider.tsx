@@ -46,7 +46,6 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [selectedAddressId, setSelectedAddressId] = useState<string>("");
   const [additionalNoteForOrder, setAdditionalNoteForOrder] =
     useState<string>("");
-  console.log(meals);
   const getPackagePrice = async (packageId: string) => {
     const url = `${endpointAPI.PACKAGE}/${packageId}`;
     const accessToken = sessionStorage.getItem("access_token");

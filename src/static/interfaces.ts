@@ -15,7 +15,28 @@ export interface OrderProviderProps {
   children: ReactNode;
 }
 
-export interface MealOrder {}
+export interface Order {
+  additionalInfo: string;
+  clientId: string;
+  cleatedAt: string;
+  deletedAt: null;
+  id: string;
+  pickMethod: string;
+  restaurantId: string;
+  updatedAt: string;
+}
+
+export interface OrderDetails {
+  additionalNote: string | null;
+  count: number;
+  createdAt: string;
+  deletedAt: null;
+  id: string;
+  mealId: string;
+  orderId: string;
+  totalPrice: number;
+  updatedAt: string;
+}
 
 export interface DecodedToken {
   sub: string;

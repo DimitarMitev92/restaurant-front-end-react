@@ -3,7 +3,7 @@ import { CartButton } from "../Cart/Cart.style";
 import { ButtonDiv, StyledModal } from "./BillPrint.style";
 import { PrintPreviewModalProps } from "./BillPrint.static";
 import { useOrderContext } from "../../context/OrderProvider";
-import UnifiedInput from "../ui-elements/input";
+import UnifiedInput from "../ui-elements/Input/input";
 import { ChangeEvent } from "react";
 
 export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
