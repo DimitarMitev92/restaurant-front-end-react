@@ -38,7 +38,6 @@ export const ShoppingCart: React.FC = () => {
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
     undefined
   );
-  const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
@@ -69,7 +68,6 @@ export const ShoppingCart: React.FC = () => {
           addresses.address &&
           addresses.address.length > 0
         ) {
-          setAddressesData(addresses);
           setSelectedAddress(addresses[0]?.address);
         }
       } catch (error) {
