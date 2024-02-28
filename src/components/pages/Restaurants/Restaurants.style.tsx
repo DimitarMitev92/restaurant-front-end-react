@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-display: flex;
-    flex-direction: column;
-    padding: 100px 16px;
-    height: 100vh;
-    overflow: scroll;
-    &::-webkit-scrollbar {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 16px;
+  height: 100vh;
+  overflow: scroll;
+  &::-webkit-scrollbar {
     width: 6px;
   }
 
@@ -22,16 +22,6 @@ display: flex;
   &::-webkit-scrollbar-thumb:hover {
     background: rgb(196, 196, 196);
   }
-    
-
-
-  /* @media (max-width: 768px) {
-    padding: 10px;
-  } */
-
-  /* @media (min-width: 769px) and (max-width: 1024px) {
-    padding: 15px;
-  } */
 `;
 
 export const CardsContainer = styled.div`
