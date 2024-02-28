@@ -15,6 +15,10 @@ import { PopupProvider } from "./context/PopupContext";
 import NotFoundPage from "./components/pages/NotFoundPage/NotFoundPage";
 import { OrderProvider } from "./context/OrderProvider";
 import { Restaurant } from "./components/pages/Restaurant/Restaurant";
+import { ChangePassword } from "./components/Forms/ChangePassword/ChangePassword";
+import { CreateAddress } from "./components/Forms/CreateAddress/CreateAddress";
+import { UserAddresses } from "./components/pages/Profile/UserAddresses/UserAddresses";
+import { OrdersHistory } from "./components/pages/Profile/OrdersHistory/OrdersHistory";
 
 function App() {
   return (
@@ -72,19 +76,19 @@ function App() {
                   <Route path={routes.PROFILE} element={<Profile />}>
                     <Route
                       path={routes.PROFILE_CHANGE_PASSWORD}
-                      element={<Profile />}
+                      element={<ChangePassword />}
                     />
                     <Route
                       path={routes.PROFILE_CREATE_ADDRESS}
-                      element={<Profile />}
+                      element={<CreateAddress />}
                     />
                     <Route
                       path={routes.PROFILE_USER_ADDRESSES}
-                      element={<Profile />}
+                      element={<UserAddresses />}
                     />
                     <Route
                       path={routes.PROFILE_ORDERS_HISTORY}
-                      element={<Profile />}
+                      element={<OrdersHistory />}
                     />
                   </Route>
                   <Route path={routes.LOGOUT} element={<Logout />} />
