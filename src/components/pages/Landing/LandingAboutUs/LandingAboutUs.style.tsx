@@ -23,6 +23,12 @@ export const ContentAboutUs = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const WrapperContent = styled.div`
