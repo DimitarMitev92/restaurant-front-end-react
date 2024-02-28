@@ -43,6 +43,7 @@ export const Restaurant = () => {
     <>
       <RestaurantWrapper>
         <FilterWrapper>
+        <ShoppingCart />
           <RestaurantNameContainer>
             {restaurant.name}
             <AdminButtonsContainer>
@@ -59,8 +60,11 @@ export const Restaurant = () => {
           <WorkingHoursContainer>
             Working hours: {restaurant.openHour} - {restaurant.closeHour}
           </WorkingHoursContainer>
+        
           <FilterBtnWrapper>
+  
             <ClearAllFilter type={clearFilter.all} filter={filter} />
+            
             {allMenus &&
               allMenus.map((menu: Menu) => {
                 return <MenuFilter filter={filter} key={menu.id} menu={menu} />;
@@ -71,7 +75,7 @@ export const Restaurant = () => {
               return <MealHolder key={menu.id} menu={menu} />;
             })}
           {menus && menus.length === 0 && <div>No menus found</div>}
-          <ShoppingCart />
+      
         </FilterWrapper>
       </RestaurantWrapper>
       {isDeleteRestaurantPopUpVisible && (

@@ -77,4 +77,20 @@ export const menuTypeService = {
       throw error;
     }
   },
+  deleteMenuTypeById: async (menuTypeId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const menuType = await fetchDataFromApi(
+        `${endpointAPI.CATEGORY}/${menuTypeId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting menuType by ID"
+      );
+      return menuType;
+    } catch (error) {
+      console.error("Error deleting menuType by menuType ID.", error);
+      throw error;
+    }
+  },
 };

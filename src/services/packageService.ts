@@ -78,4 +78,20 @@ export const packageService = {
       throw error;
     }
   },
+  deletePackagesById: async (packageId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      const pack = await fetchDataFromApi(
+        `${endpointAPI.PACKAGE}/${packageId}/soft`,
+        accessToken ? accessToken : null,
+        method.DELETE,
+        null,
+        "Error deleting package by  ID"
+      );
+      return pack;
+    } catch (error) {
+      console.error("Error deleting package by package ID.", error);
+      throw error;
+    }
+  },
 };
