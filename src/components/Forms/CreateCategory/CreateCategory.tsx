@@ -6,6 +6,9 @@ import { mainRoute } from "../../../static/endpoints";
 import { categoryService } from "../../../services/categoryService";
 import { inputsCreateCategoryData } from "./CreateCategory.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const CreateCategory: React.FC<CreateCategoryFormProps> = ({
   onSubmit,
 }) => {
@@ -21,9 +24,14 @@ export const CreateCategory: React.FC<CreateCategoryFormProps> = ({
       }}
       validationSchema={createCategoryValidationSchema}
       onSubmit={async (values) => {
-        const category = await categoryService.createCategory(values);
-        onSubmit && onSubmit(category);
-        navigate(mainRoute.MAIN);
+        try {
+          const category = await categoryService.createCategory(values);
+          onSubmit && onSubmit(category);
+          navigate(mainRoute.MAIN);
+        } catch (error) {
+          console.error("Failed to create category:", error);
+          toast.error(`Failed to create category: ${error.message}`);
+        }
       }}
       buttonText="Create"
     />

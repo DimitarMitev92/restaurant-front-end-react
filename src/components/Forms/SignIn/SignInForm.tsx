@@ -16,6 +16,9 @@ import imageSignIn from "../../../assets/sign-in.jpeg";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { inputsSignInData } from "./SignInForm.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   const navigate = useNavigate();
   const { setItem } = useSessionStorage();
@@ -30,17 +33,22 @@ export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         initialValues={{ email: "", password: "", error: "" }}
         validationSchema={signInValidationSchema}
         onSubmit={async (values) => {
-          const url = endpointAPI.SIGN_IN;
-          const options = {
-            method: method.POST,
-            headers: headers.CONTENT_TYPE_APP_JSON,
-            body: JSON.stringify(values),
-          };
-          const userDataFromApi = await signService(url, options);
-          onSubmit && onSubmit(values);
-          setItem("access_token", userDataFromApi.user.accessToken);
-          setUser(userDataFromApi);
-          navigate(mainRoute.MAIN);
+          try {
+            const url = endpointAPI.SIGN_IN;
+            const options = {
+              method: method.POST,
+              headers: headers.CONTENT_TYPE_APP_JSON,
+              body: JSON.stringify(values),
+            };
+            const userDataFromApi = await signService(url, options);
+            onSubmit && onSubmit(values);
+            setItem("access_token", userDataFromApi.user.accessToken);
+            setUser(userDataFromApi);
+            navigate(mainRoute.MAIN);
+          } catch (error) {
+            console.error("Failed to sign in:", error);
+            toast.error(`Failed to sign in: ${error.message}`);
+          }
         }}
         buttonText="Sign In"
       />

@@ -12,7 +12,6 @@ import { useAuth } from "../../../context/AuthProvider";
 import {
   ChangePasswordFormData,
   ChangePasswordFormProps,
-  ServerError,
 } from "../../../static/interfaces";
 import { useSessionStorage } from "../../../hooks/useSessionStorage";
 import { inputsChangePasswordData } from "./ChangePassword.static";
@@ -56,7 +55,7 @@ export const ChangePassword: React.FC<ChangePasswordFormProps> = ({
           setItem("access_token", userDataFromApi.user.accessToken);
           setUser(userDataFromApi);
           navigate(mainRoute.MAIN);
-        } catch (error: ServerError) {
+        } catch (error) {
           console.error("Failed to change password:", error);
           toast.error(`Failed to change password: ${error.message}`);
         }

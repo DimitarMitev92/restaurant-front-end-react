@@ -6,6 +6,9 @@ import { mainRoute } from "../../../static/endpoints";
 import { menuTypeService } from "../../../services/menuTypeService";
 import { inputsMenuTypeData } from "./CreateMenuType.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const CreateMenuType: React.FC<CreateMenuTypeFormProps> = ({
   onSubmit,
 }) => {
@@ -21,9 +24,14 @@ export const CreateMenuType: React.FC<CreateMenuTypeFormProps> = ({
       }}
       validationSchema={createMenuTypeValidationSchema}
       onSubmit={async (values) => {
-        const menuType = await menuTypeService.createMenuType(values);
-        onSubmit && onSubmit(menuType);
-        navigate(mainRoute.MAIN);
+        try {
+          const menuType = await menuTypeService.createMenuType(values);
+          onSubmit && onSubmit(menuType);
+          navigate(mainRoute.MAIN);
+        } catch (error) {
+          console.error("Failed to create menu type:", error);
+          toast.error(`Failed to create menu type: ${error.message}`);
+        }
       }}
       buttonText={"Create"}
     />

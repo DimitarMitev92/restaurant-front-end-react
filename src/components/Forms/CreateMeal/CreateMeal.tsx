@@ -1,12 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useCategories } from "../../../hooks/useCategories";
 import { usePackages } from "../../../hooks/usePackages";
-import {
-  CategoryData,
-  Meal,
-  PackageData,
-  ServerError,
-} from "../../../static/interfaces";
+import { CategoryData, Meal, PackageData } from "../../../static/interfaces";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { mainRoute } from "../../../static/endpoints";
 import { createMealValidationSchema } from "../../../static/form-validations";
@@ -76,7 +71,7 @@ export const CreateMeal: React.FC<{
           const meal = await mealService.createMeal(values);
           onSubmit && onSubmit(meal);
           navigate(`${mainRoute.RESTAURANTS}/${restaurantId}`);
-        } catch (error: ServerError) {
+        } catch (error) {
           console.error("Failed to create meal:", error);
           toast.error(`Failed to create meal: ${error.message}`);
         }

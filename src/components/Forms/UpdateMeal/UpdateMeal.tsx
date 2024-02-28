@@ -18,6 +18,9 @@ import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 import { useMenusByRestaurant } from "../../../hooks/useMenusByRestaurant";
 import { inputsCreateMealData } from "./UpdateMeal.static";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   updatedId,
   onSubmit,
@@ -113,14 +116,19 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       }}
       validationSchema={createMealValidationSchema}
       onSubmit={async (values) => {
-        values.startDate = new Date(values.startDate)
-          .toISOString()
-          .split("T")[0];
-        values.endDate = new Date(values.endDate).toISOString().split("T")[0];
+        try {
+          values.startDate = new Date(values.startDate)
+            .toISOString()
+            .split("T")[0];
+          values.endDate = new Date(values.endDate).toISOString().split("T")[0];
 
-        const meal = await mealService.updateMeal(updatedId, values);
-        onSubmit && onSubmit(meal);
-        navigate(`${mainRoute.RESTAURANTS}/${id}`);
+          const meal = await mealService.updateMeal(updatedId, values);
+          onSubmit && onSubmit(meal);
+          navigate(`${mainRoute.RESTAURANTS}/${id}`);
+        } catch (error) {
+          console.error("Failed to update meal:", error);
+          toast.error(`Failed to update meal: ${error.message}`);
+        }
       }}
       buttonText="Update"
     />
