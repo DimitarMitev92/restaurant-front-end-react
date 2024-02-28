@@ -1,5 +1,5 @@
-import { StyledInput, StyledSelect } from "./Input.style";
 import { UnifiedInputProps } from "./input.static";
+import { StyledInput, StyledSelect } from "./input.style";
 
 const UnifiedInput = ({
   onChange,
