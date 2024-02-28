@@ -5,6 +5,7 @@
   --color-yellow: #ffc244;
   --color-dark-yellow: #c98807;
   --color-gray: #545454;
+  --color-dark-gray: #333;
   --color-crimson: #f5efdb;
   --color-grey: #aaaaaa;
   --color-green: #4caf50;
@@ -15,6 +16,7 @@
   --color-white: white;
   --color-teal: #d6dcd7;
   --color-white-smoke: #d6d6d6;
+  --color-overlay: #5c5a5a4f;
 }
 
 body {

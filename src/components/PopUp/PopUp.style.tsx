@@ -49,7 +49,7 @@ export const CancelButtonPopup = styled.button`
   cursor: pointer;
 `;
 export const PopUpOverlay = styled.div`
-  background-color: #5c5a5a4f;
+  background-color: var(--color-overlay);
   width: 100%;
   height: 100%;
   position: fixed;
