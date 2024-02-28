@@ -14,6 +14,7 @@ import {
 } from "./OrderHistory.style";
 import { OrderHistoryMeal } from "./OrdersHistory.static";
 import Button from "../../../ui-elements/Button/button";
+import EmptyList from "../../../EmptyList/EmptyList";
 
 export const OrdersHistory = () => {
   const { user } = useAuth();
@@ -28,6 +29,9 @@ export const OrdersHistory = () => {
     navigate(`${routes.RESTAURANTS}/${order.restaurantId}`);
   };
 
+  if (orders?.length === 0) {
+    return <EmptyList message="No history order available" />;
+  }
   return (
     <OrderHistoryContainer>
       {orders?.map((order) => (
