@@ -6,6 +6,7 @@ export const UserAddressesWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+ 
 `;
 
 export const AddressCard = styled.div`
@@ -20,5 +21,5 @@ export const AddressCard = styled.div`
 `;
 
 export const AddressText = styled.p`
-  color: var(--color-white);
+  color: var(--color-black);
 `;
