@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MostOrderedWrapper = styled.section`
   width: 100%;
-  padding: 1rem;
+  padding: 20px;
 `;
 
 export const CardsContainer = styled.div`

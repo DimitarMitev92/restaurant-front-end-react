@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { MostOrderedMealsProps } from "../../static/interfaces";
-import { Card } from "./MostOrderedMeal.style";
+import { Card, ImageContainer, FoodImage } from "./MostOrderedMeal.style";
 import { routes } from "../../routes/routes.static";
 
 export const MostOrderedMeal: React.FC<MostOrderedMealsProps> = ({ meal }) => {
@@ -10,11 +10,11 @@ export const MostOrderedMeal: React.FC<MostOrderedMealsProps> = ({ meal }) => {
   };
   return (
     <Card onClick={cardClickHandler}>
-      <h3>{meal.meal_name}</h3>
+      <h3 style={{ color: " var(--color-green)" }}>{meal.meal_name}</h3>
       <sub>{meal.restaurant_name}</sub>
-      <div>
-        <img src={meal.meal_picture} alt={meal.meal_name} />
-      </div>
+      <ImageContainer>
+        <FoodImage src={meal.meal_picture} alt={meal.meal_name} />
+      </ImageContainer>
       <div>Ordered</div>
       <div>{meal.total_meal_count}</div>
     </Card>

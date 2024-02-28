@@ -17,7 +17,9 @@ export const LandingMostOrdered = () => {
 
   return (
     <MostOrderedWrapper>
-      <Title>Most Ordered Meals</Title>
+      <Title style={{ padding: "40px", textAlign: "start" }}>
+        Most Ordered Meals
+      </Title>
       {loading && <PulseLoader color="var(--color-green)" size={12} />}
       {error && <p>Error fetching most ordered meals</p>}
       <CardsContainer>
