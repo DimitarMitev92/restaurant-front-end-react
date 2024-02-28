@@ -81,7 +81,7 @@ export const menuTypeService = {
     try {
       const accessToken = sessionStorage.getItem("access_token");
       const menuType = await fetchDataFromApi(
-        `${endpointAPI.CATEGORY}/${menuTypeId}/soft`,
+        `${endpointAPI.MENU_TYPE}/${menuTypeId}/soft`,
         accessToken ? accessToken : null,
         method.DELETE,
         null,

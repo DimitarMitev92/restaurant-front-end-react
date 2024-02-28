@@ -483,8 +483,88 @@ export interface MostOrderedMealsProps {
   meal: MostOrderedMeals;
 }
 
+export interface LocationDataApi {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface PackageDataApi {
+  id: string;
+  type: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface CategoryDataApi {
+  id: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface MenuTypeDataApi {
+  id: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface MostOrderedMeals {
+  meal_id: string;
+  meal_name: string;
+  meal_picture: string;
+  restaurant_id: string;
+  restaurant_name: string;
+  total_meal_count: string;
+}
+
+export interface MostOrderedMealsProps {
+  meal: MostOrderedMeals;
+}
+
+export interface LocationDataApi {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface PackageDataApi {
+  id: string;
+  type: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface CategoryDataApi {
+  id: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+export interface MenuTypeDataApi {
+  id: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
 export interface ServerError {
   message: string;
   error: string;
   statusCode: number;
 }
+

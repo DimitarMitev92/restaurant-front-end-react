@@ -30,3 +30,47 @@ export const forms = [
     path: "/admin-dashboard/create-category",
   },
 ];
+export interface Form {
+  label: string;
+  formName: string;
+  path: string;
+}
+
+export const showDataForDelete = [
+  {
+    label: "Package",
+    formName: "deletePackage",
+    path: "/admin-dashboard/delete-package",
+  },
+  {
+    label: "Menu Type",
+    formName: "deleteMenuType",
+    path: "/admin-dashboard/delete-menu-type",
+  },
+  {
+    label: "Location",
+    formName: "deleteLocation",
+    path: "/admin-dashboard/delete-location",
+  },
+  {
+    label: "Category",
+    formName: "deleteCategory",
+    path: "/admin-dashboard/delete-category",
+  },
+];
+
+export interface PackagesProps {
+  onDelete: (packageId: string) => void;
+}
+
+export interface CategoriesProps {
+  onDelete: (categoryId: string) => void;
+}
+
+export interface MenuTypesProps {
+  onDelete: (menuTypeId: string) => void;
+}
+
+export interface LocationsProps {
+  onDelete: (locationId: string) => void;
+}
