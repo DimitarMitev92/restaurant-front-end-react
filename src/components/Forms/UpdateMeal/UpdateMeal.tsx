@@ -1,12 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useCategories } from "../../../hooks/useCategories";
-import { useMenus } from "../../../hooks/useMenus";
 import { usePackages } from "../../../hooks/usePackages";
 import {
   CategoryData,
   CreateMealFormData,
   CreateMealFormProps,
-  MenuData,
+  Menu,
   PackageData,
 } from "../../../static/interfaces";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
@@ -16,6 +15,7 @@ import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
 import { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
 import ErrorMessage from "../../ui-elements/errorMessage";
+import { useMenusByRestaurant } from "../../../hooks/useMenusByRestaurant";
 
 export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   updatedId,
@@ -23,7 +23,7 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
 }) => {
   const { id } = useParams();
 
-  const { menus = [] } = useMenus();
+  const { menusByRestaurant = [] } = useMenusByRestaurant(id!);
   const { categories = [] } = useCategories();
   const { packages = [] } = usePackages();
 
@@ -105,9 +105,9 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       type: "select",
       name: "menuId",
       placeholder: "Select menu",
-      options: menus.map((menu: MenuData) => ({
+      options: menusByRestaurant.map((menu:Menu) => ({
         value: menu.id,
-        label: menu.menuTypeValue,
+        label: menu.menutypevalue,
       })),
     },
     {
