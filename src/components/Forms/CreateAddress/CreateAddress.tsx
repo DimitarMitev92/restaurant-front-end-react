@@ -3,21 +3,12 @@ import { createAddressValidationSchema } from "../../../static/form-validations"
 import { addressService } from "../../../services/addressService";
 import { CreateAddressFormProps } from "../../../static/interfaces";
 import { useNavigate } from "react-router";
+import { inputsCreateAddressData } from "./CreateAddress.static";
 
 export const CreateAddress: React.FC<CreateAddressFormProps> = ({
   onSubmit,
 }) => {
-
-  const navigate = useNavigate()
-  const inputsCreateAddressData = [
-    {
-      htmlFor: "address",
-      labelTitle: "Address:",
-      type: "text",
-      name: "address",
-      placeholder: "Enter your address",
-    },
-  ];
+  const navigate = useNavigate();
 
   return (
     <ReusableForm
@@ -31,7 +22,7 @@ export const CreateAddress: React.FC<CreateAddressFormProps> = ({
       onSubmit={async (values) => {
         await addressService.createAddress(values);
         onSubmit && onSubmit(values);
-        navigate('/profile/user-addresses')
+        navigate("/profile/user-addresses");
       }}
       buttonText={"Create"}
     />

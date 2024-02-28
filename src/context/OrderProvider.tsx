@@ -46,7 +46,7 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [selectedAddressId, setSelectedAddressId] = useState<string>("");
   const [additionalNoteForOrder, setAdditionalNoteForOrder] =
     useState<string>("");
-
+  console.log(meals);
   const getPackagePrice = async (packageId: string) => {
     const url = `${endpointAPI.PACKAGE}/${packageId}`;
     const accessToken = sessionStorage.getItem("access_token");
@@ -116,37 +116,25 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
     menuId: string,
     count: number
   ) => {
-    const newMeals = typeof meal === "function" ? meal(meals) : meal;
+    setMeals([]);
 
+    const newMeals = typeof meal === "function" ? meal([]) : meal;
     for (const newMeal of newMeals) {
-      const existingMealIndex = meals.findIndex((m) => m.id === newMeal.id);
-
-      if (existingMealIndex !== -1) {
-        setMeals((prevMeals) => {
-          const updatedMeals = [...prevMeals];
-          updatedMeals[existingMealIndex] = {
-            ...updatedMeals[existingMealIndex],
-            count: count,
-          };
-          return updatedMeals;
-        });
+      if (!newMeal.packagePrice) {
+        const packageData = await getPackagePrice(newMeal.packageId);
+        const updatedMeal = {
+          ...newMeal,
+          packagePrice: packageData.price,
+          additionalNote: "",
+          menuId: menuId,
+          count: count,
+        };
+        setMeals((prevMeals) => [...prevMeals, updatedMeal]);
       } else {
-        if (!newMeal.packagePrice) {
-          const packageData = await getPackagePrice(newMeal.packageId);
-          const updatedMeal = {
-            ...newMeal,
-            packagePrice: packageData.price,
-            additionalNote: "",
-            menuId: menuId,
-            count: count,
-          };
-          setMeals((prevMeals) => [...prevMeals, updatedMeal]);
-        } else {
-          setMeals((prevMeals) => [
-            ...prevMeals,
-            { ...newMeal, menuId: menuId, count: count },
-          ]);
-        }
+        setMeals((prevMeals) => [
+          ...prevMeals,
+          { ...newMeal, menuId: menuId, count: count },
+        ]);
       }
     }
 

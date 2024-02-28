@@ -5,21 +5,12 @@ import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createLocationValidationSchema } from "../../../static/form-validations";
 import { locationService } from "../../../services/locationService";
 import { mainRoute } from "../../../static/endpoints";
+import { inputsCreateLocationData } from "./CreateLocation.static";
 
 export const CreateLocation: React.FC<CreateLocationFormProps> = ({
   onSubmit,
 }) => {
   const navigate = useNavigate();
-
-  const inputsCreateLocationData = [
-    {
-      htmlFor: "name",
-      labelTitle: "Name:",
-      type: "text",
-      name: "name",
-      placeholder: "Enter location...",
-    },
-  ];
 
   return (
     <ReusableForm

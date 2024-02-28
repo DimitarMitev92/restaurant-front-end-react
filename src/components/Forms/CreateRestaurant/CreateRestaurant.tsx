@@ -9,6 +9,7 @@ import { createRestaurantValidationSchema } from "../../../static/form-validatio
 import { restaurantService } from "../../../services/restaurantService";
 import { mainRoute } from "../../../static/endpoints";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
+import { inputsCreateRestaurantData } from "./CreateRestaurant.static";
 
 export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   onSubmit,
@@ -16,14 +17,8 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   const { locations = [] } = useLocations();
   const navigate = useNavigate();
 
-  const inputsCreateRestaurantData = [
-    {
-      htmlFor: "name",
-      labelTitle: "Name:",
-      type: "text",
-      name: "name",
-      placeholder: "Enter your name...",
-    },
+  const inputsCreateRestaurantDataWithLocation = [
+    ...inputsCreateRestaurantData,
     {
       htmlFor: "locationId",
       labelTitle: "Location:",
@@ -35,33 +30,12 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
         label: location.name,
       })),
     },
-    {
-      htmlFor: "imageUrl",
-      labelTitle: "Image:",
-      type: "text",
-      name: "imageUrl",
-      placeholder: "Enter image url...",
-    },
-    {
-      htmlFor: "openHour",
-      labelTitle: "Open hour:",
-      type: "time",
-      name: "openHour",
-      placeholder: "Enter open hour...",
-    },
-    {
-      htmlFor: "closeHour",
-      labelTitle: "Close hour:",
-      type: "time",
-      name: "closeHour",
-      placeholder: "Enter close hour...",
-    },
   ];
 
   return (
     <ReusableForm
       formHeading="Create restaurant"
-      inputsData={inputsCreateRestaurantData}
+      inputsData={inputsCreateRestaurantDataWithLocation}
       initialValues={{
         name: "",
         locationId: "",

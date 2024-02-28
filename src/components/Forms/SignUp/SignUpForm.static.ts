@@ -21,17 +21,17 @@ export const inputsSignUpData = [
     placeholder: "Enter your email...",
   },
   {
-    htmlFor: "locationId",
-    labelTitle: "Location:",
-    type: "select",
-    name: "locationId",
-    placeholder: "Select location",
-  },
-  {
     htmlFor: "password",
     labelTitle: "Password:",
     type: "password",
     name: "password",
     placeholder: "Enter your password...",
+  },
+  {
+    htmlFor: "comparePassword",
+    labelTitle: "Confirm Password:",
+    type: "password",
+    name: "comparePassword",
+    placeholder: "Enter again your password...",
   },
 ];

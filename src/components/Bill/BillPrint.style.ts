@@ -7,25 +7,9 @@ export const BillContentDiv = styled.div`
   padding-left: 30px;
 `;
 
-// export const CartItemDiv = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   text-align: left;
-//   padding: 10px;
-//   border: 1px solid var(--color-grey);
-//   box-shadow: 7px;
-//   margin-bottom: 10px;
-//   font-size: 1.2rem;
-
-//   @media (max-width: 768px) {
-//     font-size: 1rem;
-//   }
-// `;
-
 export const CartItemDiv = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;  /* Adjust the number of columns as needed */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
   text-align: left;
   padding: 10px;
@@ -36,7 +20,7 @@ export const CartItemDiv = styled.div`
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
-    grid-template-columns: 1fr;  
+    grid-template-columns: 1fr;
   }
 `;
 export const StyledModal = styled(ReactModal)`
@@ -53,11 +37,11 @@ export const StyledModal = styled(ReactModal)`
   border: 1px solid var(--color-grey);
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-  margin: 20px; 
+  margin: 20px;
   padding: 40px;
-  max-width: 90%; 
-  max-height: 80%; 
-  overflow-y: auto; 
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -108,14 +92,15 @@ export const Table = styled.table`
   margin-top: 10px;
   border: none;
 
-  th, td {
+  th,
+  td {
     border: 0.1px solid var(--color-white-smoke);
     padding: 8px;
     text-align: left;
   }
 
   th {
-    background-color:  var(--color-green);
+    background-color: var(--color-green);
     color: white;
   }
 
@@ -124,7 +109,8 @@ export const Table = styled.table`
   }
 
   @media only screen and (max-width: 768px) {
-    th, td {
+    th,
+    td {
       font-size: 8px;
       padding: 6px;
     }

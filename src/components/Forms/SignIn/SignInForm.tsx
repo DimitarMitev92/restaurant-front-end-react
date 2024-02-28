@@ -14,28 +14,12 @@ import { SignInFormProps } from "../../../static/interfaces";
 
 import imageSignIn from "../../../assets/sign-in.jpeg";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
+import { inputsSignInData } from "./SignInForm.static";
 
 export const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   const navigate = useNavigate();
   const { setItem } = useSessionStorage();
   const { setUser } = useAuth();
-
-  const inputsSignInData = [
-    {
-      htmlFor: "email",
-      labelTitle: "Email:",
-      type: "email",
-      name: "email",
-      placeholder: "Enter your email...",
-    },
-    {
-      htmlFor: "password",
-      labelTitle: "Password:",
-      type: "password",
-      name: "password",
-      placeholder: "Enter your password...",
-    },
-  ];
 
   return (
     <Wrapper>
