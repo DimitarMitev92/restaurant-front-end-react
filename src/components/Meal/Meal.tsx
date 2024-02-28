@@ -72,9 +72,9 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
             <span>{meal.weight}g</span>
           </div>
           <BtnWrapper>
-            <StyledAddCircle onClick={addHandler}></StyledAddCircle>
             <UserRoleHOC>
               <AdminButtons>
+              <StyledAddCircle onClick={addHandler}></StyledAddCircle>
                 <StyledEditButton
                   onClick={() => handlePopUp()}
                 ></StyledEditButton>
