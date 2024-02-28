@@ -1,53 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-
-const WrapperAboutUs = styled.div`
-  margin: 1em auto 5em;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2em;
-`;
-
-const TitleAboutUs = styled.h1`
-  color: var(--color-green);
-  font-size: 2em;
-  margin-bottom: 20px;
-`;
-
-const ContentAboutUs = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: start;
-`;
-
-const WrapperContent = styled.div`
-  max-width: 45%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-`;
-
-const ParagraphAboutUs = styled.p`
-  color: #555;
-  font-size: 1.1em;
-  line-height: 1.4;
-  margin-bottom: 15px;
-  text-align: center;
-`;
-
-const SubTitleAboutUs = styled.h2`
-  color: var(--color-green);
-  font-size: 1.5em;
-  margin-top: 20px;
-  margin-bottom: 10px;
-`;
+import {
+  ContentAboutUs,
+  ParagraphAboutUs,
+  SubTitleAboutUs,
+  TitleAboutUs,
+  WrapperAboutUs,
+  WrapperContent,
+} from "./LandingAboutUs.style";
 
 export const LandingAboutUs = () => {
   return (
-    <WrapperAboutUs>
+    <WrapperAboutUs id="about-us">
       <TitleAboutUs>Welcome to foodFly</TitleAboutUs>
       <ContentAboutUs>
         <WrapperContent>
