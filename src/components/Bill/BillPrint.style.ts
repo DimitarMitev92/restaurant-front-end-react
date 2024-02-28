@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const BillDiv = styled.div``;
 
 export const BillContentDiv = styled.div`
-  padding-left: 30px;
+  padding: 20px;
+  padding-bottom: 20px;
 `;
 
 // export const CartItemDiv = styled.div`
@@ -25,7 +26,7 @@ export const BillContentDiv = styled.div`
 
 export const CartItemDiv = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;  /* Adjust the number of columns as needed */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
   text-align: left;
   padding: 10px;
@@ -36,7 +37,7 @@ export const CartItemDiv = styled.div`
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
-    grid-template-columns: 1fr;  
+    grid-template-columns: 1fr;
   }
 `;
 export const StyledModal = styled(ReactModal)`
@@ -53,11 +54,11 @@ export const StyledModal = styled(ReactModal)`
   border: 1px solid var(--color-grey);
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-  margin: 20px; 
+  margin: 20px;
   padding: 40px;
-  max-width: 90%; 
-  max-height: 80%; 
-  overflow-y: auto; 
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -76,13 +77,13 @@ export const StyledModal = styled(ReactModal)`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.7rem;
+    font-size: 14px;
     padding: 20px;
     margin: 10px;
   }
 
   @media (max-width: 480px) {
-    font-size: 0.6rem;
+    font-size: 12px;
     padding: 10px;
     margin: 5px;
   }
@@ -93,6 +94,15 @@ export const ButtonDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  @media (max-width: 768px) {
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 `;
 
 export const BillHeading = styled.h2`
@@ -107,15 +117,18 @@ export const Table = styled.table`
   width: 100%;
   margin-top: 10px;
   border: none;
+  height: 15vh;
+  margin-top: 10px;
 
-  th, td {
+  th,
+  td {
     border: 0.1px solid var(--color-white-smoke);
     padding: 8px;
     text-align: left;
   }
 
   th {
-    background-color:  var(--color-green);
+    background-color: var(--color-green);
     color: white;
   }
 
@@ -124,8 +137,9 @@ export const Table = styled.table`
   }
 
   @media only screen and (max-width: 768px) {
-    th, td {
-      font-size: 8px;
+    th,
+    td {
+      font-size: 12px;
       padding: 6px;
     }
   }
