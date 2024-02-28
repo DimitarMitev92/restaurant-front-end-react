@@ -7,10 +7,9 @@ export const CartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 100vh;
   width: 360px;
   padding: 30px;
-  padding-top: 100px;
+  padding-top: 30px;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -24,7 +23,6 @@ export const SidebarWrapper = styled.div`
   width: 320px;
   height: 75vh;
   background: var(--color-white);
-  z-index: 3;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border-radius: 7px;
@@ -40,6 +38,7 @@ export const SidebarWrapper = styled.div`
     left: 0;
     transform: none;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
   }
 `;
 
