@@ -1,5 +1,5 @@
 import { SwipeableProps } from "react-swipeable";
-import { UnifiedInputProps } from "../ui-elements/Input/input";
+import { UnifiedInputProps } from "../ui-elements/Input/input.static";
 
 export interface SwitchButtonProps {
   active: boolean;

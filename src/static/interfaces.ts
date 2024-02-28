@@ -482,3 +482,9 @@ export interface MostOrderedMeals {
 export interface MostOrderedMealsProps {
   meal: MostOrderedMeals;
 }
+
+export interface ServerError {
+  message: string;
+  error: string;
+  statusCode: number;
+}

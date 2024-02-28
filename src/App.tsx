@@ -20,6 +20,9 @@ import { CreateAddress } from "./components/Forms/CreateAddress/CreateAddress";
 import { UserAddresses } from "./components/pages/Profile/UserAddresses/UserAddresses";
 import { OrdersHistory } from "./components/pages/Profile/OrdersHistory/OrdersHistory";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <AuthProvider>
@@ -99,6 +102,7 @@ function App() {
                 ></Route>
               </Routes>
             </Main>
+            <ToastContainer />
           </BrowserRouter>
         </PopupProvider>
       </OrderProvider>

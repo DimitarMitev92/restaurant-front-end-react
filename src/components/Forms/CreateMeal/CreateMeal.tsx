@@ -1,12 +1,20 @@
 import { useNavigate, useParams } from "react-router";
 import { useCategories } from "../../../hooks/useCategories";
 import { usePackages } from "../../../hooks/usePackages";
-import { CategoryData, Meal, PackageData } from "../../../static/interfaces";
+import {
+  CategoryData,
+  Meal,
+  PackageData,
+  ServerError,
+} from "../../../static/interfaces";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { mainRoute } from "../../../static/endpoints";
 import { createMealValidationSchema } from "../../../static/form-validations";
 import { mealService } from "../../../services/mealService";
 import { inputsCreateMealData } from "./CreateMeal.static";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const CreateMeal: React.FC<{
   menuId: string;
@@ -68,8 +76,9 @@ export const CreateMeal: React.FC<{
           const meal = await mealService.createMeal(values);
           onSubmit && onSubmit(meal);
           navigate(`${mainRoute.RESTAURANTS}/${restaurantId}`);
-        } catch (error) {
+        } catch (error: ServerError) {
           console.error("Failed to create meal:", error);
+          toast.error(`Failed to create meal: ${error.message}`);
         }
       }}
       buttonText="Create"

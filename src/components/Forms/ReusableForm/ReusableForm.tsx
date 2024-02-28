@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import SubmitFormButton from "../../ui-elements/SubmitFormButton/submitFormButton";
 import InputLabel from "../../ui-elements/InputLabel/inputLabel";
 import UnifiedInput from "../../ui-elements/Input/input";
 import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
@@ -12,6 +11,7 @@ import {
 } from "./ReusableForm.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { usePopupContext } from "../../../context/PopupContext";
+import SubmitFormButton from "../../ui-elements/SubmitFormButton/submitFormButton";
 
 interface ReusableProps {
   formHeading: string;
