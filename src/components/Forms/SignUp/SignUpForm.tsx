@@ -20,6 +20,7 @@ import { ImageSignUp, Wrapper } from "./SignUpForm.style";
 import imageSignUp from "../../../assets/sign-up.jpeg";
 import { useLocations } from "../../../hooks/useLocations";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
+import { inputsSignUpData } from "./SignUpForm.static";
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const { locations = [] } = useLocations();
@@ -27,28 +28,8 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const { setItem } = useSessionStorage();
   const { setUser } = useAuth();
 
-  const inputsSignUpData = [
-    {
-      htmlFor: "firstName",
-      labelTitle: "First Name:",
-      type: "text",
-      name: "firstName",
-      placeholder: "Enter your first name...",
-    },
-    {
-      htmlFor: "lastName",
-      labelTitle: "Last Name:",
-      type: "text",
-      name: "lastName",
-      placeholder: "Enter your last name...",
-    },
-    {
-      htmlFor: "email",
-      labelTitle: "Email:",
-      type: "email",
-      name: "email",
-      placeholder: "Enter your email...",
-    },
+  const inputsSignUpDataWithLocation = [
+    ...inputsSignUpData,
     {
       htmlFor: "locationId",
       labelTitle: "Location:",
@@ -60,20 +41,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
         label: location.name,
       })),
     },
-    {
-      htmlFor: "password",
-      labelTitle: "Password:",
-      type: "password",
-      name: "password",
-      placeholder: "Enter your password...",
-    },
-    {
-      htmlFor: "comparePassword",
-      labelTitle: "Confirm Password:",
-      type: "password",
-      name: "comparePassword",
-      placeholder: "Enter again your password...",
-    },
   ];
 
   return (
@@ -81,7 +48,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
       <ImageSignUp src={imageSignUp} alt="image-sign-up" />
       <ReusableForm
         formHeading="Sign Up"
-        inputsData={inputsSignUpData}
+        inputsData={inputsSignUpDataWithLocation}
         initialValues={{
           firstName: "",
           lastName: "",

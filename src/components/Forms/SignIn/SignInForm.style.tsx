@@ -6,10 +6,6 @@ export const Wrapper = styled.div`
   align-items: center;
   padding-top: 85px;
   height: 100%;
-  
-  /* @media screen and (max-width: 650px) {
-    height: 87vh;
-  } */
 `;
 
 export const FormDiv = styled.form`

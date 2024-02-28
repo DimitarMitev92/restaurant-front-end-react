@@ -14,6 +14,7 @@ import {
   ChangePasswordFormProps,
 } from "../../../static/interfaces";
 import { useSessionStorage } from "../../../hooks/useSessionStorage";
+import { inputsChangePasswordData } from "./ChangePassword.static";
 
 export const ChangePassword: React.FC<ChangePasswordFormProps> = ({
   onSubmit,
@@ -21,37 +22,6 @@ export const ChangePassword: React.FC<ChangePasswordFormProps> = ({
   const navigate = useNavigate();
   const { setItem } = useSessionStorage();
   const { setUser } = useAuth();
-
-  const inputsChangePasswordData = [
-    {
-      htmlFor: "email",
-      labelTitle: "Email:",
-      type: "text",
-      name: "email",
-      placeholder: "Enter your email...",
-    },
-    {
-      htmlFor: "password",
-      labelTitle: "Password:",
-      type: "password",
-      name: "password",
-      placeholder: "Enter your password...",
-    },
-    {
-      htmlFor: "newPassword",
-      labelTitle: "New Password:",
-      type: "password",
-      name: "newPassword",
-      placeholder: "Enter your new password...",
-    },
-    {
-      htmlFor: "comparePassword",
-      labelTitle: "Confirm Password:",
-      type: "password",
-      name: "comparePassword",
-      placeholder: "Enter again your new password...",
-    },
-  ];
 
   return (
     <ReusableForm

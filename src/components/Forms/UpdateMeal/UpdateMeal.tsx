@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
 import ErrorMessage from "../../ui-elements/errorMessage";
 import { useMenusByRestaurant } from "../../../hooks/useMenusByRestaurant";
+import { inputsCreateMealData } from "./UpdateMeal.static";
 
 export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   updatedId,
@@ -35,77 +36,15 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
 
   const [errorFromServer, setErrorFromServer] = useState(null);
 
-  const inputsCreateMealData = [
-    {
-      htmlFor: "name",
-      labelTitle: "Name:",
-      type: "text",
-      name: "name",
-      placeholder: "Enter your name...",
-    },
-    {
-      htmlFor: "picture",
-      labelTitle: "Image url:",
-      type: "text",
-      name: "picture",
-      placeholder: "Enter your image url...",
-    },
-    {
-      htmlFor: "description",
-      labelTitle: "Description:",
-      type: "text",
-      name: "description",
-      placeholder: "Enter your description...",
-    },
-    {
-      htmlFor: "startDate",
-      labelTitle: "Start date:",
-      type: "date",
-      name: "startDate",
-      placeholder: "Enter your start date...",
-    },
-    {
-      htmlFor: "endDate",
-      labelTitle: "End date:",
-      type: "date",
-      name: "endDate",
-      placeholder: "Enter your end date...",
-    },
-    {
-      htmlFor: "startHour",
-      labelTitle: "Start hour:",
-      type: "time",
-      name: "startHour",
-      placeholder: "Enter your start hour...",
-    },
-    {
-      htmlFor: "endHour",
-      labelTitle: "End hour:",
-      type: "time",
-      name: "endHour",
-      placeholder: "Enter your end hour...",
-    },
-    {
-      htmlFor: "price",
-      labelTitle: "Price:",
-      type: "number",
-      name: "price",
-      placeholder: "Enter price...",
-    },
-    {
-      htmlFor: "weight",
-      labelTitle: "Weight:",
-      type: "number",
-      name: "weight",
-      placeholder: "Enter weight...",
-    },
+  const inputsCreateMealDataWithMenuCatPack = [
+    ...inputsCreateMealData,
     {
       htmlFor: "menuId",
       labelTitle: "Menu:",
       type: "select",
       name: "menuId",
       placeholder: "Select menu",
-      options: menusByRestaurant.map((menu:Menu) => ({
+      options: menusByRestaurant.map((menu: Menu) => ({
         value: menu.id,
         label: menu.menutypevalue,
       })),
@@ -167,7 +106,7 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   return currentMeal ? (
     <ReusableForm
       formHeading="Update meal"
-      inputsData={inputsCreateMealData}
+      inputsData={inputsCreateMealDataWithMenuCatPack}
       initialValues={{
         ...currentMeal,
         error: "",

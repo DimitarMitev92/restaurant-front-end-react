@@ -4,28 +4,12 @@ import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createPackageValidationSchema } from "../../../static/form-validations";
 import { packageService } from "../../../services/packageService";
 import { mainRoute } from "../../../static/endpoints";
+import { inputsCreatePackageData } from "./CreatePackage.static";
 
 export const CreatePackage: React.FC<CreatePackageFormProps> = ({
   onSubmit,
 }) => {
   const navigate = useNavigate();
-
-  const inputsCreatePackageData = [
-    {
-      htmlFor: "type",
-      labelTitle: "Package:",
-      type: "text",
-      name: "type",
-      placeholder: "Enter package...",
-    },
-    {
-      htmlFor: "price",
-      labelTitle: "Price:",
-      type: "number",
-      name: "price",
-      placeholder: "Enter price...",
-    },
-  ];
 
   return (
     <ReusableForm

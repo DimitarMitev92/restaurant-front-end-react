@@ -32,7 +32,6 @@ import Switch from "../ui-elements/switchButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { orderService } from "../../services/orderService";
 import { mainRoute } from "../../static/endpoints";
-import { menuService } from "../../services/menuService";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -123,8 +122,11 @@ export const ShoppingCart: React.FC = () => {
     removeMealFromBasket(meal.id);
   };
 
-  const onChangeAdditionalNote = (mealId: string, e: ChangeEvent) => {
-    addAdditionalNoteForMeal(mealId, e.target?.value);
+  const onChangeAdditionalNote = (
+    mealId: string,
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    addAdditionalNoteForMeal(mealId, e.target.value);
   };
 
   const handlePreviewInvoice = () => {
@@ -143,19 +145,6 @@ export const ShoppingCart: React.FC = () => {
     bill.save("bill.pdf");
     handlePreviewInvoice();
   };
-
-  // useEffect(() => {
-  //   const fetchMenusById = async () => {
-  //     meals.forEach(async (meal) => {
-  //       const menuData = await menuService.fetchMenuById(meal.menuId);
-  //       console.log(menuData);
-  //       if (menuData.restaurantId === id) {
-  //         return setAreMealsFromRestaurant(true);
-  //       }
-  //     });
-  //   };
-  //   fetchMenusById();
-  // }, []);
 
   return (
     <CartWrapper>

@@ -27,7 +27,7 @@ export const createPDF = (meals: IMeal[], totalPrice: number): jsPDF => {
   doc.text("Bill", 20, 60);
   doc.setFontSize(12);
 
-  // Add order info
+  
   const tableData = meals.map((meal, index) => [
     index + 1,
     meal.name,

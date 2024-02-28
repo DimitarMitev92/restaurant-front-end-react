@@ -8,22 +8,6 @@ export const BillContentDiv = styled.div`
   padding-bottom: 20px;
 `;
 
-// export const CartItemDiv = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   text-align: left;
-//   padding: 10px;
-//   border: 1px solid var(--color-grey);
-//   box-shadow: 7px;
-//   margin-bottom: 10px;
-//   font-size: 1.2rem;
-
-//   @media (max-width: 768px) {
-//     font-size: 1rem;
-//   }
-// `;
-
 export const CartItemDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -139,7 +123,7 @@ export const Table = styled.table`
   @media only screen and (max-width: 768px) {
     th,
     td {
-      font-size: 12px;
+      font-size: 8px;
       padding: 6px;
     }
   }
