@@ -21,6 +21,7 @@ export const ButtonContainer = styled.div`
   gap: 10px;
   margin-bottom: 20px;
   padding: 20px;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
 
   @media screen and (min-width: 1059px) {
     display: flex;
@@ -57,3 +58,4 @@ export const WrapperDashBoard = styled.div`
     height: 87vh;
   }
 `;
+

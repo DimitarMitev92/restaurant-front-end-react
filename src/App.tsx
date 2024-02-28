@@ -72,7 +72,31 @@ function App() {
                       path={routes.ADMIN_DASHBOARD_CREATE_MEAL}
                       element={<AdminRoute element={<AdminDashboard />} />}
                     />
+                      <Route
+                      path={routes.ADMIN_DASHBOARD_DELETE_LOCATION}
+                      element={<AdminRoute element={<AdminDashboard />} />}
+                    />
+                      <Route
+                      path={routes.ADMIN_DASHBOARD_DELETE_PACKAGE}
+                      element={<AdminRoute element={<AdminDashboard />} />}
+                    />
+                    <Route
+                      path={routes.ADMIN_DASHBOARD_DELETE_RESTAURANT}
+                      element={<AdminRoute element={<AdminDashboard />} />}
+                    />
+                    <Route
+                      path={routes.ADMIN_DASHBOARD_DELETE_MENU_TYPE}
+                      element={<AdminRoute element={<AdminDashboard />} />}
+                    />
+                    <Route
+                      path={routes.ADMIN_DASHBOARD_DELETE_MENU}
+                      element={<AdminRoute element={<AdminDashboard />} />}
+                    />
                   </Route>
+                  <Route
+                      path={routes.ADMIN_DASHBOARD_DELETE_CATEGORY}
+                      element={<AdminRoute element={<AdminDashboard />} />}
+                    />
                   <Route path={routes.PROFILE} element={<Profile />}>
                     <Route
                       path={routes.PROFILE_CHANGE_PASSWORD}
