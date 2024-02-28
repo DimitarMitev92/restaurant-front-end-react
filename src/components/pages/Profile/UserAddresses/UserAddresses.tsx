@@ -1,17 +1,11 @@
 import { useAuth } from "../../../../context/AuthProvider";
-import {
-  AdminButtons,
-  IconImage,
-  RemoveButton,
-} from "../../../Meal/Meal.style";
+import { AdminButtons, StyledRemoveButton } from "../../../Meal/Meal.style";
 import { AddressDataApi } from "./UserAddresses.static";
 import {
   AddressCard,
   AddressText,
   UserAddressesWrapper,
 } from "./UserAddresses.style";
-
-import trashIcon from "../../../../assets/trash-xmark.png";
 import { addressService } from "../../../../services/addressService";
 import { useEffect, useState } from "react";
 import EmptyList from "../../../EmptyList/EmptyList";
@@ -56,9 +50,9 @@ export const UserAddresses = () => {
         <AddressCard key={address.id}>
           <AddressText>{address.address}</AddressText>
           <AdminButtons>
-            <RemoveButton onClick={() => handleDeleteAddress(address.id)}>
-              <IconImage src={trashIcon} />
-            </RemoveButton>
+            <StyledRemoveButton
+              onClick={() => handleDeleteAddress(address.id)}
+            ></StyledRemoveButton>
           </AdminButtons>
         </AddressCard>
       ))}

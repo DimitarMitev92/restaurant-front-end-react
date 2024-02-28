@@ -1,19 +1,19 @@
 import React from "react";
-import { OrderData, OrderHistoryMeal } from "./OrdersHistory.static";
+import { useAuth } from "../../../../context/AuthProvider";
 import { useOrderContext } from "../../../../context/OrderProvider";
+import { useOrderByClientId } from "../../../../hooks/useOrderByClientId";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../routes/routes.static";
 import {
   OrderHistoryCardOrder,
   OrderHistoryContainer,
   OrderHistoryHeading,
-  OrderHistoryMealCard,
-  OrderHistoryMealHeading,
-  OrderHistoryMealsContainer,
+  OrderHistoryTable,
+  OrderHistoryTableHeading,
+  OrderHistoryTableRow,
 } from "./OrderHistory.style";
+import { OrderHistoryMeal } from "./OrdersHistory.static";
 import Button from "../../../ui-elements/Button/button";
-import { routes } from "../../../../routes/routes.static";
-import { useAuth } from "../../../../context/AuthProvider";
-import { useOrderByClientId } from "../../../../hooks/useOrderByClientId";
 
 export const OrdersHistory = () => {
   const { user } = useAuth();
@@ -21,8 +21,8 @@ export const OrdersHistory = () => {
   const { addHistoryOrderToBasket } = useOrderContext();
   const navigate = useNavigate();
 
-  const orderAgainHandler = (order: OrderData) => {
-    order.meals.forEach((meal: OrderHistoryMeal) =>
+  const orderAgainHandler = (order) => {
+    order.meals.forEach((meal) =>
       addHistoryOrderToBasket([meal.meal], meal.meal.menuId, meal.count)
     );
     navigate(`${routes.RESTAURANTS}/${order.restaurantId}`);
@@ -38,28 +38,31 @@ export const OrdersHistory = () => {
           <OrderHistoryHeading>
             Picked method: {order.pickMethod}
           </OrderHistoryHeading>
-          <OrderHistoryMealsContainer>
-            {order.meals.map((meal: OrderHistoryMeal) => (
-              <OrderHistoryMealCard key={meal.id}>
-                <OrderHistoryMealHeading>
-                  Meal name: {meal.meal.name}
-                </OrderHistoryMealHeading>
-                <OrderHistoryMealHeading>
-                  Count: {meal.count}
-                </OrderHistoryMealHeading>
-                <OrderHistoryMealHeading>
-                  Price: {meal.meal.price}
-                </OrderHistoryMealHeading>
-                <OrderHistoryMealHeading>
-                  Weight: {meal.meal.weight}
-                </OrderHistoryMealHeading>
-              </OrderHistoryMealCard>
-            ))}
-          </OrderHistoryMealsContainer>
+          <OrderHistoryTable>
+            <thead>
+              <tr>
+                <OrderHistoryTableHeading>Meal Name</OrderHistoryTableHeading>
+                <OrderHistoryTableHeading>Count</OrderHistoryTableHeading>
+                <OrderHistoryTableHeading>Price</OrderHistoryTableHeading>
+                <OrderHistoryTableHeading>Weight</OrderHistoryTableHeading>
+              </tr>
+            </thead>
+            <tbody>
+              {order.meals.map((meal: OrderHistoryMeal) => (
+                <OrderHistoryTableRow key={meal.id}>
+                  <td>{meal.meal.name}</td>
+                  <td>{meal.count}</td>
+                  <td>${meal.meal.price}</td>
+                  <td>{meal.meal.weight}g</td>
+                </OrderHistoryTableRow>
+              ))}
+            </tbody>
+          </OrderHistoryTable>
+
           <Button
+            color="var(--color-green)"
             label="Order again"
             onClick={() => orderAgainHandler(order)}
-            color={""}
           />
         </OrderHistoryCardOrder>
       ))}
