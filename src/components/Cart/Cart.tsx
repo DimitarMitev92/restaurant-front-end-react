@@ -31,7 +31,8 @@ import { useOrderContext } from "../../context/OrderProvider";
 import Switch from "../ui-elements/switchButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { orderService } from "../../services/orderService";
-import { endpointAPI, mainRoute } from "../../static/endpoints";
+import { mainRoute } from "../../static/endpoints";
+import { menuService } from "../../services/menuService";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -42,6 +43,8 @@ export const ShoppingCart: React.FC = () => {
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
+  const [areMealsFromRestaurant, setAreMealsFromRestaurant] =
+    useState<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
 
   const { user } = useAuth();
@@ -86,20 +89,12 @@ export const ShoppingCart: React.FC = () => {
   };
 
   const handleConfirmOrder = async () => {
-    console.log("client id", user?.user.id);
-    console.log("restaurant id", id);
-    console.log("picked method", deliveryMode ? "delivery" : "on-site");
-    console.log("additional info", additionalNoteForOrder);
-    console.log(meals);
-
-    // Ensure clientId and restaurantId have default values if they are undefined
     const clientId = user?.user.id || "";
     const restaurantId = id || "";
 
     const mealsDataRefactor = meals.map((meal) => {
       return { mealId: meal.id, count: meal.count };
     });
-
     const dataForResponseOrder: CreateOrderFormData = {
       clientId: clientId,
       restaurantId: restaurantId,
@@ -107,11 +102,9 @@ export const ShoppingCart: React.FC = () => {
       additionalInfo: additionalNoteForOrder || "",
       meals: mealsDataRefactor,
     };
-
     const orderFromServer = await orderService.createOrder(
       dataForResponseOrder
     );
-    console.log(orderFromServer);
     navigate(`${mainRoute.PROFILE_ORDERS_HISTORY}`);
   };
 
@@ -155,6 +148,19 @@ export const ShoppingCart: React.FC = () => {
     handlePreviewInvoice();
   };
 
+  useEffect(() => {
+    const fetchMenusById = async () => {
+      meals.forEach(async (meal) => {
+        const menuData = await menuService.fetchMenuById(meal.menuId);
+        console.log(menuData);
+        if (menuData.restaurantId === id) {
+          return setAreMealsFromRestaurant(true);
+        }
+      });
+    };
+    fetchMenusById();
+  }, []);
+
   return (
     <CartWrapper>
       <SidebarWrapper>
@@ -185,7 +191,8 @@ export const ShoppingCart: React.FC = () => {
                 />
               </>
             )}
-            {meals &&
+            {areMealsFromRestaurant &&
+              meals &&
               meals.map((meal) => {
                 return (
                   <OrderMealCardWrapper key={meal.id}>

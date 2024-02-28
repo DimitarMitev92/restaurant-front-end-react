@@ -72,4 +72,75 @@ export const orderService = {
       throw error;
     }
   },
+  findAllOrdersByClientId: async (clientId: string) => {
+    try {
+      const accessToken = sessionStorage.getItem("access_token");
+      if (accessToken) {
+        const orders = await fetchDataFromApi(
+          `${endpointAPI.ORDER}/client/${clientId}`,
+          accessToken,
+          method.GET,
+          null,
+          "Error fetching orders"
+        );
+        const orderDetails = await Promise.all(
+          orders.map(async (order) => {
+            const orderDetails = await fetchDataFromApi(
+              `${endpointAPI.ORDER_DETAIL}/order/${order.id}`,
+              accessToken,
+              method.GET,
+              null,
+              "Error fetching order details"
+            );
+
+            const restaurant = await fetchDataFromApi(
+              `${endpointAPI.RESTAURANT}/${order.restaurantId}`,
+              accessToken,
+              method.GET,
+              null,
+              "Error fetching restaurant"
+            );
+
+            return {
+              ...order,
+              restaurant: restaurant,
+              meals: orderDetails.map((orderDetailMeal) => ({
+                ...orderDetailMeal,
+                meal: null, // Placeholder for meal data
+              })),
+            };
+          })
+        );
+
+        for (const orderDetail of orderDetails) {
+          for (const orderDetailMeal of orderDetail.meals) {
+            const mealData = await fetchDataFromApi(
+              `${endpointAPI.MEAL}/${orderDetailMeal.mealId}`,
+              accessToken,
+              method.GET,
+              null,
+              "Error fetching meal"
+            );
+
+            const mealIndex = orderDetail.meals.findIndex(
+              (detail) => detail.id === orderDetailMeal.id
+            );
+
+            if (mealIndex !== -1) {
+              orderDetail.meals[mealIndex] = {
+                ...orderDetailMeal,
+                meal: mealData,
+              };
+            }
+          }
+        }
+        console.log("ORDER DETAILS SERVICE");
+        console.log(orderDetails);
+        return orderDetails;
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      throw error;
+    }
+  },
 };
