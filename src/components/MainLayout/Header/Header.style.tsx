@@ -26,7 +26,6 @@ export const Navbar = styled.nav`
   @media screen and (max-width: 650px) {
     padding: 1rem;
   }
- 
 `;
 
 export const LogoContainer = styled.div`
@@ -84,9 +83,10 @@ export const LoginLink = styled(NavLink)`
   text-decoration: none;
   transition: 0.5s ease;
   color: var(--color-green);
+  display: flex;
 
   &:hover {
-    border-bottom: 1px solid var(--color-green);
+    color: var(--color-grey);
   }
 `;
 
@@ -135,7 +135,6 @@ export const SmallScreenNavLink = styled.li`
   color: var(--color-green);
   font-size: 2rem;
   text-align: center;
-  /* font-family: var(--font-base); */
 
   &:hover {
     color: var(--color-green);

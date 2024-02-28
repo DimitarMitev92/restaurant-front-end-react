@@ -51,16 +51,18 @@ export const Restaurant = () => {
         <FilterWrapper>
           <RestaurantNameContainer>
             {restaurant?.name}
+            <UserRoleHOC>
             <AdminButtonsContainer>
-              <UserRoleHOC>
+        
                 <StyledEditButton
                   onClick={handleUpdateRestaurant}
                 ></StyledEditButton>
                 <StyledRemoveButton
                   onClick={handleDeleteRestaurant}
                 ></StyledRemoveButton>
-              </UserRoleHOC>
+        
             </AdminButtonsContainer>
+            </UserRoleHOC>
           </RestaurantNameContainer>
           <WorkingHoursContainer>
             Working hours: {openHourFormatted} - {closeHourFormatted}
