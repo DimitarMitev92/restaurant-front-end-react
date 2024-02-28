@@ -8,8 +8,9 @@ export const FlexContainer = styled.div`
 
 export const SwitchButton = styled.button<SwitchButtonProps>`
   background-color: ${(props) =>
-    props.$active ? "--color-green" : "--color-yellow"};
-  color: ${(props) => (props.$active ? "--color-white" : "--color-dark-gray")};
+    props.$active ? "var(--color-green)" : "var(--color-yellow)"};
+  color: ${(props) =>
+    props.$active ? "var(--color-white)" : "var(--color-dark-gray)"};
   padding: 10px 15px;
   border: none;
   border-radius: none;
@@ -18,6 +19,6 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
 
   &:hover {
     background-color: ${(props) =>
-      props.$active ? "--color-green" : "--color-yellow"};
+      props.$active ? "var(--color-green)" : "var(--color-yellow)"};
   }
 `;
