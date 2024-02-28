@@ -43,8 +43,6 @@ export const ShoppingCart: React.FC = () => {
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [showInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
-  const [areMealsFromRestaurant, setAreMealsFromRestaurant] =
-    useState<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
 
   const { user } = useAuth();
@@ -146,18 +144,18 @@ export const ShoppingCart: React.FC = () => {
     handlePreviewInvoice();
   };
 
-  useEffect(() => {
-    const fetchMenusById = async () => {
-      meals.forEach(async (meal) => {
-        const menuData = await menuService.fetchMenuById(meal.menuId);
-        console.log(menuData);
-        if (menuData.restaurantId === id) {
-          return setAreMealsFromRestaurant(true);
-        }
-      });
-    };
-    fetchMenusById();
-  }, []);
+  // useEffect(() => {
+  //   const fetchMenusById = async () => {
+  //     meals.forEach(async (meal) => {
+  //       const menuData = await menuService.fetchMenuById(meal.menuId);
+  //       console.log(menuData);
+  //       if (menuData.restaurantId === id) {
+  //         return setAreMealsFromRestaurant(true);
+  //       }
+  //     });
+  //   };
+  //   fetchMenusById();
+  // }, []);
 
   return (
     <CartWrapper>
@@ -189,8 +187,7 @@ export const ShoppingCart: React.FC = () => {
                 />
               </>
             )}
-            {areMealsFromRestaurant &&
-              meals &&
+            {meals &&
               meals.map((meal) => {
                 return (
                   <OrderMealCardWrapper key={meal.id}>
@@ -227,8 +224,7 @@ export const ShoppingCart: React.FC = () => {
             {meals.length > 0 && (
               <BottomWrapper>
                 <StyledPriceDiv>
-                  Total Price: $
-                  {areMealsFromRestaurant ? totalPrice.toFixed(2) : 0}
+                  Total Price: ${totalPrice.toFixed(2)}
                 </StyledPriceDiv>
                 <CartButton
                   onClick={handlePreviewInvoice}
