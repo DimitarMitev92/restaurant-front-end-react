@@ -1,5 +1,3 @@
-import { isQueryKey } from "react-query/types/core/utils";
-
 export async function queryFetch({ queryKey }) {
   const [key, { url, options }] = queryKey;
   try {

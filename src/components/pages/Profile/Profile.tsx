@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../../context/AuthProvider";
-import Button from "../../ui-elements/button";
+import Button from "../../ui-elements/Button/button";
 import {
   ButtonContainer,
   DashboardContainer,

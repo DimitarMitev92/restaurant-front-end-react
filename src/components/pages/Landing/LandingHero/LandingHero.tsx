@@ -6,7 +6,7 @@ import {
   WrapperInfo,
 } from "./LandingHero.style";
 import imageSrc from "../../../../assets/logan-jeffrey-g5DNZ4X6RSc-unsplash.jpg";
-import UnifiedInput from "../../../ui-elements/input";
+import UnifiedInput from "../../../ui-elements/Input/input";
 import { PulseLoader } from "react-spinners";
 import { useLandingHeroLogic } from "./LandingHero.logic";
 import { LandingHeroProps } from "./LandingHero.static";

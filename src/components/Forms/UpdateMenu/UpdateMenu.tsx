@@ -11,7 +11,7 @@ import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
 import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
 import { createMenuValidationSchema } from "../../../static/form-validations";
 import { menuService } from "../../../services/menuService";
-import ErrorMessage from "../../ui-elements/errorMessage";
+import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 
 export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
   updatedId,

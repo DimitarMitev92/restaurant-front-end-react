@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, useRef } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useAddressesByUserId } from "../../hooks/useAddresses";
-import Select from "../ui-elements/select";
+import Select from "../ui-elements/Select/select";
 
 import {
   CartWrapper,
@@ -22,13 +22,13 @@ import {
   OrderMealPrices,
 } from "./Cart.style";
 import { Address } from "./Cart.static";
-import UnifiedInput from "../ui-elements/input";
+import UnifiedInput from "../ui-elements/Input/input";
 import { BillPrintComponent } from "../Bill/BillPrint";
 import { PrintPreviewModal } from "../Bill/Modal";
 import { CreateOrderFormData, IMeal } from "../../static/interfaces";
 import { createPDF } from "./Cart.logic";
 import { useOrderContext } from "../../context/OrderProvider";
-import Switch from "../ui-elements/switchButton";
+import Switch from "../ui-elements/SwitchButton/switchButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { orderService } from "../../services/orderService";
 import { mainRoute } from "../../static/endpoints";

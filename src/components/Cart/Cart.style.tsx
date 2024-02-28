@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CartInputProps, SwitchButtonProps } from "./Cart.static";
-import { StyledButton } from "../ui-elements/button";
-import InputLabel from "../ui-elements/inputLabel";
+import InputLabel from "../ui-elements/InputLabel/inputLabel";
+import { StyledButton } from "../ui-elements/Button/button.style";
 
 export const CartWrapper = styled.div`
   display: flex;
