@@ -37,7 +37,7 @@ export const FormDiv = styled.form`
   margin: 0 auto;
   @media screen and (max-width: 1000px) {
     width: 40em;
-    padding: 1em 2em;
+    padding-bottom: 100px;
   }
 `;
 

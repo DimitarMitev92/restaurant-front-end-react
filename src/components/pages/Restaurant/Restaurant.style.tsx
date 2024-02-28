@@ -6,6 +6,10 @@ export const MenuWrapper = styled.main`
 `;
 export const RestaurantWrapper = styled.div`
   display: flex;
+  @media (max-width: 768px) {
+   flex-direction: column-reverse;
+   padding-top: 100px;
+  }
 `;
 
 export const RestaurantNameContainer = styled.h1`
