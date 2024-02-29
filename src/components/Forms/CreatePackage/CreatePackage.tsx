@@ -3,7 +3,6 @@ import { CreatePackageFormProps } from "../../../static/interfaces";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createPackageValidationSchema } from "../../../static/form-validations";
 import { packageService } from "../../../services/packageService";
-import { mainRoute } from "../../../static/endpoints";
 import { inputsCreatePackageData } from "./CreatePackage.static";
 
 import { toast } from "react-toastify";
@@ -28,7 +27,6 @@ export const CreatePackage: React.FC<CreatePackageFormProps> = ({
         try {
           const category = await packageService.createPackage(values);
           onSubmit && onSubmit(category);
-          navigate(mainRoute.MAIN);
         } catch (error) {
           console.error("Failed to create package:", error);
           toast.error(`Failed to create package: ${error.message}`);

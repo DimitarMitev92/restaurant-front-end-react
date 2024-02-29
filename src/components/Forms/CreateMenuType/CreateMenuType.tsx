@@ -27,7 +27,6 @@ export const CreateMenuType: React.FC<CreateMenuTypeFormProps> = ({
         try {
           const menuType = await menuTypeService.createMenuType(values);
           onSubmit && onSubmit(menuType);
-          navigate(mainRoute.MAIN);
         } catch (error) {
           console.error("Failed to create menu type:", error);
           toast.error(`Failed to create menu type: ${error.message}`);
