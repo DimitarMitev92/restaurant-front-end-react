@@ -220,3 +220,32 @@ export const BottomWrapper = styled.div`
   bottom: 20px;
   padding: 1rem;
 `;
+
+export const CreateAddressButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CreateAddressButton = styled.button`
+  padding: 10px 15px;
+  margin-bottom: 1em;
+  font-size: 12px;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--color-green);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:disabled {
+    background-color: var(--color-red);
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+`;
