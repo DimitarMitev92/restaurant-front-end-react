@@ -1,3 +1,8 @@
+import {
+  DeleteFormButton,
+  DeleteFormHeading,
+  DeleteFormWrapper,
+} from "../DeleteForms.style";
 import { useDeleteRestaurantMessageFormLogic } from "./DeleteRestaurantMessageForm.logic";
 import { DeleteRestaurantMessageFormProps } from "./DeleteRestaurantMessageForm.static";
 
@@ -7,10 +12,14 @@ const DeleteRestaurantMessageForm: React.FC<
   const { handleDeleteRestaurant } =
     useDeleteRestaurantMessageFormLogic(deletedId);
   return (
-    <div>
-      <p>Are you sure you want to delete this restaurant?</p>
-      <button onClick={handleDeleteRestaurant}>Confirm Delete</button>{" "}
-    </div>
+    <DeleteFormWrapper>
+      <DeleteFormHeading>
+        Are you sure you want to delete this restaurant?
+      </DeleteFormHeading>
+      <DeleteFormButton onClick={handleDeleteRestaurant}>
+        Confirm Delete
+      </DeleteFormButton>
+    </DeleteFormWrapper>
   );
 };
 

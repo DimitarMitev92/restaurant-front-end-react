@@ -23,7 +23,7 @@ import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
 import ClientRoleHOC from "../UserRoleHOC/ClientRoleHOC";
 import { useOrderContext } from "../../context/OrderProvider";
 import DeleteMealPopUp from "../PopUp/DeleteMealPopUp";
-import DeleteMealMessageForm from "../Forms/DeleteMealMessageForm/DeleteMealMessageForm";
+import DeleteMealMessageForm from "../Forms/DeleteForms/DeleteMealMessageForm/DeleteMealMessageForm";
 
 export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
   const { id } = useParams();

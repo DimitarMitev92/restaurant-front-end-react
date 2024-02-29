@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { usePopupContext } from "../../../context/PopupContext";
-import { mealService } from "../../../services/mealService";
-import { mainRoute } from "../../../static/endpoints";
+import { usePopupContext } from "../../../../context/PopupContext";
+import { mealService } from "../../../../services/mealService";
+import { mainRoute } from "../../../../static/endpoints";
 
 export const useDeleteMealMessageFormLogic = (deletedId: string) => {
   const navigate = useNavigate();
