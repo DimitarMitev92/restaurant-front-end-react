@@ -4,6 +4,7 @@ import EmptyList from "../../../EmptyList/EmptyList";
 import {
   AddressCard,
   AddressText,
+  NameWithPriceContainer,
   UserAddressesWrapper,
 } from "../../Profile/UserAddresses/UserAddresses.style";
 import { packageService } from "../../../../services/packageService";
@@ -59,8 +60,9 @@ export const Packages: React.FC<PackagesProps> = ({ onDelete }) => {
     <UserAddressesWrapper>
       {packages.map((pack: PackageDataApi) => (
         <AddressCard key={pack.id}>
-          <AddressText>{pack.type}</AddressText>
-          <AddressText>{pack.price}</AddressText>
+          <AddressText>
+            {pack.type} - {pack.price.toFixed(2)}
+          </AddressText>
           <AdminButtons>
             <StyledRemoveButton
               onClick={() => handleDeletePackage(pack.id)}

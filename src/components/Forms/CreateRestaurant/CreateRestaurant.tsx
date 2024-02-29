@@ -1,16 +1,13 @@
 import React from "react";
 import { useLocations } from "../../../hooks/useLocations";
-import { useNavigate } from "react-router";
 import {
   CreateRestaurantFormProps,
   LocationData,
 } from "../../../static/interfaces";
 import { createRestaurantValidationSchema } from "../../../static/form-validations";
 import { restaurantService } from "../../../services/restaurantService";
-import { mainRoute } from "../../../static/endpoints";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { inputsCreateRestaurantData } from "./CreateRestaurant.static";
-
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,7 +15,6 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   onSubmit,
 }) => {
   const { locations = [] } = useLocations();
-  const navigate = useNavigate();
 
   const inputsCreateRestaurantDataWithLocation = [
     ...inputsCreateRestaurantData,
@@ -52,7 +48,6 @@ export const CreateRestaurant: React.FC<CreateRestaurantFormProps> = ({
         try {
           const restaurant = await restaurantService.createRestaurant(values);
           onSubmit && onSubmit(restaurant);
-          navigate(mainRoute.MAIN);
         } catch (error) {
           console.error("Failed to create restaurant:", error);
           toast.error(`Failed to create restaurant: ${error.message}`);
