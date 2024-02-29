@@ -37,9 +37,13 @@ export const UserAddresses = () => {
 
   const handleDeleteAddress = async (addressId: string) => {
     try {
-      const data = await addressService.deleteSoft(addressId);
-      setTriggerDelete((prev) => !prev);
-      confirm(data.message);
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this address?"
+      );
+      if (isConfirmed) {
+        const data = await addressService.deleteSoft(addressId);
+        setTriggerDelete((prev) => !prev);
+      }
     } catch (error) {
       console.error("Error deleting address:", error);
     }
