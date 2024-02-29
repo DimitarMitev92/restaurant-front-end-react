@@ -1,14 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  CreateMenuFormData,
-  CreateMenuFormProps,
-  MenuTypeData,
-} from "../../../static/interfaces";
+import { CreateMenuFormProps, MenuTypeData } from "../../../static/interfaces";
 import { useMenuTypes } from "../../../hooks/useMenuTypes";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
-import { useEffect, useState } from "react";
-import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
-import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
+import { mainRoute } from "../../../static/endpoints";
 import { createMenuValidationSchema } from "../../../static/form-validations";
 import { menuService } from "../../../services/menuService";
 import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
@@ -16,6 +10,7 @@ import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PulseLoader } from "react-spinners";
+import { useUpdateMenu } from "./UpdateMenu.logic";
 
 export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
   updatedId,
@@ -26,13 +21,7 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
   const { menuTypes = [] } = useMenuTypes();
   const navigate = useNavigate();
 
-  const [currentMenu, setCurrentMenu] = useState<CreateMenuFormData | null>(
-    null
-  );
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [errorFromServer, setErrorFromServer] = useState(null);
+  const { isLoading, currentMenu, errorFromServer } = useUpdateMenu(updatedId);
 
   const inputsCreateMenuData = [
     {
@@ -47,31 +36,6 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
       })),
     },
   ];
-
-  useEffect(() => {
-    const fetchCurrentMenu = async () => {
-      const url = `${endpointAPI.MENU}/${updatedId}`;
-      const accessToken = sessionStorage.getItem("access_token");
-      try {
-        setIsLoading(true);
-        const fetchedMenu = await fetchDataFromApi(
-          url,
-          accessToken,
-          method.GET,
-          null,
-          "Error fetching menu"
-        );
-
-        setCurrentMenu(fetchedMenu);
-      } catch (error) {
-        console.error("Error fetching menu:", error);
-        setErrorFromServer(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCurrentMenu();
-  }, [updatedId]);
 
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={5} />;
