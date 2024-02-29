@@ -33,11 +33,41 @@ export const FormDiv = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 4rem;
+  padding: 2em 4em;
   margin: 0 auto;
   @media screen and (max-width: 1000px) {
-    width: 40em;
-    padding-bottom: 100px;
+    width: 35em;
+    padding: 1.5em 4em;
+  }
+
+  @media screen and (max-width: 750px) {
+    width: 25em;
+    padding: 1.2em 3em;
+  }
+
+  @media screen and (max-width: 720px) {
+    width: 22.5em;
+    padding: 1.2em 3em;
+  }
+
+  @media screen and (max-width: 570px) {
+    width: 22em;
+    padding: 1em 2.5em;
+  }
+
+  @media screen and (max-width: 490px) {
+    width: 20.5em;
+    padding: 0.8em 1.8em;
+  }
+
+  @media screen and (max-width: 470px) {
+    width: 17em;
+    padding: 0.2em 0.4em;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 16em;
+    padding: 0.2em 0.4em;
   }
 `;
 
