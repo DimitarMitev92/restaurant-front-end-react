@@ -9,6 +9,7 @@ import {
 import {
   FilterBtnWrapper,
   FilterWrapper,
+  NameAndHoursContainer,
 } from "../../Menu/MenuFIlter/MenuFIlter.style";
 import { ClearAllFilter } from "../../Menu/MenuFIlter/ClearAllFilter";
 import { MenuFilter } from "../../Menu/MenuFIlter/MenuFilter";
@@ -48,22 +49,24 @@ export const Restaurant = () => {
       {!isLoading && (
         <RestaurantWrapper>
           <FilterWrapper>
-            <RestaurantNameContainer>
-              {restaurant?.name}
-              <UserRoleHOC>
-                <AdminButtonsContainer>
-                  <StyledEditButton
-                    onClick={handleUpdateRestaurant}
-                  ></StyledEditButton>
-                  <StyledRemoveButton
-                    onClick={handleDeleteRestaurant}
-                  ></StyledRemoveButton>
-                </AdminButtonsContainer>
-              </UserRoleHOC>
-            </RestaurantNameContainer>
-            <WorkingHoursContainer>
-              Working hours: {openHourFormatted} - {closeHourFormatted}
-            </WorkingHoursContainer>
+            <NameAndHoursContainer>
+              <RestaurantNameContainer>
+                {restaurant?.name}
+                <UserRoleHOC>
+                  <AdminButtonsContainer>
+                    <StyledEditButton
+                      onClick={handleUpdateRestaurant}
+                    ></StyledEditButton>
+                    <StyledRemoveButton
+                      onClick={handleDeleteRestaurant}
+                    ></StyledRemoveButton>
+                  </AdminButtonsContainer>
+                </UserRoleHOC>
+              </RestaurantNameContainer>
+              <WorkingHoursContainer>
+                Working hours: {openHourFormatted} - {closeHourFormatted}
+              </WorkingHoursContainer>
+            </NameAndHoursContainer>
             {hasMenus && (
               <FilterBtnWrapper>
                 <ClearAllFilter type={clearFilter.all} filter={filter} />

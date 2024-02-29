@@ -7,14 +7,21 @@ export const MenuWrapper = styled.main`
 export const RestaurantWrapper = styled.div`
   display: flex;
   @media (max-width: 768px) {
-   flex-direction: column-reverse;
-   padding-top: 100px;
+    flex-direction: column-reverse;
+    padding-top: 100px;
   }
 `;
 
 export const RestaurantNameContainer = styled.h1`
   display: flex;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (max-width: 375px) {
+    align-content: center;
+  }
 `;
 export const WorkingHoursContainer = styled.h3`
   display: flex;
