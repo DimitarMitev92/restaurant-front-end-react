@@ -15,6 +15,7 @@ import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PulseLoader } from "react-spinners";
 
 export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
   updatedId,
@@ -28,6 +29,8 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
   const [currentMenu, setCurrentMenu] = useState<CreateMenuFormData | null>(
     null
   );
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [errorFromServer, setErrorFromServer] = useState(null);
 
@@ -50,6 +53,7 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
       const url = `${endpointAPI.MENU}/${updatedId}`;
       const accessToken = sessionStorage.getItem("access_token");
       try {
+        setIsLoading(true);
         const fetchedMenu = await fetchDataFromApi(
           url,
           accessToken,
@@ -62,10 +66,16 @@ export const UpdateMenu: React.FC<CreateMenuFormProps> = ({
       } catch (error) {
         console.error("Error fetching menu:", error);
         setErrorFromServer(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchCurrentMenu();
   }, [updatedId]);
+
+  if (isLoading) {
+    return <PulseLoader color="var(--color-green)" size={5} />;
+  }
 
   return currentMenu ? (
     <ReusableForm

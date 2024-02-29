@@ -16,11 +16,11 @@ import { usePopupContext } from "../../../context/PopupContext";
 export const useAdminDashboardLogic = () => {
   const [activeForm, setActiveForm] = useState<string>("");
   const navigate = useNavigate();
-  const { 
-    showDeletePackagePopUp, 
-    showDeleteLocationPopUp, 
-    showDeleteCategoryPopUp, 
-    showDeleteMenuTypePopUp 
+  const {
+    showDeletePackagePopUp,
+    showDeleteLocationPopUp,
+    showDeleteCategoryPopUp,
+    showDeleteMenuTypePopUp,
   } = usePopupContext();
 
   const handleDeleteLocation = (locationId: string) => {
@@ -60,41 +60,41 @@ export const useAdminDashboardLogic = () => {
         return <CreateLocation onSubmit={(data) => console.log(data)} />;
       case "createCategory":
         return <CreateCategory onSubmit={(data) => console.log(data)} />;
-        case "Package":
-          return (
-            <Packages 
-              onDelete={() => {
-                showDeletePackagePopUp();
-              }}
-            />
-          );
-  
-        case "Location":
-          return (
-            <Locations 
-              onDelete={() => {
-                showDeleteLocationPopUp();
-              }}
-            />
-          );
-  
-        case "Category":
-          return (
-            <Categories 
-              onDelete={() => {
-                showDeleteCategoryPopUp();
-              }}
-            />
-          );
-  
-        case "Menu Type":
-          return (
-            <MenuTypes 
-              onDelete={() => {
-                showDeleteMenuTypePopUp();
-              }}
-            />
-          );
+      case "Package":
+        return (
+          <Packages
+            onDelete={() => {
+              showDeletePackagePopUp();
+            }}
+          />
+        );
+
+      case "Location":
+        return (
+          <Locations
+            onDelete={() => {
+              showDeleteLocationPopUp();
+            }}
+          />
+        );
+
+      case "Category":
+        return (
+          <Categories
+            onDelete={() => {
+              showDeleteCategoryPopUp();
+            }}
+          />
+        );
+
+      case "Menu Type":
+        return (
+          <MenuTypes
+            onDelete={() => {
+              showDeleteMenuTypePopUp();
+            }}
+          />
+        );
       default:
         return null;
     }
