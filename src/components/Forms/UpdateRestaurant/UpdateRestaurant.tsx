@@ -1,13 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  CreateRestaurantFormData,
   CreateRestaurantFormProps,
   LocationData,
 } from "../../../static/interfaces";
 import { ReusableForm } from "../ReusableForm/ReusableForm";
-import { useEffect, useState } from "react";
-import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
-import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
+import { mainRoute } from "../../../static/endpoints";
 import { createRestaurantValidationSchema } from "../../../static/form-validations";
 import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 import { useLocations } from "../../../hooks/useLocations";
@@ -17,6 +14,7 @@ import { inputsCreateRestaurantData } from "./UpdateRestaurant.static";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PulseLoader } from "react-spinners";
+import { useUpdateRestaurant } from "./UpdateRestaurant.logic";
 
 export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   updatedId,
@@ -27,11 +25,8 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   const { locations } = useLocations();
   const navigate = useNavigate();
 
-  const [currentRestaurant, setCurrentRestaurant] =
-    useState<CreateRestaurantFormData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [errorFromServer, setErrorFromServer] = useState(null);
+  const { currentRestaurant, isLoading, errorFromServer } =
+    useUpdateRestaurant(updatedId);
 
   const inputsCreateRestaurantDataWithLocation = [
     ...inputsCreateRestaurantData,
@@ -47,31 +42,6 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
       })),
     },
   ];
-
-  useEffect(() => {
-    const fetchCurrentRestaurant = async () => {
-      const url = `${endpointAPI.RESTAURANT}/${updatedId}`;
-      const accessToken = sessionStorage.getItem("access_token");
-      try {
-        setIsLoading(true);
-        const fetchedRestaurant = await fetchDataFromApi(
-          url,
-          accessToken,
-          method.GET,
-          null,
-          "Error fetching restaurant"
-        );
-
-        setCurrentRestaurant(fetchedRestaurant);
-      } catch (error: unknown) {
-        console.error("Error fetching restaurant:", error);
-        setErrorFromServer(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCurrentRestaurant();
-  }, [updatedId]);
 
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={5} />;
