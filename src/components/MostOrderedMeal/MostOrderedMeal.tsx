@@ -1,13 +1,10 @@
-import { useNavigate } from "react-router";
 import { MostOrderedMealsProps } from "../../static/interfaces";
 import { Card, ImageContainer, FoodImage } from "./MostOrderedMeal.style";
-import { routes } from "../../routes/routes.static";
+import { useMostOrderedLogic } from "./MostOrderedMeal.logic";
 
 export const MostOrderedMeal: React.FC<MostOrderedMealsProps> = ({ meal }) => {
-  const navigate = useNavigate();
-  const cardClickHandler = () => {
-    navigate(`${routes.RESTAURANTS}/${meal.restaurant_id}`);
-  };
+  const { cardClickHandler } = useMostOrderedLogic(meal);
+
   return (
     <Card onClick={cardClickHandler}>
       <h3 style={{ color: " var(--color-green)" }}>{meal.meal_name}</h3>

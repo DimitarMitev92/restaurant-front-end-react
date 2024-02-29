@@ -5,7 +5,7 @@ import { MenuWrapper } from "./Menu.styles";
 
 export const Menu: React.FC<MenuProps> = ({ menu }) => {
   const meals = menu.meals.map((meal) => {
-    return <Meal key={meal.id} meal={meal}></Meal>;
+    return <Meal key={meal.id} meal={meal} menuId={""}></Meal>;
   });
 
   return (
