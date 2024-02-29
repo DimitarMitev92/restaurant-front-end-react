@@ -12,4 +12,8 @@ export const MenuName = styled.h2`
   justify-content: space-between;
   margin-right: auto;
   padding: 30px;
+  @media (max-width: 450px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;

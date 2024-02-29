@@ -4,7 +4,15 @@ export const FilterWrapper = styled.div`
   width: 100%;
   padding: 100px;
   @media (max-width: 768px) {
-  padding: 30px;
+    padding: 30px;
+  }
+`;
+
+export const NameAndHoursContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    align-items: center;
   }
 `;
 
@@ -28,6 +36,6 @@ export const FilterBtnWrapper = styled.div`
   align-items: center;
   gap: 0.6rem;
   @media (max-width: 768px) {
-flex-direction: column;
+    flex-direction: column;
   }
 `;
