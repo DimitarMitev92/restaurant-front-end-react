@@ -1,6 +1,6 @@
 import { MenuProps } from "../../static/interfaces";
-import { Meal } from "../Meal/Meal";
-import { MealsWrapper } from "../Meal/Meal.style";
+import { Meal } from "../MealHolder/Meal/Meal";
+import { MealsWrapper } from "../MealHolder/Meal/Meal.style";
 import { MenuWrapper } from "./Menu.styles";
 
 export const Menu: React.FC<MenuProps> = ({ menu }) => {

@@ -1,13 +1,13 @@
 import { MealHolderProps } from "../../static/interfaces";
 import { MenuName } from "../Menu/Menu.styles";
-import { Meal } from "./Meal";
+import { Meal } from "./Meal/Meal";
 import {
   AdminButtons,
   MealsWrapper,
   StyledAddMealButton,
   StyledEditButton,
   StyledRemoveButton,
-} from "./Meal.style";
+} from "./Meal/Meal.style";
 import { usePopupContext } from "../../context/PopupContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes.static";

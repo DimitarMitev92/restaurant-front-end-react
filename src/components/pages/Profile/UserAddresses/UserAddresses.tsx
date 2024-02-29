@@ -1,5 +1,8 @@
 import { useAuth } from "../../../../context/AuthProvider";
-import { AdminButtons, StyledRemoveButton } from "../../../Meal/Meal.style";
+import {
+  AdminButtons,
+  StyledRemoveButton,
+} from "../../../MealHolder/Meal/Meal.style";
 import { AddressDataApi } from "./UserAddresses.static";
 import {
   AddressCard,

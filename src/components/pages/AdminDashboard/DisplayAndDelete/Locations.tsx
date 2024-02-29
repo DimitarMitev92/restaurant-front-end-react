@@ -1,4 +1,7 @@
-import { AdminButtons, StyledRemoveButton } from "../../../Meal/Meal.style";
+import {
+  AdminButtons,
+  StyledRemoveButton,
+} from "../../../MealHolder/Meal/Meal.style";
 import { useEffect, useState } from "react";
 import EmptyList from "../../../EmptyList/EmptyList";
 import { locationService } from "../../../../services/locationService";

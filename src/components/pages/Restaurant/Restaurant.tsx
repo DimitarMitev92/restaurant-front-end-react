@@ -12,14 +12,17 @@ import {
 } from "../../Menu/MenuFIlter/MenuFIlter.style";
 import { ClearAllFilter } from "../../Menu/MenuFIlter/ClearAllFilter";
 import { MenuFilter } from "../../Menu/MenuFIlter/MenuFilter";
-import { MealHolder } from "../../Meal/MealHolder";
+import { MealHolder } from "../../MealHolder/MealHolder";
 import { ShoppingCart } from "../../Cart/Cart";
 import UserRoleHOC from "../../UserRoleHOC/UserRoleHOC";
 import DeleteRestaurantPopUp from "../../PopUp/DeleteRestaurantPopUp";
 import { UpdateRestaurant } from "../../Forms/UpdateRestaurant/UpdateRestaurant";
 import PopUp from "../../PopUp/PopUp";
 import { useRestaurantLogic } from "./Restaurant.logic";
-import { StyledEditButton, StyledRemoveButton } from "../../Meal/Meal.style";
+import {
+  StyledEditButton,
+  StyledRemoveButton,
+} from "../../MealHolder/Meal/Meal.style";
 import EmptyList from "../../EmptyList/EmptyList";
 import { PulseLoader } from "react-spinners";
 import { ScrollToTopButton } from "../../ScrollToTopButton/ScrollToTopButton";

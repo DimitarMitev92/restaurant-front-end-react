@@ -13,22 +13,16 @@ import {
   StyledRemoveButton,
 } from "./Meal.style";
 
-import { IMealProps } from "../../static/interfaces";
-import { useNavigate, useParams } from "react-router-dom";
-import { routes } from "../../routes/routes.static";
-import PopUp from "../PopUp/PopUp";
-import { usePopupContext } from "../../context/PopupContext";
-import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
-import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
-import { useOrderContext } from "../../context/OrderProvider";
-import DeleteMealPopUp from "../PopUp/DeleteMealPopUp";
-import DeleteMealMessageForm from "../Forms/DeleteMealMessageForm/DeleteMealMessageForm";
+import { IMealProps } from "../../../static/interfaces";
+import PopUp from "../../PopUp/PopUp";
+import { usePopupContext } from "../../../context/PopupContext";
+import { UpdateMeal } from "../../Forms/UpdateMeal/UpdateMeal";
+import UserRoleHOC from "../../UserRoleHOC/UserRoleHOC";
+import DeleteMealPopUp from "../../PopUp/DeleteMealPopUp";
+import DeleteMealMessageForm from "../../Forms/DeleteMealMessageForm/DeleteMealMessageForm";
+import { useMealLogic } from "./Meal.logic";
 
 export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
-  const { id } = useParams();
-
-  const { addMealToBasket } = useOrderContext();
-
   const {
     isUpdateMealPopUpVisible,
     showUpdateMealPopUp,
@@ -38,29 +32,20 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
     isDeleteMealPopUpVisible,
   } = usePopupContext();
 
-  const navigate = useNavigate();
-
-  const handlePopUp = () => {
-    showUpdateMealPopUp();
-    navigate(`${routes.RESTAURANTS}/${id}/update/${meal.id}`);
-  };
-
-  const handleCancel = () => {
-    hideUpdateMealPopUp();
-  };
-
-  const addHandler = () => {
-    addMealToBasket([meal], menuId);
-  };
-
-  const handleDeleteMeal = () => {
-    showDeleteMealPopUp();
-    navigate(`${routes.RESTAURANTS}/${id}/delete/${meal.id}`);
-  };
-
-  const handleCancelDelete = () => {
-    hideDeleteMealPopUp();
-  };
+  const {
+    handlePopUp,
+    handleCancel,
+    addHandler,
+    handleDeleteMeal,
+    handleCancelDelete,
+  } = useMealLogic(
+    meal,
+    menuId,
+    showUpdateMealPopUp,
+    hideUpdateMealPopUp,
+    hideDeleteMealPopUp,
+    showDeleteMealPopUp
+  );
 
   return (
     <>
@@ -74,7 +59,7 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
           <BtnWrapper>
             <UserRoleHOC>
               <AdminButtons>
-              <StyledAddCircle onClick={addHandler}></StyledAddCircle>
+                <StyledAddCircle onClick={addHandler}></StyledAddCircle>
                 <StyledEditButton
                   onClick={() => handlePopUp()}
                 ></StyledEditButton>

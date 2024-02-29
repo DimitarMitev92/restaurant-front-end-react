@@ -6,7 +6,7 @@ import {
 } from "../../../Menu/MenuFIlter/MenuFIlter.style";
 import { MenuFilter } from "../../../Menu/MenuFIlter/MenuFilter";
 import { RestaurantWrapper } from "../Restaurant.style";
-import { MealHolder } from "../../../Meal/MealHolder";
+import { MealHolder } from "../../../MealHolder/MealHolder";
 import { ClearAllFilter } from "../../../Menu/MenuFIlter/ClearAllFilter";
 import { clearFilter } from "../../../../static/endpoints";
 import { useRestaurantDetailsLogic } from "./RestaurantsDetails.logic";
