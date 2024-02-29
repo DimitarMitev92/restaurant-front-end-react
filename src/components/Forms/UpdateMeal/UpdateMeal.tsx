@@ -3,7 +3,6 @@ import { useCategories } from "../../../hooks/useCategories";
 import { usePackages } from "../../../hooks/usePackages";
 import {
   CategoryData,
-  CreateMealFormData,
   CreateMealFormProps,
   Menu,
   PackageData,
@@ -11,9 +10,7 @@ import {
 import { ReusableForm } from "../ReusableForm/ReusableForm";
 import { createMealValidationSchema } from "../../../static/form-validations";
 import { mealService } from "../../../services/mealService";
-import { endpointAPI, mainRoute, method } from "../../../static/endpoints";
-import { useEffect, useState } from "react";
-import { fetchDataFromApi } from "../../../services/fetchDataFromApi";
+import { mainRoute } from "../../../static/endpoints";
 import ErrorMessage from "../../ui-elements/ErrorMessage/errorMessage";
 import { useMenusByRestaurant } from "../../../hooks/useMenusByRestaurant";
 import { inputsCreateMealData } from "./UpdateMeal.static";
@@ -21,6 +18,7 @@ import { inputsCreateMealData } from "./UpdateMeal.static";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PulseLoader } from "react-spinners";
+import { useUpdateMealLogic } from "./UpdateMeal.logic";
 
 export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   updatedId,
@@ -34,13 +32,8 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
 
   const navigate = useNavigate();
 
-  const [currentMeal, setCurrentMeal] = useState<CreateMealFormData | null>(
-    null
-  );
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [errorFromServer, setErrorFromServer] = useState(null);
+  const { isLoading, currentMeal, errorFromServer } =
+    useUpdateMealLogic(updatedId);
 
   const inputsCreateMealDataWithMenuCatPack = [
     ...inputsCreateMealData,
@@ -78,39 +71,6 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       })),
     },
   ];
-
-  useEffect(() => {
-    const fetchCurrentMeal = async () => {
-      const url = `${endpointAPI.MEAL}/${updatedId}`;
-      const accessToken = sessionStorage.getItem("access_token");
-      try {
-        setIsLoading(true);
-        const fetchedMeal = await fetchDataFromApi(
-          url,
-          accessToken,
-          method.GET,
-          null,
-          "Error fetching meal"
-        );
-
-        const startDate = new Date(fetchedMeal.startDate);
-        startDate.setDate(startDate.getDate());
-        fetchedMeal.startDate = startDate.toISOString().split("T")[0];
-
-        const endDate = new Date(fetchedMeal.endDate);
-        endDate.setDate(endDate.getDate());
-        fetchedMeal.endDate = endDate.toISOString().split("T")[0];
-
-        setCurrentMeal(fetchedMeal);
-      } catch (error) {
-        console.error("Error fetching meal:", error);
-        setErrorFromServer(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCurrentMeal();
-  }, [updatedId]);
 
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={5} />;
