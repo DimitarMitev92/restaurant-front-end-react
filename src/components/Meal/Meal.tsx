@@ -20,6 +20,7 @@ import PopUp from "../PopUp/PopUp";
 import { usePopupContext } from "../../context/PopupContext";
 import { UpdateMeal } from "../Forms/UpdateMeal/UpdateMeal";
 import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
+import ClientRoleHOC from "../UserRoleHOC/ClientRoleHOC";
 import { useOrderContext } from "../../context/OrderProvider";
 import DeleteMealPopUp from "../PopUp/DeleteMealPopUp";
 import DeleteMealMessageForm from "../Forms/DeleteMealMessageForm/DeleteMealMessageForm";
@@ -72,17 +73,19 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
             <span>{meal.weight}g</span>
           </div>
           <BtnWrapper>
-            <UserRoleHOC>
-              <AdminButtons>
+            <AdminButtons>
+              <ClientRoleHOC>
                 <StyledAddCircle onClick={addHandler}></StyledAddCircle>
+              </ClientRoleHOC>
+              <UserRoleHOC>
                 <StyledEditButton
                   onClick={() => handlePopUp()}
                 ></StyledEditButton>
                 <StyledRemoveButton
                   onClick={() => handleDeleteMeal()}
                 ></StyledRemoveButton>
-              </AdminButtons>
-            </UserRoleHOC>
+              </UserRoleHOC>
+            </AdminButtons>
           </BtnWrapper>
         </NameAndAddBtn>
         <InfoAndPicture>

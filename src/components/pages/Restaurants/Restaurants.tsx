@@ -36,7 +36,6 @@ const Restaurants = () => {
   const displayRestaurants = user ? restaurantsByUserLocation : allRestaurants;
   const displayLoading = user ? loadingByUserLocation : isLoading;
   const displayError = user ? errorByUserLocation : error;
-
   return (
     <>
       <StyledContainer>
