@@ -19,6 +19,7 @@ export const useRestaurantDetailsLogic = () => {
     useState<IRestaurantsDetails | null>(null);
   const [menus, setMenus] = useState<Menu[] | null>(null);
   const [allMenus, setAllMenus] = useState<Menu[] | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const filter = (type: string) => {
     if (type === clearFilter.all) {
@@ -31,12 +32,15 @@ export const useRestaurantDetailsLogic = () => {
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
       try {
+        setIsLoading(true);
         const data = await mealService.fetchMealsByRestaurantId(id);
         setRestaurantDetails(data);
         setMenus(data?.menus || []);
         setAllMenus(data?.menus || []);
       } catch (error) {
         console.error("Error fetching restaurant details:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -51,5 +55,5 @@ export const useRestaurantDetailsLogic = () => {
     isDeleteRestaurantPopUpVisible,
   ]);
 
-  return { restaurantDetails, filter, menus, allMenus };
+  return { restaurantDetails, filter, menus, allMenus, isLoading };
 };

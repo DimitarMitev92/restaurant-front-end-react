@@ -33,6 +33,7 @@ import Switch from "../ui-elements/SwitchButton/switchButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { orderService } from "../../services/orderService";
 import { mainRoute } from "../../static/endpoints";
+import { PulseLoader } from "react-spinners";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -43,6 +44,8 @@ export const ShoppingCart: React.FC = () => {
   const [showInvoice] = useState<boolean>(false);
   const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useAuth();
   const { id } = useParams();
@@ -63,6 +66,7 @@ export const ShoppingCart: React.FC = () => {
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
+        setIsLoading(true);
         if (
           user &&
           addresses &&
@@ -73,6 +77,8 @@ export const ShoppingCart: React.FC = () => {
         }
       } catch (error) {
         console.error("Error fetching user addresses:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -144,6 +150,10 @@ export const ShoppingCart: React.FC = () => {
     bill.save("bill.pdf");
     handlePreviewInvoice();
   };
+
+  if (isLoading) {
+    return <PulseLoader color="var(--color-green)" size={12} />;
+  }
 
   return (
     <CartWrapper>

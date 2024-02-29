@@ -16,6 +16,7 @@ import { inputsCreateRestaurantData } from "./UpdateRestaurant.static";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PulseLoader } from "react-spinners";
 
 export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
   updatedId,
@@ -28,6 +29,7 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
 
   const [currentRestaurant, setCurrentRestaurant] =
     useState<CreateRestaurantFormData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [errorFromServer, setErrorFromServer] = useState(null);
 
@@ -51,6 +53,7 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
       const url = `${endpointAPI.RESTAURANT}/${updatedId}`;
       const accessToken = sessionStorage.getItem("access_token");
       try {
+        setIsLoading(true);
         const fetchedRestaurant = await fetchDataFromApi(
           url,
           accessToken,
@@ -63,10 +66,16 @@ export const UpdateRestaurant: React.FC<CreateRestaurantFormProps> = ({
       } catch (error: unknown) {
         console.error("Error fetching restaurant:", error);
         setErrorFromServer(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchCurrentRestaurant();
   }, [updatedId]);
+
+  if (isLoading) {
+    return <PulseLoader color="var(--color-green)" size={5} />;
+  }
 
   return currentRestaurant ? (
     <ReusableForm

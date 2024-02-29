@@ -21,10 +21,12 @@ import PopUp from "../../PopUp/PopUp";
 import { useRestaurantLogic } from "./Restaurant.logic";
 import { StyledEditButton, StyledRemoveButton } from "../../Meal/Meal.style";
 import EmptyList from "../../EmptyList/EmptyList";
+import { PulseLoader } from "react-spinners";
+import { ScrollToTopButton } from "../../ScrollToTopButton/ScrollToTopButton";
 
 export const Restaurant = () => {
   const {
-    restaurantDetails,
+    isLoading,
     menus,
     filter,
     handleCancelDelete,
@@ -39,51 +41,50 @@ export const Restaurant = () => {
     closeHourFormatted,
   } = useRestaurantLogic();
 
-  if (!restaurantDetails) {
-    return <div>Loading...</div>;
-  }
-
   const hasMenus = menus && menus.length > 0;
-
   return (
     <>
-      <RestaurantWrapper>
-        <FilterWrapper>
-          <RestaurantNameContainer>
-            {restaurant?.name}
-            <UserRoleHOC>
-            <AdminButtonsContainer>
-        
-                <StyledEditButton
-                  onClick={handleUpdateRestaurant}
-                ></StyledEditButton>
-                <StyledRemoveButton
-                  onClick={handleDeleteRestaurant}
-                ></StyledRemoveButton>
-        
-            </AdminButtonsContainer>
-            </UserRoleHOC>
-          </RestaurantNameContainer>
-          <WorkingHoursContainer>
-            Working hours: {openHourFormatted} - {closeHourFormatted}
-          </WorkingHoursContainer>
-          {hasMenus && (
-            <FilterBtnWrapper>
-              <ClearAllFilter type={clearFilter.all} filter={filter} />
-              {allMenus?.map((menu: Menu) => (
-                <MenuFilter filter={filter} key={menu.id} menu={menu} />
-              ))}
-            </FilterBtnWrapper>
-          )}
+      {isLoading && <PulseLoader color="var(--color-green)" size={12} />}
+      {!isLoading && (
+        <RestaurantWrapper>
+          <FilterWrapper>
+            <RestaurantNameContainer>
+              {restaurant?.name}
+              <UserRoleHOC>
+                <AdminButtonsContainer>
+                  <StyledEditButton
+                    onClick={handleUpdateRestaurant}
+                  ></StyledEditButton>
+                  <StyledRemoveButton
+                    onClick={handleDeleteRestaurant}
+                  ></StyledRemoveButton>
+                </AdminButtonsContainer>
+              </UserRoleHOC>
+            </RestaurantNameContainer>
+            <WorkingHoursContainer>
+              Working hours: {openHourFormatted} - {closeHourFormatted}
+            </WorkingHoursContainer>
+            {hasMenus && (
+              <FilterBtnWrapper>
+                <ClearAllFilter type={clearFilter.all} filter={filter} />
+                {allMenus?.map((menu: Menu) => (
+                  <MenuFilter filter={filter} key={menu.id} menu={menu} />
+                ))}
+              </FilterBtnWrapper>
+            )}
 
-          {hasMenus ? (
-            menus.map((menu: Menu) => <MealHolder key={menu.id} menu={menu} />)
-          ) : (
-            <EmptyList message="No menus found"></EmptyList>
-          )}
-        </FilterWrapper>
-        <ShoppingCart />
-      </RestaurantWrapper>
+            {hasMenus ? (
+              menus.map((menu: Menu) => (
+                <MealHolder key={menu.id} menu={menu} />
+              ))
+            ) : (
+              <EmptyList message="No menus found"></EmptyList>
+            )}
+          </FilterWrapper>
+          <ShoppingCart />
+        </RestaurantWrapper>
+      )}
+
       {isDeleteRestaurantPopUpVisible && (
         <DeleteRestaurantPopUp onCancel={handleCancelDelete} />
       )}
@@ -93,6 +94,7 @@ export const Restaurant = () => {
           UpdateForm={UpdateRestaurant}
         />
       )}
+      <ScrollToTopButton target="top" text="Scroll To Top" />
     </>
   );
 };

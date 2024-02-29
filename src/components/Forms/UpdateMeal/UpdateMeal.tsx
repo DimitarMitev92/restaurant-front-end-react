@@ -20,6 +20,7 @@ import { inputsCreateMealData } from "./UpdateMeal.static";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PulseLoader } from "react-spinners";
 
 export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   updatedId,
@@ -36,6 +37,8 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
   const [currentMeal, setCurrentMeal] = useState<CreateMealFormData | null>(
     null
   );
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [errorFromServer, setErrorFromServer] = useState(null);
 
@@ -81,6 +84,7 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       const url = `${endpointAPI.MEAL}/${updatedId}`;
       const accessToken = sessionStorage.getItem("access_token");
       try {
+        setIsLoading(true);
         const fetchedMeal = await fetchDataFromApi(
           url,
           accessToken,
@@ -101,10 +105,16 @@ export const UpdateMeal: React.FC<CreateMealFormProps> = ({
       } catch (error) {
         console.error("Error fetching meal:", error);
         setErrorFromServer(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchCurrentMeal();
   }, [updatedId]);
+
+  if (isLoading) {
+    return <PulseLoader color="var(--color-green)" size={5} />;
+  }
 
   return currentMeal ? (
     <ReusableForm

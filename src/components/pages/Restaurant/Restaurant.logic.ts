@@ -4,7 +4,11 @@ import { usePopupContext } from "../../../context/PopupContext";
 import { routes } from "../../../routes/routes.static";
 import { mealService } from "../../../services/mealService";
 import { clearFilter } from "../../../static/endpoints";
-import { IRestaurantsDetails, Menu, RestaurantData } from "../../../static/interfaces";
+import {
+  IRestaurantsDetails,
+  Menu,
+  RestaurantData,
+} from "../../../static/interfaces";
 import { restaurantService } from "../../../services/restaurantService";
 
 export const useRestaurantLogic = () => {
@@ -31,6 +35,8 @@ export const useRestaurantLogic = () => {
 
   const [allMenus, setAllMenus] = useState<Menu[] | null>(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const filter = (type: string) => {
     if (type === clearFilter.all) {
       setMenus(allMenus);
@@ -42,6 +48,7 @@ export const useRestaurantLogic = () => {
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
       try {
+        setIsLoading(true);
         const data = await mealService.fetchMealsByRestaurantId(id);
         const restaurant = await restaurantService.fetchRestaurantById(id!);
         setRestaurant(restaurant);
@@ -50,6 +57,8 @@ export const useRestaurantLogic = () => {
         setAllMenus(data?.menus || []);
       } catch (error) {
         console.error("Error fetching restaurant details:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -83,11 +92,11 @@ export const useRestaurantLogic = () => {
     hideUpdateRestaurantPopUp();
   };
 
-
   const openHourFormatted = restaurant?.openHour.slice(0, 5);
   const closeHourFormatted = restaurant?.closeHour.slice(0, 5);
 
   return {
+    isLoading,
     restaurantDetails,
     menus,
     filter,
@@ -98,6 +107,8 @@ export const useRestaurantLogic = () => {
     allMenus,
     isDeleteRestaurantPopUpVisible,
     isUpdateRestaurantPopUpVisible,
-    restaurant,openHourFormatted,closeHourFormatted
+    restaurant,
+    openHourFormatted,
+    closeHourFormatted,
   };
 };

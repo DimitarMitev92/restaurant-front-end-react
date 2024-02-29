@@ -12,6 +12,7 @@ import UnifiedInput from "../../ui-elements/Input/input";
 import { useRestaurantsPageLogic } from "./Restaurants.logic";
 import { useAuth } from "../../../context/AuthProvider";
 import { useRestaurantsByLocationId } from "../../../hooks/useRestaurantsByLocation";
+import { ScrollToTopButton } from "../../ScrollToTopButton/ScrollToTopButton";
 
 const Restaurants = () => {
   const {
@@ -67,6 +68,7 @@ const Restaurants = () => {
             <EmptyList message="No restaurants available" />
           )}
         </CardsContainer>
+        <ScrollToTopButton target="top" text="Scroll To Top" />
       </StyledContainer>
     </>
   );

@@ -10,26 +10,25 @@ import { MealHolder } from "../../../Meal/MealHolder";
 import { ClearAllFilter } from "../../../Menu/MenuFIlter/ClearAllFilter";
 import { clearFilter } from "../../../../static/endpoints";
 import { useRestaurantDetailsLogic } from "./RestaurantsDetails.logic";
+import { PulseLoader } from "react-spinners";
 
 export const RestaurantsDetails = () => {
-  const { restaurantDetails, filter, menus, allMenus } =
-    useRestaurantDetailsLogic();
-
-  if (!restaurantDetails) {
-    return <div>Loading...</div>;
-  }
-
+  const { filter, menus, allMenus, isLoading } = useRestaurantDetailsLogic();
+  console.log(isLoading);
   return (
     <RestaurantWrapper>
+      {isLoading && <PulseLoader color="var(--color-green)" size={12} />}
       <FilterWrapper>
         <FilterBtnWrapper>
           <ClearAllFilter type={clearFilter.all} filter={filter} />
-          {allMenus &&
+          {!isLoading &&
+            allMenus &&
             allMenus.map((menu: Menu) => {
               return <MenuFilter filter={filter} key={menu.id} menu={menu} />;
             })}
         </FilterBtnWrapper>
-        {menus &&
+        {!isLoading &&
+          menus &&
           menus.map((menu: Menu) => {
             return <MealHolder key={menu.id} menu={menu} />;
           })}

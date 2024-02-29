@@ -9,6 +9,7 @@ import {
 } from "./BillPrint.style";
 import { StyledPriceDiv } from "../Cart/Cart.style";
 import { addressService } from "../../services/addressService";
+import { PulseLoader } from "react-spinners";
 
 export const BillPrintComponent = forwardRef(
   (
@@ -22,19 +23,27 @@ export const BillPrintComponent = forwardRef(
   ) => {
     const currentDate = new Date().toLocaleDateString();
     const [addressData, setAddressData] = useState({ address: "" });
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
       const fetchAddressData = async () => {
         try {
+          setIsLoading(true);
           const data = await addressService.fetchAddressByUd(selectedAddressId);
           setAddressData(data);
         } catch (error) {
           console.error("Error fetching address data:", error);
+        } finally {
+          setIsLoading(false);
         }
       };
 
       fetchAddressData();
     }, [selectedAddressId]);
+
+    if (isLoading) {
+      return <PulseLoader color="var(--color-green)" size={5} />;
+    }
 
     return (
       <BillDiv ref={ref}>
