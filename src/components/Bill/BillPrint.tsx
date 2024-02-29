@@ -1,4 +1,4 @@
-import { forwardRef, ForwardedRef, useEffect, useState } from "react";
+import { forwardRef, ForwardedRef } from "react";
 import { BillPrintComponentProps } from "./BillPrint.static";
 import {
   BillContentDiv,
@@ -8,8 +8,8 @@ import {
   Table,
 } from "./BillPrint.style";
 import { StyledPriceDiv } from "../Cart/Cart.style";
-import { addressService } from "../../services/addressService";
 import { PulseLoader } from "react-spinners";
+import { useBillPrint } from "./BillPrint.logic";
 
 export const BillPrintComponent = forwardRef(
   (
@@ -22,24 +22,8 @@ export const BillPrintComponent = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const currentDate = new Date().toLocaleDateString();
-    const [addressData, setAddressData] = useState({ address: "" });
-    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-      const fetchAddressData = async () => {
-        try {
-          setIsLoading(true);
-          const data = await addressService.fetchAddressByUd(selectedAddressId);
-          setAddressData(data);
-        } catch (error) {
-          console.error("Error fetching address data:", error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      fetchAddressData();
-    }, [selectedAddressId]);
+    const { addressData, isLoading } = useBillPrint(selectedAddressId);
 
     if (isLoading) {
       return <PulseLoader color="var(--color-green)" size={5} />;
