@@ -22,6 +22,7 @@ import { useRestaurantLogic } from "./Restaurant.logic";
 import { StyledEditButton, StyledRemoveButton } from "../../Meal/Meal.style";
 import EmptyList from "../../EmptyList/EmptyList";
 import { PulseLoader } from "react-spinners";
+import { ScrollToTopButton } from "../../ScrollToTopButton/ScrollToTopButton";
 
 export const Restaurant = () => {
   const {
@@ -93,6 +94,7 @@ export const Restaurant = () => {
           UpdateForm={UpdateRestaurant}
         />
       )}
+      <ScrollToTopButton target="top" text="Scroll To Top" />
     </>
   );
 };
