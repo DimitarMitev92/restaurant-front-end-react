@@ -14,7 +14,6 @@ import { PulseLoader } from "react-spinners";
 
 export const RestaurantsDetails = () => {
   const { filter, menus, allMenus, isLoading } = useRestaurantDetailsLogic();
-  console.log(isLoading);
   return (
     <RestaurantWrapper>
       {isLoading && <PulseLoader color="var(--color-green)" size={12} />}
