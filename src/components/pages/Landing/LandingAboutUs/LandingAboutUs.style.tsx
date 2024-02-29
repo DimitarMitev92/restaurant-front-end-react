@@ -11,11 +11,13 @@ export const WrapperAboutUs = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2em;
+  text-align: center;
 `;
 
 export const TitleAboutUs = styled.h1`
   color: var(--color-green);
-  font-size: 2em;
+  font-size: 28px;
+  font-weight: 600;
   margin-bottom: 20px;
 `;
 
@@ -45,6 +47,9 @@ export const ParagraphAboutUs = styled.p`
   line-height: 1.4;
   margin-bottom: 15px;
   text-align: center;
+  @media (max-width: 768px) {
+    width: 80vw;
+  }
 `;
 
 export const SubTitleAboutUs = styled.h2`

@@ -19,3 +19,15 @@ export const CardsContainer = styled.div`
     justify-content: center;
   }
 `;
+export const TitleContainer = styled.div`
+  display: flex;
+  padding: 40px;
+  text-align: start;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-green);
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+`;

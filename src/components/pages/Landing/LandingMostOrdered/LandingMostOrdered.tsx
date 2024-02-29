@@ -3,8 +3,7 @@ import { PulseLoader } from "react-spinners";
 import { MostOrderedMeal } from "../../../MostOrderedMeal/MostOrderedMeal";
 import { useMostOrderedMeals } from "../../../../hooks/useMostOrdered";
 import { MostOrderedMeals } from "../../../../static/interfaces";
-import { MostOrderedWrapper } from "./LandingMostOrdered.style";
-import { Title } from "../LandingRestaurants/LandingRestaurants.style";
+import { MostOrderedWrapper, TitleContainer } from "./LandingMostOrdered.style";
 import { CardsContainer } from "./LandingMostOrdered.style";
 import EmptyList from "../../../EmptyList/EmptyList";
 
@@ -17,9 +16,9 @@ export const LandingMostOrdered = () => {
   }, [meals]);
   return (
     <MostOrderedWrapper id="most-ordered">
-      <Title style={{ padding: "40px", textAlign: "start" }}>
+      <TitleContainer >
         Most Ordered Meals
-      </Title>
+      </TitleContainer>
       {loading && <PulseLoader color="var(--color-green)" size={12} />}
       {error && <p>Error fetching most ordered meals</p>}
       <CardsContainer>
