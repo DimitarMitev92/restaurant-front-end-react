@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { CancelButtonPopup, PopUpContainer, PopUpOverlay } from "./PopUp.style";
-import DeleteMealMessageForm from "../Forms/DeleteMealMessageForm/DeleteMealMessageForm";
+import DeleteMealMessageForm from "../Forms/DeleteForms/DeleteMealMessageForm/DeleteMealMessageForm";
 
 const DeleteMealPopUp = ({ onCancel, deleteMessage }) => {
   const navigate = useNavigate();

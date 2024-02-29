@@ -17,7 +17,7 @@ import PopUpCreate from "../PopUp/CreatePopUp";
 import { CreateMeal } from "../Forms/CreateMeal/CreateMeal";
 import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
 import DeletePopUp from "../PopUp/DeleteMenuPopUp";
-import DeleteMessageForm from "../Forms/DeleteMessageForm/DeleteMessageForm";
+import DeleteMessageForm from "../Forms/DeleteForms/DeleteMessageForm/DeleteMessageForm";
 
 export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
   const { id } = useParams();
