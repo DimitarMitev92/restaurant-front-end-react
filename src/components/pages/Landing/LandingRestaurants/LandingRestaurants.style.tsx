@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export const RestaurantsWrapper = styled.div`
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   flex-direction: column;
   background: var(--color-white);
   padding: 20px;

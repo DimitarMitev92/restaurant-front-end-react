@@ -116,7 +116,6 @@ export const SwitchButton = styled.button<SwitchButtonProps>`
 
 export const CartButton = styled(StyledButton)`
   padding: 10px 15px;
-  /* margin-left: 15px; */
   font-size: 12px;
   border: none;
   border-radius: 2px;

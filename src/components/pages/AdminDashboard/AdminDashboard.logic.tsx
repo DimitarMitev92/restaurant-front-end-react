@@ -24,19 +24,19 @@ export const useAdminDashboardLogic = () => {
   } = usePopupContext();
 
   const handleDeleteLocation = (locationId: string) => {
-    console.log(`Deleting location with ID ${locationId}`);
+    return `Deleting location with ID ${locationId}`;
   };
 
   const handleDeletePackage = (packageId: string) => {
-    console.log(`Deleting package with ID ${packageId}`);
+    return `Deleting package with ID ${packageId}`;
   };
 
   const handleDeleteCategory = (categoryId: string) => {
-    console.log(`Deleting category with ID ${categoryId}`);
+    return `Deleting category with ID ${categoryId}`;
   };
 
   const handleDeleteMenuType = (menuTypeId: string) => {
-    console.log(`Deleting menu type with ID ${menuTypeId}`);
+    return `Deleting menu type with ID ${menuTypeId}`;
   };
 
   const renderForm = () => {
@@ -44,22 +44,53 @@ export const useAdminDashboardLogic = () => {
       case "createRestaurant":
         return (
           <CreateRestaurant
-            onSubmit={(data) => console.log(data)}
+            onSubmit={(data) => {
+              return data;
+            }}
             updatedId={""}
           />
         );
       case "createPackage":
-        return <CreatePackage onSubmit={(data) => console.log(data)} />;
+        return (
+          <CreatePackage
+            onSubmit={(data) => {
+              return data;
+            }}
+          />
+        );
       case "createMenuType":
-        return <CreateMenuType onSubmit={(data) => console.log(data)} />;
+        return (
+          <CreateMenuType
+            onSubmit={(data) => {
+              return data;
+            }}
+          />
+        );
       case "createMenu":
         return (
-          <CreateMenu onSubmit={(data) => console.log(data)} updatedId={""} />
+          <CreateMenu
+            onSubmit={(data) => {
+              return data;
+            }}
+            updatedId={""}
+          />
         );
       case "createLocation":
-        return <CreateLocation onSubmit={(data) => console.log(data)} />;
+        return (
+          <CreateLocation
+            onSubmit={(data) => {
+              return data;
+            }}
+          />
+        );
       case "createCategory":
-        return <CreateCategory onSubmit={(data) => console.log(data)} />;
+        return (
+          <CreateCategory
+            onSubmit={(data) => {
+              return data;
+            }}
+          />
+        );
       case "Package":
         return (
           <Packages

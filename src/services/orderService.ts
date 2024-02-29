@@ -113,7 +113,7 @@ export const orderService = {
               restaurant: restaurant,
               meals: orderDetails.map((orderDetailMeal: OrderDetails) => ({
                 ...orderDetailMeal,
-                meal: null, // Placeholder for meal data
+                meal: null,
               })),
             };
           })
