@@ -24,8 +24,8 @@ import {
 } from "./Cart.style";
 import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/Input/input";
-import { BillPrintComponent } from "../Bill/BillPrint";
-import { PrintPreviewModal } from "../Bill/Modal";
+import { BillPrintComponent } from "../Modal/Bill/BillPrint";
+import { PrintPreviewModal } from "../Modal/Modal";
 import { CreateOrderFormData, IMeal } from "../../static/interfaces";
 import { useOrderContext } from "../../context/OrderProvider";
 import Switch from "../ui-elements/SwitchButton/switchButton";

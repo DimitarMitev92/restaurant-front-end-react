@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addressService } from "../../services/addressService";
+import { addressService } from "../../../services/addressService";
 
 export const useBillPrint = (selectedAddressId: string) => {
   const [addressData, setAddressData] = useState({ address: "" });

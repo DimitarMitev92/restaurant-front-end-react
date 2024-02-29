@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IMeal } from "../../static/interfaces";
+import { IMeal } from "../../../static/interfaces";
 
 export interface ModalProps {
   isOpen: boolean;

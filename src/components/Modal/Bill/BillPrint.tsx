@@ -7,7 +7,7 @@ import {
   DateHeading,
   Table,
 } from "./BillPrint.style";
-import { StyledPriceDiv } from "../Cart/Cart.style";
+import { StyledPriceDiv } from "../../Cart/Cart.style";
 import { PulseLoader } from "react-spinners";
 import { useBillPrint } from "./BillPrint.logic";
 

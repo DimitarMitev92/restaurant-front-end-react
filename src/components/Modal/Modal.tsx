@@ -1,9 +1,10 @@
-import { BillPrintComponent } from "./BillPrint";
+import { BillPrintComponent } from "./Bill/BillPrint";
 import { CartButton } from "../Cart/Cart.style";
-import { ButtonDiv, StyledModal } from "./BillPrint.style";
-import { PrintPreviewModalProps } from "./BillPrint.static";
+import { ButtonDiv, StyledModal } from "./Bill/BillPrint.style";
+import { PrintPreviewModalProps } from "./Bill/BillPrint.static";
 import { useOrderContext } from "../../context/OrderProvider";
 import UnifiedInput from "../ui-elements/Input/input";
+import { useModal } from "./Modal.logic";
 
 export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
   isOpen,
@@ -21,12 +22,7 @@ export const PrintPreviewModal: React.FC<PrintPreviewModalProps> = ({
     addAdditionalNoteForOrder,
   } = useOrderContext();
 
-  const onChangeAdditionalNoteOrder = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const value = (e.target as HTMLInputElement).value;
-    addAdditionalNoteForOrder(value);
-  };
+  const { onChangeAdditionalNoteOrder } = useModal(addAdditionalNoteForOrder);
 
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onClose}>
