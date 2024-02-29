@@ -74,7 +74,7 @@ export const Meal: React.FC<IMealProps> = ({ meal, menuId }) => {
           <BtnWrapper>
             <UserRoleHOC>
               <AdminButtons>
-              <StyledAddCircle onClick={addHandler}></StyledAddCircle>
+                <StyledAddCircle onClick={addHandler}></StyledAddCircle>
                 <StyledEditButton
                   onClick={() => handlePopUp()}
                 ></StyledEditButton>

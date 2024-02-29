@@ -43,6 +43,7 @@ export const Info = styled.div`
   width: 60%;
   height: 100%;
   overflow: hidden;
+  word-break: break-word;
 `;
 
 export const MealPicture = styled.div`
@@ -67,13 +68,13 @@ export const StyledAddCircle = styled(RiAddCircleFill)`
 `;
 
 export const StyledAddMealButton = styled(RiPlayListAddFill)`
-    font-size: 32px;
+  font-size: 32px;
   color: var(--color-green);
   cursor: pointer;
   &:hover {
     color: darkgreen;
   }
-`
+`;
 
 export const StyledEditButton = styled(RiEditBoxFill)`
   font-size: 32px;
@@ -116,7 +117,6 @@ export const RemoveButton = styled.button`
     background-color: var(--color-bright-red);
   }
 `;
-
 
 export const BtnWrapper = styled.div`
   display: flex;
