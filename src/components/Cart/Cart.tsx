@@ -21,6 +21,8 @@ import {
   OrderMealPrices,
   AddCartButton,
   DecrementCartButton,
+  CreateAddressButtonWrapper,
+  CreateAddressButton,
 } from "./Cart.style";
 import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/Input/input";
@@ -34,6 +36,8 @@ import { orderService } from "../../services/orderService";
 import { mainRoute } from "../../static/endpoints";
 import { PulseLoader } from "react-spinners";
 import { createPDF } from "../CreatePDF/CreatePDF";
+import { StyledButton } from "../ui-elements/SubmitFormButton/submitFormButton.style";
+import { routes } from "../../routes/routes.static";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
@@ -151,6 +155,10 @@ export const ShoppingCart: React.FC = () => {
     handlePreviewInvoice();
   };
 
+  const handleCreateAddress = () => {
+    navigate(`${routes.PROFILE_CREATE_ADDRESS}`);
+  };
+
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={12} />;
   }
@@ -167,6 +175,13 @@ export const ShoppingCart: React.FC = () => {
         </SidebarHeader>
         <SidebarContent>
           <>
+            {deliveryMode && !addresses && (
+              <CreateAddressButtonWrapper>
+                <CreateAddressButton onClick={handleCreateAddress}>
+                  Create address
+                </CreateAddressButton>
+              </CreateAddressButtonWrapper>
+            )}
             {deliveryMode && addresses && (
               <>
                 <CartLabel htmlFor="address-select">
