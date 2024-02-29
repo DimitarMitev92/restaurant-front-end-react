@@ -62,6 +62,7 @@ export const BillPrintComponent = forwardRef(
                 <th>Weight</th>
                 <th>Price</th>
                 <th>Pack. Price</th>
+                <th>Add. Note</th>
               </tr>
             </thead>
             <tbody>
@@ -72,6 +73,7 @@ export const BillPrintComponent = forwardRef(
                   <td>{meal.weight}</td>
                   <td>{meal.price}</td>
                   <td>{meal.packagePrice}</td>
+                  <td>{meal.additionalNote}</td>
                 </tr>
               ))}
             </tbody>
