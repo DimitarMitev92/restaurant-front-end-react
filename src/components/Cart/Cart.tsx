@@ -27,13 +27,13 @@ import UnifiedInput from "../ui-elements/Input/input";
 import { BillPrintComponent } from "../Bill/BillPrint";
 import { PrintPreviewModal } from "../Bill/Modal";
 import { CreateOrderFormData, IMeal } from "../../static/interfaces";
-import { createPDF } from "./Cart.logic";
 import { useOrderContext } from "../../context/OrderProvider";
 import Switch from "../ui-elements/SwitchButton/switchButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { orderService } from "../../services/orderService";
 import { mainRoute } from "../../static/endpoints";
 import { PulseLoader } from "react-spinners";
+import { createPDF } from "../CreatePDF/CreatePDF";
 
 export const ShoppingCart: React.FC = () => {
   const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
