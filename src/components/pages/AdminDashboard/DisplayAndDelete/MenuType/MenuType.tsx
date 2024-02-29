@@ -1,17 +1,17 @@
 import {
   AdminButtons,
   StyledRemoveButton,
-} from "../../../MealHolder/Meal/Meal.style";
+} from "../../../../MealHolder/Meal/Meal.style";
 import { useEffect, useState } from "react";
-import EmptyList from "../../../EmptyList/EmptyList";
+import EmptyList from "../../../../EmptyList/EmptyList";
 import {
   AddressCard,
   AddressText,
   UserAddressesWrapper,
-} from "../../Profile/UserAddresses/UserAddresses.style";
-import { menuTypeService } from "../../../../services/menuTypeService";
-import { MenuTypeDataApi } from "../../../../static/interfaces";
-import { MenuTypesProps } from "../AdminDashboard.static";
+} from "../../../Profile/UserAddresses/UserAddresses.style";
+import { menuTypeService } from "../../../../../services/menuTypeService";
+import { MenuTypeDataApi } from "../../../../../static/interfaces";
+import { MenuTypesProps } from "../../AdminDashboard.static";
 import { PulseLoader } from "react-spinners";
 
 export const MenuTypes: React.FC<MenuTypesProps> = ({ onDelete }) => {

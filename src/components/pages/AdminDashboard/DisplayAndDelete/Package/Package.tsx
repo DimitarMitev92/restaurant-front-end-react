@@ -1,17 +1,17 @@
 import {
   AdminButtons,
   StyledRemoveButton,
-} from "../../../MealHolder/Meal/Meal.style";
+} from "../../../../MealHolder/Meal/Meal.style";
 import { useEffect, useState } from "react";
-import EmptyList from "../../../EmptyList/EmptyList";
+import EmptyList from "../../../../EmptyList/EmptyList";
 import {
   AddressCard,
   AddressText,
   UserAddressesWrapper,
-} from "../../Profile/UserAddresses/UserAddresses.style";
-import { packageService } from "../../../../services/packageService";
-import { PackageDataApi } from "../../../../static/interfaces";
-import { PackagesProps } from "../AdminDashboard.static";
+} from "../../../Profile/UserAddresses/UserAddresses.style";
+import { packageService } from "../../../../../services/packageService";
+import { PackageDataApi } from "../../../../../static/interfaces";
+import { PackagesProps } from "../../AdminDashboard.static";
 import { PulseLoader } from "react-spinners";
 
 export const Packages: React.FC<PackagesProps> = ({ onDelete }) => {

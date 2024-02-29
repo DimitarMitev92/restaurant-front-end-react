@@ -6,10 +6,10 @@ import {
 } from "./AdminDashboard.style";
 import Button from "../../ui-elements/Button/button";
 import { useAdminDashboardLogic } from "./AdminDashboard.logic";
-import { Locations } from "./DisplayAndDelete/Locations";
-import { MenuTypes } from "./DisplayAndDelete/MenuType";
-import { Packages } from "./DisplayAndDelete/Package";
-import { Categories } from "./DisplayAndDelete/Category";
+import { Locations } from "./DisplayAndDelete/Locations/Locations";
+import { MenuTypes } from "./DisplayAndDelete/MenuType/MenuType";
+import { Packages } from "./DisplayAndDelete/Package/Package";
+import { Categories } from "./DisplayAndDelete/Category/Category";
 
 export const AdminDashboard = () => {
   const {
