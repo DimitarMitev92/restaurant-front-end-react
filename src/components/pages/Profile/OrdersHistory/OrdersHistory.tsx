@@ -1,9 +1,3 @@
-import React from "react";
-import { useAuth } from "../../../../context/AuthProvider";
-import { useOrderContext } from "../../../../context/OrderProvider";
-import { useOrderByClientId } from "../../../../hooks/useOrderByClientId";
-import { useNavigate } from "react-router-dom";
-import { routes } from "../../../../routes/routes.static";
 import {
   OrderHistoryCardOrder,
   OrderHistoryContainer,
@@ -16,19 +10,10 @@ import { OrderHistoryMeal } from "./OrdersHistory.static";
 import Button from "../../../ui-elements/Button/button";
 import EmptyList from "../../../EmptyList/EmptyList";
 import { PulseLoader } from "react-spinners";
+import { useOrderHistoryLogic } from "./OrderHistory.logic";
 
 export const OrdersHistory = () => {
-  const { user } = useAuth();
-  const { orders, loading } = useOrderByClientId(user?.user.id);
-  const { addHistoryOrderToBasket } = useOrderContext();
-  const navigate = useNavigate();
-
-  const orderAgainHandler = (order) => {
-    order.meals.forEach((meal) =>
-      addHistoryOrderToBasket([meal.meal], meal.meal.menuId, meal.count)
-    );
-    navigate(`${routes.RESTAURANTS}/${order.restaurantId}`);
-  };
+  const { orders, loading, orderAgainHandler } = useOrderHistoryLogic();
 
   if (orders?.length === 0) {
     return <EmptyList message="No history order available" />;
