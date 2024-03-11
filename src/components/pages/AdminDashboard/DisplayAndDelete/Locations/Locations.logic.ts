@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { LocationDataApi } from "../../../../../static/interfaces";
 import { locationService } from "../../../../../services/locationService";
+import { usePopupContext } from "../../../../../context/PopupContext";
 
-export const useLocations = (onDelete: (arg0: string) => void) => {
+export const useLocations = () => {
   const [locations, setLocations] = useState<LocationDataApi[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [triggerDelete, setTriggerDelete] = useState(false);
+
+  const {
+    isDeleteLocationPopUpVisible,
+    showDeleteLocationPopUp,
+    hideDeleteLocationPopUp,
+  } = usePopupContext();
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -20,27 +26,20 @@ export const useLocations = (onDelete: (arg0: string) => void) => {
       }
     };
     fetchLocations();
-  }, [triggerDelete]);
+  }, [isDeleteLocationPopUpVisible]);
 
-  const handleDeleteLocation = async (locationId: string) => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to delete this location?"
-      );
+  const handleDeleteLocation = () => {
+    showDeleteLocationPopUp();
+  };
 
-      if (isConfirmed) {
-        await locationService.deleteLocationById(locationId);
-        setTriggerDelete((prev) => !prev);
-        onDelete(locationId);
-      }
-    } catch (error) {
-      console.error("Error deleting location:", error);
-    }
+  const handleCancelDelete = () => {
+    hideDeleteLocationPopUp();
   };
 
   return {
     locations,
     isLoading,
     handleDeleteLocation,
+    handleCancelDelete,
   };
 };

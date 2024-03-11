@@ -9,9 +9,14 @@ import { PackageDataApi } from "../../../../../static/interfaces";
 import { PackagesProps } from "../../AdminDashboard.static";
 import { PulseLoader } from "react-spinners";
 import { usePackage } from "./Package.logic";
+import { DeletePackagePopUp } from "../../../../PopUp/DeletePackagePopUp";
+import { usePopupContext } from "../../../../../context/PopupContext";
 
-export const Packages: React.FC<PackagesProps> = ({ onDelete }) => {
-  const { packages, isLoading, handleDeletePackage } = usePackage(onDelete);
+export const Packages: React.FC<PackagesProps> = () => {
+  const { packages, isLoading, handleDeletePackage, handleCancelDelete } =
+    usePackage();
+
+  const { isDeletePackagePopUpVisible } = usePopupContext();
 
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={5} />;
@@ -30,9 +35,15 @@ export const Packages: React.FC<PackagesProps> = ({ onDelete }) => {
           </AddressText>
           <AdminButtons>
             <StyledRemoveButton
-              onClick={() => handleDeletePackage(pack.id)}
+              onClick={() => handleDeletePackage()}
             ></StyledRemoveButton>
           </AdminButtons>
+          {isDeletePackagePopUpVisible && (
+            <DeletePackagePopUp
+              onCancel={handleCancelDelete}
+              packageId={pack.id}
+            />
+          )}
         </AddressCard>
       ))}
     </UserAddressesWrapper>

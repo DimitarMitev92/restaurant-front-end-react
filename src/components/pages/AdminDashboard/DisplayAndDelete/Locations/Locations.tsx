@@ -9,9 +9,14 @@ import { LocationDataApi } from "../../../../../static/interfaces";
 import { LocationsProps } from "../../AdminDashboard.static";
 import { PulseLoader } from "react-spinners";
 import { useLocations } from "./Locations.logic";
+import { usePopupContext } from "../../../../../context/PopupContext";
+import { DeleteLocationPopUp } from "../../../../PopUp/DeleteLocationPopUp";
 
-export const Locations: React.FC<LocationsProps> = ({ onDelete }) => {
-  const { locations, isLoading, handleDeleteLocation } = useLocations(onDelete);
+export const Locations: React.FC<LocationsProps> = () => {
+  const { locations, isLoading, handleDeleteLocation, handleCancelDelete } =
+    useLocations();
+
+  const { isDeleteLocationPopUpVisible } = usePopupContext();
 
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={5} />;
@@ -27,10 +32,14 @@ export const Locations: React.FC<LocationsProps> = ({ onDelete }) => {
         <AddressCard key={location.id}>
           <AddressText>{location.name}</AddressText>
           <AdminButtons>
-            <StyledRemoveButton
-              onClick={() => handleDeleteLocation(location.id)}
-            />
+            <StyledRemoveButton onClick={() => handleDeleteLocation()} />
           </AdminButtons>
+          {isDeleteLocationPopUpVisible && (
+            <DeleteLocationPopUp
+              onCancel={handleCancelDelete}
+              locationId={location.id}
+            />
+          )}
         </AddressCard>
       ))}
     </UserAddressesWrapper>

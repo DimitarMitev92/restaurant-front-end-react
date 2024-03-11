@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { CategoryDataApi } from "../../../../../static/interfaces";
 import { categoryService } from "../../../../../services/categoryService";
+import { usePopupContext } from "../../../../../context/PopupContext";
 
-export const useCategory = (onDelete: (arg0: string) => void) => {
+export const useCategory = () => {
   const [categories, setCategories] = useState<CategoryDataApi[]>([]);
-  const [triggerDelete, setTriggerDelete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    isDeleteCategoryPopUpVisible,
+    showDeleteCategoryPopUp,
+    hideDeleteCategoryPopUp,
+  } = usePopupContext();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -20,27 +26,20 @@ export const useCategory = (onDelete: (arg0: string) => void) => {
       }
     };
     fetchCategories();
-  }, [triggerDelete]);
+  }, [isDeleteCategoryPopUpVisible]);
 
-  const handleDeleteCategory = async (categoryId: string) => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to delete this category?"
-      );
+  const handleDeleteCategory = () => {
+    showDeleteCategoryPopUp();
+  };
 
-      if (isConfirmed) {
-        await categoryService.deleteCategoryById(categoryId);
-        setTriggerDelete((prev) => !prev);
-        onDelete(categoryId);
-      }
-    } catch (error) {
-      console.error("Error deleting category:", error);
-    }
+  const handleCancelDelete = () => {
+    hideDeleteCategoryPopUp();
   };
 
   return {
     categories,
     isLoading,
     handleDeleteCategory,
+    handleCancelDelete,
   };
 };

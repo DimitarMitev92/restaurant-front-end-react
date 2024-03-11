@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { PackageDataApi } from "../../../../../static/interfaces";
 import { packageService } from "../../../../../services/packageService";
+import { usePopupContext } from "../../../../../context/PopupContext";
 
-export const usePackage = (onDelete: (arg0: string) => void) => {
+export const usePackage = () => {
   const [packages, setPackages] = useState<PackageDataApi[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [triggerDelete, setTriggerDelete] = useState(false);
+
+  const {
+    isDeletePackagePopUpVisible,
+    showDeletePackagePopUp,
+    hideDeletePackagePopUp,
+  } = usePopupContext();
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -20,27 +26,20 @@ export const usePackage = (onDelete: (arg0: string) => void) => {
       }
     };
     fetchPackages();
-  }, [triggerDelete]);
+  }, [isDeletePackagePopUpVisible]);
 
-  const handleDeletePackage = async (packageId: string) => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to delete this package?"
-      );
+  const handleDeletePackage = () => {
+    showDeletePackagePopUp();
+  };
 
-      if (isConfirmed) {
-        await packageService.deletePackagesById(packageId);
-        setTriggerDelete((prev) => !prev);
-        onDelete(packageId);
-      }
-    } catch (error) {
-      console.error("Error deleting package:", error);
-    }
+  const handleCancelDelete = () => {
+    hideDeletePackagePopUp();
   };
 
   return {
     packages,
     isLoading,
     handleDeletePackage,
+    handleCancelDelete,
   };
 };

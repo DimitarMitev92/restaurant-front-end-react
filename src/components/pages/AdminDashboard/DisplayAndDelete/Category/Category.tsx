@@ -9,9 +9,14 @@ import { CategoryDataApi } from "../../../../../static/interfaces";
 import { CategoriesProps } from "../../AdminDashboard.static";
 import { PulseLoader } from "react-spinners";
 import { useCategory } from "./Category.logic";
+import { usePopupContext } from "../../../../../context/PopupContext";
+import { DeleteCategoryPopUp } from "../../../../PopUp/DeleteCategoryPopUp";
 
-export const Categories: React.FC<CategoriesProps> = ({ onDelete }) => {
-  const { categories, isLoading, handleDeleteCategory } = useCategory(onDelete);
+export const Categories: React.FC<CategoriesProps> = () => {
+  const { categories, isLoading, handleDeleteCategory, handleCancelDelete } =
+    useCategory();
+
+  const { isDeleteCategoryPopUpVisible } = usePopupContext();
 
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={5} />;
@@ -28,9 +33,15 @@ export const Categories: React.FC<CategoriesProps> = ({ onDelete }) => {
           <AddressText>{category.type}</AddressText>
           <AdminButtons>
             <StyledRemoveButton
-              onClick={() => handleDeleteCategory(category.id)}
+              onClick={() => handleDeleteCategory()}
             ></StyledRemoveButton>
           </AdminButtons>
+          {isDeleteCategoryPopUpVisible && (
+            <DeleteCategoryPopUp
+              onCancel={handleCancelDelete}
+              categoryId={category.id}
+            />
+          )}
         </AddressCard>
       ))}
     </UserAddressesWrapper>

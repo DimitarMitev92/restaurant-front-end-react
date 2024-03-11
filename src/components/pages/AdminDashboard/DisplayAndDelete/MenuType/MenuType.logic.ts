@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { MenuTypeDataApi } from "../../../../../static/interfaces";
 import { menuTypeService } from "../../../../../services/menuTypeService";
+import { usePopupContext } from "../../../../../context/PopupContext";
 
-export const useMenuType = (onDelete: (arg0: string) => void) => {
+export const useMenuType = () => {
   const [menuTypes, setMenuTypes] = useState<MenuTypeDataApi[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [triggerDelete, setTriggerDelete] = useState(false);
+
+  const {
+    isDeleteMenuTypePopUpVisible,
+    showDeleteMenuTypePopUp,
+    hideDeleteMenuTypePopUp,
+  } = usePopupContext();
 
   useEffect(() => {
     const fetchMenuTypes = async () => {
@@ -20,27 +26,20 @@ export const useMenuType = (onDelete: (arg0: string) => void) => {
       }
     };
     fetchMenuTypes();
-  }, [triggerDelete]);
+  }, [isDeleteMenuTypePopUpVisible]);
 
-  const handleDeleteMenuType = async (menuTypeId: string) => {
-    try {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to delete this menu type?"
-      );
+  const handleDeleteMenuType = () => {
+    showDeleteMenuTypePopUp();
+  };
 
-      if (isConfirmed) {
-        await menuTypeService.deleteMenuTypeById(menuTypeId);
-        setTriggerDelete((prev) => !prev);
-        onDelete(menuTypeId);
-      }
-    } catch (error) {
-      console.error("Error deleting menu type:", error);
-    }
+  const handleCancelDelete = () => {
+    hideDeleteMenuTypePopUp();
   };
 
   return {
     menuTypes,
     isLoading,
     handleDeleteMenuType,
+    handleCancelDelete,
   };
 };
