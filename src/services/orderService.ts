@@ -89,8 +89,6 @@ export const orderService = {
           null,
           "Error fetching orders"
         );
-        console.log("orders");
-        console.log(orders);
         const orderDetails = await Promise.all(
           orders.map(async (order: Order) => {
             const orderDetails = await fetchDataFromApi(
@@ -100,8 +98,6 @@ export const orderService = {
               null,
               "Error fetching order details"
             );
-            console.log("orderDetails");
-            console.log(orderDetails);
             const restaurant = await fetchDataFromApi(
               `${endpointAPI.RESTAURANT}/${order.restaurantId}`,
               accessToken,
