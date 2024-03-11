@@ -9,8 +9,6 @@ import {
   StyledRemoveButton,
 } from "./Meal.style";
 import { usePopupContext } from "../../context/PopupContext";
-import { useNavigate, useParams } from "react-router-dom";
-import { routes } from "../../routes/routes.static";
 import PopUp from "../PopUp/PopUp";
 import { UpdateMenu } from "../Forms/UpdateMenu/UpdateMenu";
 import PopUpCreate from "../PopUp/CreatePopUp";
@@ -18,10 +16,9 @@ import { CreateMeal } from "../Forms/CreateMeal/CreateMeal";
 import UserRoleHOC from "../UserRoleHOC/UserRoleHOC";
 import DeletePopUp from "../PopUp/DeleteMenuPopUp";
 import DeleteMessageForm from "../Forms/DeleteForms/DeleteMessageForm/DeleteMessageForm";
+import { useMealHolder } from "./MealHolder.logic";
 
 export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
-  const { id } = useParams();
-
   const {
     isUpdateMenuPopUpVisible,
     showUpdateMenuPopUp,
@@ -34,33 +31,22 @@ export const MealHolder: React.FC<MealHolderProps> = ({ menu }) => {
     showDeleteMenuPopUp,
   } = usePopupContext();
 
-  const navigate = useNavigate();
-
-  const handlePopUp = () => {
-    showUpdateMenuPopUp();
-    navigate(`${routes.RESTAURANTS}/${id}/update/${menu.id}`);
-  };
-
-  const handleCancel = () => {
-    hideUpdateMenuPopUp();
-  };
-  const handleCancelCreate = () => {
-    hideAddMealPopUp();
-  };
-
-  const handleAddMeal = () => {
-    showAddMealPopUp();
-    navigate(`${routes.RESTAURANTS}/${id}/create/${menu.id}`);
-  };
-
-  const handleDeleteMenu = () => {
-    showDeleteMenuPopUp();
-    navigate(`${routes.RESTAURANTS}/${id}/delete/${menu.id}`);
-  };
-
-  const handleCancelDelete = () => {
-    hideDeleteMenuPopUp();
-  };
+  const {
+    handlePopUp,
+    handleCancel,
+    handleCancelCreate,
+    handleAddMeal,
+    handleDeleteMenu,
+    handleCancelDelete,
+  } = useMealHolder(
+    menu,
+    showUpdateMenuPopUp,
+    hideUpdateMenuPopUp,
+    showAddMealPopUp,
+    hideAddMealPopUp,
+    hideDeleteMenuPopUp,
+    showDeleteMenuPopUp
+  );
 
   return (
     <>

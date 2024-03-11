@@ -1,6 +1,3 @@
-import React, { useEffect, useState, ChangeEvent, useRef } from "react";
-import { useAuth } from "../../context/AuthProvider";
-import { useAddressesByUserId } from "../../hooks/useAddresses";
 import Select from "../ui-elements/Select/select";
 
 import {
@@ -28,136 +25,33 @@ import { Address } from "./Cart.static";
 import UnifiedInput from "../ui-elements/Input/input";
 import { BillPrintComponent } from "../Bill/BillPrint";
 import { PrintPreviewModal } from "../Bill/Modal";
-import { CreateOrderFormData, IMeal } from "../../static/interfaces";
-import { useOrderContext } from "../../context/OrderProvider";
 import Switch from "../ui-elements/SwitchButton/switchButton";
-import { useNavigate, useParams } from "react-router-dom";
-import { orderService } from "../../services/orderService";
-import { mainRoute } from "../../static/endpoints";
 import { PulseLoader } from "react-spinners";
-import { createPDF } from "../CreatePDF/CreatePDF";
-import { StyledButton } from "../ui-elements/SubmitFormButton/submitFormButton.style";
-import { routes } from "../../routes/routes.static";
+import { useCart } from "./Cart.logic";
 
 export const ShoppingCart: React.FC = () => {
-  const [deliveryMode, setDeliveryMode] = useState<boolean>(true);
-  const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
-    undefined
-  );
-  const [selectedAddressId, setSelectedAddressId] = useState("");
-  const [showInvoice] = useState<boolean>(false);
-  const [showPrintPreview, setShowPrintPreview] = useState<boolean>(false);
-  const componentRef = useRef<HTMLDivElement>(null);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { user } = useAuth();
-  const { id } = useParams();
-  const { addresses } = useAddressesByUserId(user?.user.id || "");
   const {
+    isLoading,
+    deliveryMode,
+    addresses,
     meals,
-    addMealToBasket,
-    removeMealFromBasket,
-    addAdditionalNoteForMeal,
-    additionalNoteForOrder,
     totalPrice,
-    updateDeliveryMode,
-    updateSelectedAddressId,
-  } = useOrderContext();
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchAddresses = async () => {
-      try {
-        setIsLoading(true);
-        if (
-          user &&
-          addresses &&
-          addresses.address &&
-          addresses.address.length > 0
-        ) {
-          setSelectedAddress(addresses[0]?.address);
-        }
-      } catch (error) {
-        console.error("Error fetching user addresses:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAddresses();
-  }, [user, addresses]);
-
-  const handleSwitchClick = (mode: boolean) => {
-    setDeliveryMode(mode);
-    setSelectedAddress(undefined);
-  };
-
-  const handleConfirmOrder = async () => {
-    const clientId = user?.user.id || "";
-    const restaurantId = id || "";
-
-    const mealsDataRefactor = meals.map((meal) => {
-      return { mealId: meal.id, count: meal.count };
-    });
-    const dataForResponseOrder: CreateOrderFormData = {
-      clientId: clientId,
-      restaurantId: restaurantId,
-      pickMethod: deliveryMode ? "delivery" : "on-site",
-      additionalInfo: additionalNoteForOrder || "",
-      meals: mealsDataRefactor,
-    };
-    await orderService.createOrder(dataForResponseOrder);
-    navigate(`${mainRoute.PROFILE_ORDERS_HISTORY}`);
-  };
-
-  const handleAddressChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const selectedAddress = e.target.value;
-
-    const [{ id }] = addresses.filter(
-      (ad: Address) => ad.address === selectedAddress
-    );
-
-    setSelectedAddressId(id);
-    setSelectedAddress(e.target.value);
-  };
-
-  const onAddMealToBasket = (meal: IMeal) => {
-    addMealToBasket([meal]);
-  };
-
-  const onRemoveMealToBasket = (meal: IMeal) => {
-    removeMealFromBasket(meal.id);
-  };
-
-  const onChangeAdditionalNote = (
-    mealId: string,
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
-    addAdditionalNoteForMeal(mealId, e.target.value);
-  };
-
-  const handlePreviewInvoice = () => {
-    setShowPrintPreview(true);
-
-    updateDeliveryMode(deliveryMode);
-    updateSelectedAddressId(selectedAddressId);
-  };
-
-  const handleClosePrintPreview = () => {
-    setShowPrintPreview(false);
-  };
-
-  const handleDownload = () => {
-    const bill = createPDF(meals, totalPrice);
-    bill.save("bill.pdf");
-    handlePreviewInvoice();
-  };
-
-  const handleCreateAddress = () => {
-    navigate(`${routes.PROFILE_CREATE_ADDRESS}`);
-  };
+    selectedAddress,
+    showInvoice,
+    showPrintPreview,
+    componentRef,
+    selectedAddressId,
+    handlePreviewInvoice,
+    handleSwitchClick,
+    handleConfirmOrder,
+    handleAddressChange,
+    onAddMealToBasket,
+    onRemoveMealToBasket,
+    onChangeAdditionalNote,
+    handleClosePrintPreview,
+    handleDownload,
+    handleCreateAddress,
+  } = useCart();
 
   if (isLoading) {
     return <PulseLoader color="var(--color-green)" size={12} />;
