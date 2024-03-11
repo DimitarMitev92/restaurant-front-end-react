@@ -1,3 +1,3 @@
-export interface DeleteMessageFormProps {
+export interface DeleteMenuFormProps {
   deletedId: string;
 }

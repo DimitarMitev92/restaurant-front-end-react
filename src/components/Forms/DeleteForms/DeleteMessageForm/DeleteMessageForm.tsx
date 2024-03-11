@@ -1,23 +1,17 @@
-import {
-  DeleteFormButton,
-  DeleteFormHeading,
-  DeleteFormWrapper,
-} from "../DeleteForms.style";
-import { useDeleteMessageFormLogic } from "./DeleteMessageForm.logic";
-import { DeleteMessageFormProps } from "./DeleteMessageForm.static";
+import { DeleteMenuFormProps } from "./DeleteMessageForm.static";
+import { useDeleteMenuMessageModalLogic } from "./DeleteMenuForm.logic";
+import CustomizableDeleteModal from "../ReusableDeleteModal";
 
-const DeleteMessageForm: React.FC<DeleteMessageFormProps> = ({ deletedId }) => {
-  const { handleDeleteMenu } = useDeleteMessageFormLogic(deletedId);
+const DeleteMessageForm: React.FC<DeleteMenuFormProps> = ({ deletedId }) => {
+  const { handleDelete } = useDeleteMenuMessageModalLogic(deletedId);
 
   return (
-    <DeleteFormWrapper>
-      <DeleteFormHeading>
-        Are you sure you want to delete this menu?
-      </DeleteFormHeading>
-      <DeleteFormButton onClick={handleDeleteMenu}>
-        Confirm Delete
-      </DeleteFormButton>
-    </DeleteFormWrapper>
+    <CustomizableDeleteModal
+      deletedId={deletedId}
+      confirmationMessage="Are you sure you want to delete this menu?"
+      confirmButtonText="Confirm Delete"
+      handleDelete={handleDelete}
+    />
   );
 };
 
