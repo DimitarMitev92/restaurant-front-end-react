@@ -6,10 +6,10 @@ import { CreateMenu } from "../../Forms/CreateMenu/CreateMenu";
 import { CreatePackage } from "../../Forms/CreatePackage/CreatePackage";
 import { CreateRestaurant } from "../../Forms/CreateRestaurant/CreateRestaurant";
 import { CreateMenuType } from "../../Forms/CreateMenuType/CreateMenuType";
-import { Locations } from "./DisplayAndDelete/Locations";
-import { Packages } from "./DisplayAndDelete/Package";
-import { MenuTypes } from "./DisplayAndDelete/MenuType";
-import { Categories } from "./DisplayAndDelete/Category";
+import { Locations } from "./DisplayAndDelete/Locations/Locations";
+import { Packages } from "./DisplayAndDelete/Package/Package";
+import { MenuTypes } from "./DisplayAndDelete/MenuType/MenuType";
+import { Categories } from "./DisplayAndDelete/Category/Category";
 import { forms, showDataForDelete } from "./AdminDashboard.static";
 import { usePopupContext } from "../../../context/PopupContext";
 
